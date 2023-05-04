@@ -85,7 +85,8 @@
         </div>
         <div class="form-group">
           <label for="length">Number of Sections:</label>
-          <div class="input-group">
+          
+          <div class="input-group" role="group">
 			  <div class="input-group-prepend">
 				    <button class="btn btn-outline-secondary" type="button" id="decrements">-</button>
 			  </div>
@@ -157,25 +158,20 @@
       <h1 class="my-4">Random String Generator</h1>
       <div class="form-group row justify-content-center">
 	 
-     <div class="form-group row justify-content-center">
-		  
-		  <div class="col-sm-12">
-			<div class="form-check form-check-inline">
-			  <input type="checkbox" id="uppercase" class="form-check-input" value="uppercase">
-			  <label for="uppercase" class="form-check-label">Uppercase</label>
-			</div>
-			<div class="form-check form-check-inline">
-			  <input type="checkbox" id="lowercase" class="form-check-input" value="lowercase" checked>
-			  <label for="lowercase" class="form-check-label">Lowercase</label>
-			</div>
-			<div class="form-check form-check-inline">
-			  <input type="checkbox" id="numbers" class="form-check-input" value="numbers" >
-			  <label for="numbers" class="form-check-label">Numbers</label>
-			</div>
-			<div class="form-check form-check-inline">
-			  <input type="checkbox" id="symbols" class="form-check-input" value="symbols">
-			  <label for="symbols" class="form-check-label">Symbols</label>
-			</div>
+        <div class="form-group row justify-content-center">
+          <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            <input type="checkbox" class="btn-check" id="uppercase" autocomplete="off">
+            <label class="btn btn-outline-primary" for="uppercase">Uppercase</label>
+          
+            <input type="checkbox" class="btn-check" id="lowercase" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="lowercase">Lowercase</label>
+          
+            <input type="checkbox" class="btn-check" id="numbers" autocomplete="off">
+            <label class="btn btn-outline-primary" for="numbers">Numbers</label>
+  
+            <input type="checkbox" class="btn-check" id="symbols" autocomplete="off">
+            <label class="btn btn-outline-primary" for="symbols">Symbols</label>
+          </div>
 			<br>
 			<br>
 			<div class="input-group">
@@ -191,8 +187,8 @@
 		
 	</div>
       	</div>
-
-      <div class="form-group row">
+        
+      <div class="form-group row py-3">
         <div class="col-sm-12 text-center">
           <button id="generate" class="btn btn-primary mr-3">Generate</button>
         </div>
