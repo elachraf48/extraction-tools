@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IP and Email Extraction Tools</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <!-- Add custom CSS -->
+<style>
+		body {
+			background-color: #F2F2F2;
+			font-family: Arial, sans-serif;
+		}
+		.form-group label {
+			font-size: 1.2rem;
+			font-weight: bold;
+			color: #212529;
+		}
+
+		.form-control {
+			border-radius: 0;
+			box-shadow: none;
+			font-size: 1.2rem;
+			color: #212529;
+			background-color: #F8F9FA;
+			resize: none;
+		}
+
+		
+	</style>
+  </head>
+<body>
+	<header>
+    <nav class="navbar navbar-expand-lg bg-dark"  data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">By Achraf</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="#" onclick="showSection('home')">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showSection('ip-extraction')">Extraction Tool</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showSection('split')">Split Email Tool</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+  
+</header>
+
+	<main class="container my-5" id="home" >
+				<center><img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/d12425a2-57e5-445b-896d-425ad79fd2ca/1320655/kpfkogkeyrqpawnjljlr/IMG_1210%20%282%29.JPG" style="height:200px ; width:200px; " alt="Placeholder image" class="rounded-circle rounded-lg">
+          <h1 class="mb-4">IP and Email Extraction Tools</h1>
+        </center>
+      <div class="row">
+    
+				
+				<p class="lead">Hi there! My name is Achraf and I'm the creator of this site. Here, you can find two powerful tools for extracting IP addresses and email addresses from text or URLs.</p>
+				<p>The IP Extraction Tool allows you to extract the IP addresses from any text or URLs you input. This can be useful for cybersecurity professionals, webmasters, or anyone who needs to quickly identify IP addresses.</p>
+				<p>The Email Extraction Tool allows you to extract email addresses from text or URLs. This can be useful for marketing professionals, recruiters, or anyone who needs to collect email addresses from a large amount of text or web pages.</p>
+				<p>Both tools are easy to use and completely free! Simply navigate to the tool you need from the navigation bar above and follow the instructions on the page.</p>
+			</div>
+			
+	</main>
+  <div class="container" id="split" style="display: none;">
+      <h1>Split Text</h1>
+      <form>
+        <div class="form-group">
+          <label for="input-text">Input Text:</label>
+          <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="length">Number of Sections:</label>
+          <div class="input-group">
+			  <div class="input-group-prepend">
+				    <button class="btn btn-outline-secondary" type="button" id="decrements">-</button>
+			  </div>
+			       <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
+			  <div class="input-group-append">
+				    <button class="btn btn-outline-secondary" type="button" id="increments">+</button>
+			  </div>
+			</div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="even-sections">
+          <label class="form-check-label" for="even-sections">Even Sections</label>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="splitText()">Split</button>
+      </form>
+      <hr>
+      <h2>Output:</h2>
+      <div class="container text-center" id="output-container"></div>
+	</div>
+  <div class="container mt-5" id="ip-extraction" style="display: none;">
+  <h1>Extract IPs/Email</h1>
+  <p>Paste your text containing IP or Email addresses  into the box below:</p>
+  <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-12">
+		 
+          <textarea id="text" class="form-control" rows="5"></textarea>
+          <br>
+		 <!--<div class="btn-group" role="group" >-->
+				<center>
+          <div class="btn-group" role="group" aria-label="Basic example">
+
+          <button  class="btn  btn-lg btn-success" onclick="copyText()">Copy 
+		  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+			  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+			  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+		  </svg>
+		  </button>
+		  <button  class="btn  btn-lg btn-primary" onclick="download()">Download 
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+			  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+			  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+			</svg> 
+		  </button>
+    </div>
+      <br>
+      <br>
+          <button class="btn btn-primary btn-lg" onclick="shuffleLines()">Shuffle Lines</button>
+          <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()">Remove Duplicate Lines</button>
+          <div class="dropdown d-inline">
+            <button class="btn btn-success dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Extract Emails
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="extractEmails()">Email Only</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractGmail()">Gmail</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractYahoo()">Yahoo</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractHotmail()">Hotmail</a></li>	
+              <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email and Password</a></li>		  
+            </ul>
+          </div>
+          <button class="btn btn-secondary btn-lg" onclick="extractAndRemoveDuplicateIP()">Extract IP Addresses</button>
+          <br>
+          <p id="line-count"></p>
+        </div>
+      </div>
+    </div>
+	 <div class="container">
+      <h1 class="my-4">Random String Generator</h1>
+      <div class="form-group row justify-content-center">
+	 
+     <div class="form-group row justify-content-center">
+		  
+		  <div class="col-sm-12">
+			<div class="form-check form-check-inline">
+			  <input type="checkbox" id="uppercase" class="form-check-input" value="uppercase">
+			  <label for="uppercase" class="form-check-label">Uppercase</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input type="checkbox" id="lowercase" class="form-check-input" value="lowercase" checked>
+			  <label for="lowercase" class="form-check-label">Lowercase</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input type="checkbox" id="numbers" class="form-check-input" value="numbers" >
+			  <label for="numbers" class="form-check-label">Numbers</label>
+			</div>
+			<div class="form-check form-check-inline">
+			  <input type="checkbox" id="symbols" class="form-check-input" value="symbols">
+			  <label for="symbols" class="form-check-label">Symbols</label>
+			</div>
+			<br>
+			<br>
+			<div class="input-group">
+			  <div class="input-group-prepend">
+				    <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
+			  </div>
+			       <input type="number" id="length" class="form-control text-center" value="25" min="1" max="100">
+			  <div class="input-group-append">
+				    <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
+			  </div>
+			</div>
+		  </div>
+		
+	</div>
+      	</div>
+
+      <div class="form-group row">
+        <div class="col-sm-12 text-center">
+          <button id="generate" class="btn btn-primary mr-3">Generate</button>
+        </div>
+      </div>
+	  <div class="input-group mb-3">
+          <input type="text" id="result-GN" class="form-control" readonly>
+		  <div class="input-group-append">
+			<button id="copy" class="btn btn-success">Copy</button>
+		  </div>
+	  </div>
+     
+    </div>
+</div>
+</center>
+<footer class="bg-light fixed-bottom">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p class="text-center">&copy; 2023 Achraf. All rights reserved.</p>
+  </div>
+</footer>
+
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+  <!-- Font Awesome JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>
