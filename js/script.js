@@ -65,7 +65,7 @@ function showSection(sectionId) {
 
        // Create a new textarea element for this section
         let outputTextarea = document.createElement("textarea");
-        outputTextarea.classList.add("form-control", "mt-2");
+        outputTextarea.classList.add("form-control", "mt-1");
 
         //outputTextarea.setAttribute("hidden", "true");
 
@@ -75,7 +75,7 @@ function showSection(sectionId) {
 
         // Create a new "Copy" button for this textarea
         let copyButton = document.createElement("button");
-        copyButton.classList.add("btn", "btn-primary", "my-2");
+        copyButton.classList.add("btn", "btn-primary", "my-1");
         copyButton.textContent = "Copy " + copyButtonCounter;
         copyButton.addEventListener("click", function() {
           outputTextarea.select();
@@ -87,13 +87,21 @@ function showSection(sectionId) {
 
         // Create a new div to hold the textarea and button
         let div = document.createElement("div");
-        div.classList.add("input-group","col-6","col-sm-3");
+        div.classList.add("input-group");
         div.appendChild(outputTextarea);
         div.appendChild(copyButton);
-        
+        // Create a new div to hold the textarea and button
+        let div1 = document.createElement("div");
+        div1.classList.add("col");
+        div1.appendChild(div);
+
+        // Create a new div to hold the textarea and button
+        let div2 = document.createElement("div");
+        div2.classList.add("row");
+        div2.appendChild(div1);
 
         // Append the div to the output container
-        outputContainer.appendChild(div);
+        outputContainer.appendChild(div2);
 
       }
 }
@@ -144,22 +152,59 @@ function showSection(sectionId) {
       }
     // Event listeners
     document.getElementById("text").addEventListener("input", countLines);
-    function extractAndRemoveDuplicateIP() {
-      // Get the input text
-      let inputText = document.getElementById("text").value;
+    function extractipv4() {
+      var input = document.getElementById("text").value;
+      var regex = /((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g;
+      var matches = input.match(regex);
+      var uniqueMatches = [...new Set(matches)];
+      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
 
-      // Extract IP addresses
-      let ipRegex = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g;
-      let ipAddresses = inputText.match(ipRegex);
-
-      // Remove duplicates
-      let uniqueIPAddresses = [...new Set(ipAddresses)];
-
-      // Update the output text and line count
-      let outputText = uniqueIPAddresses.join("\n");
-      document.getElementById("text").value = outputText;
-      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueIPAddresses.length;
+      document.getElementById("text").value = uniqueMatches.join("\n");
     }
+    
+    function extractipv6() {
+      var input = document.getElementById("text").value;
+      var regex = /((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g;
+      var matches = input.match(regex);
+      var uniqueMatches = [...new Set(matches)];
+      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+      document.getElementById("text").value = uniqueMatches.join("\n");
+    }
+    
+    function extractipv4_ipv6() {
+      var input = document.getElementById("text").value;
+      var ipv4regex = /((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g;
+      var ipv6regex = /((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g;
+      var ipv4matches = input.match(ipv4regex);
+      var ipv6matches = input.match(ipv6regex);
+      var allMatches = ipv4matches.concat(ipv6matches);
+      var uniqueMatches = [...new Set(allMatches)];
+      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+      document.getElementById("text").value = uniqueMatches.join("\n");
+    }
+    function extractDomain() {
+      var text = document.getElementById("text").value;
+      var regex = /(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk)))/ig;
+      var matches = text.match(regex);
+      var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+      document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
+      document.getElementById("text").value = uniqueMatches.join("\n");
+    }
+    
+    
+    function extractsubDomain() {
+      var text = document.getElementById("text").value;
+      var regex = /([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk)/ig;
+      var matches = text.match(regex);
+      var uniqueMatches = [...new Set(matches)];
+      document.getElementById("line-count").innerHTML = "Number of unique SubDomain: " + uniqueMatches.length;
+      document.getElementById("text").value = uniqueMatches.join("\n");
+    }
+    
+    
+    
     function extractAndRemoveDuplicateEmails() {
       // Get the input text
       let inputText = document.getElementById("text").value;
@@ -265,7 +310,8 @@ function showSection(sectionId) {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
       }
       $('#result-GN').val(result);
-      $('#count').text(result.length);
+      $('#result-GN').select();
+      // $('#count').text(result.length);
     });
 
     $('#copy').click(function() {
@@ -319,3 +365,25 @@ function showSection(sectionId) {
     // Click the anchor element to initiate the download
     a.click();
   }
+// dark mode in site
+  const darkModeBtn = document.getElementById('dark-mode-btn');
+darkModeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+});
+
+darkModeBtn.addEventListener("click", function() {
+  const icon = darkModeBtn.querySelector("svg");
+  if (icon.classList.contains("bi-moon-stars")) {
+    icon.classList.remove("bi-moon-stars");
+    icon.classList.add("bi-brightness-high");
+    darkModeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg>';
+  }
+    else
+    {
+      icon.classList.remove("bi-brightness-high");
+      icon.classList.add("bi-moon-stars");
+      darkModeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/><path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/></svg>'; 
+    
+    }
+});
+

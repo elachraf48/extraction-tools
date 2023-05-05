@@ -29,7 +29,18 @@
 			resize: none;
 		}
 
-		
+    .dark-mode {
+      background-color: #343a40;
+      color: #f8f9fa;
+    }
+    .bi-moon:before {
+  content: "\f186";
+}
+
+.bi-sun:before {
+  content: "\f185";
+}
+
 	</style>
   </head>
 <body>
@@ -40,29 +51,44 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#tools-extraction" onclick="showSection('ip-extraction')">Extraction Tool</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#split-text" onclick="showSection('split')">Split Email Tool</a>
+              </li>
               <li class="nav-item active">
-                <a class="nav-link" href="#" onclick="showSection('home')">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" onclick="showSection('ip-extraction')">Extraction Tool</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" onclick="showSection('split')">Split Email Tool</a>
+                <a class="nav-link" href="#about" onclick="showSection('home')">About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">Contact Us</a>
               </li>
+              
             </ul>
+            
+            <button class="btn btn-outline-success " id="dark-mode-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+              </svg>
+            </button>
+            
+            
           </div>
+          
         </div>
+        
+        
     </nav>
 
   
 </header>
 
-	<main class="container my-5" id="home" >
+	<main class="container my-5" id="home" style="display: none;">
 				<center><img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/d12425a2-57e5-445b-896d-425ad79fd2ca/1320655/kpfkogkeyrqpawnjljlr/IMG_1210%20%282%29.JPG" style="height:200px ; width:200px; " alt="Placeholder image" class="rounded-circle rounded-lg">
           <h1 class="mb-4">IP and Email Extraction Tools</h1>
         </center>
@@ -83,30 +109,31 @@
           <label for="input-text">Input Text:</label>
           <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
         </div>
+        
         <div class="form-group">
           <label for="length">Number of Sections:</label>
           
-          <div class="input-group" role="group">
-			  <div class="input-group-prepend">
-				    <button class="btn btn-outline-secondary" type="button" id="decrements">-</button>
-			  </div>
-			       <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
-			  <div class="input-group-append">
-				    <button class="btn btn-outline-secondary" type="button" id="increments">+</button>
-			  </div>
-			</div>
+          <div class="input-group">
+            <button class="btn btn-outline-secondary" type="button" id="decrements">-</button>
+            <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
+            <button class="btn btn-outline-secondary" type="button" id="increments">+</button>
+          </div>
+          
         </div>
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="even-sections">
+          <input type="checkbox" class="form-check-input" id="even-sections" checked>
           <label class="form-check-label" for="even-sections">Even Sections</label>
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="splitText()">Split</button>
+        <div class="d-grid gap-2">
+
+        <button type="button" class="btn btn-primary btn-lg" onclick="splitText()">Split</button>
+        </div>
       </form>
       <hr>
       <h2>Output:</h2>
-      <div class="container text-center" id="output-container"></div>
+      <div class="container text-center" style="margin-bottom: 100px;" id="output-container"></div>
 	</div>
-  <div class="container mt-5" id="ip-extraction" style="display: none;">
+  <div class="container mt-5" id="ip-extraction" >
   <h1>Extract IPs/Email</h1>
   <p>Paste your text containing IP or Email addresses  into the box below:</p>
   <div class="container mt-5">
@@ -134,9 +161,12 @@
     </div>
       <br>
       <br>
+
+      <div class="d-grid gap-2 d-md-block">
+
           <button class="btn btn-primary btn-lg" onclick="shuffleLines()">Shuffle Lines</button>
           <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()">Remove Duplicate Lines</button>
-          <div class="dropdown d-inline">
+          <div class="btn-group" role="group">
             <button class="btn btn-success dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Extract Emails
             </button>
@@ -148,8 +178,23 @@
               <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email and Password</a></li>		  
             </ul>
           </div>
-          <button class="btn btn-secondary btn-lg" onclick="extractAndRemoveDuplicateIP()">Extract IP Addresses</button>
-          <br>
+          
+          <div class="btn-group" role="group">
+            <button class="btn btn-secondary dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Extract Ip & Domain
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="extractipv4()">Extract ipv4</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractipv6()">Extract ipv6</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractipv4_ipv6()">Extract ipv4 & ipv6</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractDomain()">Extract Domain</a></li>
+              <li><a class="dropdown-item" href="#" onclick="extractsubDomain()">Extract sub Domain</a></li>
+            </ul>
+        </div>
+      </div>
+      
+
+
           <p id="line-count"></p>
         </div>
       </div>
@@ -158,8 +203,8 @@
       <h1 class="my-4">Random String Generator</h1>
       <div class="form-group row justify-content-center">
 	 
-        <div class="form-group row justify-content-center">
-          <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <div class="form-group row justify-content-center ">
+          <div class="btn-group py-2" role="group" aria-label="Basic checkbox toggle button group">
             <input type="checkbox" class="btn-check" id="uppercase" autocomplete="off">
             <label class="btn btn-outline-primary" for="uppercase">Uppercase</label>
           
@@ -175,35 +220,28 @@
 			<br>
 			<br>
 			<div class="input-group">
-			  <div class="input-group-prepend">
 				    <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
-			  </div>
 			       <input type="number" id="length" class="form-control text-center" value="25" min="1" max="100">
-			  <div class="input-group-append">
 				    <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
-			  </div>
 			</div>
 		  </div>
 		
 	</div>
       	</div>
         
-      <div class="form-group row py-3">
-        <div class="col-sm-12 text-center">
-          <button id="generate" class="btn btn-primary mr-3">Generate</button>
+        <div class="d-grid gap-2 col-6 mx-auto py-2">
+
+          <button id="generate" class="btn btn-primary mr-3 btn-lg">Generate</button>
         </div>
-      </div>
 	  <div class="input-group mb-3">
-          <input type="text" id="result-GN" class="form-control" readonly>
-		  <div class="input-group-append">
-			<button id="copy" class="btn btn-success">Copy</button>
-		  </div>
+          <input type="text" id="result-GN" class="form-control text-center" readonly>
+			    <button id="copy" style="width: 10%;" class="btn btn-success">Copy</button>
 	  </div>
      
     </div>
 </div>
 </center>
-<footer class="bg-light fixed-bottom">
+<footer class="bg-light fixed-bottom" >
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     <p class="text-center">&copy; 2023 Achraf. All rights reserved.</p>
   </div>
