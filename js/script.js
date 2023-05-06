@@ -7,7 +7,7 @@ function showSection(sectionId) {
 
   document.getElementById("input-text").value = "";
 
-  function splitText() {
+  function splitText(buttonId) {
       const inputText = document.getElementById("input-text").value;
       const sectionCount = parseInt(document.getElementById("lengths").value);
       const evenSections = document.getElementById("even-sections").checked;
