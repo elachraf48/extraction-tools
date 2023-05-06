@@ -124,10 +124,10 @@
           <input type="checkbox" class="form-check-input" id="even-sections" checked>
           <label class="form-check-label" for="even-sections">Even Sections</label>
         </div>
-        <div class="d-grid gap-2">
+        <div class="d-grid gap-2 d-md-bloc">
 
-<button type="button" class="btn btn-primary btn-lg" onclick="splitText('button1')">Split</button>
-<button type="button" class="btn btn-primary btn-lg" onclick="splitText('button2')">Split</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="splitText('area')">Split</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="splitText('txt')">Split in files txt</button>
         </div>
       </form>
       <hr>
@@ -252,6 +252,9 @@
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
   <!-- Font Awesome JS -->
