@@ -51,7 +51,8 @@ function showSection(sectionId) {
     let remainingLines = inputLineCount % sectionCount;
     let currentLineIndex = 0;
     let copyButtonCounter = 1;
-  
+  //split in textarea
+  if (buttonId ==='area'){
     for (let i = 0; i < sectionCount; i++) {
       let currentSectionSize = sectionSize;
       if (evenSections && remainingLines > 0) {
@@ -61,8 +62,7 @@ function showSection(sectionId) {
   
       let sectionLines = inputLines.slice(currentLineIndex, currentLineIndex + currentSectionSize);
       currentLineIndex += currentSectionSize;
-      //split in textarea
-      if (buttonId ==='area'){
+      
         // Create a new textarea element for this section
           let outputTextarea = document.createElement("textarea");
           outputTextarea.classList.add("form-control", "mt-1");
@@ -103,67 +103,70 @@ function showSection(sectionId) {
           // Append the div to the output container
           outputContainer.appendChild(div2);
         }
-        //split in files txt
-        else if (buttonId === 'txt') {
-          // Create an array to hold the sections of the input text
-          let sections = [];
-          let currentSectionSize;
-          for (let i = 0; i < sectionCount; i++) {
-            // Calculate the size of the current section
-            currentSectionSize = Math.floor(inputLineCount / sectionCount);
-            if (evenSections && remainingLines > 0) {
-              currentSectionSize++;
-              remainingLines--;
-            }
-        
-            // Get the lines for the current section
-            let sectionLines = inputLines.slice(i * currentSectionSize, (i + 1) * currentSectionSize);
-        
-            // Add the lines to the sections array
-            sections.push(sectionLines);
-          }
-        
-          // Create an array to hold the output files
-          let outputFiles = [];
-        
-          // Loop through the sections and create a file for each one
-          for (let i = 0; i < sections.length; i++) {
-            // Create a Blob object from the section's lines
-            let blob = new Blob([sections[i].join("\n")], { type: "text/plain" });
-        
-            // Create a file object from the Blob
-            let file = new File([blob], `output_${i + 1}.txt`);
-        
-            // Add the file to the outputFiles array
-            outputFiles.push(file);
-          }
-        
-          // Create a RAR file containing the output files
-          let rar = new JSZip();
-          outputFiles.forEach((file, index) => {
-            rar.file(`output_${index + 1}.txt`, file);
-          });
-        
-          // Generate the RAR file and save it
-          rar.generateAsync({ type: "blob" }).then((blob) => {
-            saveAs(blob, "output.rar");
-          });
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-  }
+       }
+   //split in files txt
+   else if (buttonId === 'txt') {
+    // Get the input text and split it into lines
+       let inputText = document.getElementById('input-text').value;
+       let inputLines = inputText.split(/\r?\n/);
+       let inputLineCount = inputLines.length;
+
+       // Get the number of sections and whether to split them evenly
+       let sectionCount = parseInt(document.getElementById('lengths').value);
+       let evenSections = document.getElementById('even-sections').checked;
+
+       // Calculate the number of lines in each section and the remaining lines
+       let currentSectionSize = Math.floor(inputLineCount / sectionCount);
+       let remainingLines = inputLineCount % sectionCount;
+
+       // Create an array to hold the sections of the input text
+       let sections = [];
+       let startLineIndex = 0;
+       for (let i = 0; i < sectionCount; i++) {
+         // Calculate the end line index for the current section
+         let endLineIndex = startLineIndex + currentSectionSize - 1;
+         if (evenSections && remainingLines > 0) {
+           endLineIndex++;
+           remainingLines--;
+         }
+
+         // Get the lines for the current section
+         let sectionLines = inputLines.slice(startLineIndex, endLineIndex + 1);
+
+         // Add the lines to the sections array
+         sections.push(sectionLines);
+
+         // Update the start line index for the next section
+         startLineIndex = endLineIndex + 1;
+       }
+
+       // Create an array to hold the output files
+       let outputFiles = [];
+
+       // Loop through the sections and create a file for each one
+       for (let i = 0; i < sections.length; i++) {
+         // Create a Blob object from the section's lines
+         let blob = new Blob([sections[i].join('\n')], { type: 'text/plain' });
+
+         // Create a file object from the Blob
+         let file = new File([blob], `output_${i + 1}.txt`);
+
+         // Add the file to the outputFiles array
+         outputFiles.push(file);
+       }
+
+       // Create a ZIP file containing the output files
+       let zip = new JSZip();
+       outputFiles.forEach((file, index) => {
+         zip.file(`output_${index + 1}.txt`, file);
+       });
+
+       // Generate the ZIP file and save it
+       zip.generateAsync({ type: 'blob' }).then((blob) => {
+         saveAs(blob, 'output.zip');
+       });
+   }
+   
 }
     
   

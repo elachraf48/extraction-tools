@@ -124,17 +124,16 @@
           <input type="checkbox" class="form-check-input" id="even-sections" checked>
           <label class="form-check-label" for="even-sections">Even Sections</label>
         </div>
-        <div class="d-grid gap-2 d-md-bloc">
-
-        <button type="button" class="btn btn-primary btn-lg" onclick="splitText('area')">Split</button>
-        <button type="button" class="btn btn-primary btn-lg" onclick="splitText('txt')">Split in files txt</button>
-        </div>
+        <div class="d-flex d-grid gap-2  justify-content-center">
+          <button type="button" class="btn btn-primary mr-6 col-3" onclick="splitText('area')">Split</button>
+          <button type="button" class="btn btn-primary col-3" onclick="splitText('txt')">Split in files txt</button>
+       </div>
       </form>
       <hr>
       <h2>Output:</h2>
       <div class="container text-center" style="margin-bottom: 100px;" id="output-container"></div>
 	</div>
-  <div class="container mt-5" id="ip-extraction" >
+  <div class="container" id="ip-extraction" style="margin-bottom: 100px;" >
   <h1>Extract IPs/Email</h1>
   <p>Paste your text containing IP or Email addresses  into the box below:</p>
   <div class="container mt-5">
@@ -148,17 +147,17 @@
           <div class="btn-group" role="group" aria-label="Basic example">
 
           <button  class="btn  btn-lg btn-success" onclick="copyText()">Copy 
-		  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-			  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-			  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-		  </svg>
-		  </button>
-		  <button  class="btn  btn-lg btn-primary" onclick="download()">Download 
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-			  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-			  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-			</svg> 
-		  </button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+          </svg>
+          </button>
+          <button  class="btn  btn-lg btn-primary" onclick="download()">Download 
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+          </svg> 
+          </button>
     </div>
       <br>
       <br>
@@ -242,7 +241,7 @@
     </div>
 </div>
 </center>
-<footer class="bg-light fixed-bottom" >
+<footer class="bg-light fixed-bottom"  >
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     <p class="text-center">&copy; 2023 Achraf. All rights reserved.</p>
   </div>
