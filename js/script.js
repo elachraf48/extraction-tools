@@ -6,6 +6,7 @@ function showSection(sectionId) {
 }
 
 document.getElementById("input-text").value = "";
+const outputContainer = document.getElementById("output-containerr");
 
 function splitText(buttonId) {
   const inputText = document.getElementById("input-text").value.trim();
@@ -46,7 +47,8 @@ function splitText(buttonId) {
       `;
     return;
   }
-
+  let splitBySection = document.getElementById("split-by-section").checked;
+  let splitByLine = document.getElementById("split-by-line").checked;  
   let sectionSize = Math.floor(inputLineCount / sectionCount);
   let remainingLines = inputLineCount % sectionCount;
   let currentLineIndex = 0;
@@ -186,9 +188,24 @@ function countLiness() {
 // Event listeners
 document.getElementById("text").addEventListener("input", countLines);
 document.getElementById("input-text").addEventListener("input", countLiness);
+function checkinputText(text){
+ // Clear any previous output
+ outputContainer.innerHTML = "";
+ if (text.trim() === "") {
+   outputContainer.innerHTML = `
+       <div class="alert alert-danger" role="alert">
+         Please enter some text.
+       </div>
+     `;
+   return;
+ }
+ 
+}
 function shuffleLines() {
-  let text = document.getElementById("text").value;
+  
+  let text = document.getElementById("text").value.trim();
   let lines = text.split("\n");
+  checkinputText(text)
   lines = shuffleArray(lines);
   document.getElementById("text").value = lines.join("\n");
 }
@@ -202,6 +219,8 @@ function copyText() {
 function removeDuplicateLines() {
   let text = document.getElementById("text").value;
   let lines = text.split("\n").map(line => line.trim());
+  checkinputText(text)
+
   lines = removeDuplicates(lines);
   document.getElementById("text").value = lines.join("\n");
   document.getElementById("line-count").innerHTML = "Number of lines: " + lines.length;
@@ -225,6 +244,8 @@ function extractipv4() {
   var regex = /((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g;
   var matches = input.match(regex);
   var uniqueMatches = [...new Set(matches)];
+  checkinputText(input)
+
   document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
 
   document.getElementById("text").value = uniqueMatches.join("\n");
@@ -235,6 +256,8 @@ function extractipv6() {
   var regex = /((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g;
   var matches = input.match(regex);
   var uniqueMatches = [...new Set(matches)];
+  checkinputText(input)
+
   document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
 
   document.getElementById("text").value = uniqueMatches.join("\n");
@@ -242,21 +265,27 @@ function extractipv6() {
 
 function extractipv4_ipv6() {
   var input = document.getElementById("text").value;
+  checkinputText(input)
+
   var ipv4regex = /((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g;
   var ipv6regex = /((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g;
   var ipv4matches = input.match(ipv4regex);
   var ipv6matches = input.match(ipv6regex);
   var allMatches = ipv4matches.concat(ipv6matches);
   var uniqueMatches = [...new Set(allMatches)];
+
   document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
 
   document.getElementById("text").value = uniqueMatches.join("\n");
 }
 function extractDomain() {
   var text = document.getElementById("text").value;
-  var regex = /(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk)))/ig;
+  checkinputText(text)
+
+  var regex = /(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig;
   var matches = text.match(regex);
   var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+
   document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
   document.getElementById("text").value = uniqueMatches.join("\n");
 }
@@ -264,36 +293,24 @@ function extractDomain() {
 
 function extractsubDomain() {
   var text = document.getElementById("text").value;
-  var regex = /([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk)/ig;
+  checkinputText(text)
+  var regex = /([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig;
   var matches = text.match(regex);
   var uniqueMatches = [...new Set(matches)];
+
   document.getElementById("line-count").innerHTML = "Number of unique SubDomain: " + uniqueMatches.length;
   document.getElementById("text").value = uniqueMatches.join("\n");
 }
 
 
-
-function extractAndRemoveDuplicateEmails() {
-  // Get the input text
-  let inputText = document.getElementById("text").value;
-
-  // Extract email addresses
-  let emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
-  let emailAddresses = inputText.match(emailRegex);
-
-  // Remove duplicates
-  let uniqueEmailAddresses = [...new Set(emailAddresses)];
-
-  // Update the output text and line count
-  let outputText = uniqueEmailAddresses.join("\n");
-  document.getElementById("text").value = outputText;
-}
 function extractEmails() {
   var inputText = document.getElementById("text").value;
   var regex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
   var emails = inputText.match(regex);
+  checkinputText(inputText)
   var uniqueEmails = removeDuplicates(emails);
   var sortedEmails = sortEmailsByDomain(uniqueEmails);
+
   document.getElementById("text").value = sortedEmails.join("\n");
 }
 
@@ -301,8 +318,10 @@ function extractEmailAndPassword() {
   var inputText = document.getElementById("text").value;
   var regex = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}):([A-Za-z0-9]+)/g;
   var emailAndPasswords = inputText.match(regex);
+  checkinputText(inputText)
   var uniqueEmailAndPasswords = removeDuplicates(emailAndPasswords);
   var sortedEmailAndPasswords = sortEmailsByDomain(uniqueEmailAndPasswords);
+
   document.getElementById("text").value = sortedEmailAndPasswords.join("\n");
 }
 
@@ -310,7 +329,9 @@ function extractGmail() {
   var inputText = document.getElementById("text").value;
   var regex = /[A-Za-z0-9._%+-]+@gmail\.com/g;
   var gmailEmails = inputText.match(regex);
+  checkinputText(inputText)
   var uniqueGmailEmails = removeDuplicates(gmailEmails);
+
   document.getElementById("text").value = uniqueGmailEmails.join("\n");
 }
 
@@ -318,7 +339,9 @@ function extractYahoo() {
   var inputText = document.getElementById("text").value;
   var regex = /[A-Za-z0-9._%+-]+@yahoo\.com/g;
   var yahooEmails = inputText.match(regex);
+  checkinputText(inputText)
   var uniqueYahooEmails = removeDuplicates(yahooEmails);
+
   document.getElementById("text").value = uniqueYahooEmails.join("\n");
 }
 
@@ -326,7 +349,10 @@ function extractHotmail() {
   var inputText = document.getElementById("text").value;
   var regex = /[A-Za-z0-9._%+-]+@hotmail\.com/g;
   var hotmailEmails = inputText.match(regex);
+  checkinputText(inputText)
+
   var uniqueHotmailEmails = removeDuplicates(hotmailEmails);
+
   document.getElementById("text").value = uniqueHotmailEmails.join("\n");
 }
 
@@ -416,6 +442,7 @@ $(document).ready(function () {
 function download() {
   // Get the text from the textarea
   var text = document.getElementById("text").value;
+  checkinputText(text)
 
   // Create a new Blob object with the text and specify the MIME type
   var blob = new Blob([text], { type: "text/plain;charset=utf-8" });

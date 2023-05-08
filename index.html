@@ -1,265 +1,302 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>IP and Email Extraction Tools</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<!-- Font Awesome CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <title>IP and Email Extraction Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   <!-- Add custom CSS -->
-<style>
-		body {
-			background-color: #F2F2F2;
-			font-family: Arial, sans-serif;
-		}
-		.form-group label {
-			font-size: 1.2rem;
-			font-weight: bold;
-			color: #212529;
-		}
+  <style>
+    body {
+      background-color: #F2F2F2;
+      font-family: Arial, sans-serif;
+    }
 
-		.form-control {
-			border-radius: 0;
-			box-shadow: none;
-			font-size: 1.2rem;
-			color: #212529;
-			background-color: #F8F9FA;
-			resize: none;
-		}
+    .form-group label {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #212529;
+    }
+
+    .form-control {
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 1.2rem;
+      color: #212529;
+      background-color: #F8F9FA;
+      resize: none;
+    }
 
     .dark-mode {
       background-color: #343a40;
       color: #f8f9fa;
     }
+
     .bi-moon:before {
-  content: "\f186";
-}
+      content: "\f186";
+    }
 
-.bi-sun:before {
-  content: "\f185";
-}
+    .bi-sun:before {
+      content: "\f185";
+    }
+  </style>
+</head>
 
-	</style>
-  </head>
 <body>
-	<header>
-    <nav class="navbar navbar-expand-lg bg-dark"  data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">By Achraf</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">By Achraf</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link" href="#tools-extraction" onclick="showSection('ip-extraction')">Extraction Tool</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#split-text" onclick="showSection('split')">Split Email Tool</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#about" onclick="showSection('home')">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">Contact Us</a>
+            </li>
+
+          </ul>
+
+          <button class="btn btn-outline-success " id="dark-mode-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-moon-stars"
+              viewBox="0 0 16 16">
+              <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z" />
+              <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+            </svg>
           </button>
-          
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              
-              <li class="nav-item">
-                <a class="nav-link" href="#tools-extraction" onclick="showSection('ip-extraction')">Extraction Tool</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#split-text" onclick="showSection('split')">Split Email Tool</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#about" onclick="showSection('home')">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">Contact Us</a>
-              </li>
-              
-            </ul>
-            
-            <button class="btn btn-outline-success " id="dark-mode-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16">
-                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
-                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
-              </svg>
-            </button>
-            
-            
-          </div>
-          
+
+
         </div>
-        
-        
+
+      </div>
+
+
     </nav>
 
-  
-</header>
 
-	<main class="container my-5" id="home" style="display: none;">
-				<center><img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/d12425a2-57e5-445b-896d-425ad79fd2ca/1320655/kpfkogkeyrqpawnjljlr/IMG_1210%20%282%29.JPG" style="height:200px ; width:200px; " alt="Placeholder image" class="rounded-circle rounded-lg">
-          <h1 class="mb-4">IP and Email Extraction Tools</h1>
-        </center>
-      <div class="row">
-    
-				
-				<p class="lead">Hi there! My name is Achraf and I'm the creator of this site. Here, you can find two powerful tools for extracting IP addresses and email addresses from text or URLs.</p>
-				<p>The IP Extraction Tool allows you to extract the IP addresses from any text or URLs you input. This can be useful for cybersecurity professionals, webmasters, or anyone who needs to quickly identify IP addresses.</p>
-				<p>The Email Extraction Tool allows you to extract email addresses from text or URLs. This can be useful for marketing professionals, recruiters, or anyone who needs to collect email addresses from a large amount of text or web pages.</p>
-				<p>Both tools are easy to use and completely free! Simply navigate to the tool you need from the navigation bar above and follow the instructions on the page.</p>
-			</div>
-			
-	</main>
+  </header>
+
+  <main class="container my-5" id="home" style="display: none;">
+    <center><img
+        src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/d12425a2-57e5-445b-896d-425ad79fd2ca/1320655/kpfkogkeyrqpawnjljlr/IMG_1210%20%282%29.JPG"
+        style="height:200px ; width:200px; " alt="Placeholder image" class="rounded-circle rounded-lg">
+      <h1 class="mb-4">IP and Email Extraction Tools</h1>
+    </center>
+    <div class="row">
+
+
+      <p class="lead">Hi there! My name is Achraf and I'm the creator of this site. Here, you can find two powerful
+        tools for extracting IP addresses and email addresses from text or URLs.</p>
+      <p>The IP Extraction Tool allows you to extract the IP addresses from any text or URLs you input. This can be
+        useful for cybersecurity professionals, webmasters, or anyone who needs to quickly identify IP addresses.</p>
+      <p>The Email Extraction Tool allows you to extract email addresses from text or URLs. This can be useful for
+        marketing professionals, recruiters, or anyone who needs to collect email addresses from a large amount of text
+        or web pages.</p>
+      <p>Both tools are easy to use and completely free! Simply navigate to the tool you need from the navigation bar
+        above and follow the instructions on the page.</p>
+    </div>
+
+  </main>
   <div class="container" id="split" style="display: none;">
-      <h1>Split Text</h1>
-      <form>
-        <div class="form-group">
-          <label for="input-text">Input Text:</label>
-          <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label id="line-counts"></label>
-                    
-          <label class="d-flex justify-content-center" for="length">Number of Sections:</label>
+    <h1>Split Text</h1>
+    <form>
+      <div class="form-group">
+        <label for="input-text">Input Text:</label>
+        <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
+      </div>
 
-          <div class="input-group">
-            <button class="btn btn-outline-secondary" type="button" id="decrements">-</button>
-            <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
-            <button class="btn btn-outline-secondary" type="button" id="increments">+</button>
-          </div>
-          
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="even-sections" checked>
-          <label class="form-check-label" for="even-sections">Even Sections</label>          
+      <div class="form-group">
+        <label id="line-counts"></label>
+        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnradio" id="split-by-section" autocomplete="off" checked>
+          <label class="btn btn-outline-primary " for="split-by-section">Number of Sections</label>
+
+          <input type="radio" class="btn-check" name="btnradio" id="split-by-line" autocomplete="off">
+          <label class="btn btn-outline-primary" for="split-by-line">Number of Line</label>
 
         </div>
-        <div class="d-flex d-grid gap-2  justify-content-center">
-          <button type="button" class="btn btn-outline-danger mr-6 col-3" onclick="splitText('area')">Split</button>
-          <button type="button" class="btn btn-outline-success col-3" onclick="splitText('txt')">Split in files txt</button>
-       </div>
-      </form>
-      <hr>
-      <!--<h2>Output:</h2>-->
-      <div class="container text-center" style="margin-bottom: 100px;" id="output-container"></div>
-	</div>
-  <div class="container" id="ip-extraction" style="margin-bottom: 100px;" >
-  <h1>Extractor Tools</h1>
-  <p>Paste your text containing IP or Email addresses  into the box below:</p>
-  <div class="container mt-5">
+
+        <div class="input-group">
+          <button class="btn btn-outline-secondary" type="button" id="decrements">-</button>
+          <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
+          <button class="btn btn-outline-secondary" type="button" id="increments">+</button>
+        </div>
+
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="even-sections" checked>
+        <label class="form-check-label" for="even-sections">Even Sections</label>
+
+      </div>
+      <div class="d-flex d-grid gap-2  justify-content-center">
+        <button type="button" class="btn btn-outline-danger mr-6 col-3" onclick="splitText('area')">Split</button>
+        <button type="button" class="btn btn-outline-success col-3" onclick="splitText('txt')">Split in files
+          txt</button>
+      </div>
+    </form>
+    <hr>
+    <!--<h2>Output:</h2>-->
+    <div class="container text-center" style="margin-bottom: 100px;" id="output-container"></div>
+  </div>
+  <div class="container" id="ip-extraction" style="margin-bottom: 100px;">
+    <h1>Extractor Tools</h1>
+    <p>Paste your text containing IP or Email addresses into the box below:</p>
+    <div class="container mt-5">
       <div class="row">
         <div class="col-md-12">
-		 
+
           <textarea id="text" class="form-control" rows="5"></textarea>
           <br>
-		 <!--<div class="btn-group" role="group" >-->
-				<center>
-          <div class="btn-group" role="group" aria-label="Basic example">
+          <!--<div class="btn-group" role="group" >-->
+          <center>
+            <div class="btn-group" role="group" aria-label="Basic example">
 
-          <button  class="btn  btn-lg btn-outline-success" onclick="copyText()">Copy 
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-          </svg>
-          </button>
-          <button  class="btn  btn-lg btn-outline-success" onclick="download()">Download 
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-          </svg> 
-          </button>
-    </div>
-      <br>
-      <br>
+              <button class="btn  btn-lg btn-outline-success" onclick="copyText()">Copy
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-clipboard" viewBox="0 0 16 16">
+                  <path
+                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                  <path
+                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                </svg>
+              </button>
+              <button class="btn  btn-lg btn-outline-success" onclick="download()">Download
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-download" viewBox="0 0 16 16">
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path
+                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                </svg>
+              </button>
+            </div>
+            <br>
+            <br>
 
-      <div class="d-grid gap-2 d-md-block">
+            <div class="d-grid gap-2 d-md-block">
 
-          <button class="btn btn-primary btn-lg" onclick="shuffleLines()">Shuffle Lines</button>
-          <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()">Remove Duplicate Lines</button>
-          <div class="btn-group" role="group">
-            <button class="btn btn-success dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Extract Emails
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="extractEmails()">Email Only</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractGmail()">Gmail</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractYahoo()">Yahoo</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractHotmail()">Hotmail</a></li>	
-              <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email and Password</a></li>		  
-            </ul>
-          </div>
-          
-          <div class="btn-group" role="group">
-            <button class="btn btn-secondary dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Extract Ip & Domain
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="extractipv4()">Extract ipv4</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractipv6()">Extract ipv6</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractipv4_ipv6()">Extract ipv4 & ipv6</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractDomain()">Extract Domain</a></li>
-              <li><a class="dropdown-item" href="#" onclick="extractsubDomain()">Extract sub Domain</a></li>
-            </ul>
+              <button class="btn btn-primary btn-lg" onclick="shuffleLines()">Shuffle Lines</button>
+              <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()">Remove Duplicate Lines</button>
+              <div class="btn-group" role="group">
+                <button class="btn btn-success dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Extract Emails
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" onclick="extractEmails()">Email Only</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractGmail()">Gmail</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractYahoo()">Yahoo</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractHotmail()">Hotmail</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email and Password</a></li>
+                </ul>
+              </div>
+
+              <div class="btn-group" role="group">
+                <button class="btn btn-secondary dropdown-toggle  btn-lg" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Extract Ip & Domain
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#" onclick="extractipv4()">Extract ipv4</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractipv6()">Extract ipv6</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractipv4_ipv6()">Extract ipv4 & ipv6</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractDomain()">Extract Domain</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractsubDomain()">Extract sub Domain</a></li>
+                </ul>
+              </div>
+            </div>
+
+
+
+            <p id="line-count"></p>
+            <div class="container text-center" id="output-containerr"></div>
+
         </div>
       </div>
-      
-
-
-          <p id="line-count"></p>
-        </div>
-      </div>
     </div>
-	 <div class="container">
+    <div class="container">
       <h3 class="d-flex d-grid gap-2  justify-content-center">Random String Generator</h3>
       <div class="form-group row justify-content-center">
-	 
+
         <div class="form-group row justify-content-center ">
           <div class="btn-group py-2" role="group" aria-label="Basic checkbox toggle button group">
             <input type="checkbox" class="btn-check" id="uppercase" autocomplete="off">
             <label class="btn btn-outline-primary" for="uppercase">Uppercase</label>
-          
+
             <input type="checkbox" class="btn-check" id="lowercase" autocomplete="off" checked>
             <label class="btn btn-outline-primary" for="lowercase">Lowercase</label>
-          
+
             <input type="checkbox" class="btn-check" id="numbers" autocomplete="off">
             <label class="btn btn-outline-primary" for="numbers">Numbers</label>
-  
+
             <input type="checkbox" class="btn-check" id="symbols" autocomplete="off">
             <label class="btn btn-outline-primary" for="symbols">Symbols</label>
           </div>
-			<br>
-			<br>
-			<div class="input-group">
-				    <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
-			       <input type="number" id="length" class="form-control text-center" value="25" min="1" max="100">
-				    <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
-			</div>
-		  </div>
-		
-	</div>
-      	</div>
-        
-        <div class="d-grid gap-2 col-6 mx-auto py-2">
-
-          <button id="generate" class="btn btn-outline-danger mr-3 btn-lg">Generate</button>
+          <br>
+          <br>
+          <div class="input-group">
+            <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
+            <input type="number" id="length" class="form-control text-center" value="25" min="1" max="100">
+            <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
+          </div>
         </div>
-	  <div class="input-group mb-3">
-          <input type="text" id="result-GN" class="form-control text-center" readonly>
-			    <button id="copy" style="width: 10%;" class="btn btn-outline-success">Copy</button>
-	  </div>
-     
+
+      </div>
     </div>
-</div>
-</center>
-<footer class="bg-light fixed-bottom"  >
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <p class="text-center">&copy; 2023 Achraf. All rights reserved.</p>
+
+    <div class="d-grid gap-2 col-6 mx-auto py-2">
+
+      <button id="generate" class="btn btn-outline-danger mr-3 btn-lg">Generate</button>
+    </div>
+    <div class="input-group mb-3">
+      <input type="text" id="result-GN" class="form-control text-center" readonly>
+      <button id="copy" style="width: 10%;" class="btn btn-outline-success">Copy</button>
+    </div>
+
   </div>
-</footer>
+  </div>
+  </center>
+  <footer class="bg-light fixed-bottom">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      <p class="text-center">&copy; 2023 Achraf. All rights reserved.</p>
+    </div>
+  </footer>
 
 
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="js/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>
   <!-- Font Awesome JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
+
 </html>
