@@ -40,6 +40,15 @@
         domainList.appendChild(domainLine);
 
         domainLink.addEventListener('click', () => {
+          // Copy the domain to the clipboard
+          const copyText = document.createElement('textarea');
+          copyText.textContent = domain;
+          document.body.appendChild(copyText);
+          copyText.select();
+          document.execCommand('copy');
+          document.body.removeChild(copyText);
+
+          // Remove the domain line
           domainLine.remove();
         });
       });
