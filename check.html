@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Domain List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Domain List</h1>
+    <form>
+      <div class="form-group">
+        <label for="domain-input">Enter domains:</label>
+        <textarea class="form-control" id="domain-input" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+    </form>
+    <hr>
+    <h2>Domain Results:</h2>
+    <ul id="domain-list"></ul>
+  </div>
+
+  <script>
+    const domainList = document.getElementById('domain-list');
+    const submitButton = document.getElementById('submit-button');
+
+    submitButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      const input = document.getElementById('domain-input');
+      const domains = input.value.split('\n').filter(domain => domain.trim() !== '');
+
+      domains.forEach(domain => {
+        const domainLine = document.createElement('li');
+        const domainLink = document.createElement('a');
+        domainLink.href = `https://talosintelligence.com/reputation_center/lookup?search=${domain}`;
+        domainLink.target = '_blank';
+        domainLink.classList.add('domain-line');
+        domainLink.innerText = domain;
+        domainLine.appendChild(domainLink);
+        domainList.appendChild(domainLine);
+
+        domainLink.addEventListener('click', () => {
+          domainLine.remove();
+        });
+      });
+
+      input.value = '';
+    });
+  </script>
+</body>
+</html>
