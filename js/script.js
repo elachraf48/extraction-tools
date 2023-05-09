@@ -327,7 +327,7 @@ function extractEmailAndPassword() {
 
 function extractGmail() {
   var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@gmail\.com/g;
+  var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
   var gmailEmails = inputText.match(regex);
   checkinputText(inputText)
   var uniqueGmailEmails = removeDuplicates(gmailEmails);
@@ -337,7 +337,7 @@ function extractGmail() {
 
 function extractYahoo() {
   var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@yahoo\.com/g;
+  var regex = /[A-Za-z0-9._%+-]+@yahoo\.[A-Za-z]{2,}/g;
   var yahooEmails = inputText.match(regex);
   checkinputText(inputText)
   var uniqueYahooEmails = removeDuplicates(yahooEmails);
@@ -347,7 +347,7 @@ function extractYahoo() {
 
 function extractHotmail() {
   var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@hotmail\.com/g;
+  var regex = /[A-Za-z0-9._%+-]+@hotmai\.[A-Za-z]{2,}/g;
   var hotmailEmails = inputText.match(regex);
   checkinputText(inputText)
 
