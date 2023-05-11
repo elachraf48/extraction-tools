@@ -64,7 +64,10 @@
               <a class="nav-link" href="#tools-extraction" onclick="showSection('ip-extraction')">Extraction Tool</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#split-text" onclick="showSection('split')">Split Email Tool</a>
+              <a class="nav-link" href="#split-text" onclick="showSection('split')">Split Tool</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#check_domain" onclick="showSection('checkdomain')">About Domain</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#about" onclick="showSection('home')">About</a>
@@ -95,8 +98,22 @@
 
 
   </header>
-
-  <main class="container my-5" id="home" style="display: none;">
+  <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="section-modal-label"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="container my-5 box-shadow" id="home" style="display: none;">
     <center><img
         src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/d12425a2-57e5-445b-896d-425ad79fd2ca/1320655/kpfkogkeyrqpawnjljlr/IMG_1210%20%282%29.JPG"
         style="height:200px ; width:200px; " alt="Placeholder image" class="rounded-circle rounded-lg">
@@ -150,8 +167,7 @@
       </div>
       <div class="d-flex d-grid gap-2  justify-content-center">
         <button type="button" class="btn btn-outline-danger mr-6 col-3" onclick="splitText('area')">Split</button>
-        <button type="button" class="btn btn-outline-success col-3" onclick="splitText('txt')">Split in files
-          txt</button>
+        <button type="button" class="btn btn-outline-success col-3" onclick="splitText('txt')">Split in files txt</button>
       </div>
     </form>
     <hr>
@@ -275,6 +291,24 @@
 
   </div>
   </div>
+
+  <section id="checkdomain" style="display: none;">
+    <div class="container mt-5">
+      <h1>Domain List</h1>
+      <form>
+        <div class="form-group">
+          <label for="domain-input">Enter domains:</label>
+          <textarea class="form-control" id="domain-input" rows="3"></textarea>
+        </div>
+        <center class="mt-1"> 
+          <button type="button" class="btn btn-outline-primary col-3" id="talos-button">Check in Talos</button>
+          <button type="button" class="btn btn-outline-primary col-3" id="spamhaus-button">Check in Spamhaus</button>
+          <button type="button" class="btn btn-outline-primary col-3" id="scamadviser-button">Check in ScamAdviser</button>        
+        </center>
+      </form>
+      <ul style="margin-bottom: 100px;" id="domain-list"></ul>
+    </div>
+  </section>
   </center>
   <footer class="bg-light fixed-bottom">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">

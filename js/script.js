@@ -1,10 +1,55 @@
 function showSection(sectionId) {
-  var sections = ["home", "ip-extraction", "split"];
+  var sections = ["home", "ip-extraction", "split","checkdomain"];
   sections.forEach(function (item) {
     document.getElementById(item).style.display = (item === sectionId) ? "block" : "none";
   });
+  showModal(sectionId);
 }
+function getSectionInfo(section) {
+  switch (section) {
+    case 'home':
+      return {
+        title: 'About',
+        description: 'This is the home section. It provides general information about the website.'
+      };
+    case 'ip-extraction':
+      return {
+        title: 'IP Extraction Tool',
+        description: 'This section contains an IP extraction tool that allows you to extract IP addresses from text.'
+      };
+    case 'split':
+      return {
+        title: 'Split Tool',
+        description: 'This section contains a text splitting tool that allows you to split text into words or sentences.'
+      };
+    case 'checkdomain':
+      return {
+        title: 'About Domain',
+        description: 'This section contains information about domains and allows you to check the reputation of a domain.'
+      };
+    default:
+      return {
+        title: '',
+        description: ''
+      };
+  }
+}
+function showModal(section) {
+  const visited = localStorage.getItem(section);
 
+  if (!visited) {
+    const modal = document.getElementById('section-modal');
+    const modalBody = modal.querySelector('.modal-body');
+    const sectionTitle = modal.querySelector('.modal-title');
+    const sectionInfo = getSectionInfo(section);
+
+    sectionTitle.innerText = sectionInfo.title;
+    modalBody.innerHTML = sectionInfo.description;
+
+    $(modal).modal('show');
+    localStorage.setItem(section, 'visited');
+  }
+}
 document.getElementById("input-text").value = "";
 const outputContainer = document.getElementById("output-containerr");
 
@@ -481,3 +526,52 @@ darkModeBtn.addEventListener("click", function () {
   }
 });
 
+
+//check domain   
+const domainList = document.getElementById('domain-list');
+document.getElementById('talos-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('talos');});
+document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('spamhaus');});
+document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('scamadviser');});
+
+function checkdomain(check) {
+  const input = document.getElementById('domain-input');
+  const domains = removeDuplicates(input.value.split('\n').filter(domain => domain.trim() !== ''));
+  domains.forEach(domain => {
+	const domainLine = document.createElement('li');
+	const domainLink = document.createElement('a');
+	switch (check) {
+	  case 'talos':
+		domainLink.href = `https://talosintelligence.com/reputation_center/lookup?search=${domain}`;
+		break;
+	  case 'spamhaus':
+		domainLink.href = `https://check.spamhaus.org/not_listed/?searchterm=${domain}`;
+		break;
+	  case 'scamadviser':
+		domainLink.href = `https://www.scamadviser.com/check-website/${domain}`;
+		break;
+	  default:
+		console.log('Invalid check value');
+		return;
+	}
+	domainLink.target = '_blank';
+	domainLink.classList.add('domain-line');
+	domainLink.innerText = domain;
+	domainLine.appendChild(domainLink);
+	domainList.appendChild(domainLine);
+
+	domainLink.addEventListener('click', () => {
+	  // Copy the domain to the clipboard
+	  const copyText = document.createElement('textarea');
+	  copyText.textContent = domain;
+	  document.body.appendChild(copyText);
+	  copyText.select();
+	  document.execCommand('copy');
+	  document.body.removeChild(copyText);
+
+	  // Remove the domain line
+	  domainLine.remove();
+	});
+  });
+
+  input.value = '';
+}
