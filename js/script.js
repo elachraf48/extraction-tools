@@ -14,13 +14,13 @@ function getSectionInfo(section) {
       };
     case 'ip-extraction':
       return {
-        title: 'IP Extraction Tool',
-        description: 'This section contains an IP extraction tool that allows you to extract IP addresses from text.'
+        title: 'Extraction Tool',
+        description: 'This section contains an IP or Email or Domain extraction tool that allows you to extract IPV4/V6 or email or domain addresses from text and Remove Duplicate Line or Shulffle text.'
       };
     case 'split':
       return {
         title: 'Split Tool',
-        description: 'This section contains a text splitting tool that allows you to split text into words or sentences.'
+        description: 'This section contains a text splitting tool that allows you to split text into sections.'
       };
     case 'checkdomain':
       return {
