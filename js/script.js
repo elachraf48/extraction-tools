@@ -10,7 +10,7 @@ function getSectionInfo(section) {
     case 'home':
       return {
         title: 'About',
-        description: 'This is the home section. It provides general information about the website.'
+        description: 'This is the About section. It provides general information about the website.'
       };
     case 'ip-extraction':
       return {
@@ -527,28 +527,36 @@ darkModeBtn.addEventListener("click", function () {
 });
 
 
-//check domain   
 const domainList = document.getElementById('domain-list');
 document.getElementById('talos-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('talos');});
 document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('spamhaus');});
 document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('scamadviser');});
+document.getElementById('clear').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';});
+
+function removeDuplicates(array) {
+  return [...new Set(array)];
+}
 
 function checkdomain(check) {
   const input = document.getElementById('domain-input');
   const domains = removeDuplicates(input.value.split('\n').filter(domain => domain.trim() !== ''));
+
   domains.forEach(domain => {
 	const domainLine = document.createElement('li');
 	const domainLink = document.createElement('a');
 	switch (check) {
 	  case 'talos':
 		domainLink.href = `https://talosintelligence.com/reputation_center/lookup?search=${domain}`;
+    domainLink.classList.add('text-primary');
 		break;
 	  case 'spamhaus':
 		domainLink.href = `https://check.spamhaus.org/not_listed/?searchterm=${domain}`;
+    domainLink.classList.add('text-success');
 		break;
 	  case 'scamadviser':
 		domainLink.href = `https://www.scamadviser.com/check-website/${domain}`;
-		break;
+    domainLink.classList.add('text-danger');
+    break;
 	  default:
 		console.log('Invalid check value');
 		return;
@@ -575,3 +583,27 @@ function checkdomain(check) {
 
   input.value = '';
 }
+
+   // Get the cookie banner and buttons
+   const cookieBanner = document.getElementById("cookie-banner");
+   const cookieSettings = document.getElementById("cookie-settings");
+   const cookieAccept = document.getElementById("cookie-accept");
+
+   // Check if the user has already accepted cookies
+   if (localStorage.getItem("cookie-consent") === "true") {
+     // Hide the cookie banner
+     cookieBanner.style.display = "none";
+   }
+
+   // Show the cookie settings when the settings button is clicked
+   cookieSettings.addEventListener("click", () => {
+     // Add your code to open the cookie settings here
+   });
+
+   // Accept cookies and hide the cookie banner when the accept button is clicked
+   cookieAccept.addEventListener("click", () => {
+     // Set a local storage item to remember that the user has accepted cookies
+     localStorage.setItem("cookie-consent", "true");
+     // Hide the cookie banner
+     cookieBanner.style.display = "none";
+   });

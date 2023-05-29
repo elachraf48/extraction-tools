@@ -1,60 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Domain List</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 </head>
+
 <body>
-  <div class="container mt-5">
-    <h1>Domain List</h1>
-    <form>
-      <div class="form-group">
-        <label for="domain-input">Enter domains:</label>
-        <textarea class="form-control" id="domain-input" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
-    </form>
-    <hr>
-    <h2>Domain Results:</h2>
-    <ul id="domain-list"></ul>
-  </div>
+  
+  <section id="checkdomain" >
+    <div class="container mt-5">
+      <h1>Domain List</h1>
+      <form>
+        <div class="form-group">
+          <label for="domain-input">Enter domains:</label>
+          <textarea class="form-control" id="domain-input" rows="3"></textarea>
+        </div>
+        <center class="mt-1"> 
+          <button type="button" class="btn btn-outline-secondary col-1" id="clear">clear</button>
+          <button type="button" class="btn btn-outline-primary col-3" id="talos-button">Check in Talos</button>
+          <button type="button" class="btn btn-outline-success col-3" id="spamhaus-button">Check in Spamhaus</button>
+          <button type="button" class="btn btn-outline-danger col-3" id="scamadviser-button">Check in ScamAdviser</button>  
+      
+        </center>
+      </form>
+      <div class="container text-center" id="output-containerr"></div>
+      <ul style="margin-bottom: 100px;" id="domain-list"></ul>
+    </div>
+  </section>
 
-  <script>
-    const domainList = document.getElementById('domain-list');
-    const submitButton = document.getElementById('submit-button');
+    <script>
+     //check domain   
+const domainList = document.getElementById('domain-list');
+document.getElementById('talos-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('talos');});
+document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('spamhaus');});
+document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('scamadviser');});
+document.getElementById('clear').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';});
 
-    submitButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      const input = document.getElementById('domain-input');
-      const domains = input.value.split('\n').filter(domain => domain.trim() !== '');
+function removeDuplicates(array) {
+  return [...new Set(array)];
+}
 
-      domains.forEach(domain => {
-        const domainLine = document.createElement('li');
-        const domainLink = document.createElement('a');
-        domainLink.href = `https://talosintelligence.com/reputation_center/lookup?search=${domain}`;
-        domainLink.target = '_blank';
-        domainLink.classList.add('domain-line');
-        domainLink.innerText = domain;
-        domainLine.appendChild(domainLink);
-        domainList.appendChild(domainLine);
+function checkdomain(check) {
+  const input = document.getElementById('domain-input');
+  const domains = removeDuplicates(input.value.split('\n').filter(domain => domain.trim() !== ''));
 
-        domainLink.addEventListener('click', () => {
-          // Copy the domain to the clipboard
-          const copyText = document.createElement('textarea');
-          copyText.textContent = domain;
-          document.body.appendChild(copyText);
-          copyText.select();
-          document.execCommand('copy');
-          document.body.removeChild(copyText);
+  domains.forEach(domain => {
+	const domainLine = document.createElement('li');
+	const domainLink = document.createElement('a');
+	switch (check) {
+	  case 'talos':
+		domainLink.href = `https://talosintelligence.com/reputation_center/lookup?search=${domain}`;
+    domainLink.classList.add('text-primary');
+		break;
+	  case 'spamhaus':
+		domainLink.href = `https://check.spamhaus.org/not_listed/?searchterm=${domain}`;
+    domainLink.classList.add('text-success');
+		break;
+	  case 'scamadviser':
+		domainLink.href = `https://www.scamadviser.com/check-website/${domain}`;
+    domainLink.classList.add('text-danger');
+    break;
+	  default:
+		console.log('Invalid check value');
+		return;
+	}
+	domainLink.target = '_blank';
+	domainLink.classList.add('domain-line');
+	domainLink.innerText = domain;
+	domainLine.appendChild(domainLink);
+	domainList.appendChild(domainLine);
 
-          // Remove the domain line
-          domainLine.remove();
-        });
-      });
+	domainLink.addEventListener('click', () => {
+	  // Copy the domain to the clipboard
+	  const copyText = document.createElement('textarea');
+	  copyText.textContent = domain;
+	  document.body.appendChild(copyText);
+	  copyText.select();
+	  document.execCommand('copy');
+	  document.body.removeChild(copyText);
 
-      input.value = '';
-    });
-  </script>
+	  // Remove the domain line
+	  domainLine.remove();
+	});
+  });
+
+  input.value = '';
+}
+    </script>
 </body>
+
 </html>
