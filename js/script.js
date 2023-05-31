@@ -532,6 +532,21 @@ document.getElementById('talos-button').addEventListener('click', (event) => {ev
 document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('spamhaus');});
 document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('scamadviser');});
 document.getElementById('clear').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';});
+document.getElementById('bulkblacklist').addEventListener('click', (event) => {event.preventDefault();
+  const ifram=document.createElement('iframe');
+  ifram.src="https://www.bulkblacklist.com/";
+  ifram.width="100%";
+  ifram.height="1000px";
+
+  ifram.style.border="none";
+  ifram.style.position="absolute";
+  ifram.style.top="40%";
+  ifram.style.left="0px";
+  ifram.style.zIndex="99999";
+  domainList.appendChild(ifram);
+
+});
+
 
 function removeDuplicates(array) {
   return [...new Set(array)];
