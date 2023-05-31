@@ -528,18 +528,19 @@ darkModeBtn.addEventListener("click", function () {
 
 
 const domainList = document.getElementById('domain-list');
-document.getElementById('talos-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('talos');});
-document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('spamhaus');});
-document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('scamadviser');});
+document.getElementById('talos-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('talos');});
+document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('spamhaus');});
+document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('scamadviser');});
 document.getElementById('clear').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';});
 document.getElementById('bulkblacklist').addEventListener('click', (event) => {
   event.preventDefault();
+  domainList.innerText='';
    // Retrieve the user's current country
   fetch('https://ipapi.co/json/')
     .then(response => response.json())
     .then(data => {
       const country = data.country_name;
-      alert('Your current country is ' + country);
+      // alert('Your current country is ' + country);
 
       // Show the alert popup with the user's current country
       if (country!="Morocco"){
