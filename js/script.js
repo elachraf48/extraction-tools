@@ -542,7 +542,7 @@ document.getElementById('bulkblacklist').addEventListener('click', (event) => {
       alert('Your current country is ' + country);
 
       // Show the alert popup with the user's current country
-      if (country!="morroco"){
+      if (country!="Morocco"){
         // Create and append the iframe
         const iframe = document.createElement('iframe');
         iframe.src = "https://www.bulkblacklist.com/";
