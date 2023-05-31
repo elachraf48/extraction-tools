@@ -550,7 +550,7 @@ function checkdomain(check) {
     domainLink.classList.add('text-primary');
 		break;
 	  case 'spamhaus':
-		domainLink.href = `https://check.spamhaus.org/not_listed/?searchterm=${domain}`;
+		domainLink.href = `https://check.spamhaus.org/listed/?searchterm=${domain}`;
     domainLink.classList.add('text-success');
 		break;
 	  case 'scamadviser':
