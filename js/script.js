@@ -532,18 +532,40 @@ document.getElementById('talos-button').addEventListener('click', (event) => {ev
 document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('spamhaus');});
 document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();checkdomain('scamadviser');});
 document.getElementById('clear').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';});
-document.getElementById('bulkblacklist').addEventListener('click', (event) => {event.preventDefault();
-  const ifram=document.createElement('iframe');
-  ifram.src="https://www.bulkblacklist.com/";
-  ifram.width="100%";
-  ifram.height="1000px";
+document.getElementById('bulkblacklist').addEventListener('click', (event) => {
+  event.preventDefault();
+   // Retrieve the user's current country
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      const country = data.country_name;
 
-  ifram.style.border="none";
-  ifram.style.position="absolute";
-  ifram.style.top="40%";
-  ifram.style.left="0px";
-  ifram.style.zIndex="99999";
-  domainList.appendChild(ifram);
+      // Show the alert popup with the user's current country
+      if (country!="morroco"){
+        // Create and append the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = "https://www.bulkblacklist.com/";
+        iframe.width = "100%";
+        iframe.height = "1000px";
+        iframe.style.border = "none";
+        iframe.style.position = "absolute";
+        iframe.style.top = "40%";
+        iframe.style.left = "0px";
+        iframe.style.zIndex = "99999";
+        // document.body.appendChild(iframe);
+        domainList.appendChild(iframe);
+      }
+      else{
+        alert('Sorry not suppored your country  ' + country);
+      }
+     
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+   
+      
 
 });
 
