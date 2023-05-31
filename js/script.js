@@ -539,6 +539,7 @@ document.getElementById('bulkblacklist').addEventListener('click', (event) => {
     .then(response => response.json())
     .then(data => {
       const country = data.country_name;
+      alert('Your current country is ' + country);
 
       // Show the alert popup with the user's current country
       if (country!="morroco"){
