@@ -488,22 +488,23 @@ function download() {
   // Get the text from the textarea
   var text = document.getElementById("text").value;
   checkinputText(text)
+  if(text!=''){
+    // Create a new Blob object with the text and specify the MIME type
+    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
 
-  // Create a new Blob object with the text and specify the MIME type
-  var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    // Create a new URL object pointing to the blob
+    var url = URL.createObjectURL(blob);
 
-  // Create a new URL object pointing to the blob
-  var url = URL.createObjectURL(blob);
+    // Create a new anchor element for the download link
+    var a = document.createElement("a");
 
-  // Create a new anchor element for the download link
-  var a = document.createElement("a");
+    // Set the download attribute and the URL
+    a.setAttribute("download", "myTextFile.txt");
+    a.setAttribute("href", url);
 
-  // Set the download attribute and the URL
-  a.setAttribute("download", "myTextFile.txt");
-  a.setAttribute("href", url);
-
-  // Click the anchor element to initiate the download
-  a.click();
+    // Click the anchor element to initiate the download
+    a.click();}
+    
 }
 // dark mode in site
 const darkModeBtn = document.getElementById('dark-mode-btn');
