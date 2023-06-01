@@ -488,7 +488,7 @@ function download() {
   // Get the text from the textarea
   var text = document.getElementById("text").value;
   checkinputText(text)
-  if(text!=''){
+  if(text.trim()!=''){
     // Create a new Blob object with the text and specify the MIME type
     var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
 
