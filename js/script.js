@@ -235,25 +235,88 @@ document.getElementById("text").addEventListener("input", countLines);
 document.getElementById("input-text").addEventListener("input", countLiness);
 function checkinputText(text){
  // Clear any previous output
- outputContainer.innerHTML = "";
  if (text.trim() === "") {
-   outputContainer.innerHTML = `
-       <div class="alert alert-danger" role="alert">
-         Please enter some text.
-       </div>
-     `;
+  // Create the Bootstrap alert component
+  let alertDiv = document.createElement("div");
+  alertDiv.classList.add("alert", "alert-danger", "mt-3");
+  alertDiv.setAttribute("role", "alert");
+  alertDiv.textContent = "Please enter some text.";
+  // Find the container to prepend the alert
+  let container = document.getElementById("output-containerr");
+  container.innerHTML = ""; // Clear previous alerts
+  // Append the alert to the container
+  container.appendChild(alertDiv);
+  // Hide the alert after 6 seconds
+  setTimeout(function() {
+    alertDiv.style.display = "none";
+  }, 2000);
+
    return;
  }
  
 }
 function shuffleLines() {
-  
-  let text = document.getElementById("text").value.trim();
-  let lines = text.split("\n");
-  checkinputText(text)
-  lines = shuffleArray(lines);
-  document.getElementById("text").value = lines.join("\n");
+  let fileInput = document.getElementById("inputGroupFile01");
+  let textarea = document.getElementById("text");
+
+  if (fileInput.files.length > 0) {
+    let file = fileInput.files[0];
+    let reader = new FileReader();
+
+    reader.onload = function(event) {
+      let dialogueContent = event.target.result;
+      let lines = dialogueContent.split("\n");
+      lines = shuffleArray(lines);
+      downloadResult(lines.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    let text = textarea.value.trim();
+    checkinputText(text);
+    let lines = text.split("\n");
+    lines = shuffleArray(lines);
+    textarea.value = lines.join("\n");
+  }
 }
+
+function downloadResult(content, file) {
+  if (content.trim() === "") {
+    // Create the Bootstrap alert component
+    let alertDiv = document.createElement("div");
+    alertDiv.classList.add("alert", "alert-danger", "mt-3");
+    alertDiv.setAttribute("role", "alert");
+    alertDiv.textContent = "There is no information required in this file.";
+
+    // Find the container to prepend the alert
+    let container = document.getElementById("output-containerr");
+    container.innerHTML = ""; // Clear previous alerts
+
+    // Append the alert to the container
+    container.appendChild(alertDiv);
+
+    // Hide the alert after 6 seconds
+    setTimeout(function() {
+      alertDiv.style.display = "none";
+    }, 2000);
+  } else {
+    let filename = "result.txt";
+    let blob = new Blob([content], { type: "text/plain" });
+
+    // Create a temporary anchor element
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+
+    // Simulate a click on the anchor element to trigger the download
+    link.dispatchEvent(new MouseEvent("click"));
+
+    // Clean up the temporary URL object
+    URL.revokeObjectURL(link.href);
+  }
+}
+
 
 function copyText() {
   let outputText = document.getElementById("text");
@@ -262,14 +325,38 @@ function copyText() {
 }
 
 function removeDuplicateLines() {
-  let text = document.getElementById("text").value;
-  let lines = text.split("\n").map(line => line.trim());
-  checkinputText(text)
+  let fileInput = document.getElementById("inputGroupFile01");
+  let textarea = document.getElementById("text");
 
-  lines = removeDuplicates(lines);
-  document.getElementById("text").value = lines.join("\n");
-  document.getElementById("line-count").innerHTML = "Number of lines: " + lines.length;
+  if (fileInput.files.length > 0) {
+    let file = fileInput.files[0];
+    let reader = new FileReader();
 
+    reader.onload = function(event) {
+      let dialogueContent = event.target.result;
+      let lines = dialogueContent.split("\n").map(line => line.trim());
+      checkinputText(dialogueContent);
+
+      lines = removeDuplicates(lines);
+      document.getElementById("line-count").innerHTML = "Number of lines: " + lines.length;
+
+      // Remove duplicate lines from file (if required) and download the result
+      downloadResult(lines.join("\n"));
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    let text = textarea.value.trim();
+    checkinputText(text);
+    let lines = text.split("\n").map(line => line.trim());
+
+    lines = removeDuplicates(lines);
+    textarea.value = lines.join("\n");
+    document.getElementById("line-count").innerHTML = "Number of lines: " + lines.length;
+
+    
+  }
 }
 
 function shuffleArray(array) {
@@ -283,126 +370,333 @@ function shuffleArray(array) {
 function removeDuplicates(array) {
   return [...new Set(array)];
 }
-// Event listeners
+
+
 function extractipv4() {
-  var input = document.getElementById("text").value;
-  var regex = /((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g;
-  var matches = input.match(regex);
-  var uniqueMatches = [...new Set(matches)];
-  checkinputText(input)
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-  document.getElementById("text").value = uniqueMatches.join("\n");
+    reader.onload = function(event) {
+      var dialogueContent = event.target.result;
+      var matches = dialogueContent.match(/((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g);
+      var uniqueMatches = [...new Set(matches)];
+      checkinputText(dialogueContent);
+
+      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+      downloadResult(uniqueMatches.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var input = textarea.value;
+    var matches = input.match(/((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g);
+    var uniqueMatches = [...new Set(matches)];
+    checkinputText(input);
+
+    document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+    textarea.value = uniqueMatches.join("\n");
+  }
 }
 
 function extractipv6() {
-  var input = document.getElementById("text").value;
-  var regex = /((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g;
-  var matches = input.match(regex);
-  var uniqueMatches = [...new Set(matches)];
-  checkinputText(input)
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-  document.getElementById("text").value = uniqueMatches.join("\n");
+    reader.onload = function(event) {
+      var dialogueContent = event.target.result;
+      var matches = dialogueContent.match(/((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g);
+      var uniqueMatches = [...new Set(matches)];
+      checkinputText(dialogueContent);
+
+      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+      downloadResult(uniqueMatches.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var input = textarea.value;
+    var matches = input.match(/((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g);
+    var uniqueMatches = [...new Set(matches)];
+    checkinputText(input);
+
+    document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+    textarea.value = uniqueMatches.join("\n");
+  }
 }
 
 function extractipv4_ipv6() {
-  var input = document.getElementById("text").value;
-  checkinputText(input)
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  var ipv4regex = /((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g;
-  var ipv6regex = /((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g;
-  var ipv4matches = input.match(ipv4regex);
-  var ipv6matches = input.match(ipv6regex);
-  var allMatches = ipv4matches.concat(ipv6matches);
-  var uniqueMatches = [...new Set(allMatches)];
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-  document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+    reader.onload = function(event) {
+      var dialogueContent = event.target.result;
+      var ipv4Matches = dialogueContent.match(/((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g);
+      var ipv6Matches = dialogueContent.match(/((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g);
+      var allMatches = ipv4Matches.concat(ipv6Matches);
+      var uniqueMatches = [...new Set(allMatches)];
+      checkinputText(dialogueContent);
 
-  document.getElementById("text").value = uniqueMatches.join("\n");
+      document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+      downloadResult(uniqueMatches.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var input = textarea.value;
+    var ipv4Matches = input.match(/((?:[0-9]{1,3}\.){3}[0-9]{1,3})/g);
+    var ipv6Matches = input.match(/((?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})/g);
+    var allMatches = ipv4Matches.concat(ipv6Matches);
+    var uniqueMatches = [...new Set(allMatches)];
+    checkinputText(input);
+
+    document.getElementById("line-count").innerHTML = "Number of unique IP addresses: " + uniqueMatches.length;
+
+    textarea.value = uniqueMatches.join("\n");
+  }
 }
 function extractDomain() {
-  var text = document.getElementById("text").value;
-  checkinputText(text)
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  var regex = /(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig;
-  var matches = text.match(regex);
-  var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-  document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
-  document.getElementById("text").value = uniqueMatches.join("\n");
+    reader.onload = function(event) {
+      var dialogueContent = event.target.result;
+      var matches = dialogueContent.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
+      var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+      checkinputText(dialogueContent);
+
+      document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
+      downloadResult(uniqueMatches.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var text = textarea.value;
+    var matches = text.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
+    var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+    checkinputText(text);
+
+    document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
+    textarea.value = uniqueMatches.join("\n");
+  }
 }
-
 
 function extractsubDomain() {
-  var text = document.getElementById("text").value;
-  checkinputText(text)
-  var regex = /([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig;
-  var matches = text.match(regex);
-  var uniqueMatches = [...new Set(matches)];
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("line-count").innerHTML = "Number of unique SubDomain: " + uniqueMatches.length;
-  document.getElementById("text").value = uniqueMatches.join("\n");
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+      var dialogueContent = event.target.result;
+      var matches = dialogueContent.match(/([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig);
+      var uniqueMatches = [...new Set(matches)];
+      checkinputText(dialogueContent);
+
+      document.getElementById("line-count").innerHTML = "Number of unique SubDomain: " + uniqueMatches.length;
+      downloadResult(uniqueMatches.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var text = textarea.value;
+    var matches = text.match(/([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig);
+    var uniqueMatches = [...new Set(matches)];
+    checkinputText(text);
+
+    document.getElementById("line-count").innerHTML = "Number of unique SubDomain: " + uniqueMatches.length;
+    textarea.value = uniqueMatches.join("\n");
+  }
 }
 
-
 function extractEmails() {
-  var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
-  var emails = inputText.match(regex);
-  checkinputText(inputText)
-  var uniqueEmails = removeDuplicates(emails);
-  var sortedEmails = sortEmailsByDomain(uniqueEmails);
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("text").value = sortedEmails.join("\n");
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+      var inputText = event.target.result;
+      var regex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+      var emails = inputText.match(regex);
+      checkinputText(inputText);
+      var uniqueEmails = removeDuplicates(emails);
+      var sortedEmails = sortEmailsByDomain(uniqueEmails);
+
+      downloadResult(sortedEmails.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var inputText = textarea.value;
+    var regex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+    var emails = inputText.match(regex);
+    checkinputText(inputText);
+    var uniqueEmails = removeDuplicates(emails);
+    var sortedEmails = sortEmailsByDomain(uniqueEmails);
+
+    textarea.value = sortedEmails.join("\n");
+  }
 }
 
 function extractEmailAndPassword() {
-  var inputText = document.getElementById("text").value;
-  var regex = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}):([A-Za-z0-9]+)/g;
-  var emailAndPasswords = inputText.match(regex);
-  checkinputText(inputText)
-  var uniqueEmailAndPasswords = removeDuplicates(emailAndPasswords);
-  var sortedEmailAndPasswords = sortEmailsByDomain(uniqueEmailAndPasswords);
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("text").value = sortedEmailAndPasswords.join("\n");
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+      var inputText = event.target.result;
+      var regex = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}):([A-Za-z0-9]+)/g;
+      var emailAndPasswords = inputText.match(regex);
+      checkinputText(inputText);
+      var uniqueEmailAndPasswords = removeDuplicates(emailAndPasswords);
+      var sortedEmailAndPasswords = sortEmailsByDomain(uniqueEmailAndPasswords);
+
+      downloadResult(sortedEmailAndPasswords.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var inputText = textarea.value;
+    var regex = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}):([A-Za-z0-9]+)/g;
+    var emailAndPasswords = inputText.match(regex);
+    checkinputText(inputText);
+    var uniqueEmailAndPasswords = removeDuplicates(emailAndPasswords);
+    var sortedEmailAndPasswords = sortEmailsByDomain(uniqueEmailAndPasswords);
+
+    textarea.value = sortedEmailAndPasswords.join("\n");
+  }
 }
 
 function extractGmail() {
-  var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
-  var gmailEmails = inputText.match(regex);
-  checkinputText(inputText)
-  var uniqueGmailEmails = removeDuplicates(gmailEmails);
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("text").value = uniqueGmailEmails.join("\n");
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+      var inputText = event.target.result;
+      var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
+      var gmailEmails = inputText.match(regex);
+      checkinputText(inputText);
+      var uniqueGmailEmails = removeDuplicates(gmailEmails);
+
+      downloadResult(uniqueGmailEmails.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var inputText = textarea.value;
+    var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
+    var gmailEmails = inputText.match(regex);
+    checkinputText(inputText);
+    var uniqueGmailEmails = removeDuplicates(gmailEmails);
+
+    textarea.value = uniqueGmailEmails.join("\n");
+  }
 }
 
 function extractYahoo() {
-  var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@yahoo\.[A-Za-z]{2,}/g;
-  var yahooEmails = inputText.match(regex);
-  checkinputText(inputText)
-  var uniqueYahooEmails = removeDuplicates(yahooEmails);
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  document.getElementById("text").value = uniqueYahooEmails.join("\n");
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+      var inputText = event.target.result;
+      var regex = /[A-Za-z0-9._%+-]+@yahoo\.[A-Za-z]{2,}/g;
+      var yahooEmails = inputText.match(regex);
+      checkinputText(inputText);
+      var uniqueYahooEmails = removeDuplicates(yahooEmails);
+
+      downloadResult(uniqueYahooEmails.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var inputText = textarea.value;
+    var regex = /[A-Za-z0-9._%+-]+@yahoo\.[A-Za-z]{2,}/g;
+    var yahooEmails = inputText.match(regex);
+    checkinputText(inputText);
+    var uniqueYahooEmails = removeDuplicates(yahooEmails);
+
+    textarea.value = uniqueYahooEmails.join("\n");
+  }
 }
 
 function extractHotmail() {
-  var inputText = document.getElementById("text").value;
-  var regex = /[A-Za-z0-9._%+-]+@hotmai\.[A-Za-z]{2,}/g;
-  var hotmailEmails = inputText.match(regex);
-  checkinputText(inputText)
+  var fileInput = document.getElementById("inputGroupFile01");
+  var textarea = document.getElementById("text");
 
-  var uniqueHotmailEmails = removeDuplicates(hotmailEmails);
+  if (fileInput.files.length > 0) {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
 
-  document.getElementById("text").value = uniqueHotmailEmails.join("\n");
+    reader.onload = function(event) {
+      var inputText = event.target.result;
+      var regex = /[A-Za-z0-9._%+-]+@hotmail\.[A-Za-z]{2,}/g;
+      var hotmailEmails = inputText.match(regex);
+      checkinputText(inputText);
+      var uniqueHotmailEmails = removeDuplicates(hotmailEmails);
+
+      downloadResult(uniqueHotmailEmails.join("\n"), file);
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  } else {
+    var inputText = textarea.value;
+    var regex = /[A-Za-z0-9._%+-]+@hotmail\.[A-Za-z]{2,}/g;
+    var hotmailEmails = inputText.match(regex);
+    checkinputText(inputText);
+    var uniqueHotmailEmails = removeDuplicates(hotmailEmails);
+
+    textarea.value = uniqueHotmailEmails.join("\n");
+  }
 }
 
 function sortEmailsByDomain(emails) {
-  return emails.sort(function (a, b) {
+  return emails.sort(function(a, b) {
     var domainA = a.substring(a.lastIndexOf("@") + 1).toLowerCase();
     var domainB = b.substring(b.lastIndexOf("@") + 1).toLowerCase();
     if (domainA < domainB) return -1;
@@ -412,10 +706,10 @@ function sortEmailsByDomain(emails) {
 }
 
 function removeDuplicates(emails) {
-  document.getElementById("text").value = '';
-  document.getElementById("line-count").innerHTML = "Number of Email addresses: 0"
+  document.getElementById("text").value = "";
+  document.getElementById("line-count").innerHTML = "Number of Email addresses: 0";
   var uniqueEmails = [];
-  emails.forEach(function (email) {
+  emails.forEach(function(email) {
     if (!uniqueEmails.includes(email)) {
       uniqueEmails.push(email);
     }
@@ -423,6 +717,21 @@ function removeDuplicates(emails) {
   document.getElementById("line-count").innerHTML = "Number of Email addresses: " + uniqueEmails.length;
   return uniqueEmails;
 }
+
+// function downloadResult(content, file) {
+//   var element = document.createElement("a");
+//   element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(content));
+//   element.setAttribute("download", file.name + "_result.txt");
+//   element.style.display = "none";
+//   document.body.appendChild(element);
+//   element.click();
+//   document.body.removeChild(element);
+// }
+
+// function checkinputText(inputText) {
+//   var lineCount = (inputText.match(/\n/g) || []).length + 1;
+//   document.getElementById("line-count").innerHTML = "Number of lines: " + lineCount;
+// }
 
 $(document).ready(function () {
   $('#generate').click(function () {
