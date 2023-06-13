@@ -75,20 +75,12 @@ function splitText(buttonId) {
 
   // Check for invalid input
   if (inputText.trim() === "") {
-    outputContainer.innerHTML = `
-        <div class="alert alert-danger" role="alert">
-          Please enter some text.
-        </div>
-      `;
+    showAlert("Please enter some text.");
     return;
   }
 
   if (isNaN(sectionCount) || sectionCount < 1) {
-    outputContainer.innerHTML = `
-        <div class="alert alert-danger" role="alert">
-          Please enter a valid number of sections.
-        </div>
-      `;
+    showAlert("Please enter a valid number of sections.");
     return;
   }
 
@@ -96,135 +88,150 @@ function splitText(buttonId) {
   const inputLineCount = inputLines.length;
 
   if (inputLineCount < sectionCount) {
-    outputContainer.innerHTML = `
-        <div class="alert alert-danger" role="alert">
-          The number of sections is greater than the number of lines in the input text.
-        </div>
-      `;
+    showAlert("The number of sections is greater than the number of lines in the input text.");
     return;
   }
-  let splitBySection = document.getElementById("split-by-section").checked;
-  let splitByLine = document.getElementById("split-by-line").checked;  
-  let sectionSize = Math.floor(inputLineCount / sectionCount);
-  let remainingLines = inputLineCount % sectionCount;
-  let currentLineIndex = 0;
-  let copyButtonCounter = 1;
-  //split in textarea
-  if (buttonId === 'area') {
-    for (let i = 0; i < sectionCount; i++) {
-      let currentSectionSize = sectionSize;
-      if (evenSections && remainingLines > 0) {
-        currentSectionSize++;
-        remainingLines--;
-      }
 
-      let sectionLines = inputLines.slice(currentLineIndex, currentLineIndex + currentSectionSize);
-      currentLineIndex += currentSectionSize;
+  function showAlert(message) {
+    outputContainer.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        ${message}
+      </div>
+    `;
 
-      // Create a new textarea element for this section
-      let outputTextarea = document.createElement("textarea");
-      outputTextarea.classList.add("form-control", "mt-1");
-
-      //outputTextarea.setAttribute("hidden", "true");
-
-      outputTextarea.rows = 1;
-      outputTextarea.value = sectionLines.join("\n");
-
-
-      // Create a new "Copy" button for this textarea
-      let copyButton = document.createElement("button");
-      copyButton.classList.add("btn", "btn-outline-primary", "my-1");
-      copyButton.textContent = "Copy " + copyButtonCounter;
-      copyButton.addEventListener("click", function () {
-        outputTextarea.select();
-        document.execCommand("copy");
-      });
-
-      // Increment the copy button counter for the next button
-      copyButtonCounter++;
-
-      // Create a new div to hold the textarea and button
-      let div = document.createElement("div");
-      div.classList.add("input-group");
-      div.appendChild(outputTextarea);
-      div.appendChild(copyButton);
-      // Create a new div to hold the textarea and button
-      let div1 = document.createElement("div");
-      div1.classList.add("col");
-      div1.appendChild(div);
-
-      // Create a new div to hold the textarea and button
-      let div2 = document.createElement("div");
-      div2.classList.add("row");
-      div2.appendChild(div1);
-
-      // Append the div to the output container
-      outputContainer.appendChild(div2);
-    }
+    // Remove the alert after 4 seconds
+    setTimeout(() => {
+      outputContainer.innerHTML = "";
+    }, 4000);
   }
-  //split in files txt
-  else if (buttonId === 'txt') {
-    // Get the input text and split it into lines
-    // let inputText = document.getElementById('input-text').value;
-    let inputLines = inputText.split(/\r?\n/);
-    let inputLineCount = inputLines.length;
 
-    // Get the number of sections and whether to split them evenly
-    let sectionCount = parseInt(document.getElementById('lengths').value);
-    let evenSections = document.getElementById('even-sections').checked;
+  let splitBySection = document.getElementById("split-by-section").checked;
+  let splitByLine = document.getElementById("split-by-line").checked;
 
-    // Calculate the number of lines in each section and the remaining lines
-    let currentSectionSize = Math.floor(inputLineCount / sectionCount);
+  if (splitBySection) {
+    let sectionSize = Math.floor(inputLineCount / sectionCount);
     let remainingLines = inputLineCount % sectionCount;
+    let currentLineIndex = 0;
+    let copyButtonCounter = 1;
 
-    // Create an array to hold the sections of the input text
-    let sections = [];
-    let startLineIndex = 0;
-    for (let i = 0; i < sectionCount; i++) {
-      // Calculate the end line index for the current section
-      let endLineIndex = startLineIndex + currentSectionSize - 1;
-      if (evenSections && remainingLines > 0) {
-        endLineIndex++;
-        remainingLines--;
+    if (buttonId === "area") {
+      for (let i = 0; i < sectionCount; i++) {
+        let currentSectionSize = sectionSize;
+        if (evenSections && remainingLines > 0) {
+          currentSectionSize++;
+          remainingLines--;
+        }
+
+        let sectionLines = inputLines.slice(currentLineIndex, currentLineIndex + currentSectionSize);
+        currentLineIndex += currentSectionSize;
+
+        let outputTextarea = createTextarea(sectionLines.join("\n"));
+        outputTextarea.value = sectionLines.join("\n");
+
+        let copyButton = createCopyButton(outputTextarea, copyButtonCounter);
+
+        let div = createDiv();
+        div.appendChild(outputTextarea);
+        div.appendChild(copyButton);
+
+        outputContainer.appendChild(div);
+
+        copyButtonCounter++;
+      }
+    } else if (buttonId === "txt") {
+      let sections = [];
+
+      for (let i = 0; i < sectionCount; i++) {
+        let currentSectionSize = sectionSize;
+        if (evenSections && remainingLines > 0) {
+          currentSectionSize++;
+          remainingLines--;
+        }
+
+        let sectionLines = inputLines.slice(currentLineIndex, currentLineIndex + currentSectionSize);
+        currentLineIndex += currentSectionSize;
+
+        sections.push(sectionLines.join("\n"));
       }
 
-      // Get the lines for the current section
-      let sectionLines = inputLines.slice(startLineIndex, endLineIndex + 1);
-
-      // Add the lines to the sections array
-      sections.push(sectionLines);
-
-      // Update the start line index for the next section
-      startLineIndex = endLineIndex + 1;
+      createAndDownloadFiles(sections);
     }
-
-    // Create an array to hold the output files
+  } else if (splitByLine) {
+    let linesPerSection = sectionCount;
+    let currentLineIndex = 0;
+    let copyButtonCounter = 1;
     let outputFiles = [];
 
-    // Loop through the sections and create a file for each one
-    for (let i = 0; i < sections.length; i++) {
-      // Create a Blob object from the section's lines
-      let blob = new Blob([sections[i].join('\n')], { type: 'text/plain' });
+    for (let i = 0; i < Math.ceil(inputLineCount / linesPerSection); i++) {
+      let sectionLines = inputLines.slice(currentLineIndex, currentLineIndex + linesPerSection);
+      currentLineIndex += linesPerSection;
 
-      // Create a file object from the Blob
-      let file = new File([blob], `output_${i + 1}.txt`);
-
-      // Add the file to the outputFiles array
-      outputFiles.push(file);
+      if (sectionLines.length > 0) {
+        if (buttonId === "area") {
+          let outputTextarea = createTextarea(sectionLines.join("\n"));
+          outputTextarea.rows = sectionLines.length;
+          let copyButton = createCopyButton(outputTextarea, copyButtonCounter);
+          let div = createDiv();
+          div.appendChild(outputTextarea);
+          div.appendChild(copyButton);
+          outputContainer.appendChild(div);
+        } else if (buttonId === "txt") {
+          let blob = new Blob([sectionLines.join("\n")], { type: "text/plain" });
+          let file = new File([blob], `output_${i + 1}.txt`);
+          outputFiles.push(file);
+        }
+        copyButtonCounter++;
+      }
     }
 
-    // Create a ZIP file containing the output files
-    let zip = new JSZip();
-    outputFiles.forEach((file, index) => {
-      zip.file(`output_${index + 1}.txt`, file);
-    });
-
-    // Generate the ZIP file and save it
-    zip.generateAsync({ type: 'blob' }).then((blob) => {
-      saveAs(blob, 'output.zip');
-    });
+    if (buttonId === "txt") {
+      createAndDownloadZip(outputFiles);
+    }
   }
 
+  function createTextarea(value) {
+    let outputTextarea = document.createElement("textarea");
+    outputTextarea.classList.add("form-control", "mt-1");
+    outputTextarea.value = value;
+    return outputTextarea;
+  }
+
+  function createCopyButton(outputTextarea, copyButtonCounter) {
+    let copyButton = document.createElement("button");
+    copyButton.classList.add("btn", "btn-outline-primary", "my-1");
+    copyButton.textContent = "Copy " + copyButtonCounter;
+    copyButton.addEventListener("click", function () {
+      outputTextarea.select();
+      document.execCommand("copy");
+    });
+    return copyButton;
+  }
+
+  function createDiv() {
+    let div = document.createElement("div");
+    div.classList.add("input-group");
+    return div;
+  }
+
+  function createAndDownloadFiles(sections) {
+    let outputFiles = [];
+    sections.forEach((section, index) => {
+      let blob = new Blob([section], { type: "text/plain" });
+      let file = new File([blob], `output_${index + 1}.txt`);
+      outputFiles.push(file);
+    });
+    createAndDownloadZip(outputFiles);
+  }
+
+  function createAndDownloadZip(files) {
+    let zip = new JSZip();
+    files.forEach((file, index) => {
+      zip.file(`output_${index + 1}.txt`, file);
+    });
+    zip.generateAsync({ type: "blob" }).then((blob) => {
+      saveAs(blob, "output.zip");
+    });
+  }
 }
 
 
@@ -971,13 +978,20 @@ function checkdomain(check) {
 // suffl split
  function  shuffleSplit(){
   var textarea = document.getElementById("input-text");
-    var lines = textarea.value.split("\n");
-    for (var i = lines.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = lines[i];
-      lines[i] = lines[j];
-      lines[j] = temp;
-    }
-    var shuffledText = lines.join("\n");
-    textarea.value = shuffledText;
+  var lines = textarea.value.split("\n");
+  
+  // Remove empty lines
+  lines = lines.filter(line => line.trim() !== '');
+  
+  for (var i = lines.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = lines[i];
+    lines[i] = lines[j];
+    lines[j] = temp;
+  }
+  
+  var shuffledText = lines.join("\n");
+  textarea.value = shuffledText;
+  countLiness()
+
 }
