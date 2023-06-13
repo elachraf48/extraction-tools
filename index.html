@@ -172,17 +172,11 @@
     <form>
       <div class="form-group">
         <label for="input-text">Input Text:</label>
-        <style>
-          #sufull:hover {
-            opacity: 1;
-          }
-          #sufull{
-            opacity: 0.5
-          }
-        </style>
-        <div style="position: relative;">
-          <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
-          <button class="btn-danger" id="sufull" style="position: absolute; top: 5px; right: 10px;"><i  class="fas fa-random" ></i></button>
+          <div style="position: relative;">
+            <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
+            <button type="button" onclick="shuffleSplit()" class="btn btn-lg btn-outline-success" id="sufull" style="position: absolute; top: 5px; right: 5px;">
+              <i  class="fas fa-random"></i>
+            </button>
         </div>
       </div>
 

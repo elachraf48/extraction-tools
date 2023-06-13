@@ -969,20 +969,15 @@ function checkdomain(check) {
    });
 // -------------------------------------
 // suffl split
-document.getElementById("sufull").addEventListener("click", function() {
+ function  shuffleSplit(){
   var textarea = document.getElementById("input-text");
-  var text = textarea.value;
-  var shuffledText = shufflesplit(text);
-  textarea.value = shuffledText;
-});
-
-function shufflesplit(text) {
-  var words = text.split(" ");
-  for (var i = words.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = words[i];
-    words[i] = words[j];
-    words[j] = temp;
-  }
-  return words.join(" ");
+    var lines = textarea.value.split("\n");
+    for (var i = lines.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = lines[i];
+      lines[i] = lines[j];
+      lines[j] = temp;
+    }
+    var shuffledText = lines.join("\n");
+    textarea.value = shuffledText;
 }
