@@ -74,7 +74,9 @@
     #cookie-banner button:hover {
       opacity: 0.8;
     }
-    
+    .nav-link.active {
+      color: #00FF01 !important;
+    }
   </style>
 </head>
 
@@ -92,19 +94,19 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li class="nav-item">
-              <a class="nav-link" href="#tools-extraction" onclick="showSection('ip-extraction')">Extraction Tool</a>
+              <a class="nav-link active" id="ip-extraction-nav-link" href="#tools-extraction" onclick="showSection('ip-extraction')"><i class="fas fa-cogs"> </i> Extraction Tool</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#split-text" onclick="showSection('split')">Split Tool</a>
+              <a class="nav-link" id="split-nav-link" href="#split-text" onclick="showSection('split')"><i class="fas fa-columns"> </i> Split Tool</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#check_domain" onclick="showSection('checkdomain')">About Domain</a>
+              <a class="nav-link" id="checkdomain-nav-link" href="#check_domain" onclick="showSection('checkdomain')"><i class="fas fa-search"> </i> About Domain</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#about" onclick="showSection('home')">About</a>
-            </li>
+              <a class="nav-link" id="home-nav-link" href="#about" onclick="showSection('home')"><i class="fa fa-user-circle"></i> About</a>
+            </li>            
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">Contact Us</a>
+              <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi"><i class="fa fa-envelope" aria-hidden="true"></i> Contact Us</a>
             </li>
 
           </ul>
@@ -170,7 +172,18 @@
     <form>
       <div class="form-group">
         <label for="input-text">Input Text:</label>
-        <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
+        <style>
+          #sufull:hover {
+            opacity: 1;
+          }
+          #sufull{
+            opacity: 0.5
+          }
+        </style>
+        <div style="position: relative;">
+          <textarea class="form-control col-12 mt-2" id="input-text" rows="8"></textarea>
+          <button class="btn-danger" id="sufull" style="position: absolute; top: 5px; right: 10px;"><i  class="fas fa-random" ></i></button>
+        </div>
       </div>
 
       <div class="form-group">
@@ -211,42 +224,40 @@
     <div class="container mt-1">
       <div class="row">
         <div class="col-md-12">
-          <input  type="file" class="form-control" id="inputGroupFile01" accept=".txt">
+
+          <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
+            <input style="width: 80%;"   type="file" class="form-control btn-outline-success" id="inputGroupFile01" accept=".txt">
+
+            <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
+              <i class="fa fa-clone" aria-hidden="true"></i>
+            </button>
+            <button class="btn  btn-lg btn-outline-success" onclick="download()">
+              <i class="fa fa-download" aria-hidden="true"></i>
+            </button>
+          </div>
           <textarea id="text" class="form-control" rows="5"></textarea>
 
           <br>
           <!--<div class="btn-group" role="group" >-->
-          <center>
+          <!--<center>
             <div class="btn-group" role="group" aria-label="Basic example">
-
-              <button class="btn  btn-lg btn-outline-success" onclick="copyText()">Copy
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-clipboard" viewBox="0 0 16 16">
-                  <path
-                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                  <path
-                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                </svg>
+              <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
               </button>
-              <button class="btn  btn-lg btn-outline-success" onclick="download()">Download
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-download" viewBox="0 0 16 16">
-                  <path
-                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                  <path
-                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                </svg>
+              <button class="btn  btn-lg btn-outline-success" onclick="download()">
+                <i class="fa fa-download" aria-hidden="true"></i>
               </button>
             </div>
-            <br>
+            <br>-->
+            <center>
             <br>
 
             <div class="d-grid gap-2 d-md-block">
 
-              <button class="btn btn-primary btn-lg" onclick="shuffleLines()">Shuffle Lines</button>
-              <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()">Remove Duplicate</button>
+              <button class="btn btn-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random" aria-hidden="true"></i> Shuffle Lines</button>
+              <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser" aria-hidden="true"></i> Remove Duplicate</button>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()">Extract Email</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i class="fa fa-envelope" aria-hidden="true"></i> Extract Email</button>
                 <button class="btn btn-success dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
@@ -260,7 +271,7 @@
               </div>
 
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary btn-lg" onclick="extractipv4_ipv6()">Extract Ip & Domain</button>
+                <button type="button" class="btn btn-secondary btn-lg" onclick="extractipv4_ipv6()"><i class="fa fa-magic" aria-hidden="true"></i> Extract Ip & Domain</button>
                 <button class="btn btn-secondary dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown"aria-expanded="false">
                   <span class="visually-hidden">Extract Ip & Domain</span>
                   

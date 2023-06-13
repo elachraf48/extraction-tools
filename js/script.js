@@ -1,10 +1,21 @@
 function showSection(sectionId) {
-  var sections = ["home", "ip-extraction", "split","checkdomain"];
+  var sections = ["home", "ip-extraction", "split", "checkdomain"];
   sections.forEach(function (item) {
-    document.getElementById(item).style.display = (item === sectionId) ? "block" : "none";
+    var navLink = document.getElementById(item + "-nav-link");
+    var section = document.getElementById(item);
+
+    if (item === sectionId) {
+      navLink.classList.add("active");
+      section.style.display = "block";
+    } else {
+      navLink.classList.remove("active");
+      section.style.display = "none";
+    }
   });
   showModal(sectionId);
 }
+
+
 function getSectionInfo(section) {
   switch (section) {
     case 'home':
@@ -249,7 +260,7 @@ function checkinputText(text){
   // Hide the alert after 6 seconds
   setTimeout(function() {
     alertDiv.style.display = "none";
-  }, 2000);
+  }, 4000);
 
    return;
  }
@@ -299,7 +310,7 @@ function downloadResult(content, file) {
     // Hide the alert after 6 seconds
     setTimeout(function() {
       alertDiv.style.display = "none";
-    }, 2000);
+    }, 4000);
   } else {
     let filename = "result.txt";
     let blob = new Blob([content], { type: "text/plain" });
@@ -956,3 +967,22 @@ function checkdomain(check) {
      // Hide the cookie banner
      cookieBanner.style.display = "none";
    });
+// -------------------------------------
+// suffl split
+document.getElementById("sufull").addEventListener("click", function() {
+  var textarea = document.getElementById("input-text");
+  var text = textarea.value;
+  var shuffledText = shufflesplit(text);
+  textarea.value = shuffledText;
+});
+
+function shufflesplit(text) {
+  var words = text.split(" ");
+  for (var i = words.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = words[i];
+    words[i] = words[j];
+    words[j] = temp;
+  }
+  return words.join(" ");
+}
