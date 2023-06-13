@@ -192,6 +192,7 @@ function splitText(buttonId) {
   function createTextarea(value) {
     let outputTextarea = document.createElement("textarea");
     outputTextarea.classList.add("form-control", "mt-1");
+    outputTextarea.setAttribute("rows", "1");
     outputTextarea.value = value;
     return outputTextarea;
   }
