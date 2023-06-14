@@ -221,6 +221,7 @@
 
           <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
             <input style="width: 80%;"   type="file" class="form-control btn-outline-success" id="inputGroupFile01" accept=".txt">
+            <button class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random" aria-hidden="true"></i></button>
 
             <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
               <i class="fa fa-clone" aria-hidden="true"></i>
@@ -232,23 +233,12 @@
           <textarea id="text" class="form-control" rows="5"></textarea>
 
           <br>
-          <!--<div class="btn-group" role="group" >-->
-          <!--<center>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
-                <i class="fa fa-clipboard" aria-hidden="true"></i>
-              </button>
-              <button class="btn  btn-lg btn-outline-success" onclick="download()">
-                <i class="fa fa-download" aria-hidden="true"></i>
-              </button>
-            </div>
-            <br>-->
+          
             <center>
             <br>
 
             <div class="d-grid gap-2 d-md-block">
 
-              <button class="btn btn-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random" aria-hidden="true"></i> Shuffle Lines</button>
               <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser" aria-hidden="true"></i> Remove Duplicate</button>
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i class="fa fa-envelope" aria-hidden="true"></i> Extract Email</button>
@@ -284,48 +274,49 @@
 
             <p id="line-count"></p>
             <div class="container text-center" id="output-containerr"></div>
+          </center>
 
         </div>
       </div>
     </div>
+   
     <div class="container">
       <h3 class="d-flex d-grid gap-2  justify-content-center">Random String Generator</h3>
-      <div class="form-group row justify-content-center">
 
         <div class="form-group row justify-content-center ">
-          <div class="btn-group py-2" role="group" aria-label="Basic checkbox toggle button group">
+          <div class="btn-group-vertical mt-3" style="width:10% ; height: 50%; color: #00FF01;" role="group" aria-label="Basic checkbox toggle button group">
             <input type="checkbox" class="btn-check" id="uppercase" autocomplete="off">
-            <label class="btn btn-outline-primary" for="uppercase">Uppercase</label>
+            <label class="btn btn-outline-danger" for="uppercase">A-Z</label>
 
             <input type="checkbox" class="btn-check" id="lowercase" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="lowercase">Lowercase</label>
+            <label class="btn btn-outline-danger" for="lowercase">a-z</label>
 
             <input type="checkbox" class="btn-check" id="numbers" autocomplete="off">
-            <label class="btn btn-outline-primary" for="numbers">Numbers</label>
+            <label class="btn btn-outline-danger" for="numbers">NB</label>
 
             <input type="checkbox" class="btn-check" id="symbols" autocomplete="off">
-            <label class="btn btn-outline-primary" for="symbols">Symbols</label>
+            <label class="btn btn-outline-danger" for="symbols">SY</label>
           </div>
-          <br>
-          <br>
-          <div class="input-group">
-            <button class="btn btn-primary" style="width:10% ;" type="button" id="decrement"><i class="fa fa-minus" aria-hidden="true"></i></button>
+
+          <div class="input-group-vertical" style="width:60% ;">
+
+          <div class="input-group py-3" style="height:20% ;">
+            <button class="btn btn-outline-primary" style="width:20% ;" type="button" id="decrement"><i class="fa fa-minus" aria-hidden="true"></i></button>
             <input type="number" id="length" class="form-control text-center" value="25" min="1" max="100">
-            <button class="btn btn-primary" style="width:10% ;" type="button" id="increment"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-primary" style="width:20% ;" type="button" id="increment"><i class="fa fa-plus" aria-hidden="true"></i></button>
           </div>
+          <div class="input-group mt-4 p-1">
+            <input type="text" id="result-GN" class="form-control text-center" readonly>
+            <button id="copy" style="width: 20%;" class="btn btn-outline-success"><i class="fa fa-clone" aria-hidden="true"></i></button>
+          </div>
+          <button id="generate" style="width: 100%;"  class="btn btn-outline-danger btn-lg mt-3">Generate</button>
         </div>
+      </div>
+
 
       </div>
-    </div>
 
-    <div class="d-grid gap-2 col-6 mx-auto py-2">
-
-      <button id="generate" class="btn btn-outline-danger mr-3 btn-lg">Generate</button>
-    </div>
-    <div class="input-group mb-3">
-      <input type="text" id="result-GN" class="form-control text-center" readonly>
-      <button id="copy" style="width: 10%;" class="btn btn-outline-success">Copy</button>
-    </div>
+   
 
   </div>
   </div>
@@ -339,12 +330,15 @@
           <textarea class="form-control" id="domain-input" rows="3"></textarea>
         </div>
         <center class="mt-1"> 
-          <button type="button" class="btn btn-outline-secondary col-2" id="clear">clear</button>
-          <button type="button" class="btn btn-outline-info   col-2" id="bulkblacklist">bulk blacklist</button>
-          <button type="button" class="btn btn-outline-primary   col-2" id="talos-button">Check in Talos</button>
-          <button type="button" class="btn btn-outline-success   col-2" id="spamhaus-button">Check in Spamhaus</button>
-          <button type="button" class="btn btn-outline-danger    col-2  " id="scamadviser-button">Check in ScamAdviser</button>  
-      
+          <div class="d-grid gap-2 d-md-block justify-content-center">
+
+          <button type="button" class="btn btn-outline-secondary " id="clear">clear</button>
+          <button type="button" class="btn btn-outline-info   " id="bulkblacklist">bulk blacklist</button>
+          <button type="button" class="btn btn-outline-primary   " id="talos-button">Check in Talos</button>
+          <button type="button" class="btn btn-outline-success  " id="spamhaus-button">Check in Spamhaus</button>
+          <button type="button" class="btn btn-outline-danger   " id="scamadviser-button">Check in ScamAdviser</button>  
+        </div>
+
         </center>
       </form>
       <div class="container text-center" id="output-containerr"></div>
