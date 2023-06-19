@@ -104,10 +104,17 @@
               <a class="nav-link" id="checkdomain-nav-link" href="#check_domain" onclick="showSection('checkdomain')"><i class="fas fa-search"> </i> About Domain</a>
             </li>
             <li class="nav-item">
+              <!--<a class="nav-link" id="prime-nav-link" href="#calcule_prime" onclick="showSection('prime')"><i class="fas fa-magic"> </i>Calcule prime</a>-->
+              <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"  aria-controls="offcanvasExample">
+                <i class="far fa-money-bill-alt	"></i>
+                Calcule prime</a>
+              
+            </li>
+            <li class="nav-item">
               <a class="nav-link" id="home-nav-link" href="#about" onclick="showSection('home')"><i class="fa fa-user-circle"></i> About</a>
             </li>            
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi"><i class="fa fa-envelope" aria-hidden="true"></i> Contact Us</a>
+              <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi"><i class="fa fa-envelope"></i> Contact Us</a>
             </li>
 
           </ul>
@@ -132,7 +139,7 @@
 
 
   </header>
-  <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label" aria-hidden="true">
+  <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -193,9 +200,9 @@
         </div>
 
         <div class="input-group mt-1">
-          <button class="btn btn-primary" style="width:10% ;" type="button" id="decrements"><i class="fa fa-minus" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" style="width:10% ;" type="button" id="decrements"><i class="fa fa-minus"></i></button>
           <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
-          <button class="btn btn-primary" style="width:10% ;" type="button" id="increments"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" style="width:10% ;" type="button" id="increments"><i class="fa fa-plus"></i></button>
         </div>
 
       </div>
@@ -222,13 +229,13 @@
 
           <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
             <input style="width: 80%;"   type="file" class="form-control btn-outline-success" id="inputGroupFile01" accept=".txt">
-            <button class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random"></i></button>
 
             <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
-              <i class="fa fa-clone" aria-hidden="true"></i>
+              <i class="fa fa-clone"></i>
             </button>
             <button class="btn  btn-lg btn-outline-success" onclick="download()">
-              <i class="fa fa-download" aria-hidden="true"></i>
+              <i class="fa fa-download"></i>
             </button>
           </div>
           <textarea id="text" class="form-control" rows="5"></textarea>
@@ -240,9 +247,9 @@
 
             <div class="d-grid gap-2 d-md-block">
 
-              <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser" aria-hidden="true"></i> Remove Duplicate</button>
+              <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser"></i> Remove Duplicate</button>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i class="fa fa-envelope" aria-hidden="true"></i> Extract Email</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i class="fa fa-envelope"></i> Extract Email</button>
                 <button class="btn btn-success dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
@@ -256,7 +263,7 @@
               </div>
 
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary btn-lg" onclick="extractipv4_ipv6()"><i class="fa fa-magic" aria-hidden="true"></i> Extract Ip & Domain</button>
+                <button type="button" class="btn btn-secondary btn-lg" onclick="extractipv4_ipv6()"><i class="fa fa-magic"></i> Extract Ip & Domain</button>
                 <button class="btn btn-secondary dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown"aria-expanded="false">
                   <span class="visually-hidden">Extract Ip & Domain</span>
                   
@@ -302,13 +309,13 @@
           <div class="input-group-vertical" style="width:60% ;">
 
           <div class="input-group py-3" style="height:20% ;">
-            <button class="btn btn-outline-primary" style="width:20% ;" type="button" id="decrement"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-primary" style="width:20% ;" type="button" id="decrement"><i class="fa fa-minus"></i></button>
             <input type="number" id="length" class="form-control text-center" value="25" min="1" max="100">
-            <button class="btn btn-outline-primary" style="width:20% ;" type="button" id="increment"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-primary" style="width:20% ;" type="button" id="increment"><i class="fa fa-plus"></i></button>
           </div>
           <div class="input-group mt-4 p-1">
             <input type="text" id="result-GN" class="form-control text-center" readonly>
-            <button id="copy" style="width: 20%;" class="btn btn-outline-success"><i class="fa fa-clone" aria-hidden="true"></i></button>
+            <button id="copy" style="width: 20%;" class="btn btn-outline-success"><i class="fa fa-clone"></i></button>
           </div>
           <button id="generate" style="width: 100%;"  class="btn btn-outline-danger btn-lg mt-3">Generate</button>
         </div>
@@ -359,8 +366,61 @@
     <button id="cookie-settings">COOKIES SETTINGS</button>
     <button id="cookie-accept">ACCEPT COOKIES</button>
   </div>
-  
 
+  
+  <div class="offcanvas  offcanvas-start  p-2" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title " id="offcanvasExampleLabel">Calcule Prime</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+      <label for="">Taux de change</label>
+      <div class="input-group mb-3">
+
+      <span class="input-group-text">$</span>
+      <input type="number" name="change" id="change-input" placeholder="ex: 10.01" required/>
+      <button class="btn btn-primary" onclick="fetchExchangeRate()" type="button" id="button-addon2">Get Exchange</button>
+      </div>
+    <div class="input-group mb-3 befor">
+      <span class="input-group-text bg-danger" style="width:20% ;">Before</span>
+      <input type="text" class="form-control" id="before" placeholder="20" value="20" >
+      <span class="input-group-text">K</span>
+      <span class="input-group-text"><i class="fa fa-arrow-right"></i>        </span>
+      <input type="text" class="form-control" id="beforepr" placeholder="2" value="2">
+      <span class="input-group-text"><i class="fa fa-percent"></i>        </span>
+    
+    </div>  
+    <div class="input-group mb-3 after">
+      <span class="input-group-text bg-success" style="width:20% ;">After </span>
+      <input type="text" class="form-control" id="after" placeholder="20" value="20">
+      <span class="input-group-text">K</span>
+      <span class="input-group-text"><i class="fa fa-arrow-right"></i>        </span>
+      <input type="text" class="form-control" id="afterpr" placeholder="2.5" value="2.5" >
+      <span class="input-group-text"><i class="fa fa-percent"></i>        </span>
+    
+    </div>    
+    <div class="input-group mb-3">
+      <span class="input-group-text bg-primary" style="width:20% ;">Prime </span>
+      <input type="text" class="form-control" id="prime" placeholder="21000">
+      <span class="input-group-text">$</span>
+    </div>   
+
+    <div class="btn-group d-flex justify-content-center mb-2" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="model" autocomplete="off" >
+      <label class="btn btn-outline-success " for="model">Employé model </label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="nmodel" autocomplete="off" checked>
+      <label class="btn btn-outline-success" for="nmodel">Non employé model</label>
+
+    </div>
+
+    <button class="btn btn-primary" onclick="calcule()" type="button" id="button-calcule">Calcule</button>
+    <div id="resultatcal" class="text-center font-weight-bold p-3"></div>
+  </div>
+  
+  <script>
+   
+  
+  </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="js/script.js"></script>

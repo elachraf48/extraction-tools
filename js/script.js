@@ -1,5 +1,5 @@
 function showSection(sectionId) {
-  var sections = ["home", "ip-extraction", "split", "checkdomain"];
+  var sections = ["home", "ip-extraction", "split", "checkdomain","prime"];
   sections.forEach(function (item) {
     var navLink = document.getElementById(item + "-nav-link");
     var section = document.getElementById(item);
@@ -38,6 +38,11 @@ function getSectionInfo(section) {
         title: 'About Domain',
         description: 'This section contains information about domains and allows you to check the reputation of a domain.'
       };
+      case 'prime':
+        return {
+          title: 'Prime',
+          description: 'This section contains calcule prime.'
+        };
     default:
       return {
         title: '',
@@ -997,3 +1002,54 @@ function checkdomain(check) {
   countLiness()
 
 }
+
+
+// prime
+function fetchExchangeRate() {
+  fetch('https://v6.exchangerate-api.com/v6/2fe8acc573bf7f482de7cbbe/latest/USD')
+    .then(response => response.json())
+    .then(data => {
+      const rates = data.conversion_rates;
+      const changeInput = document.getElementById('change-input');
+      const exchangeRate = rates['MAD']; // Assuming you want to display the exchange rate for USD to MAD
+
+      if (exchangeRate) {
+        changeInput.value = exchangeRate.toFixed(2); // Display the exchange rate with 2 decimal places
+      } else {
+        alert('Exchange rate not available');
+      }
+    })
+    .catch(error => {
+      alert('Error fetching exchange rates:', error);
+    });
+}
+
+function calcule() {
+
+  var before = Number(document.getElementById("before").value + '000');
+  var beforepr = parseFloat(document.getElementById("beforepr").value/100);
+  var after = Number(document.getElementById("after").value + '000');
+  var afterpr = parseFloat(document.getElementById("afterpr").value/100);
+  var prime = parseFloat(document.getElementById("prime").value.replace(/[\u202F$]/g, ''));
+  var usd = Number(document.getElementById("change-input").value);
+  let TopModel = document.getElementById("model").checked;
+  let NTopModel = document.getElementById("nmodel").checked;
+  var primetop=0
+  if(TopModel){primetop=300}
+  else if(NTopModel){primetop=0}
+
+  if (prime < before) {
+    res = (prime * beforepr * usd)+primetop;
+  } 
+  else if (prime >= after) {
+    res = (prime * afterpr * usd)+primetop;
+  }
+  else{
+    document.getElementById("resultatcal").innerText="Verfier donne";
+  }
+
+  document.getElementById("resultatcal").innerText = res.toFixed(2)+" Dh"; // Update the result
+
+
+  
+  };
