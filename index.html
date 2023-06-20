@@ -78,6 +78,14 @@
     .nav-link.active {
       color: #00FF01 !important;
     }
+    
+    .notepad-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #000;
+      margin-bottom: 6px;
+    }
+  
   </style>
 </head>
 
@@ -105,10 +113,13 @@
             </li>
             <li class="nav-item">
               <!--<a class="nav-link" id="prime-nav-link" href="#calcule_prime" onclick="showSection('prime')"><i class="fas fa-magic"> </i>Calcule prime</a>-->
-              <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"  aria-controls="offcanvasExample">
-                <i class="far fa-money-bill-alt	"></i>
-                Calcule prime</a>
-              
+              <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"  aria-controls="offcanvasExample"><i class="far fa-money-bill-alt	"></i>Calcule prime</a>
+            </li>
+            <li class="nav-item">
+              <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" class="nav-link">
+                <i class="fas fa-notes-medical"></i>
+                Notpade
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="home-nav-link" href="#about" onclick="showSection('home')"><i class="fa fa-user-circle"></i> About</a>
@@ -118,7 +129,7 @@
             </li>
 
           </ul>
-
+          
           <button class="btn btn-outline-success " id="dark-mode-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-moon-stars"
               viewBox="0 0 16 16">
@@ -139,6 +150,29 @@
 
 
   </header>
+  <!---------------------notpade---------------------------->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-body">
+      <div class="notepad-container">
+        <div class="notepad-header">
+          <h5 class="notepad-title">notepad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <center>
+          <button class="btn btn-danger mb-2"  id="clear-button"><i  class="fa fa-eraser"></i>Clear Notepad</button>
+          <button class="btn btn-success mb-2"  id="copy-button-note"><i class="fa fa-clone"></i> Copy Text</button>  
+        </center>
+       
+        <div class="notepad-content">
+          <textarea id="notepad-textarea" rows="" style="height:85vh ; width:100% ;" ></textarea>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+  <!----------------end-----notpade---------------------------->
+
   <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -368,7 +402,7 @@
   </div>
 
   
-  <div class="offcanvas  offcanvas-start p-2" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas offcanvas-start p-2" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title " id="offcanvasExampleLabel">Calcule Prime</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -390,15 +424,17 @@
       <span class="input-group-text bg-danger" style="width:25% ;">Less than</span>
       <input type="text" class="form-control" id="before" placeholder="20" value="20" >
       <span class="input-group-text">K</span>
+      <span class="input-group-text bg-danger"></span>
       <span class="input-group-text"><i class="fa fa-arrow-right"></i>        </span>
       <input type="text" class="form-control" id="beforepr" placeholder="2" value="2">
       <span class="input-group-text"><i class="fa fa-percent"></i>        </span>
-    
     </div>  
+
     <div class="input-group mb-3 after">
       <span class="input-group-text bg-success" style="width:25% ;">More than </span>
       <input type="text" class="form-control" id="after" placeholder="20" value="20">
       <span class="input-group-text">K</span>
+      <span class="input-group-text bg-success"></span>
       <span class="input-group-text"><i class="fa fa-arrow-right"></i>        </span>
       <input type="text" class="form-control" id="afterpr" placeholder="2.5" value="2.5" >
       <span class="input-group-text"><i class="fa fa-percent"></i>        </span>
@@ -419,10 +455,17 @@
     <div id="resultatcal" class="text-center font-weight-bold p-3"></div>
   </div>
   
-  <script>
-   
   
+
+
+
+  
+  <script>
+    
   </script>
+  <script type="text/javascript" src="https://use.fontawesome.com/releases/vVERSION/js/conflict-detection.js">
+  </script>
+
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="js/script.js"></script>

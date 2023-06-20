@@ -1053,3 +1053,36 @@ function calcule() {
 
   
   };
+
+
+
+  // notpade
+  const textarea = document.getElementById('notepad-textarea');
+    const clearButton = document.getElementById('clear-button');
+    const copyButton = document.getElementById('copy-button-note');
+  
+    // Save the text to local storage as the user types
+    textarea.addEventListener('input', () => {
+      const text = textarea.value;
+      localStorage.setItem('notepadText', text);
+    });
+  
+    // Retrieve the saved text from local storage when the page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedText = localStorage.getItem('notepadText');
+      if (savedText) {
+        textarea.value = savedText;
+      }
+    });
+  
+    // Clear the Notepad textarea and remove saved text from local storage
+    clearButton.addEventListener('click', () => {
+      textarea.value = '';
+      localStorage.removeItem('notepadText');
+    });
+  
+    // Copy the text from the Notepad to the clipboard
+    copyButton.addEventListener('click', () => {
+      textarea.select();
+      document.execCommand('copy');
+    });
