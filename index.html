@@ -85,6 +85,29 @@
       border-bottom: 1px solid #000;
       margin-bottom: 6px;
     }
+    .site-heading {
+      margin-bottom: 40px;
+    }
+  
+    .site-heading img {
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+  
+    .lead {
+      font-size: 18px;
+    }
+  
+   
+    .row{
+      position: relative;
+      margin-bottom: 18%;
+
+    }
+   
   
   </style>
 </head>
@@ -113,7 +136,7 @@
             </li>
             <li class="nav-item">
               <!--<a class="nav-link" id="prime-nav-link" href="#calcule_prime" onclick="showSection('prime')"><i class="fas fa-magic"> </i>Calcule prime</a>-->
-              <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"  aria-controls="offcanvasExample"><i class="far fa-money-bill-alt	"></i>Calcule prime</a>
+              <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"  aria-controls="offcanvasExample"><i class="far fa-money-bill-alt	"></i> Calcule prime</a>
             </li>
             <li class="nav-item">
               <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" class="nav-link">
@@ -188,27 +211,22 @@
       </div>
     </div>
   </div>
+ 
   <main class="container my-5 box-shadow" id="home" style="display: none;">
-    <center><img
-      src="https://i.ibb.co/yy8S6Wn/code.png"
-      style="height:200px ; width:200px; " alt="Placeholder image" class="rounded-circle rounded-lg">
+    <center class="site-heading">
+      <img src="https://i.ibb.co/yy8S6Wn/code.png" alt="Placeholder image" class="rounded-circle rounded-lg">
       <h1 class="mb-4">IP and Email Extraction Tools</h1>
     </center>
-    <div class="row">
-
-
-      <p class="lead">Hi there! My name is Achraf and I'm the creator of this site. Here, you can find two powerful
-        tools for extracting IP addresses and email addresses from text or URLs.</p>
-      <p>The IP Extraction Tool allows you to extract the IP addresses from any text or URLs you input. This can be
-        useful for cybersecurity professionals, webmasters, or anyone who needs to quickly identify IP addresses.</p>
-      <p>The Email Extraction Tool allows you to extract email addresses from text or URLs. This can be useful for
-        marketing professionals, recruiters, or anyone who needs to collect email addresses from a large amount of text
-        or web pages.</p>
-      <p>Both tools are easy to use and completely free! Simply navigate to the tool you need from the navigation bar
-        above and follow the instructions on the page.</p>
+    <div class="row tool-description">
+      <p class="lead">Hi there! Welcome to the IP and Email Extraction Tools website. My name is Achraf, and I'm the creator of this site. Here, you'll find two powerful tools designed to make your life easier when it comes to extracting IP addresses and email addresses from text or URLs.</p>
+      <p class="tool-description">The IP Extraction Tool is a valuable resource for cybersecurity professionals, webmasters, or anyone who needs to quickly identify IP addresses. Whether you want to analyze network traffic, investigate potential security threats, or track website visitors, this tool provides a simple and efficient solution.</p>
+      <p class="tool-description">With the Email Extraction Tool, marketing professionals, recruiters, and researchers can save valuable time by automating the process of collecting email addresses. Whether you're building a targeted email list, conducting market research, or performing competitive analysis, this tool will help you gather email addresses from text or web pages effortlessly.</p>
+      <p>Both tools are designed with user-friendliness in mind. You can access them easily from the navigation bar above. Simply choose the tool you need, follow the instructions on the respective page, and enjoy the benefits of streamlined IP and email extraction.</p>
+      <p>Rest assured that our tools are completely free to use. We're passionate about providing accessible and efficient solutions for professionals and enthusiasts alike. Your privacy and data security are also a top priority for us. We handle your information with care and ensure that it remains confidential throughout the extraction process.</p>
+      <p>Ready to get started? Explore the power of IP and email extraction today and take your analysis and research to new heights!</p>
     </div>
-
   </main>
+  
   <div class="container" id="split" style="display: none;">
     <h1>Split Text</h1>
     <form>
@@ -254,7 +272,10 @@
     <!--<h2>Output:</h2>-->
     <div class="container text-center" style="margin-bottom: 100px;" id="output-container"></div>
   </div>
-  <div class="container" id="ip-extraction" style="margin-bottom: 100px;">
+
+  <!--home-->
+
+  <div class="container" id="ip-extraction" style="margin-bottom: 100px; display: block;">
     <h1>Extractor Tools</h1>
     <p>Paste your text containing IP or Email addresses into the box below:</p>
     <div class="container mt-1">
@@ -262,7 +283,9 @@
         <div class="col-md-12">
 
           <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
-            <input style="width: 80%;"   type="file" class="form-control btn-outline-success" id="inputGroupFile01" accept=".txt">
+            <input  style="width: 60%;"   type="file" class="form-control btn-outline-success" id="inputGroupFile01" accept=".txt">
+            <button alt="ffff" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser"></i> Duplicate</button>
+
             <button class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random"></i></button>
 
             <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
@@ -273,6 +296,8 @@
             </button>
           </div>
           <textarea id="text" class="form-control" rows="5"></textarea>
+          
+
 
           <br>
           
@@ -280,9 +305,8 @@
             <br>
 
             <div class="d-grid gap-2 d-md-block">
-
-              <button class="btn btn-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser"></i> Remove Duplicate</button>
-              <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary btn-lg" id="btn">Randome Text</button>
+              <div  class="btn-group" role="group">
                 <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i class="fa fa-envelope"></i> Extract Email</button>
                 <button class="btn btn-success dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span class="visually-hidden">Toggle Dropdown</span>
@@ -297,20 +321,27 @@
               </div>
 
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary btn-lg" onclick="extractipv4_ipv6()"><i class="fa fa-magic"></i> Extract Ip & Domain</button>
-                <button class="btn btn-secondary dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown"aria-expanded="false">
-                  <span class="visually-hidden">Extract Ip & Domain</span>
+                <button type="button" class="btn btn-info btn-lg" onclick="extractipv4()"><i class="fa fa-magic"></i> Extract Ip</button>
+                <button class="btn btn-info dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown"aria-expanded="false">
                   
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="#" onclick="extractipv4()">Extract ipv4</a></li>
                   <li><a class="dropdown-item" href="#" onclick="extractipv6()">Extract ipv6</a></li>
                   <li><a class="dropdown-item" href="#" onclick="extractipv4_ipv6()">Extract ipv4 & ipv6</a></li>
+                </ul>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary btn-lg" onclick="extractsubDomain()"><i class="fa fa-magic"></i> Extract Domain</button>
+                <button class="btn btn-secondary dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown"aria-expanded="false">                  
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="#" onclick="extractDomain()">Extract Domain</a></li>
                   <li><a class="dropdown-item" href="#" onclick="extractsubDomain()">Extract sub Domain</a></li>
                 </ul>
               </div>
             </div>
+           
 
 
 

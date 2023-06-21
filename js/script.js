@@ -1086,3 +1086,32 @@ function calcule() {
       textarea.select();
       document.execCommand('copy');
     });
+
+     // Show the Notepad when Ctrl+Q is pressed
+  document.addEventListener('keydown', (event) => {
+    if (event.ctrlKey && event.key === 'q') {
+      event.preventDefault();
+      offcanvas.show();
+    }
+  });
+
+// ret random text
+// Function to fetch random text from the internet
+function getRandomText() {
+  // Make an API request to the Loripsum API
+  return fetch('https://baconipsum.com/api/?type=all-meat&paras=1')
+    .then(response => response.text());
+}
+
+// Event listener for button click
+document.getElementById('btn').addEventListener('click', function() {
+  getRandomText()
+    .then(function(text) {
+      // Replace the content of the textarea with the random text
+      document.getElementById('text').value = text.replace(/\["|"\]/g, '');
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+      alert('Failed to fetch random text. Please try again later.');
+    });
+});
