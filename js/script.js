@@ -1030,7 +1030,7 @@ function calcule() {
   var beforepr = parseFloat(document.getElementById("beforepr").value/100);
   var after = Number(document.getElementById("after").value + '000');
   var afterpr = parseFloat(document.getElementById("afterpr").value/100);
-  var prime = parseFloat(document.getElementById("prime").value.replace(/[\s\u202F$]/g, '').trim(''));
+  var prime = parseFloat(document.getElementById("prime").value.replace(/[\s\u202F$,]/g, '').trim(''));
   var usd = Number(document.getElementById("change-input").value);
   let TopModel = document.getElementById("model").checked;
   let NTopModel = document.getElementById("nmodel").checked;
@@ -1045,7 +1045,7 @@ function calcule() {
     res = (prime * afterpr * usd)+primetop;
   }
   else{
-    document.getElementById("resultatcal").innerText="Verfier donne";
+    document.getElementById("resultatcal").innerText="donne incorrect";
   }
 
   document.getElementById("resultatcal").innerText = res.toFixed(2)+" Dh"; // Update the result
