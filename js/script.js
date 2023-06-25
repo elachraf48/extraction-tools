@@ -1103,15 +1103,79 @@ function getRandomText() {
     .then(response => response.text());
 }
 
+// Function to copy text to clipboard
+function copyToClipboard(text) {
+  // Create a temporary textarea element
+  var textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed'; // Prevent scrolling to bottom of page
+  document.body.appendChild(textarea);
+  textarea.select();
+  
+  try {
+    // Copy the text to clipboard
+    document.execCommand('copy');
+    showNotification('Text copied successfully!', 3000);
+  } catch (error) {
+    console.error('Error:', error);
+    showNotification('Failed to copy text.', 3000);
+  }
+  
+  // Clean up the temporary textarea element
+  document.body.removeChild(textarea);
+}
+
+// Function to show notification
+function showNotification(message, duration) {
+  var notification = document.createElement('div');
+  notification.textContent = message;
+  notification.style.position = 'fixed';
+  notification.style.top = '40%';
+  notification.style.left = '50%';
+  notification.style.transform = 'translate(-50%, -50%)';
+  notification.style.backgroundColor = 'green';
+  notification.style.color = 'white';
+  notification.style.padding = '10px';
+  notification.style.borderRadius = '5px';
+  notification.style.zIndex = '9999';
+  document.body.appendChild(notification);
+
+  setTimeout(function() {
+    document.body.removeChild(notification);
+  }, duration);
+}
+
 // Event listener for button click
 document.getElementById('btn').addEventListener('click', function() {
   getRandomText()
     .then(function(text) {
       // Replace the content of the textarea with the random text
-      document.getElementById('text').value = text.replace(/\["|"\]/g, '');
+      var cleanedText = text.replace(/\["|"\]/g, '');
+      document.getElementById('text').value = cleanedText;
+      
+      // Copy the text to clipboard and show notification
+      copyToClipboard(cleanedText);
     })
     .catch(function(error) {
       console.error('Error:', error);
       alert('Failed to fetch random text. Please try again later.');
     });
 });
+
+//extract email from page
+function extractemailfromgmail(){
+  var link="https://www.google.com/?gws_rd=ssl"
+  // Find the Google Account element
+  var accountElement = document.querySelector('a.gb_d[aria-label^="Google Account:"]');
+  if (accountElement) {
+    // Extract the email address from the aria-label attribute
+    var email = accountElement.getAttribute('aria-label').match(/[\w.-]+@[\w.-]+\.[\w]{2,}/);
+    if (email) {
+      console.log(email[0]);
+    } else {
+      console.log("Email address not found.");
+    }
+  } else {
+    console.log("Google Account element not found.");
+  }
+}
