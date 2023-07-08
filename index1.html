@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Your other code -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        // Global variables
+        var CLIENT_ID = '324134933481-r9s2bgh0lq5jv4233sk5p06l49d809c5.apps.googleusercontent.com';
+        var API_KEY = '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';
+        var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'];
+        var SCOPES = 'https://www.googleapis.com/auth/gmail.send';
+
+        // Function to handle authorization and email sending
+        function authorizeAndSendEmail() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                // Authorize user
+                return gapi.auth2.getAuthInstance().signIn();
+            }).then(function () {
+                // Send email
+                sendEmail();
+            }).catch(function (error) {
+                console.log('Error initializing client:', error);
+            });
+        }
+
+        function sendEmail() {
+            var email = {
+                to: 'achraf.abwi@gmail.com', // Email recipient
+                subject: 'Test Email', // Email subject
+                message: 'This is a test email' // Email body
+            };
+
+            var base64EncodedEmail = btoa(
+                'Content-Type: text/plain; charset="UTF-8"\n' +
+                'MIME-Version: 1.0\n' +
+                'Content-Transfer-Encoding: 7bit\n' +
+                'to: ' + email.to + '\n' +
+                'subject: ' + email.subject + '\n\n' +
+                email.message
+            ).replace(/\+/g, '-').replace(/\//g, '_');
+
+            var request = gapi.client.gmail.users.messages.send({
+                'userId': 'me',
+                'resource': {
+                    'raw': base64EncodedEmail
+                }
+            });
+
+            request.execute(function (response) {
+                console.log('Email sent:', response);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="col-right">
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" id="nameInput" placeholder="Your name">
+                <input type="email" id="emailInput" placeholder="Your email">
+                <input type="text" id="subjectInput" placeholder="Your subject">
+            </div>
+            <textarea rows="5" id="messageInput"></textarea>
+            <button onclick="authorizeAndSendEmail()" type="button" class="btn">Send Email</button>
+        </form>
+    </div>
+</body>
+</html>

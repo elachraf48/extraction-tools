@@ -866,6 +866,8 @@ const domainList = document.getElementById('domain-list');
 document.getElementById('talos-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('talos');});
 document.getElementById('spamhaus-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('spamhaus');});
 document.getElementById('scamadviser-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('scamadviser');});
+document.getElementById('mxtoolbar-button').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';checkdomain('mxtoolbar');});
+
 document.getElementById('clear').addEventListener('click', (event) => {event.preventDefault();domainList.innerText='';});
 document.getElementById('bulkblacklist').addEventListener('click', (event) => {
   event.preventDefault();
@@ -931,6 +933,10 @@ function checkdomain(check) {
 		domainLink.href = `https://www.scamadviser.com/check-website/${domain}`;
     domainLink.classList.add('text-danger');
     break;
+    case 'mxtoolbar':
+      domainLink.href = `https://mxtoolbox.com/SuperTool.aspx?action=mx%3a${domain}&run=toolpage`;
+      domainLink.classList.add('text-info');
+      break;
 	  default:
 		console.log('Invalid check value');
 		return;
@@ -1178,4 +1184,103 @@ function extractemailfromgmail(){
   } else {
     console.log("Google Account element not found.");
   }
+}
+
+
+
+const net = require('net');
+const tls = require('tls');
+
+// Define the details for your email and account.
+const host = 'smtp.gmail.com';
+const port = 465;
+const username = 'testafter112@gmail.com';
+const password = 'anqxhnihvxjqzxkx';
+const fromEmail = 'testafter112@gmail.com';
+const toEmails = ['chaymaejarodi@gmail.com'];
+const subjectLine= "Test Email";
+let messageBody= "This is just a test email sent using Node.js";
+
+function sendMail() {
+  // Connect to the Gmail SMTP server over TLS.
+  const socketOptions =
+      { host: host,
+        port: port,
+        rejectUnauthorized: false };
+  const clientSocket =
+      new tls.TLSSocket(new net.Socket(), socketOptions);
+  clientSocket.connect(port, host, () => {
+      console.log(`Connected to ${host}:${port}`);
+  });
+
+    // Handle any errors that occur while connecting or sending data.
+    clientSocket.on('error', (e) => {
+      console.error(e.message);
+      clientSocket.end();
+     });
+
+     // Send commands to authenticate with the Gmail SMTP server. 
+     let authCommands=[
+         `EHLO ${host}\r\n`,
+         `AUTH LOGIN\r\n`,
+         `${Buffer.from(username).toString('base64')}\r\n`,
+         `${Buffer.from(password).toString('base64')}\r\n`
+       ];
+     
+     authCommands.forEach((command)=>{
+           clientSocket.write(command);
+           console.log(command.trim());
+       });
+    
+       // Send command to initiate sending mail
+       let mailCommand=`MAIL FROM:<${fromEmail}>\r\n`;
+        
+        setTimeout(()=>{
+            console.log(mailCommand.trim());
+            clientSocket.write(mailCommand);
+        }, 1000); // Wait for a second before sending next command
+    
+       // Send commands to specify recipients of the email.
+       let rcptCommands=[];
+    
+           toEmails.forEach((email)=>{
+               rcptCommands.push(`RCPT TO:<${email}>\r\n`);
+           });
+           
+           setTimeout(()=>{
+              rcptCommands.forEach((command)=>{
+                  console.log(command.trim());
+                  clientSocket.write(command);
+              }); 
+           }, 2000); // Wait for two seconds before sending next command
+    
+    
+    // Send command to start data transfer
+    let dataCommand=`DATA\r\n`;
+        
+        setTimeout(()=>{
+            console.log(dataCommand.trim());
+            clientSocket.write(dataCommand);
+        }, 3000); // Wait for three seconds before sending next command
+     
+     // Define the contents of your email and send it.
+     const date = new Date().toUTCString();
+     const message =
+         `From: ${fromEmail}\r\n` +
+         `To: ${toEmails.join(',')}\r\n` +
+         `Subject: ${subjectLine}\r\n` +
+         'Content-Type: text/plain;charset=utf-8\r\n' +
+         `Date: ${date}\r\n\r\n${messageBody}`;
+         
+      setTimeout(()=>{
+          console.log(message.trim());
+          clientSocket.write(message + '\r\n.\r\n');
+      },4000);// wait four seconds before ending connection
+      
+       // Quit once the contents have been sent, closing the connection.
+       setTimeout(() => {
+             console.log('Message sent successfully!');
+             clientSocket.end();
+          },
+          5000);//Wait five seconds after completion of last step
 }
