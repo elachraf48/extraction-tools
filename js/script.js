@@ -935,7 +935,7 @@ function checkdomain(check) {
     break;
     case 'mxtoolbar':
       domainLink.href = `https://mxtoolbox.com/SuperTool.aspx?action=mx%3a${domain}&run=toolpage`;
-      domainLink.classList.add('text-info');
+      domainLink.classList.add('text-warning');
       break;
 	  default:
 		console.log('Invalid check value');
