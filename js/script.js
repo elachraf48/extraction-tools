@@ -384,6 +384,21 @@ function removeDuplicateLines() {
   }
 }
 
+function removeDuplicateLines_split() {
+  let textarea = document.getElementById("input-text");
+
+
+    let text = textarea.value.trim();
+    checkinputText(text);
+    let lines = text.split("\n").map(line => line.trim());
+
+    lines = removeDuplicates(lines);
+    textarea.value = lines.join("\n");
+    document.getElementById("line-counts").innerHTML = "Number of lines: " + lines.length;
+
+    
+  
+}
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -657,7 +672,18 @@ function extractGmail() {
     textarea.value = uniqueGmailEmails.join("\n");
   }
 }
+function extractGmail_split() {
+  var textarea = document.getElementById("input-text");
+  var inputText = textarea.value;
+  var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
+  var gmailEmails = inputText.match(regex);
+  checkinputText(inputText);
+  var uniqueGmailEmails = removeDuplicates(gmailEmails);
+  document.getElementById("line-counts").innerHTML = "Number of Email addresses: " + uniqueGmailEmails.length;
+  textarea.value = uniqueGmailEmails.join("\n");
 
+  
+}
 function extractYahoo() {
   var fileInput = document.getElementById("inputGroupFile01");
   var textarea = document.getElementById("text");
