@@ -384,21 +384,6 @@ function removeDuplicateLines() {
   }
 }
 
-function removeDuplicateLines_split() {
-  let textarea = document.getElementById("input-text");
-
-
-    let text = textarea.value.trim();
-    checkinputText(text);
-    let lines = text.split("\n").map(line => line.trim());
-
-    lines = removeDuplicates(lines);
-    textarea.value = lines.join("\n");
-    document.getElementById("line-counts").innerHTML = "Number of lines: " + lines.length;
-
-    
-  
-}
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
