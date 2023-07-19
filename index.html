@@ -107,7 +107,36 @@
       margin-bottom: 18%;
 
     }
-   
+    #loadingGif{
+      position: fixed;
+      left: 46%;
+      top: 20%;
+      z-index: 9999;
+    }
+    .box{
+      border: solid black 2px;
+      border-radius: 25px;
+      height: 100%;
+      padding: 1%;
+      text-align: center;
+    }
+    #resultTextContainer {
+      position: fixed;
+      z-index: 800;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: opacity 3s;
+      width: 400px;
+    }
+    
+    #resultTextContainer.show {
+      opacity: 1;
+    }
+    
+    #resultTextContainer.hide {
+      opacity: 0;
+    }
   
   </style>
 </head>
@@ -130,6 +159,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" id="split-nav-link" href="#split-text" onclick="showSection('split')"><i class="fas fa-columns"> </i> Split Tool</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="texttool-nav-link" href="#tool-text" onclick="showSection('texttool')"><i class="fas fa-columns"> </i> Text Tool</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="checkdomain-nav-link" href="#check_domain" onclick="showSection('checkdomain')"><i class="fas fa-search"> </i> About Domain</a>
@@ -212,7 +244,49 @@
       </div>
     </div>
   </div>
- 
+ <!---------------------text tool---------------------------->
+ <div class="container my-5 box-shadow" id="texttool" style="display: none;">
+        <div class="mb-3" id="loadingGif" style="display: none;">
+          <img src="loading.gif" alt="Loading...">
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="megretandsplit" class="container box mt-5">
+                <h3>Text File Merger and Splitter</h3>
+                <input  style="display: none;" name="file" id="fileInput" type="file" multiple>
+              
+                <div class="check">
+                  <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInput').click()">megret text</button>
+                  <br>
+                  <input style="size: 200px;" type="checkbox" name="sep" id="sep" checked>
+
+                  <label for="sep">split by __SEP__ </label>
+
+                </div>
+              
+            </div>
+          </div>
+          <div class="col">
+            <div id="megretandsplit50" class="container box mt-5">
+              <h3>Text File Splitter</h3>
+              <input style="display: none;" name="file" id="fileInput50" type="file">
+              <div class="check">
+                <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInput50').click()">Split text</button>
+                <br>
+                <label for="sep">Split By Line </label><br>
+                <input type="number" name="" id="number50" value="50" required>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="mb-3" id="resultTextContainer" style="display: none;">
+      <div class="alert alert-success fixed-top mt-3" role="alert" id="outputAlert">
+          Result:
+      </div>
+</div>
+ <!---------------------end text tool---------------------------->
+
   <main class="container my-5 box-shadow" id="home" style="display: none;">
     <center class="site-heading">
       <img src="https://i.ibb.co/yy8S6Wn/code.png" alt="Placeholder image" class="rounded-circle rounded-lg">
@@ -517,7 +591,6 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
@@ -529,7 +602,162 @@
   <!-- Font Awesome JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+  <script>
+    let fileContents = [];
+    let mergedContent = '';
 
+    function handleFiles(e) {
+        fileContents = [];
+        const files = Array.from(e.target.files);
+        if (files.length > 0) {
+            document.getElementById('loadingGif').style.display = 'block';
+            document.getElementById('resultTextContainer').style.display = 'block';
+            const fileCount = files.length;
+            document.getElementById('outputAlert').innerText = `Files merged and downloaded successfully! ${fileCount}`;
+            readFiles(0, files); // Start reading the files
+        } else {
+            document.getElementById('resultTextContainer').style.display = 'none';
+            document.getElementById('outputAlert').innerText = 'No files selected.';
+        }
+    }
+
+    document.getElementById('fileInput').addEventListener('change', handleFiles);
+
+    function readFiles(index, files) { // Pass the index and files as parameters
+        const check = document.getElementById('sep').checked;
+
+        if (index >= files.length) {
+            if(check){
+               mergedContent = fileContents.join("\n__SEP__\n");
+               mergeAndDownloadFiles();
+            }
+            else{
+              mergedContent = fileContents.join("\n");
+              mergeAndDownloadFiles();
+            }
+          
+        } else {
+            const fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                const content = e.target.result;
+                fileContents.push(content);
+                readFiles(index + 1, files); // Call the function recursively with updated index
+            };
+            fileReader.onerror = function (e) {
+                alert('Error reading file: ', e);
+                readFiles(index + 1, files); // Call the function recursively with updated index
+            };
+            fileReader.readAsText(files[index]);
+        }
+    }
+
+    function mergeAndDownloadFiles() {
+          const check = document.getElementById('sep').checked;
+
+          let mergedContent= '';
+          if(check){
+            // Merge the file contents with separator "__SEP__"
+            mergedContent = fileContents.join("\n__SEP__\n");
+          }
+          else{
+            // Just join all lines of each file without any separators between them
+            mergedContent = fileContents.join("\n");
+            }
+        
+       // Download the merged content as a text file
+          const downloadLink = document.createElement('a');
+          downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(mergedContent);
+          downloadLink.download = 'after_split.txt';
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+
+          // Hide loading GIF and show success message with animation
+          // Hide loading GIF and show success message
+          document.getElementById('loadingGif').style.display = 'none';
+          mergedContent = ''; // Reset the merged content
+
+          const resultTextContainer = document.getElementById('resultTextContainer');
+
+          resultTextContainer.classList.add('show');
+          resultTextContainer.classList.remove('hide');
+
+          // Hide the result text after 3 seconds
+          setTimeout(() => {
+              resultTextContainer.classList.add('hide');
+          }, 3000);
+    }
+    //split of number line
+
+    function handleFiles50(e) {
+      const file = e.target.files[0];
+      if (file) {
+        splitFile(file);
+      } else {
+        console.log("No file selected.");
+      }
+    }
+  
+    function splitFile(file) {
+      const number = parseInt(document.getElementById("number50").value);
+      if (!isNaN(number) && number > 0) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const content = reader.result;
+          const lines = content.split("\n");
+          const splitContent = [];
+
+          document.getElementById('loadingGif').style.display = 'block';
+          document.getElementById('outputAlert').innerText = `Files Split and downloaded successfully! `;
+          for (let i = 0; i < lines.length; i += number) {
+            splitContent.push(lines.slice(i, i + number).join("\n"));
+          }
+          createZip(splitContent);
+        };
+        reader.readAsText(file);
+      } else {
+        console.log("Invalid number of lines.");
+      }
+    }
+  
+    function createZip(splitContent) {
+      const zip = new JSZip();
+      for (let i = 0; i < splitContent.length; i++) {
+        zip.file(`part_${i + 1}.txt`, splitContent[i]);
+      }
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        downloadZip(content);
+      });
+    }
+  
+    function downloadZip(zipBlob) {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(zipBlob);
+      downloadLink.download = "split_files.zip";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      // Hide loading GIF and show success message
+      document.getElementById('loadingGif').style.display = 'none';
+      document.getElementById('resultTextContainer').style.display = 'block';
+
+      const resultTextContainer = document.getElementById('resultTextContainer');
+
+      resultTextContainer.classList.add('show');
+      resultTextContainer.classList.remove('hide');
+
+      // Hide the result text after 3 seconds
+      setTimeout(() => {
+        resultTextContainer.classList.add('hide');
+    }, 3000);
+    }
+  
+    document.getElementById("fileInput50").addEventListener("change", handleFiles50);
+  
+  
+</script>
+<!-- Add the JSZip library to your HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 function showSection(sectionId) {
-  var sections = ["home", "ip-extraction", "split", "checkdomain","prime"];
+  var sections = ["home", "ip-extraction","texttool", "split", "checkdomain","prime"];
   sections.forEach(function (item) {
     var navLink = document.getElementById(item + "-nav-link");
     var section = document.getElementById(item);
@@ -42,6 +42,11 @@ function getSectionInfo(section) {
         return {
           title: 'Prime',
           description: 'This section contains calcule prime.'
+        };
+      case 'texttool':
+        return {
+          title: 'text',
+          description: 'This section contains tool text.'
         };
     default:
       return {
@@ -1323,3 +1328,5 @@ function extractWords() {
     document.getElementById("output-containerr").textContent = "Count: 0";
   }
 }
+
+//tool text

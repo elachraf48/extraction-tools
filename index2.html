@@ -6,104 +6,80 @@
   <style>
     
 
-a{
-  text-decoration: none;
-  color: white;
-}
-
-.form{
-position: relative;
-width: 100%;
-height: 200px;
-border: 3px dashed grey;
-border-radius: 10px;
-
-}
-.form div{
-width: 100%;
-height: 100%;
-text-align: center;
-line-height: 170px;
-color: black;
-font-family: Arial;
-position: absolute;
-top: 10%;
-z-index: -1;
-}
-.form input{
-position: relative;
-margin: 0;
-padding: 0;
-width: 100%;
-height: 100%;
-outline: none;
-opacity: 0;
-}
-button {
-  border-radius: 10px;
-  padding: 10px 20px;
-  background: #1950A3;
-  outline: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btn1 {
-  border-radius: 10px;
-  padding: 10px 20px;
-  background: #8b6106;
-  outline: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-
-
-div img {
-  position: relative;
-  top: 30px;
-  left: -10px;
-}
-
-#fileName {
-  position: relative;
-  top: 10px;
-}
 #loadingGif{
   position: fixed;
+  left: 46%;
+  top: 20%;
+  z-index: 9999;
+}
+.box{
+  border: solid black 2px;
+  border-radius: 25px;
+  height: 100%;
+  padding: 1%;
+  text-align: center;
+}
+#resultTextContainer {
+  position: fixed;
+  z-index: 800;
+  top: 20%;
   left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 3s;
+  width: 400px;
+}
+
+#resultTextContainer.show {
+  opacity: 1;
+}
+
+#resultTextContainer.hide {
+  opacity: 0;
 }
   </style>
 </head>
 
 <body>
-  <div class="container mt-5">
-      <h1>Text File Merger and Splitter</h1>
-      <form>
-          <div class="form">
-              <input name="file" id="fileInput" type="file" multiple>
-              <div>
-                  <img src="upload.png" alt="upload" width="7%" class="mx-2">
-                  Upload your files here or
-                  <button class="btn bg-color-dblue btn-primary px-4 py-3" onclick="document.getElementById('fileInput').click()">Browse</button>
-              </div>
-              <span id="fileName" class="text-primary"></span>
-          </div>
-      </form>
-      <div class="mb-3" id="loadingGif" style="display: none;">
-          <img src="loading.gif" alt="Loading...">
-      </div>
-      <div class="mb-3" id="resultTextContainer" style="display: none;">
-        <div class="alert alert-success" role="alert" id="outputAlert">
-            Result:
-        </div>
+  <div class="container">
+    <div class="mb-3" id="loadingGif" style="display: none;">
+      <img src="loading.gif" alt="Loading...">
     </div>
-  </div>
+    <div class="row">
+      <div class="col">
+        <div id="megretandsplit" class="container box mt-5">
+            <h3>Text File Merger and Splitter</h3>
+            <input  style="display: none;" name="file" id="fileInput" type="file" multiple>
+          
+            <div class="check">
+              <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInput').click()">megret text</button>
+              <br>
+              <input style="size: 200px;" type="checkbox" name="sep" id="sep" checked>
 
+              <label for="sep">split by __SEP__ </label>
+
+            </div>
+           
+        </div>
+      </div>
+      <div class="col">
+        <div id="megretandsplit50" class="container box mt-5">
+          <h3>Text File Splitter</h3>
+          <input style="display: none;" name="file" id="fileInput50" type="file">
+          <div class="check">
+            <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInput50').click()">Split text</button>
+            <br>
+            <label for="sep">Split By Line </label><br>
+            <input type="number" name="" id="number" value="50" required>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="mb-3" id="resultTextContainer" style="display: none;">
+  <div class="alert alert-success fixed-top mt-3" role="alert" id="outputAlert">
+      Result:
+  </div>
+</div>
   <script>
     let fileContents = [];
     let mergedContent = '';
@@ -112,9 +88,10 @@ div img {
         fileContents = [];
         const files = Array.from(e.target.files);
         if (files.length > 0) {
+            document.getElementById('loadingGif').style.display = 'block';
             document.getElementById('resultTextContainer').style.display = 'block';
             const fileCount = files.length;
-            document.getElementById('outputAlert').innerText = `Selected ${fileCount}`;
+            document.getElementById('outputAlert').innerText = `Files merged and downloaded successfully! ${fileCount}`;
             readFiles(0, files); // Start reading the files
         } else {
             document.getElementById('resultTextContainer').style.display = 'none';
@@ -125,9 +102,18 @@ div img {
     document.getElementById('fileInput').addEventListener('change', handleFiles);
 
     function readFiles(index, files) { // Pass the index and files as parameters
+        const check = document.getElementById('sep').checked;
+
         if (index >= files.length) {
-            mergedContent = fileContents.join("\n__SEP__\n");
-            mergeAndDownloadFiles();
+            if(check){
+               mergedContent = fileContents.join("\n__SEP__\n");
+               mergeAndDownloadFiles();
+            }
+            else{
+              mergedContent = fileContents.join("\n");
+              mergeAndDownloadFiles();
+            }
+          
         } else {
             const fileReader = new FileReader();
             fileReader.onload = function (e) {
@@ -136,7 +122,7 @@ div img {
                 readFiles(index + 1, files); // Call the function recursively with updated index
             };
             fileReader.onerror = function (e) {
-                console.error('Error reading file: ', e);
+                alert('Error reading file: ', e);
                 readFiles(index + 1, files); // Call the function recursively with updated index
             };
             fileReader.readAsText(files[index]);
@@ -144,23 +130,113 @@ div img {
     }
 
     function mergeAndDownloadFiles() {
-        // Merge the file contents with separator "__SEP__"
-        const mergedContent = fileContents.join("\n__SEP__\n");
+          const check = document.getElementById('sep').checked;
 
-        // Download the merged content as a text file
-        const downloadLink = document.createElement('a');
-        downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(mergedContent);
-        downloadLink.download = 'after_split.txt';
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+          let mergedContent= '';
+          if(check){
+            // Merge the file contents with separator "__SEP__"
+            mergedContent = fileContents.join("\n__SEP__\n");
+          }
+          else{
+            // Just join all lines of each file without any separators between them
+            mergedContent = fileContents.join("\n");
+            }
+        
+       // Download the merged content as a text file
+          const downloadLink = document.createElement('a');
+          downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(mergedContent);
+          downloadLink.download = 'after_split.txt';
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
 
-        // Hide loading GIF and show success message
-        document.getElementById('loadingGif').style.display = 'none';
-        document.getElementById('outputAlert').innerText = 'Files merged and downloaded successfully!';
-        mergedContent = ''; // Reset the merged content
+          // Hide loading GIF and show success message with animation
+          // Hide loading GIF and show success message
+          document.getElementById('loadingGif').style.display = 'none';
+          mergedContent = ''; // Reset the merged content
+
+          const resultTextContainer = document.getElementById('resultTextContainer');
+
+          resultTextContainer.classList.add('show');
+          resultTextContainer.classList.remove('hide');
+
+          // Hide the result text after 3 seconds
+          setTimeout(() => {
+              resultTextContainer.classList.add('hide');
+          }, 3000);
     }
+    //split of number line
+
+    function handleFiles50(e) {
+      const file = e.target.files[0];
+      if (file) {
+        splitFile(file);
+      } else {
+        console.log("No file selected.");
+      }
+    }
+  
+    function splitFile(file) {
+      const number = parseInt(document.getElementById("number").value);
+      if (!isNaN(number) && number > 0) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const content = reader.result;
+          const lines = content.split("\n");
+          const splitContent = [];
+
+          document.getElementById('loadingGif').style.display = 'block';
+          document.getElementById('outputAlert').innerText = `Files Split and downloaded successfully! `;
+          for (let i = 0; i < lines.length; i += number) {
+            splitContent.push(lines.slice(i, i + number).join("\n"));
+          }
+          createZip(splitContent);
+        };
+        reader.readAsText(file);
+      } else {
+        console.log("Invalid number of lines.");
+      }
+    }
+  
+    function createZip(splitContent) {
+      const zip = new JSZip();
+      for (let i = 0; i < splitContent.length; i++) {
+        zip.file(`part_${i + 1}.txt`, splitContent[i]);
+      }
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        downloadZip(content);
+      });
+    }
+  
+    function downloadZip(zipBlob) {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(zipBlob);
+      downloadLink.download = "split_files.zip";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      // Hide loading GIF and show success message
+      document.getElementById('loadingGif').style.display = 'none';
+      document.getElementById('resultTextContainer').style.display = 'block';
+
+      const resultTextContainer = document.getElementById('resultTextContainer');
+
+      resultTextContainer.classList.add('show');
+      resultTextContainer.classList.remove('hide');
+
+      // Hide the result text after 3 seconds
+      setTimeout(() => {
+        resultTextContainer.classList.add('hide');
+    }, 3000);
+    }
+  
+    document.getElementById("fileInput50").addEventListener("change", handleFiles50);
+  
+  
 </script>
+<!-- Add the JSZip library to your HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+
 </body>
 
 
