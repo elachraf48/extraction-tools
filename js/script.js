@@ -194,48 +194,32 @@ function splitText(buttonId) {
     }
   }
 
-  function createDiv() {
-    let div = document.createElement("div");
-    div.classList.add("input-group", "d-flex", "justify-content-between", "align-items-center");
-    return div;
-  }
-  
   function createTextarea(value) {
-    let wrapper = document.createElement("div");
-    wrapper.classList.add("form-control", "mt-1");
-    wrapper.style.resize = "none";
-  
     let outputTextarea = document.createElement("textarea");
-    outputTextarea.classList.add("col-12");
+    outputTextarea.classList.add("form-control", "mt-1");
     outputTextarea.setAttribute("rows", "1");
-    outputTextarea.setAttribute("maxlength", "1");
+outputTextarea.style.resize = "none";
     outputTextarea.value = value;
-  
-    // Add line count element
-    let lineCountElement = document.createElement("span");
-    lineCountElement.textContent = `Line Count: ${value.trim().split("\n").length}`;
-    lineCountElement.classList.add("float-left");
-    outputTextarea.appendChild(lineCountElement);
-  
-    // Add copy button
+    return outputTextarea;
+  }
+
+  function createCopyButton(outputTextarea, copyButtonCounter) {
     let copyButton = document.createElement("button");
     copyButton.classList.add("btn", "btn-outline-primary", "my-1");
-    copyButton.textContent = "Copy";
-    copyButton.style.marginLeft = "10px";
+    copyButton.textContent = "Copy " + copyButtonCounter;
     copyButton.addEventListener("click", function () {
       outputTextarea.select();
       document.execCommand("copy");
     });
-    wrapper.appendChild(outputTextarea);
-    wrapper.appendChild(copyButton);
-  
-    // Add input event listener to update line count
-    outputTextarea.addEventListener("input", updateLineCount);
-  
-    return wrapper;
+    return copyButton;
   }
-  
-  
+
+  function createDiv() {
+    let div = document.createElement("div");
+    div.classList.add("input-group");
+    return div;
+  }
+
   function createAndDownloadFiles(sections) {
     let outputFiles = [];
     sections.forEach((section, index) => {
