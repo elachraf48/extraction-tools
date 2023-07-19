@@ -301,13 +301,8 @@
             </button>
           </div>
           <textarea id="text" class="form-control" rows="5"></textarea>
-          
-
-
-          <br>
-          
-            <center>
-            <br>
+                    
+            <center class="mt-2">
 
             <div class="d-grid gap-2 d-md-block">
               <button type="button" class="btn btn-primary btn-lg" id="btn">Get Randome Text</button>
@@ -346,6 +341,11 @@
                 </ul>
               </div>
             </div>
+            <div class="input-group py-3" style="height:10% ; width: 20%;">
+                <input type="text" class="form-control" placeholder="s_emh_" value="s_emh_" id="keywordInput">
+                <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Words</button>
+            </div>
+
             <p id="line-count"></p>
             <div class="container text-center" id="output-containerr"></div>
           </center>

@@ -1295,3 +1295,31 @@ function sendMail() {
           },
           5000);//Wait five seconds after completion of last step
 }
+
+//extract word list
+function extractWords() {
+  // Get the input text and keyword
+  var inputText = document.getElementById("text");
+  var keyword = document.getElementById("keywordInput").value;
+
+  // Create a regular expression to match the keyword
+  var regex = new RegExp("\\b(" + keyword + "\\d*)\\b", "g");
+
+  // Extract matching words
+  var matches = inputText.value.match(regex);
+
+  // Remove duplicates and sort the matches by the number in the last keyword
+  var uniqueMatches = [...new Set(matches)].sort(function(a, b) {
+    var numberA = parseInt(a.match(/\d+$/)[0]);
+    var numberB = parseInt(b.match(/\d+$/)[0]);
+    return numberA - numberB;
+  });
+
+  // Display extracted words
+  if (uniqueMatches) {
+    inputText.value = uniqueMatches.join('\n');
+    document.getElementById("output-containerr").textContent = "Count: " + uniqueMatches.length;
+  } else {
+    document.getElementById("output-containerr").textContent = "Count: 0";
+  }
+}
