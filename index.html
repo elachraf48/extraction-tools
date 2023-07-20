@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -748,14 +749,16 @@
     }, 3000);
 }
 
-// Helper function to remove special characters
+// Helper function to remove special characters except '-'
 function removeSpecialCharacters(text) {
-    // Define the regex pattern for special characters
-    const specialCharsRegex = /[^a-zA-Z0-9\s]/g;
+  // Define the regex pattern for special characters (except '-')
+  const specialCharsRegex = /[^a-zA-Z0-9\s_]/g;
 
-    // Replace special characters with an empty string
-    return text.replace(specialCharsRegex, '');
+  // Replace special characters (except '-') with an empty string
+  return text.replace(specialCharsRegex, '');
 }
+
+
 
 // Helper function to remove special characters
 function removedotanddollar(text) {
@@ -782,7 +785,7 @@ function removeEmptyLinesFromContent(text) {
     // Remove empty lines from the text
     return text.replace(emptyLinesRegex, '');
 }
-    //split of number line
+//==========================split of number line======================
 
     function handleFiles50(e) {
       const file = e.target.files[0];
