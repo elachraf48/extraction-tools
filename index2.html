@@ -44,196 +44,203 @@
     <div class="mb-3" id="loadingGif" style="display: none;">
       <img src="loading.gif" alt="Loading...">
     </div>
-    <div class="row">
-      <div class="col">
-        <div id="megretandsplit" class="container box mt-5">
-            <h3>Text File Merger and Splitter</h3>
-            <input  style="display: none;" name="file" id="fileInput" type="file" multiple>
-          
-            <div class="check">
-              <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInput').click()">megret text</button>
-              <br>
-              <input style="size: 200px;" type="checkbox" name="sep" id="sep" checked>
-
-              <label for="sep">split by __SEP__ </label>
-
-            </div>
-           
-        </div>
+    <div class="mb-3" id="resultTextContainer" style="display: none;">
+      <div class="alert alert-success fixed-top mt-3" role="alert" id="outputAlert">
+          Result:
       </div>
-      <div class="col">
-        <div id="megretandsplit50" class="container box mt-5">
-          <h3>Text File Splitter</h3>
-          <input style="display: none;" name="file" id="fileInput50" type="file">
-          <div class="check">
-            <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInput50').click()">Split text</button>
-            <br>
-            <label for="sep">Split By Line </label><br>
-            <input type="number" name="" id="number" value="50" required>
-          </div>
+    </div>
+
+    <div class="col-md-4 mt-3" id="convertpdfpdf">
+      <div id="megretandsplit50" class="container box">
+        <center >
+        <h3>PDF to Text convertpdfer</h3>
+        <div class="mb-3 w-50">
+          <label for="pdffile" class="form-label">Select PDF Files:</label>
+          <input type="file" class="form-control" id="pdffile" accept=".pdf" name="pdffile" multiple="">
         </div>
+        <div class="mb-3 w-50">
+          <label for="lignsinfile" class="form-label">Count Lines in File:</label>
+          <input type="number" class="form-control" id="lignsinfile" value="50" placeholder="Count Lines in File">
+        </div>
+
+        <button id="btn" class="btn btn-primary w-50 mt-2" onclick="convertpdf()">convertpdf </button>
+
+      </center>
       </div>
+    </div>
+
+      
   </div>
-</div>
-<div class="mb-3" id="resultTextContainer" style="display: none;">
-  <div class="alert alert-success fixed-top mt-3" role="alert" id="outputAlert">
-      Result:
-  </div>
-</div>
+
   <script>
-    let fileContents = [];
-    let mergedContent = '';
+     
+      function convertpdf() {
+          // Hide the convertpdf button and show the loading GIF
+          document.getElementById('convertpdfpdf').style.display = 'none';
+          document.getElementById('loadingGif').style.display = 'block';
 
-    function handleFiles(e) {
-        fileContents = [];
-        const files = Array.from(e.target.files);
-        if (files.length > 0) {
-            document.getElementById('loadingGif').style.display = 'block';
-            document.getElementById('resultTextContainer').style.display = 'block';
-            const fileCount = files.length;
-            document.getElementById('outputAlert').innerText = `Files merged and downloaded successfully! ${fileCount}`;
-            readFiles(0, files); // Start reading the files
-        } else {
-            document.getElementById('resultTextContainer').style.display = 'none';
-            document.getElementById('outputAlert').innerText = 'No files selected.';
-        }
-    }
-
-    document.getElementById('fileInput').addEventListener('change', handleFiles);
-
-    function readFiles(index, files) { // Pass the index and files as parameters
-        const check = document.getElementById('sep').checked;
-
-        if (index >= files.length) {
-            if(check){
-               mergedContent = fileContents.join("\n__SEP__\n");
-               mergeAndDownloadFiles();
+        var lignsinfile = parseInt(document.getElementById('lignsinfile').value);
+        var wordsinlign = Math.floor(Math.random() * (12 - 7 + 1)) + 7;
+      
+        const files = document.getElementById('pdffile').files;
+        const pdf2text = new Pdf2TextClassp();
+        pdf2text.pdfToText(files, function(text) {
+      
+          // Remove URLs/domains
+          text = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+      
+          // Remove special characters
+          text = text.replace(/[^0-9a-zA-Z ]+/g, ' ');
+      
+          const words = text.split(/\s+/);
+      
+          let content = "";
+          let w = 0;
+          let l = 0;
+          let n = 1;
+          let zip = new JSZip();
+          let folder = zip.folder("text-files");
+      
+          for (let i = 0; i < words.length; i++) {
+            content += words[i] + " ";
+            w++;
+      
+            if (w == wordsinlign) {
+              content += "\n";
+              w = 0;
+              wordsinlign= Math.floor(Math.random() * (11 - 7 + 1)) + 7;
+      
+              l++;
+      
+              if (l == lignsinfile) {
+                folder.file(`text-${n}.txt`, content);
+                n++;
+                l = 0;
+                content = "";
+              }
             }
-            else{
-              mergedContent = fileContents.join("\n");
-              mergeAndDownloadFiles();
-            }
-          
-        } else {
-            const fileReader = new FileReader();
-            fileReader.onload = function (e) {
-                const content = e.target.result;
-                fileContents.push(content);
-                readFiles(index + 1, files); // Call the function recursively with updated index
-            };
-            fileReader.onerror = function (e) {
-                alert('Error reading file: ', e);
-                readFiles(index + 1, files); // Call the function recursively with updated index
-            };
-            fileReader.readAsText(files[index]);
-        }
-    }
-
-    function mergeAndDownloadFiles() {
-          const check = document.getElementById('sep').checked;
-
-          let mergedContent= '';
-          if(check){
-            // Merge the file contents with separator "__SEP__"
-            mergedContent = fileContents.join("\n__SEP__\n");
           }
-          else{
-            // Just join all lines of each file without any separators between them
-            mergedContent = fileContents.join("\n");
-            }
-        
-       // Download the merged content as a text file
-          const downloadLink = document.createElement('a');
-          downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(mergedContent);
-          downloadLink.download = 'after_split.txt';
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
-
-          // Hide loading GIF and show success message with animation
-          // Hide loading GIF and show success message
+      
+          if (content.length > 0) {
+            folder.file(`text-${n}.txt`, content);
+          }
+      
+          zip.generateAsync({type:"blob"}).then(function(content) {
+            // Hide the loading GIF and show the result text container
           document.getElementById('loadingGif').style.display = 'none';
-          mergedContent = ''; // Reset the merged content
-
+          document.getElementById('convertpdfpdf').style.display = 'block';
+          document.getElementById('resultTextContainer').style.display = 'block';
           const resultTextContainer = document.getElementById('resultTextContainer');
-
           resultTextContainer.classList.add('show');
           resultTextContainer.classList.remove('hide');
 
-          // Hide the result text after 3 seconds
-          setTimeout(() => {
-              resultTextContainer.classList.add('hide');
-          }, 3000);
-    }
-    //split of number line
-
-    function handleFiles50(e) {
-      const file = e.target.files[0];
-      if (file) {
-        splitFile(file);
-      } else {
-        console.log("No file selected.");
+              // Display the result text
+              const outputAlert = document.getElementById('outputAlert');
+              outputAlert.innerText = 'Task donne \n' ;
+              saveAspdf(content, "textfiles.zip");
+              // Hide the result text after 3 seconds
+              setTimeout(() => {
+                resultTextContainer.classList.add('hide');
+              }, 3000);
+              }
+          
+          );
+        });
       }
-    }
-  
-    function splitFile(file) {
-      const number = parseInt(document.getElementById("number").value);
-      if (!isNaN(number) && number > 0) {
-        const reader = new FileReader();
-        reader.onload = function () {
-          const content = reader.result;
-          const lines = content.split("\n");
-          const splitContent = [];
-
-          document.getElementById('loadingGif').style.display = 'block';
-          document.getElementById('outputAlert').innerText = `Files Split and downloaded successfully! `;
-          for (let i = 0; i < lines.length; i += number) {
-            splitContent.push(lines.slice(i, i + number).join("\n"));
+      
+    
+      function Pdf2TextClassp() {
+        this.pdfToText = function(files, callback) {
+          let total = files.length;
+          let complete = 0;
+          let layers = {};
+          
+          for (let j = 0; j < files.length; j++) {
+            const file = files[j];
+            const reader = new FileReader();
+            
+            reader.onload = function() {
+              const loadingTask = pdfjsLib.getDocument(reader.result);
+              
+              loadingTask.promise.then(function(pdf) {
+                let numPages = pdf.numPages;
+                let pageNumber = 1;
+                
+                pdf.getPage(pageNumber).then(function(page) {
+                  page.getTextContent().then(function(textContent) {
+                    let pageText = "";
+                    
+                    for (let i = 0; i < textContent.items.length; i++) {
+                      const item = textContent.items[i];
+                      pageText += item.str;
+                    }
+                    
+                    layers[j] = pageText;
+                    
+                    complete++;
+                    if (complete == total) {
+                      let fullText = "";
+                      
+                      for (let k = 0; k < total; k++) {
+                        if(layers[k] !== undefined){
+                            fullText += layers[k];
+                        }
+                      }
+                      
+                      callback(fullText);
+                    }
+                  });
+                });
+              }).catch(function(error) {
+                  console.log(`Error loading PDF: ${error.message}`);
+                  complete++;
+                  if (complete == total) {
+                      let fullText = "";
+                      for (let k = 0; k < total; k++) {
+                          if(layers[k] !== undefined){
+                              fullText += layers[k];
+                          }
+                      }
+                      callback(fullText);
+                  }
+              });
+            };
+            
+            reader.readAsArrayBuffer(file);
           }
-          createZip(splitContent);
         };
-        reader.readAsText(file);
-      } else {
-        console.log("Invalid number of lines.");
       }
-    }
-  
-    function createZip(splitContent) {
-      const zip = new JSZip();
-      for (let i = 0; i < splitContent.length; i++) {
-        zip.file(`part_${i + 1}.txt`, splitContent[i]);
+     
+      function saveToFilepdf(text, filename) {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
       }
-      zip.generateAsync({ type: "blob" }).then(function (content) {
-        downloadZip(content);
-      });
+
+
+      function saveAspdf(blob, filename) {
+        if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            const link = document.createElement('a');
+            if (typeof link.download !== 'undefined') {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
     }
-  
-    function downloadZip(zipBlob) {
-      const downloadLink = document.createElement("a");
-      downloadLink.href = URL.createObjectURL(zipBlob);
-      downloadLink.download = "split_files.zip";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-      // Hide loading GIF and show success message
-      document.getElementById('loadingGif').style.display = 'none';
-      document.getElementById('resultTextContainer').style.display = 'block';
-
-      const resultTextContainer = document.getElementById('resultTextContainer');
-
-      resultTextContainer.classList.add('show');
-      resultTextContainer.classList.remove('hide');
-
-      // Hide the result text after 3 seconds
-      setTimeout(() => {
-        resultTextContainer.classList.add('hide');
-    }, 3000);
-    }
-  
-    document.getElementById("fileInput50").addEventListener("change", handleFiles50);
-  
-  
+    
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 <!-- Add the JSZip library to your HTML -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
 

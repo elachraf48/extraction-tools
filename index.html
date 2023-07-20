@@ -251,13 +251,14 @@
     </div>
   </div>
  <!---------------------text tool---------------------------->
- <div class="container my-5 box-shadow" id="texttool" style="display: none;">
+ <div class="container my-5 box-shadow " id="texttool" style="display: none; margin-bottom: 200%;">
         <div class="mb-3" id="loadingGif" style="display: none;">
           <img src="loading.gif" alt="Loading...">
         </div>
-        <div class="row">
-          <div class="col">
-            <div id="megretandsplit" class="container box mt-5">
+        <div class="row"  style=" margin-bottom: 20%;">
+
+          <div class="col-md-4 mt-3">
+            <div id="megretandsplit" class="container box ">
                 <h3>Text File Merger and Splitter</h3>
                 <input  style="display: none;" name="file" id="fileInputsw" type="file" multiple>
                 <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInputsw').click()">megret text</button>
@@ -288,8 +289,8 @@
               
             </div>
           </div>
-          <div class="col">
-            <div id="megretandsplit50" class="container box mt-5">
+          <div class="col-md-4 mt-3">
+            <div id="megretandsplit50" class="container box">
               <h3>Text File Splitter</h3>
               <input style="display: none;" name="file" id="fileInputsw50" type="file">
               <div class="check">
@@ -308,6 +309,27 @@
                   <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="name file txt" disabled id="nameInput">
                 </div>
             </center>
+            </div>
+          </div>
+          <div class="col-md-4 mt-3" id="convertpdfpdfs">
+            <div id="megretandsplit50" class="container box">
+              <center >
+              <h3>PDF to Text convertpdfer</h3>
+              <div class="mb-3 w-50">
+                <label for="pdffile" class="form-label">Select PDF Files:</label>
+                <input type="file" class="form-control" id="pdffile" accept=".pdf" name="pdffile" multiple="">
+              </div>
+              <div class="mb-3 w-50">
+                <label for="lignsinfile" class="form-label">Count Lines in File:</label>
+                <input type="number" class="form-control" id="lignsinfile" value="50" placeholder="Count Lines in File">
+              </div>
+      
+              <button class="btn btn-primary w-50 mt-2" onclick="convertpdf()">convertpdf </button>
+      
+            </center>
+            </div>
+          </div>
+
             </div>
           </div>
       </div>
@@ -395,14 +417,14 @@
 
           <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
             <input  style="width: 60%;"   type="file" class="form-control btn-outline-success" id="inputGroupFile01" accept=".txt">
-            <button alt="ffff" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser"></i> Duplicate</button>
+            <button  title="remove duplicate" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i class="fa fa-eraser"></i></button>
 
-            <button class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random"></i></button>
+            <button title="shuffle Lines" class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i class="fa fa-random"></i></button>
 
-            <button class="btn  btn-lg btn-outline-success" onclick="copyText()">
+            <button title="copy" class="btn  btn-lg btn-outline-success" onclick="copyText()">
               <i class="fa fa-clone"></i>
             </button>
-            <button class="btn  btn-lg btn-outline-success" onclick="download()">
+            <button title="download file" class="btn  btn-lg btn-outline-success" onclick="download()">
               <i class="fa fa-download"></i>
             </button>
           </div>
@@ -447,8 +469,8 @@
                 </ul>
               </div>
             </div>
-            <div class="input-group py-3" style="height:10% ; width: 20%;">
-                <input type="text" class="form-control" placeholder="s_emh_" value="s_emh_" id="keywordInput">
+            <div class="input-group m-2 w-50" role="group">
+                <input  type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
                 <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Words</button>
             </div>
 
@@ -651,6 +673,8 @@
         const files = Array.from(e.target.files);
         if (files.length > 0) {
             document.getElementById('loadingGif').style.display = 'block';
+
+            
             const fileCount = files.length;
             document.getElementById('outputAlert').innerText = `Files merged and downloaded successfully! ${fileCount}`;
             readFiles(0, files); // Start reading the files
@@ -863,8 +887,172 @@ function removeEmptyLinesFromContent(text) {
   
     document.getElementById("fileInputsw50").addEventListener("change", handleFiles50);
   
+//==========================pdf to text======================
+function convertpdf() {
+  // Hide the convertpdf button and show the loading GIF
+  document.getElementById('loadingGif').style.display = 'block';
+
+var lignsinfile = parseInt(document.getElementById('lignsinfile').value);
+var wordsinlign = Math.floor(Math.random() * (12 - 7 + 1)) + 7;
+
+const files = document.getElementById('pdffile').files;
+const pdf2text = new Pdf2TextClassp();
+pdf2text.pdfToText(files, function(text) {
+
+  // Remove URLs/domains
+  text = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+
+  // Remove special characters
+  text = text.replace(/[^0-9a-zA-Z ]+/g, ' ');
+
+  const words = text.split(/\s+/);
+
+  let content = "";
+  let w = 0;
+  let l = 0;
+  let n = 1;
+  let zip = new JSZip();
+  let folder = zip.folder("text-files");
+
+  for (let i = 0; i < words.length; i++) {
+    content += words[i] + " ";
+    w++;
+
+    if (w == wordsinlign) {
+      content += "\n";
+      w = 0;
+      wordsinlign= Math.floor(Math.random() * (11 - 7 + 1)) + 7;
+
+      l++;
+
+      if (l == lignsinfile) {
+        folder.file(`text-${n}.txt`, content);
+        n++;
+        l = 0;
+        content = "";
+      }
+    }
+  }
+
+  if (content.length > 0) {
+    folder.file(`text-${n}.txt`, content);
+  }
+
+  zip.generateAsync({type:"blob"}).then(function(content) {
+    // Hide the loading GIF and show the result text container
+  document.getElementById('loadingGif').style.display = 'none';
+  document.getElementById('resultTextContainer').style.display = 'block';
+  const resultTextContainer = document.getElementById('resultTextContainer');
+  resultTextContainer.classList.add('show');
+  resultTextContainer.classList.remove('hide');
+
+      // Display the result text
+      const outputAlert = document.getElementById('outputAlert');
+      outputAlert.innerText = 'Task donne \n' ;
+      saveAspdf(content, "textfiles.zip");
+      // Hide the result text after 3 seconds
+      setTimeout(() => {
+        resultTextContainer.classList.add('hide');
+      }, 3000);
+      }
   
+  );
+});
+}
+
+
+function Pdf2TextClassp() {
+this.pdfToText = function(files, callback) {
+  let total = files.length;
+  let complete = 0;
+  let layers = {};
+  
+  for (let j = 0; j < files.length; j++) {
+    const file = files[j];
+    const reader = new FileReader();
+    
+    reader.onload = function() {
+      const loadingTask = pdfjsLib.getDocument(reader.result);
+      
+      loadingTask.promise.then(function(pdf) {
+        let numPages = pdf.numPages;
+        let pageNumber = 1;
+        
+        pdf.getPage(pageNumber).then(function(page) {
+          page.getTextContent().then(function(textContent) {
+            let pageText = "";
+            
+            for (let i = 0; i < textContent.items.length; i++) {
+              const item = textContent.items[i];
+              pageText += item.str;
+            }
+            
+            layers[j] = pageText;
+            
+            complete++;
+            if (complete == total) {
+              let fullText = "";
+              
+              for (let k = 0; k < total; k++) {
+                if(layers[k] !== undefined){
+                    fullText += layers[k];
+                }
+              }
+              
+              callback(fullText);
+            }
+          });
+        });
+      }).catch(function(error) {
+          console.log(`Error loading PDF: ${error.message}`);
+          complete++;
+          if (complete == total) {
+              let fullText = "";
+              for (let k = 0; k < total; k++) {
+                  if(layers[k] !== undefined){
+                      fullText += layers[k];
+                  }
+              }
+              callback(fullText);
+          }
+      });
+    };
+    
+    reader.readAsArrayBuffer(file);
+  }
+};
+}
+
+function saveToFilepdf(text, filename) {
+const element = document.createElement('a');
+element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+element.setAttribute('download', filename);
+element.style.display = 'none';
+document.body.appendChild(element);
+element.click();
+document.body.removeChild(element);
+}
+
+
+function saveAspdf(blob, filename) {
+if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
+    navigator.msSaveOrOpenBlob(blob, filename);
+} else {
+    const link = document.createElement('a');
+    if (typeof link.download !== 'undefined') {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+}
+
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 <!-- Add the JSZip library to your HTML -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
 </body>
