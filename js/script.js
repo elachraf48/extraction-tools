@@ -1323,9 +1323,9 @@ function extractWords() {
   // Display extracted words
   if (uniqueMatches) {
     inputText.value = uniqueMatches.join('\n');
-    document.getElementById("output-containerr").textContent = "Count: " + uniqueMatches.length;
+    document.getElementById("line-count").textContent = "Count: " + uniqueMatches.length;
   } else {
-    document.getElementById("output-containerr").textContent = "Count: 0";
+    document.getElementById("line-count").textContent = "Count: 0";
   }
 }
 
