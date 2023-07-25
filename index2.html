@@ -1,250 +1,76 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Text File Merger and Splitter</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <style>
-    
-
-#loadingGif{
-  position: fixed;
-  left: 46%;
-  top: 20%;
-  z-index: 9999;
-}
-.box{
-  border: solid black 2px;
-  border-radius: 25px;
-  height: 100%;
-  padding: 1%;
-  text-align: center;
-}
-#resultTextContainer {
-  position: fixed;
-  z-index: 800;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: opacity 3s;
-  width: 400px;
-}
-
-#resultTextContainer.show {
-  opacity: 1;
-}
-
-#resultTextContainer.hide {
-  opacity: 0;
-}
-  </style>
+  <title>Text to HTML Converter</title>
+  <!-- Add Bootstrap CSS link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
-    <div class="mb-3" id="loadingGif" style="display: none;">
-      <img src="loading.gif" alt="Loading...">
-    </div>
-    <div class="mb-3" id="resultTextContainer" style="display: none;">
-      <div class="alert alert-success fixed-top mt-3" role="alert" id="outputAlert">
-          Result:
-      </div>
-    </div>
+  <div class="container mt-4">
+    <h2>Text to HTML Converter</h2>
+    <input type="file" id="fileInput" multiple accept=".txt" class="form-control mb-3">
 
-    <div class="col-md-4 mt-3" id="convertpdfpdf">
-      <div id="megretandsplit50" class="container box">
-        <center >
-        <h3>PDF to Text convertpdfer</h3>
-        <div class="mb-3 w-50">
-          <label for="pdffile" class="form-label">Select PDF Files:</label>
-          <input type="file" class="form-control" id="pdffile" accept=".pdf" name="pdffile" multiple="">
-        </div>
-        <div class="mb-3 w-50">
-          <label for="lignsinfile" class="form-label">Count Lines in File:</label>
-          <input type="number" class="form-control" id="lignsinfile" value="50" placeholder="Count Lines in File">
-        </div>
-
-        <button id="btn" class="btn btn-primary w-50 mt-2" onclick="convertpdf()">convertpdf </button>
-
-      </center>
-      </div>
-    </div>
-
-      
+    <button onclick="convertToHTML()" class="btn btn-primary">Convert to HTML</button>
   </div>
 
+  <!-- Add Bootstrap JS and your custom script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-     
-      function convertpdf() {
-          // Hide the convertpdf button and show the loading GIF
-          document.getElementById('convertpdfpdf').style.display = 'none';
-          document.getElementById('loadingGif').style.display = 'block';
-
-        var lignsinfile = parseInt(document.getElementById('lignsinfile').value);
-        var wordsinlign = Math.floor(Math.random() * (12 - 7 + 1)) + 7;
-      
-        const files = document.getElementById('pdffile').files;
-        const pdf2text = new Pdf2TextClassp();
-        pdf2text.pdfToText(files, function(text) {
-      
-          // Remove URLs/domains
-          text = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
-      
-          // Remove special characters
-          text = text.replace(/[^0-9a-zA-Z ]+/g, ' ');
-      
-          const words = text.split(/\s+/);
-      
-          let content = "";
-          let w = 0;
-          let l = 0;
-          let n = 1;
-          let zip = new JSZip();
-          let folder = zip.folder("text-files");
-      
-          for (let i = 0; i < words.length; i++) {
-            content += words[i] + " ";
-            w++;
-      
-            if (w == wordsinlign) {
-              content += "\n";
-              w = 0;
-              wordsinlign= Math.floor(Math.random() * (11 - 7 + 1)) + 7;
-      
-              l++;
-      
-              if (l == lignsinfile) {
-                folder.file(`text-${n}.txt`, content);
-                n++;
-                l = 0;
-                content = "";
-              }
-            }
-          }
-      
-          if (content.length > 0) {
-            folder.file(`text-${n}.txt`, content);
-          }
-      
-          zip.generateAsync({type:"blob"}).then(function(content) {
-            // Hide the loading GIF and show the result text container
-          document.getElementById('loadingGif').style.display = 'none';
-          document.getElementById('convertpdfpdf').style.display = 'block';
-          document.getElementById('resultTextContainer').style.display = 'block';
-          const resultTextContainer = document.getElementById('resultTextContainer');
-          resultTextContainer.classList.add('show');
-          resultTextContainer.classList.remove('hide');
-
-              // Display the result text
-              const outputAlert = document.getElementById('outputAlert');
-              outputAlert.innerText = 'Task donne \n' ;
-              saveAspdf(content, "textfiles.zip");
-              // Hide the result text after 3 seconds
-              setTimeout(() => {
-                resultTextContainer.classList.add('hide');
-              }, 3000);
-              }
-          
-          );
-        });
+    function convertToHTML() {
+      const fileInput = document.getElementById('fileInput');
+      const files = fileInput.files;
+      if (files.length === 0) {
+        alert('Please select one or more text files.');
+        return;
       }
-      
-    
-      function Pdf2TextClassp() {
-        this.pdfToText = function(files, callback) {
-          let total = files.length;
-          let complete = 0;
-          let layers = {};
-          
-          for (let j = 0; j < files.length; j++) {
-            const file = files[j];
-            const reader = new FileReader();
-            
-            reader.onload = function() {
-              const loadingTask = pdfjsLib.getDocument(reader.result);
-              
-              loadingTask.promise.then(function(pdf) {
-                let numPages = pdf.numPages;
-                let pageNumber = 1;
-                
-                pdf.getPage(pageNumber).then(function(page) {
-                  page.getTextContent().then(function(textContent) {
-                    let pageText = "";
-                    
-                    for (let i = 0; i < textContent.items.length; i++) {
-                      const item = textContent.items[i];
-                      pageText += item.str;
-                    }
-                    
-                    layers[j] = pageText;
-                    
-                    complete++;
-                    if (complete == total) {
-                      let fullText = "";
-                      
-                      for (let k = 0; k < total; k++) {
-                        if(layers[k] !== undefined){
-                            fullText += layers[k];
-                        }
-                      }
-                      
-                      callback(fullText);
-                    }
-                  });
-                });
-              }).catch(function(error) {
-                  console.log(`Error loading PDF: ${error.message}`);
-                  complete++;
-                  if (complete == total) {
-                      let fullText = "";
-                      for (let k = 0; k < total; k++) {
-                          if(layers[k] !== undefined){
-                              fullText += layers[k];
-                          }
-                      }
-                      callback(fullText);
-                  }
-              });
-            };
-            
-            reader.readAsArrayBuffer(file);
+
+      const zip = new JSZip();
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+          const content = event.target.result;
+          const htmlContent = '<!DOCTYPE html><html><head></head><body><pre>' + encodeHTML(content) + '</pre></body></html>';
+
+          zip.file(`${file.name}`, htmlContent);
+
+          if (i === files.length - 1) {
+            // Create the ZIP file after all files are processed
+            zip.generateAsync({ type: 'blob' }).then(function (content) {
+              const downloadLink = document.createElement('a');
+              downloadLink.href = URL.createObjectURL(content);
+              downloadLink.download = 'converted_files.zip';
+              downloadLink.click();
+            });
           }
         };
-      }
-     
-      function saveToFilepdf(text, filename) {
-        const element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-      }
 
-
-      function saveAspdf(blob, filename) {
-        if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
-            navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-            const link = document.createElement('a');
-            if (typeof link.download !== 'undefined') {
-                const url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
+        reader.readAsText(file);
+      }
     }
+
+    function encodeHTML(text) {
+      // Split the text into lines
+      const lines = text.split('\n');
     
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-<!-- Add the JSZip library to your HTML -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
-
+      // Wrap each line with <p> and </p> tags
+      const paragraphs = lines.map(line => `<p>${line}</p>`).join('');
+    
+      return paragraphs.replace(/[&<"']/g, function (match) {
+        return {
+          '&': '&amp;',
+          '<': '<;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[match];
+      });
+    }
+  </script>
 </body>
-
 
 </html>

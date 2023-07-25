@@ -187,7 +187,7 @@ function splitText(buttonId) {
           outputContainer.appendChild(div);
         } else if (buttonId === "txt") {
           let blob = new Blob([sectionLines.join("\n")], { type: "text/plain" });
-          let file = new File([blob], `output_${i + 1}.txt`);
+          let file = new File([blob], `text_${i + 1}.txt`);
           outputFiles.push(file);
         }
         copyButtonCounter++;
@@ -202,11 +202,13 @@ function splitText(buttonId) {
   function createTextarea(value) {
     let outputTextarea = document.createElement("textarea");
     outputTextarea.classList.add("form-control", "mt-1");
-    outputTextarea.setAttribute("rows", "1");
-outputTextarea.style.resize = "none";
+    outputTextarea.style.height = "20px"; // Set the height to 100 pixels
+    outputTextarea.style.resize = "none";
     outputTextarea.value = value;
     return outputTextarea;
   }
+  
+  
 
   function createCopyButton(outputTextarea, copyButtonCounter) {
     let copyButton = document.createElement("button");
