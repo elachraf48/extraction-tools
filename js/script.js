@@ -638,14 +638,27 @@ function extractGmail() {
   var fileInput = document.getElementById("inputGroupFile01");
   var textarea = document.getElementById("text");
 
+  function extractEmailsFromLine(line) {
+    var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
+    return line.match(regex);
+  }
+
   if (fileInput.files.length > 0) {
     var file = fileInput.files[0];
     var reader = new FileReader();
 
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       var inputText = event.target.result;
-      var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
-      var gmailEmails = inputText.match(regex);
+      var lines = inputText.split(/\r?\n/); // Split text into lines
+      var gmailEmails = [];
+
+      for (var i = 0; i < lines.length; i++) {
+        var emailsInLine = extractEmailsFromLine(lines[i]);
+        if (emailsInLine) {
+          gmailEmails = gmailEmails.concat(emailsInLine);
+        }
+      }
+
       checkinputText(inputText);
       var uniqueGmailEmails = removeDuplicates(gmailEmails);
 
@@ -656,26 +669,44 @@ function extractGmail() {
     reader.readAsText(file);
   } else {
     var inputText = textarea.value;
-    var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
-    var gmailEmails = inputText.match(regex);
+    var lines = inputText.split(/\r?\n/); // Split text into lines
+    var gmailEmails = [];
+
+    for (var i = 0; i < lines.length; i++) {
+      var emailsInLine = extractEmailsFromLine(lines[i]);
+      if (emailsInLine) {
+        gmailEmails = gmailEmails.concat(emailsInLine);
+      }
+    }
+
     checkinputText(inputText);
     var uniqueGmailEmails = removeDuplicates(gmailEmails);
 
     textarea.value = uniqueGmailEmails.join("\n");
   }
 }
+
 function extractGmail_split() {
   var textarea = document.getElementById("input-text");
   var inputText = textarea.value;
+  var words = inputText.split(/\s+/); // Split text into words
   var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
-  var gmailEmails = inputText.match(regex);
+  var gmailEmails = [];
+
+  for (var i = 0; i < words.length; i++) {
+    var word = words[i];
+    var emailsInWord = word.match(regex);
+    if (emailsInWord) {
+      gmailEmails = gmailEmails.concat(emailsInWord);
+    }
+  }
+
   checkinputText(inputText);
   var uniqueGmailEmails = removeDuplicates(gmailEmails);
   document.getElementById("line-counts").innerHTML = "Number of Email addresses: " + uniqueGmailEmails.length;
   textarea.value = uniqueGmailEmails.join("\n");
-
-  
 }
+
 function extractYahoo() {
   var fileInput = document.getElementById("inputGroupFile01");
   var textarea = document.getElementById("text");
