@@ -3,7 +3,7 @@ function showSection(sectionId) {
   sections.forEach(function (item) {
     var navLink = document.getElementById(item + "-nav-link");
     var section = document.getElementById(item);
-
+    toggleCollapse();
     if (item === sectionId) {
       navLink.classList.add("active");
       section.style.display = "block";
@@ -12,10 +12,36 @@ function showSection(sectionId) {
       section.style.display = "none";
     }
   });
+  alert('la')
   showModal(sectionId);
 }
+//for hide list header en mode mobile
+function toggleCollapse() {
+  const navbarNav = document.getElementById('navbarNav');
 
+  const navbarToggler = document.querySelector('.navbar-toggler');
 
+  if (navbarNav.classList.contains('show')) {
+    navbarToggler.click(); // Close the menu
+  }
+}
+//hide or show generateur
+// Get references to the checkbox and target div
+const randomCheckbox = document.getElementById('random');
+const generateRandomDiv = document.getElementById('generat_random');
+const ip_extraction_lite= document.getElementById('ip-extraction-lite');
+
+randomCheckbox.addEventListener('change', function () {
+  // Toggle the display style of the target div based on the checkbox's checked state
+  generateRandomDiv.style.display = this.checked ? 'block' : 'none';
+// Add or remove the "row" class based on the checkbox's checked state
+// if (this.checked) {
+//   ip_extraction_lite.classList.remove('mt-5');
+// } else {
+//   ip_extraction_lite.classList.add('mt-5');
+// }
+  
+});
 function getSectionInfo(section) {
   switch (section) {
     case 'home':
