@@ -576,10 +576,11 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     
     </div>
+
     <label for="">Prime</label>
     <div class="input-group mb-3">
       <span class="input-group-text bg-primary" style="width:25% ;">Prime </span>
-      <input type="text" class="form-control" id="prime" placeholder="0">
+      <input type="text" class="form-control" id="prime" placeholder="0" value="0">
       <span class="input-group-text">$</span>
     </div>   
     <label class="m-6">Taux de change</label>
@@ -596,6 +597,7 @@
       <label class="btn btn-outline-primary" for="tl">Team leader</label>
 
     </div>
+    <div id="mailer_div">
     <div class="input-group mb-3 befor">
       <span class="input-group-text bg-danger" style="width:25% ;">Less than</span>
       <input type="text" class="form-control" id="before" placeholder="20" value="20" >
@@ -626,10 +628,23 @@
       <label class="btn btn-outline-success" for="nmodel">Non employé model</label>
 
     </div>
+  </div>
+  <div id="tl_div" style="display: none;">
+    <div class="input-group mb-3 befor">
+      <span class="input-group-text bg-primary" style="width:25% ;">It equals</span>
+      <input type="text" class="form-control"  placeholder="0" value="0" >
+      <span class="input-group-text">K</span>
+      <span class="input-group-text bg-primary"></span>
+      <span class="input-group-text"><i class="fa fa-arrow-right"></i>        </span>
+      <input type="text" class="form-control" id="tl_pr" placeholder="1.5" value="1.5">
+      <span class="input-group-text"><i class="fa fa-percent"></i>        </span>
+    </div>  
 
+  </div>
     <button class="btn btn-primary" onclick="calcule()" type="button" id="button-calcule">Calcule</button>
     <div id="resultatcal" class="text-center font-weight-bold p-3"></div>
   </div>
+  
   
    <!--    header     
    <div id="navbarContainer">

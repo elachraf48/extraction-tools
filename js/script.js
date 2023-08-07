@@ -30,7 +30,6 @@ function toggleCollapse() {
 const randomCheckbox = document.getElementById('random');
 const generateRandomDiv = document.getElementById('generat_random');
 const ip_extraction_lite= document.getElementById('ip-extraction-lite');
-
 randomCheckbox.addEventListener('change', function () {
   // Toggle the display style of the target div based on the checkbox's checked state
   generateRandomDiv.style.display = this.checked ? 'block' : 'none';
@@ -1104,6 +1103,20 @@ function fetchExchangeRate() {
       alert('Error fetching exchange rates:', error);
     });
 }
+const mailer =document.getElementById("mailer");
+const tl =document.getElementById("tl");
+const tl_div=document.getElementById("tl_div");
+const mailer_div=document.getElementById("mailer_div");
+
+tl.addEventListener('change', function () {
+  tl_div.style.display = this.checked ? 'block' : 'none';
+  mailer_div.style.display = this.checked ?  'none':'block';
+});
+
+mailer.addEventListener('change', function () {
+  mailer_div.style.display = this.checked ? 'block' : 'none';
+  tl_div.style.display = this.checked ?  'none':'block';
+});
 
 function calcule() {
 
@@ -1111,21 +1124,29 @@ function calcule() {
   var beforepr = parseFloat(document.getElementById("beforepr").value/100);
   var after = Number(document.getElementById("after").value + '000');
   var afterpr = parseFloat(document.getElementById("afterpr").value/100);
+  var tl_pr= parseFloat(document.getElementById("tl_pr").value/100);
   var prime = parseFloat(document.getElementById("prime").value.replace(/[\s\u202F$,]/g, '').trim(''));
   var usd = Number(document.getElementById("change-input").value);
   let TopModel = document.getElementById("model").checked;
   let NTopModel = document.getElementById("nmodel").checked;
+  
   var primetop=0
-  if(TopModel){primetop=300}
-  else if(NTopModel){primetop=0}
-
-  if (prime < before) {
-    res = (prime * beforepr * usd)+primetop;
-  } 
-  else if (prime >= after) {
-    res = (prime * afterpr * usd)+primetop;
+  if(mailer.checked){
+    if(TopModel){primetop=300}
+    else if(NTopModel){primetop=0}
+  
+    if (prime < before) {
+      res = (prime * beforepr * usd)+primetop;
+    } 
+    else if (prime >= after) {
+      res = (prime * afterpr * usd)+primetop;
+    }
+   
   }
-  else{
+  else if(tl.checked){
+    res = (prime * tl_pr * usd);
+  }
+  if(res===NaN){
     document.getElementById("resultatcal").innerText="donne incorrect";
   }
 
