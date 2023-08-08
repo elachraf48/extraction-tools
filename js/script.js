@@ -1196,7 +1196,6 @@ function calcule() {
       offcanvas.show();
     }
   });
-
 // ret random text
 // Function to fetch random text from the internet
 function getRandomText() {
@@ -1284,102 +1283,6 @@ function extractemailfromgmail(){
 
 
 
-const net = require('net');
-const tls = require('tls');
-
-// Define the details for your email and account.
-const host = 'smtp.gmail.com';
-const port = 465;
-const username = 'testafter112@gmail.com';
-const password = 'anqxhnihvxjqzxkx';
-const fromEmail = 'testafter112@gmail.com';
-const toEmails = ['chaymaejarodi@gmail.com'];
-const subjectLine= "Test Email";
-let messageBody= "This is just a test email sent using Node.js";
-
-function sendMail() {
-  // Connect to the Gmail SMTP server over TLS.
-  const socketOptions =
-      { host: host,
-        port: port,
-        rejectUnauthorized: false };
-  const clientSocket =
-      new tls.TLSSocket(new net.Socket(), socketOptions);
-  clientSocket.connect(port, host, () => {
-      console.log(`Connected to ${host}:${port}`);
-  });
-
-    // Handle any errors that occur while connecting or sending data.
-    clientSocket.on('error', (e) => {
-      console.error(e.message);
-      clientSocket.end();
-     });
-
-     // Send commands to authenticate with the Gmail SMTP server. 
-     let authCommands=[
-         `EHLO ${host}\r\n`,
-         `AUTH LOGIN\r\n`,
-         `${Buffer.from(username).toString('base64')}\r\n`,
-         `${Buffer.from(password).toString('base64')}\r\n`
-       ];
-     
-     authCommands.forEach((command)=>{
-           clientSocket.write(command);
-           console.log(command.trim());
-       });
-    
-       // Send command to initiate sending mail
-       let mailCommand=`MAIL FROM:<${fromEmail}>\r\n`;
-        
-        setTimeout(()=>{
-            console.log(mailCommand.trim());
-            clientSocket.write(mailCommand);
-        }, 1000); // Wait for a second before sending next command
-    
-       // Send commands to specify recipients of the email.
-       let rcptCommands=[];
-    
-           toEmails.forEach((email)=>{
-               rcptCommands.push(`RCPT TO:<${email}>\r\n`);
-           });
-           
-           setTimeout(()=>{
-              rcptCommands.forEach((command)=>{
-                  console.log(command.trim());
-                  clientSocket.write(command);
-              }); 
-           }, 2000); // Wait for two seconds before sending next command
-    
-    
-    // Send command to start data transfer
-    let dataCommand=`DATA\r\n`;
-        
-        setTimeout(()=>{
-            console.log(dataCommand.trim());
-            clientSocket.write(dataCommand);
-        }, 3000); // Wait for three seconds before sending next command
-     
-     // Define the contents of your email and send it.
-     const date = new Date().toUTCString();
-     const message =
-         `From: ${fromEmail}\r\n` +
-         `To: ${toEmails.join(',')}\r\n` +
-         `Subject: ${subjectLine}\r\n` +
-         'Content-Type: text/plain;charset=utf-8\r\n' +
-         `Date: ${date}\r\n\r\n${messageBody}`;
-         
-      setTimeout(()=>{
-          console.log(message.trim());
-          clientSocket.write(message + '\r\n.\r\n');
-      },4000);// wait four seconds before ending connection
-      
-       // Quit once the contents have been sent, closing the connection.
-       setTimeout(() => {
-             console.log('Message sent successfully!');
-             clientSocket.end();
-          },
-          5000);//Wait five seconds after completion of last step
-}
 
 //extract word list
 function extractWords() {
@@ -1409,4 +1312,70 @@ function extractWords() {
   }
 }
 
-//tool text
+//add or remove dot in email
+
+
+function removedots() {
+  checkinputText(document.getElementById("text").value );
+  var newuser = "";
+  var lines = document.getElementById('text').value.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    if (i == lines.length - 1) {
+      newuser += lines[i].split('@')[0].replaceAll(".", "") + "@" + lines[i].split('@')[1];
+    } else {
+      newuser += lines[i].split('@')[0].replaceAll(".", "") + "@" + lines[i].split('@')[1] + "\n";
+    }
+  }
+  document.getElementById('text').value = newuser;
+}
+
+
+
+function dotfunction() {
+  checkinputText(document.getElementById("text").value );
+  var lines = document.getElementById('text').value.split('\n');
+  var newinput = "";
+
+  for (let i = 0; i < lines.length; i++) {
+    var email = lines[i];
+    var username = email.split('@')[0];
+    var domain = email.split('@')[1];
+    var dotcount = username.split('.');
+
+    if (((username.length) - dotcount.length) < dotcount.length) {
+      newuser = username;
+    } else {
+      var usernamelength = (username.length) - 1;
+      var rand = Math.floor(Math.random() * usernamelength);
+      var tryname = 0;
+
+      while ((username[rand] == "." || username[rand + 1] == ".") && tryname < usernamelength) {
+        rand = Math.floor(Math.random() * usernamelength);
+
+        if (username[rand] != "." && username[rand + 1] != ".") {
+          break;
+        }
+
+        tryname++;
+      }
+
+      var newuser = "";
+      for (let j = 0; j < usernamelength + 1; j++) {
+        if (j == rand) {
+          newuser += (username[j] + ".").replace("..", ".");
+        } else {
+          newuser += username[j];
+        }
+      }
+    }
+
+    if (i == lines.length - 1) {
+      newinput += newuser.replace("..", ".") + "@" + domain;
+    } else {
+      newinput += newuser.replace("..", ".") + "@" + domain + "\n";
+    }
+  }
+  document.getElementById('text').value = newinput;
+}
+
+
