@@ -542,7 +542,7 @@ function extractDomain() {
     reader.onload = function(event) {
       var dialogueContent = event.target.result;
       var matches = dialogueContent.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
-      var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+      var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))].filter(domain => domain.length > 0);
       checkinputText(dialogueContent);
 
       document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
@@ -554,13 +554,29 @@ function extractDomain() {
   } else {
     var text = textarea.value;
     var matches = text.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
-    var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))];
+    var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))].filter(domain => domain.length > 0);
     checkinputText(text);
 
     document.getElementById("line-count").innerHTML = "Number of unique Domain: " + uniqueMatches.length;
     textarea.value = uniqueMatches.join("\n");
   }
 }
+
+function checkinputText(dialogueContent) {
+  if (dialogueContent.length < 1) {
+    document.getElementById("line-count").innerHTML = "Please enter some text or upload a file.";
+  }
+}
+
+function downloadResult(text, file) {
+  var blob = new Blob([text], {type: "text/plain"});
+  var filename = file.name.replace(".txt", "-results.txt");
+  var link = document.createElement("a");
+  link.href = window.URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+}
+
 
 function extractsubDomain() {
   var fileInput = document.getElementById("inputGroupFile01");
