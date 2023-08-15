@@ -874,6 +874,9 @@ $(document).ready(function () {
     }
     $('#result-GN').val(result);
     $('#result-GN').select();
+    document.execCommand('copy');
+    showNotification('Random copied successfully!', 3000);
+
     // $('#count').text(result.length);
   });
 
@@ -1002,6 +1005,12 @@ document.getElementById('bulkblacklist').addEventListener('click', (event) => {
 function removeDuplicates(array) {
   return [...new Set(array)];
 }
+function namesheap() {
+  var domains = document.getElementById('domain-input').value.replace(/\n/g, ',');
+  var url = `https://www.namecheap.com/domains/registration/results/?type=beast&domain=${domains}`;
+  window.open(url, '_blank');
+}
+
 
 function checkdomain(check) {
   const input = document.getElementById('domain-input');
@@ -1027,6 +1036,9 @@ function checkdomain(check) {
       domainLink.href = `https://mxtoolbox.com/SuperTool.aspx?action=mx%3a${domain}&run=toolpage`;
       domainLink.classList.add('text-warning');
       break;
+    
+      // https://www.namecheap.com/domains/registration/results/?type=beast&domain=
+
 	  default:
 		console.log('Invalid check value');
 		return;
@@ -1141,6 +1153,7 @@ function calcule() {
   var after = Number(document.getElementById("after").value + '000');
   var afterpr = parseFloat(document.getElementById("afterpr").value/100);
   var tl_pr= parseFloat(document.getElementById("tl_pr").value/100);
+  var primetl=parseFloat(document.getElementById("primetl").value/100);
   var prime = parseFloat(document.getElementById("prime").value.replace(/[\s\u202F$,]/g, '').trim(''));
   var usd = Number(document.getElementById("change-input").value);
   let TopModel = document.getElementById("model").checked;
@@ -1160,7 +1173,8 @@ function calcule() {
    
   }
   else if(tl.checked){
-    res = (prime * tl_pr * usd);
+    
+    res = (prime * tl_pr * usd)+(primetl*3*usd);
   }
   if(res===NaN){
     document.getElementById("resultatcal").innerText="donne incorrect";
