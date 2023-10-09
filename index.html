@@ -8,7 +8,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="index.css" />
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
 	<link rel="shortcut icon" type="image/ico" href="https://i.ibb.co/yy8S6Wn/code.png" />
 	<meta property="og:title" content="achraf48.co">
 	<meta name="twitter:title" content="achraf48.co">
@@ -36,148 +39,9 @@
 	<meta name="description" content="Email Extractor - A free online tool that help you find all the email addresses from the text content. " />
 	<meta name="keywords" content="email extractor, email from text, get email from text, email extraction, online email extract tool, debounce">
 	<meta name="description" content="A free tool to extract email from texts. Fast and accurate email extractor helps you to get emails from text body in seconds.">
-	<meta name="facebook-domain-verification" content="20ft8cgsryh3ctls3ghq5kvoynsk7v" />
-  	<title>achraf48</title>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4057043616267040"
-     crossorigin="anonymous"></script>
-  <!-- Add custom CSS -->
-  <style>
-    body {
-      background-color: #F2F2F2;
+  <meta name="keywords" content="email extractor, email from text, get email from text, email extraction, online email extract tool, debounce">
+  <meta name="description" content="A free tool to extract email from texts. Fast and accurate email extractor helps you to get emails from text body in seconds.">  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4057043616267040" crossorigin="anonymous"></script>
 
-      font-family: Arial, sans-serif;
-    }
-
-    .form-group label {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #212529;
-    }
-
-    .form-control {
-      border-radius: 0;
-      box-shadow: none;
-      font-size: 1.2rem;
-      color: #212529;
-      background-color: #F8F9FA;
-      resize: none;
-    }
-
-    .dark-mode {
-      background-color: #343a40;
-      color: #f8f9fa;
-    }
-
-    .bi-moon:before {
-      content: "\f186";
-    }
-
-    .bi-sun:before {
-      content: "\f185";
-    }
-
-    #cookie-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: #f2f2f2;
-      padding: 20px;
-      text-align: center;
-      z-index: 1200;
-      /*display: none;*/
-
-    }
-
-    #cookie-banner p {
-      margin: 0;
-    }
-
-    #cookie-banner button {
-      margin: 10px;
-      padding: 10px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-    }
-
-    #cookie-banner button:hover {
-      opacity: 0.8;
-    }
-
-    .nav-link.active {
-      color: #00FF01 !important;
-    }
-
-    .notepad-header {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #000;
-      margin-bottom: 6px;
-    }
-
-    .site-heading {
-      margin-bottom: 40px;
-    }
-
-    .site-heading img {
-      height: 200px;
-      width: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
-
-    .lead {
-      font-size: 18px;
-    }
-
-
-    #Row {
-      position: relative;
-      margin-bottom: 18%;
-
-    }
-
-    #loadingGif {
-      position: fixed;
-      left: 46%;
-      top: 20%;
-      z-index: 9999;
-    }
-
-    .box {
-      border: solid black 2px;
-      border-radius: 25px;
-      height: 100%;
-      padding: 1%;
-      text-align: center;
-    }
-
-    .boxcheck {
-      text-align: left;
-      margin-left: 10%;
-    }
-
-    #resultTextContainer {
-      position: fixed;
-      z-index: 800;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: opacity 3s;
-      width: 400px;
-    }
-
-    #resultTextContainer.show {
-      opacity: 1;
-    }
-
-    #resultTextContainer.hide {
-      opacity: 0;
-    }
-  </style>
 </head>
 
 <body>
@@ -555,7 +419,15 @@
             </div>
 
             <div class="input-group m-2 w-50" role="group">
+              
               <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
+              <select class="form-select" aria-label="Default select example">
+                <option value="1">  </option>
+                <option value="2">word_number</option>
+                <option value="3">word</option>
+                <option value="4">extention</option>
+
+              </select>
               <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Words</button>
             </div>
 

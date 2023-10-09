@@ -1,0 +1,137 @@
+body {
+    background-color: #F2F2F2;
+  
+    font-family: Arial, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+		font-family: Spoof;
+	}
+  .form-group label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #212529;
+  }
+  
+  .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 1.2rem;
+    color: #212529;
+    background-color: #F8F9FA;
+    resize: none;
+  }
+  
+  .dark-mode {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+  
+  .bi-moon:before {
+    content: "\f186";
+  }
+  
+  .bi-sun:before {
+    content: "\f185";
+  }
+  
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+    z-index: 1200;
+    /*display: none;*/
+  
+  }
+  
+  #cookie-banner p {
+    margin: 0;
+  }
+  
+  #cookie-banner button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  #cookie-banner button:hover {
+    opacity: 0.8;
+  }
+  
+  .nav-link.active {
+    color: #00FF01 !important;
+  }
+  
+  .notepad-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    margin-bottom: 6px;
+  }
+  
+  .site-heading {
+    margin-bottom: 40px;
+  }
+  
+  .site-heading img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .lead {
+    font-size: 18px;
+  }
+  
+  
+  #Row {
+    position: relative;
+    margin-bottom: 18%;
+  
+  }
+  
+  #loadingGif {
+    position: fixed;
+    left: 46%;
+    top: 20%;
+    z-index: 9999;
+  }
+  
+  .box {
+    border: solid black 2px;
+    border-radius: 25px;
+    height: 100%;
+    padding: 1%;
+    text-align: center;
+  }
+  
+  .boxcheck {
+    text-align: left;
+    margin-left: 10%;
+  }
+  
+  #resultTextContainer {
+    position: fixed;
+    z-index: 800;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 3s;
+    width: 400px;
+  }
+  
+  #resultTextContainer.show {
+    opacity: 1;
+  }
+  
+  #resultTextContainer.hide {
+    opacity: 0;
+  }
