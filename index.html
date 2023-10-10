@@ -10,7 +10,7 @@
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  
+
   <link rel="shortcut icon" type="image/ico" href="https://i.ibb.co/yy8S6Wn/code.png" />
   <meta property="og:title" content="achraf48.co">
   <meta name="twitter:title" content="achraf48.co">
@@ -379,16 +379,13 @@
                   <li><a class="dropdown-item" href="#" onclick="extractGmail()">Gmail</a></li>
                   <li><a class="dropdown-item" href="#" onclick="extractYahoo()">Yahoo</a></li>
                   <li><a class="dropdown-item" href="#" onclick="extractHotmail()">Hotmail</a></li>
-                  <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email and Password</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email:Password</a></li>
                 </ul>
               </div>
 
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-info btn-lg" onclick="extractipv4()"><i class="fa fa-magic"></i>
-                  Extract Ip</button>
-                <button class="btn btn-info dropdown-toggle  btn-lg dropdown-toggle-split" type="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-
+                <button type="button" class="btn btn-info btn-lg" onclick="extractipv4()"><i class="fa fa-magic"></i>Extract Ip</button>
+                <button class="btn btn-info dropdown-toggle  btn-lg dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="#" onclick="extractipv4()">Extract ipv4</a></li>
@@ -417,7 +414,7 @@
             <div class="input-group m-2 w-50" role="group">
               
               <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
-              <select class="form-select" aria-label="Default select example">
+              <select style="display: none;" class="form-select" aria-label="Default select example">
                 <option value="1">  </option>
                 <option value="2">word_number</option>
                 <option value="3">word</option>
