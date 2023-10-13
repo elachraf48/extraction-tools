@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Email Extractor</title>
+    <title>Extraction Tools | Extract IP Addresses From Text, IP Address Extractor | achraf48 |Email Extractor </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <link rel="shortcut icon" type="image/ico" href="https://i.ibb.co/yy8S6Wn/code.png" />
+  <meta property="og:title" content="achraf48.co">
+  <meta name="twitter:title" content="achraf48.co">
+  <meta name="description" content="Hi there! Welcome to the IP and Email Extraction Tools website. My name is Achraf, and I'm the creator of this site. Here, you'll find two powerful tools designed to make your life easier when it comes to extracting IP addresses and email addresses from text or URLs.">
+  <meta name="description" content="The IP Extraction Tool is a valuable resource for cybersecurity professionals, webmasters, or anyone who needs to quickly identify IP addresses. Whether you want to analyze network traffic, investigate potential security threats, or track website visitors, this tool provides a simple and efficient solution.">
+  <meta name="description" content="With the Email Extraction Tool, marketing professionals, recruiters, and researchers can save valuable time by automating the process of collecting email addresses. Whether you're building a targeted email list, conducting market research, or performing competitive analysis, this tool will help you gather email addresses from text or web pages effortlessly.">
+  <meta name="description" content="Both tools are designed with user-friendliness in mind. You can access them easily from the navigation bar above. Simply choose the tool you need, follow the instructions on the respective page, and enjoy the benefits of streamlined IP and email extraction.">
+  <meta name="description" content="Rest assured that our tools are completely free to use. We're passionate about providing accessible and efficient solutions for professionals and enthusiasts alike. Your privacy and data security are also a top priority for us. We handle your information with care and ensure that it remains confidential throughout the extraction process.">
+  <meta name="description" content="Ready to get started? Explore the power of IP and email extraction today and take your analysis and research to new heights!">
+  <meta name="description" content="Extract IP addresses online. This tool extracts all IPv4 addresses found on the submitted text and shows only unique and valid IPv4 addresses." />
+  <!-- IPVoid -->
+  <meta property="og:title" content="Extract IP Addresses, Extract IP Online | achraf48.co" />
+  <meta property="og:description" content="Extract IP addresses online. This tool extracts all IPv4 addresses found on the submitted text and shows only unique and valid IPv4 and IPv6 addresses." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="achraf48" />
+  <meta property="og:image" content="https://www.achraf48.co/image/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description" content="Extract IP addresses online. This tool extracts all IPv4 addresses found on the submitted text and shows only unique and valid IPv4 and IPv6 addresses." />
+  <meta name="twitter:title" content="Extract IP Addresses, Extract IP Online | achraf48" />
+  <!-- Toolsvoid -->
+  <meta property="og:title" content="Extract IP Addresses From Text, IP Address Extractor | achraf48.co" />
+  <meta name="description" content="Email extractor for web pages and text"/><meta property="og:description" content="Free online service used to extract ip addresses from a text, extract IPv4 addresses, extract ips online." />
+  <meta property="og:type" content="website" />
+  <meta name="description" content="Email Extractor - A free online tool that help you find all the email addresses from the text content. " />
+  <meta name="keywords" content="email extractor, email from text, get email from text, email extraction, online email extract tool, debounce">
+  <meta name="description" content="A free tool to extract email from texts. Fast and accurate email extractor helps you to get emails from text body in seconds.">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/index.html"><img src="https://i.ibb.co/yy8S6Wn/code.png"
+                style="width: 10%; margin-right: 1%;">By Achraf</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+                <li class="nav-item">
+                  <a class="nav-link active" id="ip-extraction-nav-link" href="/index.html"
+                    onclick="showSection('ip-extraction')"><i class="fas fa-cogs"> </i> Extraction Tool</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="split-nav-link" href="/index.html" onclick="showSection('split')"><i
+                      class="fas fa-columns"> </i> Split Tool</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="texttool-nav-link" href="/index.html" onclick="showSection('texttool')"><i
+                      class="fas fa-file"></i> Text Tool</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="checkdomain-nav-link" href="/index.html" onclick="showSection('checkdomain')"><i
+                      class="fas fa-search"> </i> About Domain</a>
+                </li>
+                <li class="nav-item">
+                  <!--<a class="nav-link" id="prime-nav-link" href="#calcule_prime" onclick="showSection('prime')"><i class="fas fa-magic"> </i>Calcule prime</a>-->
+                  <a class="nav-link " data-bs-toggle="offcanvas" href="/index.html"
+                    aria-controls="offcanvasExample"><i class="far fa-money-bill-alt	"></i> Calcule prime</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/index.html" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                    aria-controls="offcanvasWithBothOptions" class="nav-link">
+                    <i class="fas fa-notes-medical"></i>
+                    Notpade
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="home-nav-link" href="/index.html" onclick="showSection('home')"><i
+                      class="fa fa-user-circle"></i> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi"><i class="fa fa-envelope"></i>
+                    Contact Us</a>
+                </li>
+    
+              </ul>
+    
+              <button class="btn btn-outline-success " id="dark-mode-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-moon-stars"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z" />
+                  <path
+                    d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+                </svg>
+              </button>
+    
+    
+            </div>
+    
+          </div>
+    
+    
+        </nav>
+    
+    
+      </header>
+    <div class="container mt-5">
+        <h1>Email Extractor</h1>
+        <div class="form-group">
+            <label for="fileInput">Upload a text file:</label>
+            <input type="file" class="form-control-file" id="fileInput">
+        </div>
+        <div class="form-group">
+            <label for="domainInput">Enter a domain:</label>
+            <input type="text" class="form-control" id="domainInput" placeholder="example.com">
+        </div>
+        <button class="btn btn-primary" id="extractButton">Extract</button>
+		<button class="btn btn-primary" id="copyButton">Copy</button>
+
+        <div class="mt-3">
+            <label for="resultTextarea">Extracted Email:Password Pairs:</label>
+            <textarea class="form-control" id="resultTextarea" rows="10"></textarea>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <!-- Add the JSZip library to your HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/releases/vVERSION/js/conflict-detection.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script >
+	document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("fileInput");
+    const domainInput = document.getElementById("domainInput");
+    const extractButton = document.getElementById("extractButton");
+    const resultTextarea = document.getElementById("resultTextarea");
+
+    extractButton.addEventListener("click", function () {
+        // Clear the textarea
+        resultTextarea.value = "";
+
+        // Validate domain input
+        const domain = domainInput.value.trim();
+        if (!domain) {
+            alert("Please enter a valid domain.");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        if (!file) {
+            alert("Please select a file.");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const content = event.target.result;
+            const lines = content.split('\n');
+            const emailPasswordPairs = [];
+
+            lines.forEach((line) => {
+                if (line.includes(domain)) {
+                    emailPasswordPairs.push(line);
+                }
+            });
+
+            if (emailPasswordPairs.length === 0) {
+                resultTextarea.value = "No email:password pairs found for the specified domain.";
+            } else {
+                resultTextarea.value = emailPasswordPairs.join('\n');
+            }
+        };
+
+        reader.readAsText(file);
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("fileInput");
+    const domainInput = document.getElementById("domainInput");
+    const extractButton = document.getElementById("extractButton");
+    const resultTextarea = document.getElementById("resultTextarea");
+    const copyButton = document.getElementById("copyButton");
+
+    extractButton.addEventListener("click", function () {
+        // ... (previous extraction logic)
+
+        if (emailPasswordPairs.length === 0) {
+            resultTextarea.value = "No email:password pairs found for the specified domain.";
+        } else {
+            resultTextarea.value = emailPasswordPairs.join('\n');
+            copyButton.removeAttribute("disabled"); // Enable the Copy button
+        }
+    });
+
+    copyButton.addEventListener("click", function () {
+        if (resultTextarea.value) {
+            resultTextarea.select();
+            document.execCommand("copy");
+            //alert("Copied to clipboard!");
+        }
+    });
+});
+
+	</script>
+</body>
+</html>
