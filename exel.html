@@ -1,0 +1,224 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Excel File Processing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Excel File Processing</h2>
+        <form id="upload-form">
+            <div class="form-group">
+                <label for="file1">File 1:</label>
+                <input type="file" class="form-control-file" id="file1" accept=".xlsx">
+            </div>
+            <div class="form-group">
+                <label for="file2">File 2:</label>
+                <input type="file" class="form-control-file" id="file2" accept=".xlsx">
+            </div>
+            <button type="button" class="btn btn-primary" id="process-button">Process Files</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById("process-button").addEventListener("click", function() {
+            var file1Input = document.getElementById("file1");
+            var file2Input = document.getElementById("file2");
+            
+            var reader1 = new FileReader();
+            var reader2 = new FileReader();
+
+            reader1.onload = function(e) {
+                var data1 = e.target.result;
+                var workbook1 = XLSX.read(data1, { type: 'array' });
+                
+                reader2.onload = function(e) {
+                    var data2 = e.target.result;
+                    var workbook2 = XLSX.read(data2, { type: 'array' });
+
+                    // Compare and separate duplicate and non-duplicate rows.
+                    var [duplicates, nonDuplicates] = findDuplicates(workbook1, workbook2);
+
+                    // Create new Excel files with the results.
+                    var duplicateWorkbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(duplicateWorkbook, XLSX.utils.json_to_sheet(duplicates), "Duplicates");
+                    
+                    var nonDuplicateWorkbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(nonDuplicateWorkbook, XLSX.utils.json_to_sheet(nonDuplicates), "Non-Duplicates");
+
+                    // Create download links for the results.
+                    downloadWorkbook(duplicateWorkbook, "duplicate_results.xlsx");
+                    downloadWorkbook(nonDuplicateWorkbook, "non_duplicate_results.xlsx");
+                };
+                
+                reader2.readAsArrayBuffer(file2Input.files[0]);
+            };
+            
+            reader1.readAsArrayBuffer(file1Input.files[0]);
+        });
+
+        function findDuplicates(workbook1, workbook2) {
+            // Compare rows from the two workbooks and find duplicates.
+            var sheet1 = workbook1.Sheets[workbook1.SheetNames[0]];
+            var sheet2 = workbook2.Sheets[workbook2.SheetNames[0]];
+
+            var duplicates = [];
+            var nonDuplicates = [];
+
+            // Extract the row data from the sheets.
+            var rows1 = XLSX.utils.sheet_to_json(sheet1);
+            var rows2 = XLSX.utils.sheet_to_json(sheet2);
+
+            // Compare rows between the two arrays.
+            for (var i = 0; i < rows1.length; i++) {
+                var row1 = JSON.stringify(rows1[i]);
+                var isDuplicate = false;
+
+                for (var j = 0; j < rows2.length; j++) {
+                    var row2 = JSON.stringify(rows2[j]);
+
+                    if (row1 === row2) {
+                        duplicates.push(rows1[i]);
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (!isDuplicate) {
+                    nonDuplicates.push(rows1[i]);
+                }
+            }
+
+            return [duplicates, nonDuplicates];
+        }
+
+
+        function downloadWorkbook(workbook, filename) {
+    // Generate a download link for the workbook.
+    var arrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    var blob = new Blob([arrayBuffer], { type: 'application/octet-stream' });
+
+    var url = URL.createObjectURL(blob);
+
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+}
+
+    </script>
+</body>
+</html>
+-->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel Row Comparison</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Excel Row Comparison</h2>
+        <form id="upload-form">
+            <div class="form-group">
+                <label for="file1">File 1:</label>
+                <input type="file" class="form-control-file" id="file1" accept=".xlsx">
+            </div>
+            <div class="form-group">
+                <label for "file2">File 2:</label>
+                <input type="file" class="form-control-file" id="file2" accept=".xlsx">
+            </div>
+            <button type="button" class="btn btn-primary" id="process-button">Process Files</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById("process-button").addEventListener("click", function() {
+            var file1Input = document.getElementById("file1");
+            var file2Input = document.getElementById("file2");
+
+            var reader1 = new FileReader();
+            var reader2 = new FileReader();
+
+            reader1.onload = function(e) {
+                var data1 = e.target.result;
+                var workbook1 = XLSX.read(data1, { type: 'array' });
+
+                reader2.onload = function(e) {
+                    var data2 = e.target.result;
+                    var workbook2 = XLSX.read(data2, { type: 'array' });
+
+                    // Compare rows between the two files.
+                    var [foundInBoth, notFoundInBoth] = compareExcelRows(workbook1, workbook2);
+
+                    // Create two new Excel files with the results.
+                    createExcelFile(foundInBoth, "found_in_both.xlsx");
+                    createExcelFile(notFoundInBoth, "not_found_in_both.xlsx");
+                };
+
+                reader2.readAsArrayBuffer(file2Input.files[0]);
+            };
+
+            reader1.readAsArrayBuffer(file1Input.files[0]);
+        });
+
+        function compareExcelRows(workbook1, workbook2) {
+            var sheet1 = workbook1.Sheets[workbook1.SheetNames[0]];
+            var sheet2 = workbook2.Sheets[workbook2.SheetNames[0]];
+
+            var rows1 = XLSX.utils.sheet_to_json(sheet1);
+            var rows2 = XLSX.utils.sheet_to_json(sheet2);
+
+            var foundInBoth = [];
+            var notFoundInBoth = [];
+
+            // Convert rows to JSON strings for accurate comparison
+            var rows1Strings = rows1.map(JSON.stringify);
+            var rows2Strings = rows2.map(JSON.stringify);
+
+            for (var i = 0; i < rows1Strings.length; i++) {
+                var row1 = rows1Strings[i];
+                var found = false;
+
+                for (var j = 0; j < rows2Strings.length; j++) {
+                    if (row1 === rows2Strings[j]) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    foundInBoth.push(rows1[i]);
+                }
+            }
+
+            // Find rows not found in both
+            notFoundInBoth = rows1.filter(function(row1) {
+                var row1String = JSON.stringify(row1);
+                return !foundInBoth.some(function(row2) {
+                    return JSON.stringify(row2) === row1String;
+                });
+            });
+
+            notFoundInBoth = notFoundInBoth.concat(rows2.filter(function(row2) {
+                var row2String = JSON.stringify(row2);
+                return !foundInBoth.some(function(row1) {
+                    return JSON.stringify(row1) === row2String;
+                });
+            }));
+
+            return [foundInBoth, notFoundInBoth];
+        }
+
+        function createExcelFile(rows, filename) {
+            var sheet = XLSX.utils.json_to_sheet(rows);
+            var workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, sheet, "Sheet 1");
+            XLSX.writeFile(workbook, filename);
+        }
+    </script>
+</body>
+</html>
