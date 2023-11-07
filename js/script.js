@@ -579,6 +579,7 @@ function extractDomains() {
   } else {
       document.getElementById("text").value = "No domains found with the selected extension.";
   }
+  removeDuplicateLines();
 }
 function downloadResult(text, file) {
   var blob = new Blob([text], {type: "text/plain"});
