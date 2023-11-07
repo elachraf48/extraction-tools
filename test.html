@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="form-group">
+            <label for="extensionSelect">Select Domain Extension:</label>
+            <select id="extensionSelect" class="form-control" onchange="extractDomains()">
+                <option value="">Select Extension</option>
+                <option value="com">.com</option>
+                <option value="net">.net</option>
+                <option value="org">.org</option>
+                <option value="edu">.edu</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <textarea id="text" class="form-control"
+                      placeholder="Paste your text containing IP or Email addresses into the box below..." rows="5"></textarea>
+        </div>
+
+        
+    </div>
+
+    <script>
+        function extractDomains() {
+            var selectedExtension = document.getElementById("extensionSelect").value;
+            var textAreaContent = document.getElementById("text").value;
+            var domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${selectedExtension}\\b`, 'g');
+            var matches = textAreaContent.match(domainPattern);
+
+            if (matches) {
+                var resultText = matches.join("\n");
+                document.getElementById("text").value = resultText;
+            } else {
+                document.getElementById("text").value = "No domains found with the selected extension.";
+            }
+        }
+    </script>
+</body>
+</html>

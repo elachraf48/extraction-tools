@@ -553,7 +553,7 @@ function extractDomain() {
     reader.readAsText(file);
   } else {
     var text = textarea.value;
-    var matches = text.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
+    var matches = text.match(/(?:https?:\/\/)?(?:[^./]+\.)?([a-z0-9-]+\.[a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
     var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))].filter(domain => domain.length > 0);
     checkinputText(text);
 
@@ -567,7 +567,19 @@ function checkinputText(dialogueContent) {
     document.getElementById("line-count").innerHTML = "Please enter some text or upload a file.";
   }
 }
+function extractDomains() {
+  var selectedExtension = document.getElementById("extensionSelect").value;
+  var textAreaContent = document.getElementById("text").value;
+  var domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${selectedExtension}\\b`, 'g');
+  var matches = textAreaContent.match(domainPattern);
 
+  if (matches) {
+      var resultText = matches.join("\n");
+      document.getElementById("text").value = resultText;
+  } else {
+      document.getElementById("text").value = "No domains found with the selected extension.";
+  }
+}
 function downloadResult(text, file) {
   var blob = new Blob([text], {type: "text/plain"});
   var filename = file.name.replace(".txt", "-results.txt");
