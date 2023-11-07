@@ -434,25 +434,25 @@
             </div>
 
             <div class="input-group m-2 w-50" role="group">
-              
-              <select id="extensionSelect" class="form-control" onchange="extractDomains()">
-                <option value="">Select Extension</option>
-                <option value="me">.me</option>
-                <option value="net">.net</option>
-                <option value="org">.org</option>
-                <option value="edu">.edu</option>
-                <option value="gov">.gov</option>
-                <option value="mil">.mil</option>
-                <option value="biz">.biz</option>
-                <option value="info">.info</option>
-                <option value="io">.io</option>
-                <option value="com">.com</option>
-                <option value="tv">.tv</option>
-                <option value="co">.co</option>
-                <option value="uk">.uk</option>
-                <option value="club">.club</option>
-                <option value="online">.online</option>
-                <option value="xyz">.xyz</option>
+              <button type="button" class="btn btn-primary" onclick="extractDomains()">Extract</button>
+
+              <select id="extensionSelect" class="form-control" >
+              <option value="me">me</option>
+              <option value="net">net</option>
+              <option value="org">org</option>
+              <option value="edu">edu</option>
+              <option value="gov">gov</option>
+              <option value="mil">mil</option>
+              <option value="biz">biz</option>
+              <option value="info">info</option>
+              <option value="io">io</option>
+              <option value="com">com</option>
+              <option value="tv">tv</option>
+              <option value="co">co</option>
+              <option value="uk">uk</option>
+              <option value="club">club</option>
+              <option value="online">online</option>
+              <option value="xyz">xyz</option>
                 <!-- Add more options as needed -->
             </select>
               <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">

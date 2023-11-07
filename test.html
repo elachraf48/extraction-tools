@@ -7,7 +7,7 @@
     <div class="container mt-5">
         <div class="form-group">
             <label for="extensionSelect">Select Domain Extension:</label>
-            <select id="extensionSelect" class="form-control" onchange="extractDomains()">
+            <select id="extensionSelect" class="form-control">
                 <option value="">Select Extension</option>
                 <option value="com">.com</option>
                 <option value="net">.net</option>
@@ -22,7 +22,12 @@
                       placeholder="Paste your text containing IP or Email addresses into the box below..." rows="5"></textarea>
         </div>
 
-        
+        <button class="btn btn-primary" onclick="extractDomains()">Extract Domains</button>
+
+        <div class="form-group mt-3">
+            <label for="resultText">Extracted Domains:</label>
+            <textarea id="resultText" class="form-control" rows="5" readonly></textarea>
+        </div>
     </div>
 
     <script>
@@ -34,9 +39,9 @@
 
             if (matches) {
                 var resultText = matches.join("\n");
-                document.getElementById("text").value = resultText;
+                document.getElementById("resultText").value = resultText;
             } else {
-                document.getElementById("text").value = "No domains found with the selected extension.";
+                document.getElementById("resultText").value = "No domains found with the selected extension.";
             }
         }
     </script>
