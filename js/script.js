@@ -541,7 +541,7 @@ function extractDomain() {
 
     reader.onload = function(event) {
       var dialogueContent = event.target.result;
-      var matches = dialogueContent.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
+      var matches = dialogueContent.match(/(?:https?:\/\/)?(?:[a-z0-9-]+\.)+([a-z]{2,}(?:\.(?:com|one|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
       var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))].filter(domain => domain.length > 0);
       checkinputText(dialogueContent);
 
@@ -553,7 +553,7 @@ function extractDomain() {
     reader.readAsText(file);
   } else {
     var text = textarea.value;
-    var matches = text.match(/(?:https?:\/\/)?(?:[^./]+\.)?([a-z0-9-]+\.[a-z]{2,}(?:\.(?:com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
+    var matches = text.match(/(?:https?:\/\/)?(?:[^./]+\.)?([a-z0-9-]+\.[a-z]{2,}(?:\.(?:com|one|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)))/ig);
     var uniqueMatches = [...new Set(matches.map(match => match.replace(/^(https?:\/\/)?/, '')))].filter(domain => domain.length > 0);
     checkinputText(text);
 
@@ -673,7 +673,7 @@ function extractsubDomain() {
 
     reader.onload = function(event) {
       var dialogueContent = event.target.result;
-      var matches = dialogueContent.match(/([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig);
+      var matches = dialogueContent.match(/([a-z0-9-]+\.)+(com|one|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig);
       var uniqueMatches = [...new Set(matches)];
       checkinputText(dialogueContent);
 
@@ -685,7 +685,7 @@ function extractsubDomain() {
     reader.readAsText(file);
   } else {
     var text = textarea.value;
-    var matches = text.match(/([a-z0-9-]+\.)+(com|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig);
+    var matches = text.match(/([a-z0-9-]+\.)+(com|one|net|org|edu|gov|mil|biz|info|io|me|tv|co|uk|club|online|xyz)/ig);
     var uniqueMatches = [...new Set(matches)];
     checkinputText(text);
 
@@ -765,7 +765,7 @@ function extractGmail() {
   var textarea = document.getElementById("text");
 
   function extractEmailsFromLine(line) {
-    var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
+    var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|one|googlemail\.com)/g;
     return line.match(regex);
   }
 
@@ -816,7 +816,7 @@ function extractGmail_split() {
   var textarea = document.getElementById("input-text");
   var inputText = textarea.value;
   var words = inputText.split(/\s+/); // Split text into words
-  var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com)/g;
+  var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|one|googlemail\.com)/g;
   var gmailEmails = [];
 
   for (var i = 0; i < words.length; i++) {
