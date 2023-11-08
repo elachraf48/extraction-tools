@@ -434,9 +434,9 @@
             </div>
 
             <div class="input-group m-2 w-50" role="group">
-              <button type="button" class="btn btn-primary" onclick="extractDomains()">Extract</button>
+              <button type="button" class="btn btn-primary w-25" onclick="extractDomains()">Extract Domain</button>
 
-              <select id="extensionSelect" class="form-control" onchange="handleExtensionChange()">
+              <select id="extensionSelect" class="form-control w-25" onchange="handleExtensionChange()">
               <option value="net">net</option>
               <option value="org">org</option>
               <option value="edu">edu</option>
@@ -453,7 +453,8 @@
               <option value="other">Add new</option>
               <!-- Add more options as needed -->
             </select>
-            
+            <span class="input-group-text bg-primary"></span>
+
               <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
               
               <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Words</button>
