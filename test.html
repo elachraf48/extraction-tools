@@ -2,27 +2,31 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 </head>
 <body>
     <div class="container mt-5">
         <div class="form-group">
-            <label for="extensionSelect">Select Domain Extension:</label>
-            <select id="extensionSelect" class="form-control">
+            <label for="extensionSelect">Select or Add Domain Extension:</label>
+            <select id="extensionSelect" class="form-control" onchange="handleExtensionChange()">
                 <option value="">Select Extension</option>
                 <option value="com">.com</option>
                 <option value="net">.net</option>
                 <option value="org">.org</option>
                 <option value="edu">.edu</option>
-                <!-- Add more options as needed -->
+                <option value="other">Other</option>
             </select>
         </div>
 
-        <div class="form-group">
-            <textarea id="text" class="form-control"
-                      placeholder="Paste your text containing IP or Email addresses into the box below..." rows="5"></textarea>
+        <div class="form-group" id="customExtensionInputDiv" style="display: none;">
+            <label for="customExtensionInput">Enter Custom Extension:</label>
+            <input type="text" id="customExtensionInput" class="form-control" placeholder=".example" />
         </div>
 
-        <button class="btn btn-primary" onclick="extractDomains()">Extract Domains</button>
+        <div class="form-group">
+            <textarea id="text" class "form-control"
+                      placeholder="Paste your text containing IP or Email addresses into the box below..." rows="5"></textarea>
+        </div>
 
         <div class="form-group mt-3">
             <label for="resultText">Extracted Domains:</label>
@@ -30,18 +34,93 @@
         </div>
     </div>
 
+    <!-- Bootstrap Modal Dialog -->
+    <div class="modal fade" id="customExtensionModal" tabindex="-1" role="dialog" aria-labelledby="customExtensionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customExtensionModalLabel">Add Custom Domain Extension</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="customExtensionInputModal">Enter Custom Extension:</label>
+                    <input type="text" id="customExtensionInputModal" class="form-control" placeholder=".example" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCustomExtension()">Add Extension</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#extensionSelect').select2({
+                tags: true,
+                tokenSeparators: [',', ' ']
+            });
+        });
+
+        function handleExtensionChange() {
+            var selectedExtension = document.getElementById("extensionSelect").value;
+            if (selectedExtension === 'other') {
+                $('#customExtensionModal').modal('show');
+            } else {
+                document.getElementById("customExtensionInputDiv").style.display = 'none';
+            }
+        }
+
+        function addCustomExtension() {
+            var customExtension = document.getElementById("customExtensionInputModal").value;
+            if (customExtension) {
+                // Add the new custom extension to the select options before "Other"
+                var selectElement = document.getElementById("extensionSelect");
+                var newOption = document.createElement("option");
+                newOption.text = customExtension;
+                newOption.value = customExtension;
+                // Insert the new option before the "Other" option
+                var otherOption = selectElement.querySelector('option[value="other"]');
+                selectElement.insertBefore(newOption, otherOption);
+
+                // Select the newly added option
+                selectElement.value = customExtension;
+                document.getElementById("customExtensionInput").value = customExtension;
+
+                // Store the new extension in local storage for future use
+                var extensions = JSON.parse(localStorage.getItem('customExtensions')) || [];
+                extensions.push(customExtension);
+            }
+            $('#customExtensionModal').modal('hide');
+        }
+
         function extractDomains() {
             var selectedExtension = document.getElementById("extensionSelect").value;
+            var customExtension = document.getElementById("customExtensionInput").value;
             var textAreaContent = document.getElementById("text").value;
-            var domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${selectedExtension}\\b`, 'g');
+            var domainPattern;
+
+            if (selectedExtension && selectedExtension !== 'other') {
+                domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${selectedExtension}\\b`, 'g');
+            } else if (customExtension) {
+                domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${customExtension}\\b`, 'g');
+            } else {
+                document.getElementById("resultText").value = "Please select or enter an extension.";
+                return;
+            }
+
             var matches = textAreaContent.match(domainPattern);
 
             if (matches) {
                 var resultText = matches.join("\n");
                 document.getElementById("resultText").value = resultText;
             } else {
-                document.getElementById("resultText").value = "No domains found with the selected extension.";
+                document.getElementById("resultText").value = "No domains found with the selected/entered extension.";
             }
         }
     </script>

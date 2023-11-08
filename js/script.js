@@ -567,6 +567,50 @@ function checkinputText(dialogueContent) {
     document.getElementById("line-count").innerHTML = "Please enter some text or upload a file.";
   }
 }
+
+// }
+/*----------------------new extact domain----------------------------------*/
+$(document).ready(function() {
+  $('#extensionSelect').select2({
+      tags: true,
+      tokenSeparators: [',', ' ']
+  });
+});
+function closeCustomExtensionModal() {
+  $('#customExtensionModal').modal('hide');
+}
+function handleExtensionChange() {
+  var selectedExtension = document.getElementById("extensionSelect").value;
+  if (selectedExtension === 'other') {
+      $('#customExtensionModal').modal('show');
+  } else {
+      document.getElementById("customExtensionInputDiv").style.display = 'none';
+  }
+}
+
+function addCustomExtension() {
+  var customExtension = document.getElementById("customExtensionInputModal").value;
+  if (customExtension) {
+      // Add the new custom extension to the select options before "Other"
+      var selectElement = document.getElementById("extensionSelect");
+      var newOption = document.createElement("option");
+      newOption.text = customExtension;
+      newOption.value = customExtension;
+      // Insert the new option before the "Other" option
+      var otherOption = selectElement.querySelector('option[value="other"]');
+      selectElement.insertBefore(newOption, otherOption);
+      $('#customExtensionModal').modal('hide');
+
+      // Select the newly added option
+      selectElement.value = customExtension;
+      document.getElementById("customExtensionInput").value = customExtension;
+
+      // Store the new extension in local storage for future use
+      var extensions = JSON.parse(localStorage.getItem('customExtensions')) || [];
+      extensions.push(customExtension);
+  }
+  $('#customExtensionModal').modal('hide');
+}
 function extractDomains() {
   var selectedExtension = document.getElementById("extensionSelect").value;
   var textAreaContent = document.getElementById("text").value;
@@ -581,6 +625,34 @@ function extractDomains() {
   }
   removeDuplicateLines();
 }
+
+// function extractDomains() {
+//   var selectedExtension = document.getElementById("extensionSelect").value;
+//   var customExtension = document.getElementById("customExtensionInput").value;
+//   var textAreaContent = document.getElementById("text").value;
+//   var domainPattern;
+
+//   if (selectedExtension && selectedExtension !== 'other') {
+//       domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${selectedExtension}\\b`, 'g');
+//   } else if (customExtension) {
+//       domainPattern = new RegExp(`\\b[a-z0-9-]+\\.${customExtension}\\b`, 'g');
+//   } else {
+//       document.getElementById("text").value = "Please select or enter an extension.";
+//       return;
+//   }
+
+//   var matches = textAreaContent.match(domainPattern);
+
+//   if (matches) {
+//       var resultText = matches.join("\n");
+//       document.getElementById("text").value = resultText;
+//   } else {
+//       document.getElementById("text").value = "No domains found with the selected/entered extension.";
+//   }
+//   removeDuplicateLines();
+
+// }
+/*------end new extract domain----*/
 function downloadResult(text, file) {
   var blob = new Blob([text], {type: "text/plain"});
   var filename = file.name.replace(".txt", "-results.txt");

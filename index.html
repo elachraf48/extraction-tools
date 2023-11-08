@@ -147,7 +147,7 @@
   </div>
   <!----------------end-----notpade---------------------------->
 
-  <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label">
+  <!-- <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -161,7 +161,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!---------------------text tool---------------------------->
   <div class="container my-5 box-shadow " id="texttool" style="display: none; margin-bottom: 200%;">
     <div class="mb-3" id="loadingGif" style="display: none;">
@@ -436,27 +436,24 @@
             <div class="input-group m-2 w-50" role="group">
               <button type="button" class="btn btn-primary" onclick="extractDomains()">Extract</button>
 
-              <select id="extensionSelect" class="form-control" >
-              <option value="me">me</option>
+              <select id="extensionSelect" class="form-control" onchange="handleExtensionChange()">
               <option value="net">net</option>
               <option value="org">org</option>
               <option value="edu">edu</option>
               <option value="gov">gov</option>
-              <option value="mil">mil</option>
-              <option value="biz">biz</option>
               <option value="info">info</option>
               <option value="io">io</option>
               <option value="com">com</option>
-              <option value="tv">tv</option>
+              <option value="me" selected>me</option>
               <option value="co">co</option>
               <option value="uk">uk</option>
               <option value="club">club</option>
               <option value="online">online</option>
-              <option value="xyz">xyz</option>
               <option value="one">one</option>
-
-                <!-- Add more options as needed -->
+              <option value="other">Add new</option>
+              <!-- Add more options as needed -->
             </select>
+            
               <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
               
               <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Words</button>
@@ -469,7 +466,28 @@
         </div>
       </div>
     </div>
-
+    <!-- Bootstrap Modal Dialog -->
+    <div class="modal fade" id="customExtensionModal" tabindex="-1" role="dialog" aria-labelledby="customExtensionModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="customExtensionModalLabel">Add Custom Domain Extension</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <label for="customExtensionInputModal">Enter Custom Extension:</label>
+                  <input type="text" id="customExtensionInputModal" class="form-control" placeholder="com or org .." />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeCustomExtensionModal()">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCustomExtension()">Add Extension</button>
+            </div>
+            
+          </div>
+      </div>
+    </div>
     <div class="container">
 
         <div class="form-check form-switch">
