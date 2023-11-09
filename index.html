@@ -128,13 +128,15 @@
           <button class="btn btn-danger mb-2" id="clear-button"><i class="fa fa-eraser"></i>Clear Notepad</button>
           <button class="btn btn-success mb-2" id="copy-button-note"><i class="fa fa-clone"></i> Copy Text</button>
 
-        </center>
+       
 
         <div class="notepad-content">
-          <textarea id="notepad-textarea" rows="" style="height:85vh ; width:100% ;"></textarea>
+          <textarea id="notepad-textarea" rows="" style="height:80vh ; width:100% ;"></textarea>
         </div>
-
-
+        <!-- <button class="btn btn-success mb-2" id="copy-button-note"><i class="fa fa-clone"></i> Copy Text</button> -->
+        <button type="button" class="btn btn-primary" onclick="codeText()"><i class="fa fa-file" aria-hidden="true"></i> Encode Text</button>
+        <button type="button" class="btn btn-primary" onclick="decodeText()"><i class="fa fa-file-o" aria-hidden="true"></i> Decode Text</button>
+      </center>
       </div>
     </div>
   </div>

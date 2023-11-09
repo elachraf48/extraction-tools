@@ -84,19 +84,20 @@
       </header>
   <div class="container">
     <center>
-        <h1>Text Decoder</h1>
-        <textarea  class="form-control" id="encodedText" placeholder="Enter encoded text"></textarea>
+        <h1>Text Coder & Decoder</h1>
+        <textarea  class="form-control" id="notepad-textarea" placeholder="Enter encoded text"></textarea>
         <br>
-        <button type="button" class="btn btn-primary" onclick="codeText()">code Text</button>
+        <button type="button" class="btn btn-primary" onclick="codeText()">Encode Text</button>
         <button type="button" class="btn btn-primary" onclick="decodeText()">Decode Text</button>
     </center>
   </div>
+  <script src="../js/script.js"></script>
 
   <script>
     // Decode text function
     function decodeText() {
       // Get the textarea element
-        const textarea = document.getElementById('encodedText');
+        const textarea = document.getElementById('notepad-textarea');
 
         // Get the text in the textarea
         let text = textarea.value;
@@ -119,7 +120,7 @@
     // Decode text function
     function codeText() {
         // Get the textarea element
-        const textarea = document.getElementById('encodedText');
+        const textarea = document.getElementById('notepad-textarea');
 
         // Get the text in the textarea
         let text = textarea.value;
@@ -141,5 +142,10 @@
     }
 
   </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  <!-- Add the JSZip library to your HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
