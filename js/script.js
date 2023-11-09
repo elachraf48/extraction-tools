@@ -1271,8 +1271,13 @@ function calcule() {
   
   };
 
-
-
+function copynot(){
+  let outputText = document.getElementById("notepad-textarea");
+  outputText.select();
+  document.execCommand("copy");
+  showNotification('Copied successfully!', 3000);
+}
+  
   // notpade
   function decodeText() {
     // Get the textarea element
@@ -1295,6 +1300,8 @@ function calcule() {
 
       // Set the new text in the textarea
       textarea.value = newText;
+      copynot();
+
   }
   // Decode text function
   function codeText() {
@@ -1318,6 +1325,7 @@ function calcule() {
 
       // Set the new text in the textarea
       textarea.value = newText;
+      copynot();
   }
   const textarea = document.getElementById('notepad-textarea');
     const clearButton = document.getElementById('clear-button');
