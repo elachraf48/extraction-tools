@@ -1290,7 +1290,7 @@ function copynot(){
       text = text.toLowerCase();
 
       // Create a mapping of old characters to new characters
-      const alphabetMapping = {' ':' ','b':'a','c':'b','d':'c','e':'d','f':'e','g':'f','h':'g','i':'h','j':'i','k':'j','l':'k','m':'l','n':'m','o':'n','p':'o','q':'p','r':'q','s':'r','t':'s','u':'t','v':'u','w':'v','x':'w','y':'x','z':'y','0':'z','3':'2','4':'3','5':'4','6':'5','7':'6','8':'7','9':'8','1':'9'};
+      const alphabetMapping = {'_':'_','-':'-','@':'@',' ':' ','b':'a','c':'b','d':'c','e':'d','f':'e','g':'f','h':'g','i':'h','j':'i','k':'j','l':'k','m':'l','n':'m','o':'n','p':'o','q':'p','r':'q','s':'r','t':'s','u':'t','v':'u','w':'v','x':'w','y':'x','z':'y','0':'z','3':'2','4':'3','5':'4','6':'5','7':'6','8':'7','9':'8','1':'9'};
 
       // Iterate over the text and replace each character with its corresponding new character
       let newText = '';
@@ -1315,7 +1315,7 @@ function copynot(){
       text = text.toLowerCase();
 
       // Create a mapping of old characters to new characters
-      const alphabetMapping = {' ':' ','a':'b','b':'c','c':'d','d':'e','e':'f','f':'g','g':'h','h':'i','i':'j','j':'k','k':'l','l':'m','m':'n','n':'o','o':'p','p':'q','q':'r','r':'s','s':'t','t':'u','u':'v','v':'w','w':'x','x':'y','y':'z','z':'0','2':'3','3':'4','4':'5','5':'6','6':'7','7':'8','8':'9','9':'1'};
+      const alphabetMapping = {'_':'_','-':'-','@':'@',' ':' ','a':'b','b':'c','c':'d','d':'e','e':'f','f':'g','g':'h','h':'i','i':'j','j':'k','k':'l','l':'m','m':'n','n':'o','o':'p','p':'q','q':'r','r':'s','s':'t','t':'u','u':'v','v':'w','w':'x','x':'y','y':'z','z':'0','2':'3','3':'4','4':'5','5':'6','6':'7','7':'8','8':'9','9':'1'};
 
       // Iterate over the text and replace each character with its corresponding new character
       let newText = '';
