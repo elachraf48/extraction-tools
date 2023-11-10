@@ -1283,12 +1283,14 @@ function copynot(){
     let message = document.getElementById('notepad-textarea').value;
     let key = document.getElementById('key').value || 0; // Use 0 if the key is empty
     document.getElementById('notepad-textarea').value = caesarCipher(message, parseInt(key));
+    copynot();
 }
 
 function decodeMessage() {
     let message = document.getElementById('notepad-textarea').value;
     let key = document.getElementById('key').value || 0; // Use 0 if the key is empty
     document.getElementById('notepad-textarea').value = caesarCipher(message, -parseInt(key));
+    copynot();
 }
 
 function caesarCipher(str, key) {
