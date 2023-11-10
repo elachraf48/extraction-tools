@@ -1279,6 +1279,25 @@ function copynot(){
 }
   
   // notpade
+  function encodeMessage() {
+    let message = document.getElementById('notepad-textarea').value;
+    let key = document.getElementById('key').value || 0; // Use 0 if the key is empty
+    document.getElementById('notepad-textarea').value = caesarCipher(message, parseInt(key));
+}
+
+function decodeMessage() {
+    let message = document.getElementById('notepad-textarea').value;
+    let key = document.getElementById('key').value || 0; // Use 0 if the key is empty
+    document.getElementById('notepad-textarea').value = caesarCipher(message, -parseInt(key));
+}
+
+function caesarCipher(str, key) {
+    key = (key % 26 + 26) % 26; // Ensure key is positive and within the range of the alphabet
+    return str.replace(/[a-zA-Z]/g, function (char) {
+        let offset = char.toUpperCase() === char ? 65 : 97; // ASCII code for 'A' or 'a'
+        return String.fromCharCode((char.charCodeAt(0) - offset + key) % 26 + offset);
+    });
+}
   function decodeText() {
     // Get the textarea element
       const textarea = document.getElementById('notepad-textarea');
