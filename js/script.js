@@ -1568,3 +1568,32 @@ function dotfunction() {
 }
 
 
+// extract footer
+async function extractFooter() {
+  try {
+      // Get the URL from the input
+      var url = document.getElementById("url").value;
+
+      // Use a CORS proxy to bypass CORS restrictions
+      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+      const response = await fetch(proxyUrl + url);
+
+      // Check if the request was successful
+      if (!response.ok) {
+          throw new Error(`Failed to fetch. Status: ${response.status} ${response.statusText}`);
+      }
+
+      const html = await response.text();
+
+      // Extract the entire footer tag (customize this part based on the website structure)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const footer = doc.querySelector('footer');
+
+      // Update the result textarea with the extracted footer content
+      document.getElementById("text").value = footer ? footer.outerHTML : 'Footer not found';
+  } catch (error) {
+      console.error("Error:", error);
+      alert(`An error occurred: ${error.message}. Check the console for more details.`);
+  }
+}
