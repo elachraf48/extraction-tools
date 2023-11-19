@@ -199,12 +199,12 @@
         <div id="megretandsplit" class="container box ">
           <h3>Text File Merger and Splitter</h3>
           <input style="display: none;" name="file" id="fileInputsw" type="file" multiple>
-          <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInputsw').click()">megret
+          <button class="btn btn-primary m-2 px-4" onclick="alert('aler','select your chois before select file','yes');document.getElementById('fileInputsw').click()">megret
             text</button>
 
           <div class="check boxcheck">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="sep" checked>
+              <input class="form-check-input" type="checkbox" role="switch" id="sep" >
               <label class="form-check-label" for="sep">split by __SEP__ </label>
             </div>
             <div class="form-check form-switch">
@@ -256,7 +256,7 @@
       <div class="col-md-4 mt-3" id="convertpdfpdfs">
         <div id="megretandsplit50" class="container box">
           <center>
-            <h3>PDF to Text convertpdfer</h3>
+            <h3>PDF to Text</h3>
             <div class="mb-3 w-50">
               <label for="pdffile" class="form-label">Select PDF Files:</label>
               <input type="file" class="form-control" id="pdffile" accept=".pdf" name="pdffile" multiple="">
