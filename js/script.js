@@ -816,7 +816,15 @@ function extractGmail_split() {
   var textarea = document.getElementById("input-text");
   var inputText = textarea.value;
   var words = inputText.split(/\s+/); // Split text into words
-  var regex = /[A-Za-z0-9._%+-]+@(gmail\.com|one|googlemail\.com)/g;
+  var removeGoogleMail = document.getElementById("removegooglemail").checked;
+  var regex;
+
+  if (removeGoogleMail) {
+    regex = /[A-Za-z0-9._%+-]+@gmail\.com/g;
+  } else {
+    regex = /[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com|one)/g;
+  }
+
   var gmailEmails = [];
 
   for (var i = 0; i < words.length; i++) {
@@ -832,6 +840,7 @@ function extractGmail_split() {
   document.getElementById("line-counts").innerHTML = "Number of Email addresses: " + uniqueGmailEmails.length;
   textarea.value = uniqueGmailEmails.join("\n");
 }
+
 
 function extractYahoo() {
   var fileInput = document.getElementById("inputGroupFile01");
