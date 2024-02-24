@@ -9,7 +9,7 @@ function showSection(sectionId) {
       section.style.display = "block";
     } else {
       navLink.classList.remove("active");
-      section.style.display = "none";
+      section.style.display = "none"; 
     }
   });
   alert('la')
