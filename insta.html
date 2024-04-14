@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Link Extractor</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Instagram Link Extractor</h1>
+    <div class="form-group">
+      <label for="textInput">Enter Text:</label>
+      <textarea class="form-control" id="textInput" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="fileInput">Upload a Text File:</label>
+      <input type="file" class="form-control-file" id="fileInput">
+    </div>
+    <button class="btn btn-primary" onclick="extractLinks()">Extract Links</button>
+    <div class="mt-3">
+      <h2>Extracted Instagram Links:</h2>
+      <ul id="linkList"></ul>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function extractLinks() {
+      const textInput = document.getElementById('textInput').value;
+      const fileInput = document.getElementById('fileInput').files[0];
+
+      let content = '';
+      if (fileInput) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          content = event.target.result;
+          extractLinksFromText(content);
+        }
+        reader.readAsText(fileInput);
+      } else {
+        extractLinksFromText(textInput);
+      }
+    }
+
+    function extractLinksFromText(text) {
+      const pattern = /https:\/\/www\.instagram\.com\/p\/[a-zA-Z0-9_-]+\/?/g;
+      const links = text.match(pattern) || [];
+      
+      const linkList = document.getElementById('linkList');
+      linkList.innerHTML = '';
+      
+      links.forEach(link => {
+        const listItem = document.createElement('li');
+        listItem.textContent = link;
+        linkList.appendChild(listItem);
+      });
+    }
+  </script>
+</body>
+</html>
