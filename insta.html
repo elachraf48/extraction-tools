@@ -88,7 +88,6 @@
       const linkTexts = Array.from(links).map(link => link.textContent).join('\n');
 
       navigator.clipboard.writeText(linkTexts).then(function() {
-        alert('Links copied to clipboard!');
       }, function(err) {
         console.error('Failed to copy links: ', err);
       });
