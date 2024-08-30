@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Email work</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .line-count {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Extract Email work</h2>
+
+    <div class="line-count">Lits Email want extract: <span id="count1">0</span></div>
+    <textarea id="textarea1" placeholder="Enter emails here, one per line..." oninput="updateLineCount()"></textarea>
+
+    <div class="line-count">All Email: <span id="count2">0</span></div>
+    <textarea id="textarea2" placeholder="Enter lines to filter here..." oninput="updateLineCount()"></textarea>
+    
+    <br>
+    <button onclick="filterText()">Extract</button>
+
+    <script>
+        function updateLineCount() {
+            const textArea1 = document.getElementById('textarea1').value.trim();
+            const textArea2 = document.getElementById('textarea2').value.trim();
+
+            const count1 = textArea1 ? textArea1.split('\n').length : 0;
+            const count2 = textArea2 ? textArea2.split('\n').length : 0;
+
+            document.getElementById('count1').textContent = count1;
+            document.getElementById('count2').textContent = count2;
+        }
+
+        function filterText() {
+            const textArea1 = document.getElementById('textarea1').value.trim();
+            const textArea2 = document.getElementById('textarea2').value.trim();
+
+            const emails = new Set(textArea1.split('\n').map(line => line.trim()));
+            const filteredLines = textArea2.split('\n').filter(line => {
+                const emailInLine = line.split(' ')[2];
+                return emails.has(emailInLine);
+            });
+
+            document.getElementById('textarea2').value = filteredLines.join('\n');
+            updateLineCount(); // Update the line count after filtering
+        }
+
+        // Initialize the line counts when the page loads
+        updateLineCount();
+    </script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
