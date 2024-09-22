@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Email Processor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+        <h1 class="text-2xl font-bold mb-4 text-center">CSV Email Processor</h1>
+        <input type="file" id="fileInput" accept=".csv" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none mb-4">
+        <textarea id="result" rows="10" class="block w-full p-2.5 mb-4 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Results will be shown here..."></textarea>
+        <div class="text-center">
+            <label id="emailWithAppPasswordCount" class="block text-sm font-medium text-gray-700 mb-2"></label>
+            <label id="emailWithoutAppPasswordCount" class="block text-sm font-medium text-gray-700"></label>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const text = e.target.result;
+                    processCSV(text);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function processCSV(text) {
+            const lines = text.split('\n');
+            const headers = lines[0].split(',');
+            const emailIndex = headers.indexOf('"Email"');
+            const appPasswordIndex = headers.indexOf('"App Password"');
+
+            if (emailIndex === -1 || appPasswordIndex === -1) {
+                alert('CSV does not contain required headers.');
+                return;
+            }
+
+            let resultText = '';
+            let emailWithAppPasswordCount = 0;
+            let emailWithoutAppPasswordCount = 0;
+
+            for (let i = 1; i < lines.length; i++) {
+                const columns = lines[i].split(',');
+                const email = columns[emailIndex].replace(/"/g, '');
+                const appPassword = columns[appPasswordIndex].replace(/"/g, '');
+
+                if (email && appPassword) {
+                    resultText += `smtp.gmail.com 587 ${email} ${appPassword}\n`;
+                    emailWithAppPasswordCount++;
+                } else if (email) {
+                    emailWithoutAppPasswordCount++;
+                }
+            }
+
+            document.getElementById('result').value = resultText;
+            document.getElementById('emailWithAppPasswordCount').innerText = `Emails with App Password: ${emailWithAppPasswordCount}`;
+            document.getElementById('emailWithoutAppPasswordCount').innerText = `Emails without App Password: ${emailWithoutAppPasswordCount}`;
+        }
+    </script>
+</body>
+</html>
