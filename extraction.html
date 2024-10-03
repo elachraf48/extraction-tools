@@ -142,6 +142,7 @@ smtp.gmail.com 587 gmail appPassword" oninput="updateLineCount()"></textarea>
                 
                 // Replace '_smtp_gmail_com' with '@gmail.com'
                 line = line.replace('_smtp_gmail_com', '@gmail.com');
+                line = line.replace(/_/g, '.');
 
                 return line;
             });
