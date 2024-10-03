@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +111,9 @@
     <textarea id="textarea2" placeholder="Enter lines to filter here..." oninput="updateLineCount()"></textarea>
     
     <br>
-    <button class="btn btn-primary" onclick="filterText()">Extract</button>
+    <button class="btn btn-primary" onclick="filterText()">Extract Work email</button>
+    <button class="btn btn-primary" onclick="updateEmails()">Convert to gmail</button>
+
 </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="js/script.js"></script>
@@ -121,6 +124,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
+      function updateEmails() {
+            // Get the value from the textarea
+            let inputText = document.getElementById('textarea1').value;
+            
+            // Split the input text into lines
+            let lines = inputText.split('\n');
+
+            // Process each line
+            let processedLines = lines.map(line => {
+                // Remove everything before the last occurrence of '_smtp_'
+                line = line.replace(/.*?_smtp_/, '');
+                
+                // Replace '_smtp_gmail_com' with '@gmail.com'
+                line = line.replace('_smtp_gmail_com', '@gmail.com');
+
+                return line;
+            });
+
+            // Join the processed lines back into a single string
+            let result = processedLines.join('\n');
+
+            // Set the value back to the textarea
+            document.getElementById('textarea1').value = result;
+        }
         function updateLineCount() {
             const textArea1 = document.getElementById('textarea1').value.trim();
             const textArea2 = document.getElementById('textarea2').value.trim();
