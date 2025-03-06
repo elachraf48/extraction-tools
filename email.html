@@ -51,14 +51,16 @@
                 const appPassword = columns[appPasswordIndex].replace(/"/g, '');
 
                 if (email && appPassword) {
-                    resultText += `smtp.gmail.com 587 ${email} ${appPassword}\n`;
+                    resultText += `${email}	${appPassword}\n`;
                     emailWithAppPasswordCount++;
                 } else if (email) {
+                    resultTextWithoutAppPassword += `${email}\n`;
                     emailWithoutAppPasswordCount++;
                 }
             }
 
             document.getElementById('result').value = resultText;
+            document.getElementById('result').value = resultTextWithoutAppPassword;
             document.getElementById('emailWithAppPasswordCount').innerText = `Emails with App Password: ${emailWithAppPasswordCount}`;
             document.getElementById('emailWithoutAppPasswordCount').innerText = `Emails without App Password: ${emailWithoutAppPasswordCount}`;
         }
