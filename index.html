@@ -81,10 +81,12 @@
                   class="fas fa-search"> </i> About Domain</a>
             </li>
             <li class="nav-item">
-              <!--<a class="nav-link" id="prime-nav-link" href="#calcule_prime" onclick="showSection('prime')"><i class="fas fa-magic"> </i>Calcule prime</a>-->
+              <a class="nav-link" id="fixage-nav-link" href="#fixage_all" onclick="showSection('fixage')"><i class="fas fa-file"> </i> Fixage</a>
+            </li>
+            <!-- <li class="nav-item">
               <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"
                 aria-controls="offcanvasExample"><i class="far fa-money-bill-alt	"></i> Calcule prime</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
                 aria-controls="offcanvasWithBothOptions" class="nav-link">
@@ -432,7 +434,7 @@
 
             <div class="d-grid gap-2 d-md-block">
               <button type="button" class="btn btn-primary btn-lg" id="btn">Get Randome Text</button>
-              <button class="btn btn-danger btn-lg" onclick="updateEmails()">Convert to gmail</button>
+              <!-- <button class="btn btn-danger btn-lg" onclick="updateEmails()">Convert to gmail</button> -->
 
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i
@@ -481,9 +483,9 @@
             </div>
 
             <div class="input-group m-2 w-75" role="group">
-              <button type="button" class="btn btn-primary w-25" onclick="extractDomains()">Extract Domain</button>
+              <button type="button" class="btn btn-primary " onclick="extractDomains()">Extract Domain</button>
 
-              <select id="extensionSelect" class="form-control w-25" onchange="handleExtensionChange()">
+              <select id="extensionSelect" class="form-control" onchange="handleExtensionChange()">
                 <option value="net">net</option>
                 <option value="org">org</option>
                 <option value="edu">edu</option>
@@ -502,17 +504,23 @@
               </select>
               <span class="input-group-text bg-primary"></span>
 
-              <!-- <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput"> -->
-              <select id="extensionSelect" class="form-control w-25" onchange="handleExtensionChange()">
+              <!-- <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
+              <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Email pass</button> -->
+              <select id="Splitter" class="form-control">
                 <option value=";">;</option>
                 <option value=",">,</option>
                 <option value=":">:</option>
                 <!-- Add more options as needed -->
               </select>
-              <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Email pass</button>
-            </div>
+            
+              <!-- Button to open file dialog -->
+              <button type="button" class="btn btn-danger" onclick="openFileDialog()"><i class="fas fa-file"> </i> Extract Email Pass</button>
 
-            <p id="line-count"></p>
+              <!-- Hidden file input element -->
+              <input type="file" id="csvFile" style="display: none;" accept=".csv">
+            </div>
+            <span id="line-count"></span>
+      
             <div class="container text-center" id="output-containerr"></div>
             <!-- <div class="form-group row mt-4 w-50">
               <div class="input-group col-12">
@@ -584,7 +592,7 @@
                 <div class="input-group col-4 " style="width:58% ; margin-left:1% ;">
                   <button class="btn btn-outline-primary" style="width:30% ;" type="button" id="decrement"><i
                       class="fa fa-minus"></i></button>
-                  <input type="number" id="length" class="form-control text-center" value="35" min="1" max="100">
+                  <input type="number" id="length" class="form-control text-center" value="20" min="1" max="100">
                   <button class="btn btn-outline-primary" style="width:30% ;" type="button" id="increment"><i
                       class="fa fa-plus"></i></button>
                 </div>
@@ -600,13 +608,33 @@
           </div>
         </div>
       </div>
-
     </div>
-
-
   </div>
   </div>
-
+  <section id="fixage" style="display: none;">
+    <div class="container mt-5">
+      <div class="row">
+        <!-- Left Section -->
+        <div class="col-md-6">
+          <h3>Main Text</h3>
+          <textarea id="main-textarea" class="form-control" rows="10" placeholder="Enter your main text here..."></textarea>
+          <button id="generate-btn" class="btn btn-primary mt-3">Generate</button>
+          <h4 class="mt-4">Output Result</h4>
+          <textarea id="left-output-textarea" class="form-control" rows="10" readonly></textarea>
+        </div>
+  
+        <!-- Right Section -->
+        <div class="col-md-6">
+          <h3>Dynamic Text Inputs</h3>
+          <button id="add-text-btn" class="btn btn-success mb-3">Add Text</button>
+          <div id="dynamic-inputs">
+            <!-- Dynamic inputs will be appended here -->
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="checkdomain" style="display: none;">
     <div class="container mt-5">
       <h1>Domain List</h1>
@@ -810,7 +838,7 @@
 
             // Set the value back to the textarea
             document.getElementById('text').value = result;
-            extractEmails();
+            
         }
 
     document.getElementById('enableInput').addEventListener('change', function () {

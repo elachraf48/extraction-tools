@@ -1,5 +1,35 @@
+let textCount = 0;
+
+// Function to add a new text input and textarea
+$('#add-text-btn').click(function () {
+    textCount++;
+    const inputGroup = `
+      <div class="mb-3" id="text-group-${textCount}">
+        <label for="text-name-${textCount}" class="form-label">Text Name:</label>
+        <input type="text" class="form-control text-name" id="text-name-${textCount}" value="text${textCount}" placeholder="Enter text name">
+        <label for="text-value-${textCount}" class="form-label mt-2">Replacement Text:</label>
+        <textarea class="form-control text-value" id="text-value-${textCount}" rows="2" placeholder="Enter replacement text"></textarea>
+      </div>`;
+    $('#dynamic-inputs').append(inputGroup);
+});
+
+// Function to generate output text
+$('#generate-btn').click(function () {
+    let mainText = $('#main-textarea').val();
+    
+    // Loop through all dynamic inputs and replace text
+    $('.text-name').each(function (index) {
+      const textName = $(this).val();
+      const replacementText = $(`#text-value-${index + 1}`).val();
+      const regex = new RegExp(`\\[${textName}\\]`, 'g'); // Regex to find [name]
+      mainText = mainText.replace(regex, replacementText);
+    });
+
+    // Set the generated output in both output textareas
+    $('#left-output-textarea').val(mainText);
+});
 function showSection(sectionId) {
-  var sections = ["home", "ip-extraction","texttool", "split", "checkdomain","prime"];
+  var sections = ["fixage","home", "ip-extraction","texttool", "split", "checkdomain","prime"];
   sections.forEach(function (item) {
     var navLink = document.getElementById(item + "-nav-link");
     var section = document.getElementById(item);
@@ -12,7 +42,7 @@ function showSection(sectionId) {
       section.style.display = "none"; 
     }
   });
-  alert('la')
+  alert(section)
   showModal(sectionId);
 }
 //for hide list header en mode mobile
@@ -48,6 +78,11 @@ function getSectionInfo(section) {
         title: 'About',
         description: 'This is the About section. It provides general information about the website.'
       };
+    case 'fixage':
+        return {
+          title: 'fixage',
+          description: 'This is the About section. fixage general information.'
+        };
     case 'ip-extraction':
       return {
         title: 'Extraction Tool',
@@ -570,12 +605,12 @@ function checkinputText(dialogueContent) {
 
 // }
 /*----------------------new extact domain----------------------------------*/
-$(document).ready(function() {
-  $('#extensionSelect').select2({
-      tags: true,
-      tokenSeparators: [',', ' ']
-  });
-});
+// $(document).ready(function() {
+//   $('#extensionSelect').select2({
+//       tags: true,
+//       tokenSeparators: [',', ' ']
+//   });
+// });
 function closeCustomExtensionModal() {
   $('#customExtensionModal').modal('hide');
 }
@@ -697,7 +732,7 @@ function extractsubDomain() {
 function extractEmails() {
   var fileInput = document.getElementById("inputGroupFile01");
   var textarea = document.getElementById("text");
-
+  updateEmails();
   if (fileInput.files.length > 0) {
     var file = fileInput.files[0];
     var reader = new FileReader();
@@ -1606,3 +1641,93 @@ async function extractFooter() {
       alert(`An error occurred: ${error.message}. Check the console for more details.`);
   }
 }
+
+
+
+function processCSV(text) {
+  // Get the selected delimiter from the dropdown
+  const splitter = document.getElementById('Splitter').value;
+  document.getElementById('text').value = "";
+
+  const lines = text.split('\n');
+  if (lines.length === 0) {
+    alert("CSV is empty");
+    return;
+  }
+
+  // Use the selected splitter to separate the header columns
+  const headers = lines[0].split(splitter);
+
+  // Try to find headers "Email" and "App Password" (with or without quotes)
+  let emailIndex = headers.indexOf('"Email"');
+  if (emailIndex === -1) {
+    emailIndex = headers.indexOf('Email');
+  }
+  let appPasswordIndex = headers.indexOf('"App Password"');
+  if (appPasswordIndex === -1) {
+    appPasswordIndex = headers.indexOf('App Password');
+  }
+
+  if (emailIndex === -1 || appPasswordIndex === -1) {
+    alert('CSV does not contain required headers.');
+    return;
+  }
+
+  let resultText = '';
+  let resultTextWithoutAppPassword = '';
+
+  let emailWithAppPasswordCount = 0;
+  let emailWithoutAppPasswordCount = 0;
+
+  // Process each line after the header
+  for (let i = 1; i < lines.length; i++) {
+    // Skip empty lines
+    if (lines[i].trim() === '') continue;
+
+    const columns = lines[i].split(splitter);
+    const email = columns[emailIndex] ? columns[emailIndex].replace(/"/g, '').trim() : '';
+    const appPassword = columns[appPasswordIndex] ? columns[appPasswordIndex].replace(/"/g, '').trim() : '';
+
+    if (email && appPassword) {
+      resultText += `${email}    ${appPassword}\n`;
+      emailWithAppPasswordCount++;
+    } else if (email) {
+      resultTextWithoutAppPassword += `${email}\n`;
+      emailWithoutAppPasswordCount++;
+    }
+  }
+  
+  // Append emails without app passwords at the end
+  resultText += resultTextWithoutAppPassword;
+
+  // Set the result in the textarea with id 'text'
+  document.getElementById('text').value = resultText;
+  document.getElementById('csvFile').value = "";
+
+  // Optionally, update counts on the page
+  alert(`Emails with App Password: ${emailWithAppPasswordCount}\n Emails without App Password: ${emailWithoutAppPasswordCount}`);
+  // document.getElementById('emailWithAppPasswordCount').innerText = `Emails with App Password: ${emailWithAppPasswordCount}`;
+  // document.getElementById('emailWithoutAppPasswordCount').innerText = `Emails without App Password: ${emailWithoutAppPasswordCount}`;
+}
+
+// Handle file selection and reading
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (!file) {
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    processCSV(text);
+  };
+  reader.readAsText(file);
+}
+
+// Trigger the file dialog when button is clicked
+function openFileDialog() {
+  document.getElementById('csvFile').click();
+}
+
+// Listen for file selection
+document.getElementById('csvFile').addEventListener('change', handleFileSelect);

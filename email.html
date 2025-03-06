@@ -42,6 +42,8 @@
             }
 
             let resultText = '';
+            let resultTextWithoutAppPassword = '';
+
             let emailWithAppPasswordCount = 0;
             let emailWithoutAppPasswordCount = 0;
 
@@ -58,9 +60,9 @@
                     emailWithoutAppPasswordCount++;
                 }
             }
+            resultText+=resultTextWithoutAppPassword;
 
             document.getElementById('result').value = resultText;
-            document.getElementById('result').value = resultTextWithoutAppPassword;
             document.getElementById('emailWithAppPasswordCount').innerText = `Emails with App Password: ${emailWithAppPasswordCount}`;
             document.getElementById('emailWithoutAppPasswordCount').innerText = `Emails without App Password: ${emailWithoutAppPasswordCount}`;
         }
