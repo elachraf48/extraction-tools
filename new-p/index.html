@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExtractX - Powerful Data Extraction Tools</title>
+  <meta name="description" content="Extract emails, IPs, domains and more with our powerful online tools">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.ico">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="images/logo.svg" alt="ExtractX Logo">
+        <span>ExtractX</span>
+      </a>
+      <div class="nav-links">
+        <a href="#extractor" class="nav-link active"><i class="fas fa-cogs"></i> Extractor</a>
+        <a href="#text-tools" class="nav-link"><i class="fas fa-file-alt"></i> Text Tools</a>
+        <a href="#domain-tools" class="nav-link"><i class="fas fa-globe"></i> Domain Tools</a>
+        <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="btn-icon">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="btn btn-primary" id="contact-btn">
+          <i class="fas fa-envelope"></i> Contact
+        </button>
+      </div>
+      <button class="hamburger" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#extractor" class="mobile-link active"><i class="fas fa-cogs"></i> Extractor</a>
+    <a href="#text-tools" class="mobile-link"><i class="fas fa-file-alt"></i> Text Tools</a>
+    <a href="#domain-tools" class="mobile-link"><i class="fas fa-globe"></i> Domain Tools</a>
+    <a href="#about" class="mobile-link"><i class="fas fa-info-circle"></i> About</a>
+    <div class="mobile-actions">
+      <button id="mobile-theme-toggle" class="btn-icon">
+        <i class="fas fa-moon"></i> Toggle Theme
+      </button>
+      <button class="btn btn-primary" id="mobile-contact-btn">
+        <i class="fas fa-envelope"></i> Contact Us
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Extractor Tool -->
+    <section id="extractor" class="tool-section active">
+      <h1><i class="fas fa-cogs"></i> Data Extractor</h1>
+      <div class="tool-card">
+        <div class="tool-header">
+          <h2>Extract from Text</h2>
+          <div class="tool-actions">
+            <button class="btn btn-secondary" id="clear-text">
+              <i class="fas fa-eraser"></i> Clear
+            </button>
+            <button class="btn btn-secondary" id="paste-text">
+              <i class="fas fa-paste"></i> Paste
+            </button>
+          </div>
+        </div>
+        <textarea id="extractor-input" class="tool-input" placeholder="Paste your text here..."></textarea>
+        <div class="extraction-options">
+          <div class="option-group">
+            <h3>Email Extraction</h3>
+            <div class="btn-group">
+              <button class="btn btn-primary extract-btn" data-type="email">
+                <i class="fas fa-envelope"></i> All Emails
+              </button>
+              <button class="btn btn-primary extract-btn" data-type="gmail">
+                <i class="fab fa-google"></i> Gmail
+              </button>
+              <button class="btn btn-primary extract-btn" data-type="yahoo">
+                <i class="fas fa-at"></i> Yahoo
+              </button>
+              <button class="btn btn-primary extract-btn" data-type="email-pass">
+                <i class="fas fa-key"></i> Email:Pass
+              </button>
+            </div>
+          </div>
+          <div class="option-group">
+            <h3>IP Extraction</h3>
+            <div class="btn-group">
+              <button class="btn btn-info extract-btn" data-type="ipv4">
+                <i class="fas fa-network-wired"></i> IPv4
+              </button>
+              <button class="btn btn-info extract-btn" data-type="ipv6">
+                <i class="fas fa-network-wired"></i> IPv6
+              </button>
+            </div>
+          </div>
+          <div class="option-group">
+            <h3>Domain Extraction</h3>
+            <div class="btn-group">
+              <button class="btn btn-success extract-btn" data-type="domain">
+                <i class="fas fa-globe"></i> Domains
+              </button>
+              <button class="btn btn-success extract-btn" data-type="subdomain">
+                <i class="fas fa-sitemap"></i> Subdomains
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="tool-footer">
+          <button class="btn btn-danger" id="download-results">
+            <i class="fas fa-download"></i> Download Results
+          </button>
+          <button class="btn btn-success" id="copy-results">
+            <i class="fas fa-copy"></i> Copy to Clipboard
+          </button>
+        </div>
+      </div>
+      <div class="results-container">
+        <h3>Extraction Results</h3>
+        <div class="results-info">
+          <span id="results-count">0 items found</span>
+          <span id="results-time">Processed in 0ms</span>
+        </div>
+        <textarea id="extractor-results" class="tool-output" readonly></textarea>
+      </div>
+    </section>
+
+    <!-- Text Tools -->
+    <!-- Add these sections after the extractor section in index.html -->
+
+<!-- Text Tools Section -->
+<section id="text-tools" class="tool-section">
+  <h1><i class="fas fa-file-alt"></i> Text Tools</h1>
+  
+  <div class="tool-card">
+    <div class="tool-header">
+      <h2>Text File Merger</h2>
+    </div>
+    <div class="tool-options">
+      <div class="option-group">
+        <label class="checkbox-container">
+          <input type="checkbox" id="sep-checkbox">
+          <span class="checkmark"></span>
+          Split by __SEP__
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="special-chars-checkbox">
+          <span class="checkmark"></span>
+          Remove special characters
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="dots-checkbox">
+          <span class="checkmark"></span>
+          Remove dots and @ symbols
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="domains-checkbox">
+          <span class="checkmark"></span>
+          Remove domains
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" id="empty-lines-checkbox" checked>
+          <span class="checkmark"></span>
+          Remove empty lines
+        </label>
+      </div>
+    </div>
+    <div class="tool-footer">
+      <input type="file" id="merge-files" multiple style="display: none;">
+      <button class="btn btn-primary" id="merge-btn">
+        <i class="fas fa-object-group"></i> Merge Files
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <h2>Text File Splitter</h2>
+    </div>
+    <div class="tool-options">
+      <div class="form-group">
+        <label for="split-lines">Split By Line</label>
+        <div class="input-group">
+          <button class="btn btn-secondary" id="decrement-split"><i class="fas fa-minus"></i></button>
+          <input type="number" id="split-lines" class="form-control" value="50" min="1">
+          <button class="btn btn-secondary" id="increment-split"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="checkbox-container">
+          <input type="checkbox" id="custom-name-checkbox">
+          <span class="checkmark"></span>
+          Custom file name prefix
+        </label>
+        <input type="text" id="file-prefix" class="form-control" placeholder="file_prefix" disabled>
+      </div>
+    </div>
+    <div class="tool-footer">
+      <input type="file" id="split-file" style="display: none;">
+      <button class="btn btn-primary" id="split-btn">
+        <i class="fas fa-cut"></i> Split File
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <h2>PDF to Text Converter</h2>
+    </div>
+    <div class="tool-options">
+      <div class="form-group">
+        <label for="pdf-lines">Lines per File</label>
+        <input type="number" id="pdf-lines" class="form-control" value="50" min="1">
+      </div>
+    </div>
+    <div class="tool-footer">
+      <input type="file" id="pdf-files" accept=".pdf" multiple style="display: none;">
+      <button class="btn btn-primary" id="pdf-btn">
+        <i class="fas fa-file-pdf"></i> Convert PDFs
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Domain Tools Section -->
+<section id="domain-tools" class="tool-section">
+  <h1><i class="fas fa-globe"></i> Domain Tools</h1>
+  
+  <div class="tool-card">
+    <div class="tool-header">
+      <h2>Domain Checker</h2>
+    </div>
+    <textarea id="domain-input" class="tool-input" placeholder="Enter domains, one per line..."></textarea>
+    <div class="tool-footer">
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="clear-domains">
+          <i class="fas fa-eraser"></i> Clear
+        </button>
+        <button class="btn btn-primary" id="check-talos">
+          <i class="fas fa-shield-alt"></i> Check Talos
+        </button>
+        <button class="btn btn-primary" id="check-spamhaus">
+          <i class="fas fa-ban"></i> Check Spamhaus
+        </button>
+        <button class="btn btn-primary" id="check-mxtoolbox">
+          <i class="fas fa-tools"></i> Check MXToolbox
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-container">
+    <h3>Domain Check Results</h3>
+    <div class="results-info">
+      <span id="domain-count">0 domains</span>
+    </div>
+    <div id="domain-results" class="domain-results"></div>
+  </div>
+</section>
+
+<!-- Fixage Tool Section -->
+<section id="fixage" class="tool-section">
+  <h1><i class="fas fa-magic"></i> Fixage Tool</h1>
+  
+  <div class="tool-card">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Main Text</h3>
+        <textarea id="main-textarea" class="tool-input" rows="10" placeholder="Enter your main text here..."></textarea>
+        <button id="generate-fixage" class="btn btn-primary mt-3">
+          <i class="fas fa-cogs"></i> Generate
+        </button>
+        <h4 class="mt-4">Output Result</h4>
+        <textarea id="fixage-output" class="tool-input" rows="10" readonly></textarea>
+      </div>
+      <div class="col-md-6">
+        <h3>Dynamic Text Inputs</h3>
+        <button id="add-text-input" class="btn btn-success mb-3">
+          <i class="fas fa-plus"></i> Add Text
+        </button>
+        <div id="dynamic-inputs-container"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Notepad Section -->
+<section id="notepad" class="tool-section">
+  <h1><i class="fas fa-edit"></i> Notepad</h1>
+  
+  <div class="tool-card">
+    <div class="tool-header">
+      <h2>Secure Notepad</h2>
+    </div>
+    <textarea id="notepad-textarea" class="tool-input" rows="15" placeholder="Write your notes here..."></textarea>
+    <div class="tool-footer">
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="clear-notepad">
+          <i class="fas fa-eraser"></i> Clear
+        </button>
+        <button class="btn btn-primary" id="copy-notepad">
+          <i class="fas fa-copy"></i> Copy
+        </button>
+        <button class="btn btn-primary" id="save-notepad">
+          <i class="fas fa-save"></i> Save
+        </button>
+      </div>
+    </div>
+    <div class="tool-options mt-3">
+      <div class="form-group">
+        <label for="notepad-key">Encryption Key</label>
+        <input type="number" id="notepad-key" class="form-control" placeholder="Enter key (1-26)" min="1" max="26">
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-info" id="encode-notepad">
+          <i class="fas fa-lock"></i> Encode
+        </button>
+        <button class="btn btn-info" id="decode-notepad">
+          <i class="fas fa-unlock"></i> Decode
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Prime Calculator Section -->
+<section id="prime-calculator" class="tool-section">
+  <h1><i class="fas fa-calculator"></i> Prime Calculator</h1>
+  
+  <div class="tool-card">
+    <form id="prime-form">
+      <div class="form-group">
+        <label>Prime Amount</label>
+        <div class="input-group">
+          <input type="number" id="prime-amount" class="form-control" placeholder="0" value="0" step="0.01" min="0">
+          <span class="input-group-text">$</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Exchange Rate</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="number" id="exchange-rate" class="form-control" placeholder="e.g. 10.01" step="0.01" min="0">
+          <button class="btn btn-secondary" type="button" id="fetch-rate">
+            <i class="fas fa-sync-alt"></i> Get Rate
+          </button>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>User Type</label>
+        <div class="btn-group w-100">
+          <input type="radio" class="btn-check" name="user-type" id="mailer-type" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="mailer-type">Mailer</label>
+          <input type="radio" class="btn-check" name="user-type" id="tl-type" autocomplete="off">
+          <label class="btn btn-outline-primary" for="tl-type">Team Leader</label>
+        </div>
+      </div>
+      
+      <div id="mailer-options">
+        <div class="form-group">
+          <label>Mailer Options</label>
+          <div class="input-group">
+            <span class="input-group-text bg-danger">Less than</span>
+            <input type="number" id="less-than" class="form-control" value="20" min="0">
+            <span class="input-group-text">K</span>
+            <span class="input-group-text bg-danger"></span>
+            <span class="input-group-text"><i class="fas fa-arrow-right"></i></span>
+            <input type="number" id="less-than-percent" class="form-control" value="2" min="0" step="0.1">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-text bg-success">More than</span>
+            <input type="number" id="more-than" class="form-control" value="20" min="0">
+            <span class="input-group-text">K</span>
+            <span class="input-group-text bg-success"></span>
+            <span class="input-group-text"><i class="fas fa-arrow-right"></i></span>
+            <input type="number" id="more-than-percent" class="form-control" value="2.5" min="0" step="0.1">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Employee Type</label>
+          <div class="btn-group w-100">
+            <input type="radio" class="btn-check" name="employee-type" id="model-employee" autocomplete="off">
+            <label class="btn btn-outline-success" for="model-employee">Model</label>
+            <input type="radio" class="btn-check" name="employee-type" id="non-model-employee" autocomplete="off" checked>
+            <label class="btn btn-outline-success" for="non-model-employee">Non-Model</label>
+          </div>
+        </div>
+      </div>
+      
+      <div id="tl-options" style="display: none;">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-text bg-primary">TL Percentage</span>
+            <input type="number" id="tl-percent" class="form-control" value="1.5" min="0" step="0.1">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Your Prime</label>
+          <div class="input-group">
+            <input type="number" id="tl-prime" class="form-control" placeholder="0" value="0" step="0.01" min="0">
+            <span class="input-group-text">$</span>
+          </div>
+        </div>
+      </div>
+      
+      <button type="button" id="calculate-prime" class="btn btn-primary w-100 mt-3">
+        <i class="fas fa-calculator"></i> Calculate
+      </button>
+      
+      <div id="prime-result" class="alert alert-success mt-3" style="display: none;"></div>
+    </form>
+  </div>
+</section>
+  </main>
+
+  <!-- Contact Modal -->
+  <div class="modal" id="contact-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+      <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="current-year"></span> ExtractX Tools. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">API Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/extractor.js"></script>
+  <script src="js/domain-tools.js"></script>
+  <script src="js/fixage.js"></script>
+  <script src="js/notepad.js"></script>
+  <script src="js/prime-calculator.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+</body>
+</html>

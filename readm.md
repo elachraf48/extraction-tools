@@ -1,0 +1,11 @@
+index.html
+css/
+  style.css
+js/
+  main.js
+  extractor.js
+  text-tools.js
+  domain-tools.js
+images/
+  logo.svg
+  favicon.ico
