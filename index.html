@@ -83,6 +83,9 @@
             <li class="nav-item">
               <a class="nav-link" id="fixage-nav-link" href="#fixage_all" onclick="showSection('fixage')"><i class="fas fa-file"> </i> Fixage</a>
             </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" id="fixage-nav-link"  href="extractjson.html"><i class="fas fa-file"> </i> Extract json</a>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"
                 aria-controls="offcanvasExample"><i class="far fa-money-bill-alt	"></i> Calcule prime</a>
@@ -414,6 +417,7 @@
           <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
             <input style="width: 60%;" type="file" class="form-control btn-outline-success" id="inputGroupFile01"
               accept=".txt">
+            <a title="extract json" class="btn btn-outline-danger btn-lg" href="extractjson.html"><i class="far fa-file-exclamation"></i> </a>
             <button title="remove duplicate" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i
                 class="fa fa-eraser"></i></button>
 
@@ -426,6 +430,7 @@
             <button title="download file" class="btn  btn-lg btn-outline-success" onclick="download()">
               <i class="fa fa-download"></i>
             </button>
+            
           </div>
           <textarea id="text" class="form-control"
             placeholder="Paste your text containing IP or Email addresses into the box below..." rows="5"></textarea>
@@ -519,6 +524,7 @@
               <!-- Hidden file input element -->
               <input type="file" id="csvFile" style="display: none;" accept=".csv">
             </div>
+            
             <span id="line-count"></span>
       
             <div class="container text-center" id="output-containerr"></div>

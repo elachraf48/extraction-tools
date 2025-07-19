@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Data Extractor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --success-color: #4ade80;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .header {
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control, .form-select, .form-check-input {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(76, 201, 240, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(67, 97, 238, 0.15);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .result-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .field-selector {
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed #cbd5e0;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: rgba(248, 249, 250, 0.5);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .file-upload-area.active {
+            border-color: var(--success-color);
+            background-color: rgba(76, 201, 240, 0.1);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .feature-card {
+            height: 100%;
+        }
+        
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .result-table th {
+            background-color: rgba(67, 97, 238, 0.1);
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .result-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        
+        .result-table tr:hover {
+            background-color: rgba(76, 201, 240, 0.05);
+        }
+        
+        .footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+        
+        .preview-area {
+            background-color: #2d3748;
+            color: #cbd5e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .highlight {
+            color: #f6ad55;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        
+        .status-clipped {
+            background-color: #dbeafe;
+            color: #3b82f6;
+        }
+        
+        .data-placeholder {
+            color: #a0aec0;
+            font-style: italic;
+        }
+        
+        .export-btn-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .tooltip-icon {
+            color: var(--primary-color);
+            margin-left: 5px;
+            cursor: help;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1><i class="fas fa-database me-3"></i>Account Data Extractor</h1>
+                    <p class="lead">Extract specific fields from your JSON account data</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="bg-white text-dark p-3 rounded d-inline-block">
+                        <i class="fas fa-file-code text-primary me-2"></i>
+                        <span>JSON Processor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header> -->
+        <div id="header-container"></div>
+
+
+    <div class="container">
+        <div class="row">
+            <!-- Left Panel - Controls -->
+            <div class="col-lg-4 mb-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="section-title"><span class="step-number">1</span> Upload JSON File</h5>
+                        <div class="file-upload-area mb-3" id="dropArea">
+                            <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                            <h5>Drag & Drop your JSON file</h5>
+                            <p class="text-muted">or</p>
+                            <input type="file" class="d-none" id="fileInput" accept=".json">
+                            <button class="btn btn-primary" id="browseBtn">Browse Files</button>
+                        </div>
+                        <div id="fileInfo" class="d-none alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <span id="fileName">file.json</span> loaded successfully
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="section-title"><span class="step-number">2</span> Select Fields to Extract</h5>
+                        <div class="field-selector">
+                            <div class="checkbox-grid">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="emailCheck" checked>
+                                    <label class="form-check-label" for="emailCheck">Email</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="passwordCheck" checked>
+                                    <label class="form-check-label" for="passwordCheck">Password</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="recoveryCheck" checked>
+                                    <label class="form-check-label" for="recoveryCheck">Recovery Email</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="totpCheck" checked>
+                                    <label class="form-check-label" for="totpCheck">TOTP Secret Key</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="appPasswordCheck" checked>
+                                    <label class="form-check-label" for="appPasswordCheck">App Password</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="section-title"><span class="step-number">3</span> Filter by Emails</h5>
+                        <div class="mb-3">
+                            <label for="emailFilter" class="form-label">Enter emails to extract (one per line):</label>
+                            <textarea class="form-control" id="emailFilter" rows="5" placeholder="user1@example.com&#10;user2@example.com"></textarea>
+                            <div class="form-text mt-1">
+                                Leave empty to extract all accounts. Emails are case-insensitive.
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary" id="extractBtn">
+                                <i class="fas fa-cogs me-2"></i>Extract Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Results -->
+            <div class="col-lg-8">
+                <!-- <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="section-title">Data Preview</h5>
+                        <div class="preview-area">
+                            <span class="highlight">[</span><br>
+                            <span class="ms-3">{</span><br>
+                            <span class="ms-4">"UserName": <span class="text-warning">"alonakruchtenukw32"</span>,</span><br>
+                            <span class="ms-4">"Email": <span class="text-warning">"fefefz@gmail.com"</span>,</span><br>
+                            <span class="ms-4">"Password": <span class="text-warning">"ealfjlkef!"</span>,</span><br>
+                            <span class="ms-4">"RecoveryEmail": <span class="text-warning">"egrzrgezrg.fefefz@gmail.com"</span>,</span><br>
+                            <span class="ms-4">"TOTPSecretKey": <span class="text-warning">"6r352f4zusnuy7lhkcim2v2f36ieyr5o"</span>,</span><br>
+                            <span class="ms-4">"AppPassword": <span class="text-warning">"nbgzhqrmwrcpelbj"</span>,</span><br>
+                            <span class="ms-4">"Status": <span class="text-warning">"Pending"</span></span><br>
+                            <span class="ms-3">},</span><br>
+                            <span class="ms-3">{</span><br>
+                            <span class="ms-4">"UserName": <span class="text-warning">"zege"</span>,</span><br>
+                            <span class="ms-4">"Email": <span class="text-warning">"sgsgsrg@gmail.com"</span>,</span><br>
+                            <span class="ms-4">"Password": <span class="text-warning">"vqegezge+"</span>,</span><br>
+                            <span class="ms-4">"RecoveryEmail": <span class="text-warning">"fefefz@gmail.com"</span>,</span><br>
+                            <span class="ms-4">"TOTPSecretKey": <span class="text-warning">"2biuug6bupgh6fdwh27ak2ut2begiweb"</span>,</span><br>
+                            <span class="ms-4">"AppPassword": <span class="text-warning">"wthyvksoypsmfttq"</span>,</span><br>
+                            <span class="ms-4">"Status": <span class="text-warning">"Pending"</span></span><br>
+                            <span class="ms-3">}</span><br>
+                            <span class="highlight">]</span>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="section-title m-0">Extraction Results</h5>
+                            <div class="export-btn-container">
+                                <button class="btn btn-outline-primary" id="copyBtn">
+                                    <i class="fas fa-copy me-2"></i>Copy
+                                </button>
+                                <button class="btn btn-outline-primary" id="exportBtn">
+                                    <i class="fas fa-file-export me-2"></i>Export CSV
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="result-container">
+                            <table class="result-table">
+                                <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                        <th>Recovery Email</th>
+                                        <th>TOTP Secret</th>
+                                        <th>App Password</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultBody">
+                                    <tr>
+                                        <td colspan="6" class="text-center py-5">
+                                            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                            <p class="text-muted">Upload a JSON file and click "Extract Data" to see results</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card feature-card h-100">
+                            <div class="card-body">
+                                <div class="feature-icon mx-auto">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h5 class="card-title text-center">Secure Processing</h5>
+                                <p class="card-text">All processing happens in your browser. Your data never leaves your device.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card feature-card h-100">
+                            <div class="card-body">
+                                <div class="feature-icon mx-auto">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h5 class="card-title text-center">Fast Extraction</h5>
+                                <p class="card-text">Quickly extract only the fields you need from large JSON datasets.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card feature-card h-100">
+                            <div class="card-body">
+                                <div class="feature-icon mx-auto">
+                                    <i class="fas fa-filter"></i>
+                                </div>
+                                <h5 class="card-title text-center">Precise Filtering</h5>
+                                <p class="card-text">Extract data only for specific accounts using email filtering.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Account Data Extractor</h5>
+                    <p>Easily extract and filter account information from JSON files</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">Created with <i class="fas fa-heart text-danger"></i> for secure data processing</p>
+                    <p class="mb-0">&copy; 2025 All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    <footer class="bg-light fixed-bottom">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      <p class="text-center">
+        <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">
+          &copy; <span id="currentYears"></span> Achraf . All rights reserved.
+        </a>
+      </p>
+
+    </div>
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                
+                // Initialize Bootstrap components if needed
+                if (typeof bootstrap !== 'undefined') {
+                    // Initialize dropdowns
+                    var dropdowns = document.querySelectorAll('.dropdown-toggle');
+                    dropdowns.forEach(function(dropdown) {
+                        new bootstrap.Dropdown(dropdown);
+                    });
+                    
+                    // Initialize nav tabs
+                    var tabTriggers = document.querySelectorAll('[data-bs-toggle="tab"]');
+                    tabTriggers.forEach(function(tab) {
+                        new bootstrap.Tab(tab);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = 
+                    '<div class="alert alert-danger">Error loading header</div>';
+            });
+        document.addEventListener('DOMContentLoaded', function() {
+            // File upload elements
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const browseBtn = document.getElementById('browseBtn');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            
+            // Buttons
+            const extractBtn = document.getElementById('extractBtn');
+            const exportBtn = document.getElementById('exportBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            
+            // Checkboxes
+            const emailCheck = document.getElementById('emailCheck');
+            const passwordCheck = document.getElementById('passwordCheck');
+            const recoveryCheck = document.getElementById('recoveryCheck');
+            const totpCheck = document.getElementById('totpCheck');
+            const appPasswordCheck = document.getElementById('appPasswordCheck');
+            
+            // Result area
+            const resultBody = document.getElementById('resultBody');
+            
+            // Email filter
+            const emailFilter = document.getElementById('emailFilter');
+            
+            // Data storage
+            let jsonData = null;
+            
+            // Browse button click handler
+            browseBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // File input change handler
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFile(e.target.files[0]);
+                }
+            });
+            
+            // Drag and drop handlers
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                dropArea.classList.add('active');
+            }
+            
+            function unhighlight() {
+                dropArea.classList.remove('active');
+            }
+            
+            dropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const file = dt.files[0];
+                handleFile(file);
+            }
+            
+            function handleFile(file) {
+                if (file && (file.type === 'application/json' || file.name.endsWith('.json'))) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        try {
+                            jsonData = JSON.parse(e.target.result);
+                            fileName.textContent = file.name;
+                            fileInfo.classList.remove('d-none');
+                            
+                            // Show sample data in results
+                            showResults(jsonData.slice(0, 3));
+                        } catch (error) {
+                            alert('Error parsing JSON file. Please ensure it is valid JSON.');
+                            console.error('JSON parsing error:', error);
+                        }
+                    };
+                    
+                    reader.readAsText(file);
+                } else {
+                    alert('Please select a valid JSON file.');
+                }
+            }
+            
+            // Extract button click handler
+            extractBtn.addEventListener('click', () => {
+                if (!jsonData) {
+                    alert('Please upload a JSON file first.');
+                    return;
+                }
+                
+                // Get filter emails
+                const filterEmails = emailFilter.value
+                    .split('\n')
+                    .map(email => email.trim().toLowerCase())
+                    .filter(email => email);
+                
+                // Filter data
+                let filteredData = jsonData;
+                if (filterEmails.length > 0) {
+                    filteredData = jsonData.filter(account => 
+                        account.Email && filterEmails.includes(account.Email.toLowerCase())
+                    );
+                }
+                
+                // If no data matches
+                if (filteredData.length === 0) {
+                    resultBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <i class="fas fa-exclamation-triangle fa-2x text-warning mb-3"></i>
+                                <p class="text-muted">No accounts match your email filter</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                showResults(filteredData);
+            });
+            
+            // Show results in table
+            function showResults(data) {
+                if (!data || data.length === 0) {
+                    resultBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger mb-3"></i>
+                                <p class="text-muted">No data available to display</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                
+                data.forEach(account => {
+                    // Format status badge
+                    let statusBadge = '';
+                    if (account.Status) {
+                        const statusClass = account.Status.toLowerCase().includes('clipped') 
+                            ? 'status-clipped' 
+                            : 'status-pending';
+                        statusBadge = `<span class="status-badge ${statusClass}">${account.Status}</span>`;
+                    }
+                    
+                    html += `
+                        <tr>
+                            <td>${emailCheck.checked ? (account.Email || '<span class="data-placeholder">N/A</span>') : '<span class="data-placeholder">N/A</span>'}</td>
+                            <td>${passwordCheck.checked ? (account.Password || '<span class="data-placeholder">N/A</span>') : '<span class="data-placeholder">N/A</span>'}</td>
+                            <td>${recoveryCheck.checked ? (account.RecoveryEmail || '<span class="data-placeholder">N/A</span>') : '<span class="data-placeholder">N/A</span>'}</td>
+                            <td>${totpCheck.checked ? (account.TOTPSecretKey || '<span class="data-placeholder">N/A</span>') : '<span class="data-placeholder">N/A</span>'}</td>
+                            <td>${appPasswordCheck.checked ? (account.AppPassword || '<span class="data-placeholder">N/A</span>') : '<span class="data-placeholder">N/A</span>'}</td>
+                            <td>${statusBadge || '<span class="data-placeholder">N/A</span>'}</td>
+                        </tr>
+                    `;
+                });
+                
+                resultBody.innerHTML = html;
+            }
+            
+            // Export button click handler
+            exportBtn.addEventListener('click', () => {
+                if (!jsonData) {
+                    alert('No data to export. Please upload and extract data first.');
+                    return;
+                }
+                
+                // Create CSV content
+                let csvContent = "data:text/csv;charset=utf-8,";
+                
+                // Add headers
+                const headers = [];
+                if (emailCheck.checked) headers.push("Email");
+                if (passwordCheck.checked) headers.push("Password");
+                if (recoveryCheck.checked) headers.push("Recovery Email");
+                if (totpCheck.checked) headers.push("TOTP Secret Key");
+                if (appPasswordCheck.checked) headers.push("App Password");
+                headers.push("Status");
+                
+                csvContent += headers.join(",") + "\r\n";
+                
+                // Add data
+                jsonData.forEach(account => {
+                    const row = [];
+                    
+                    if (emailCheck.checked) row.push(account.Email || "");
+                    if (passwordCheck.checked) row.push(account.Password || "");
+                    if (recoveryCheck.checked) row.push(account.RecoveryEmail || "");
+                    if (totpCheck.checked) row.push(account.TOTPSecretKey || "");
+                    if (appPasswordCheck.checked) row.push(account.AppPassword || "");
+                    row.push(account.Status || "");
+                    
+                    csvContent += row.map(field => `"${field.replace(/"/g, '""')}"`).join(",") + "\r\n";
+                });
+                
+                // Create download link
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "account_data.csv");
+                document.body.appendChild(link);
+                
+                // Trigger download
+                link.click();
+                document.body.removeChild(link);
+            });
+            
+            // Copy button click handler
+            copyBtn.addEventListener('click', () => {
+                if (!jsonData) {
+                    alert('No data to copy. Please upload and extract data first.');
+                    return;
+                }
+                
+                // Create text content
+                let textContent = "";
+                
+                // Add headers
+                const headers = [];
+                if (emailCheck.checked) headers.push("Email");
+                if (passwordCheck.checked) headers.push("Password");
+                if (recoveryCheck.checked) headers.push("Recovery Email");
+                if (totpCheck.checked) headers.push("TOTP Secret Key");
+                if (appPasswordCheck.checked) headers.push("App Password");
+                headers.push("Status");
+                
+                textContent += headers.join("\t") + "\r\n";
+                
+                // Add data
+                jsonData.forEach(account => {
+                    const row = [];
+                    
+                    if (emailCheck.checked) row.push(account.Email || "");
+                    if (passwordCheck.checked) row.push(account.Password || "");
+                    if (recoveryCheck.checked) row.push(account.RecoveryEmail || "");
+                    if (totpCheck.checked) row.push(account.TOTPSecretKey || "");
+                    if (appPasswordCheck.checked) row.push(account.AppPassword || "");
+                    row.push(account.Status || "");
+                    
+                    textContent += row.join("\t") + "\r\n";
+                });
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(textContent)
+                    .then(() => {
+                        // Show success feedback
+                        const originalText = copyBtn.innerHTML;
+                        copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = originalText;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy data to clipboard.');
+                    });
+            });
+            
+            // Initialize with empty state
+            showResults([]);
+        });
+    </script>
+</body>
+</html>
