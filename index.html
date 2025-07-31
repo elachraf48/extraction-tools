@@ -618,28 +618,43 @@
   </div>
   </div>
   <section id="fixage" style="display: none;">
-    <div class="container mt-5">
-      <div class="row">
-        <!-- Left Section -->
-        <div class="col-md-6">
+    <div class="container">
+    <div class="row">
+      <!-- Left Section -->
+      <div class="col-md-5">
+        <div class="section-title">
           <h3>Main Text</h3>
-          <textarea id="main-textarea" class="form-control" rows="10" placeholder="Enter your main text here..."></textarea>
-          <button id="generate-btn" class="btn btn-primary mt-3">Generate</button>
-          <h4 class="mt-4">Output Result</h4>
+        </div>
+        <textarea id="main-textarea" class="form-control" rows="10" placeholder="Enter your main text here..."></textarea>
+      </div>
+
+      <!-- Middle Section with Generate Button -->
+      <div class="col-md-2">
+        <div class="generate-container">
+          <button id="generate-btn" class="btn btn-primary btn-lg mb-3">Generate</button>
+          <div class="auto-copy-container form-check">
+            <input class="form-check-input" type="checkbox" id="auto-copy" checked>
+            <label class="form-check-label" for="auto-copy">Auto copy to clipboard</label>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h4>Output Result</h4>
           <textarea id="left-output-textarea" class="form-control" rows="10" readonly></textarea>
         </div>
-  
-        <!-- Right Section -->
-        <div class="col-md-6">
+      </div>
+
+      <!-- Right Section -->
+      <div class="col-md-5">
+        <div class="section-title">
           <h3>Dynamic Text Inputs</h3>
-          <button id="add-text-btn" class="btn btn-success mb-3">Add Text</button>
-          <div id="dynamic-inputs">
-            <!-- Dynamic inputs will be appended here -->
-          </div>
-         
+          <button id="add-text-btn" class="btn btn-success">+ Add Text</button>
+        </div>
+        <div id="dynamic-inputs">
+          <!-- Dynamic inputs will be appended here -->
         </div>
       </div>
     </div>
+  </div>
   </section>
   <section id="checkdomain" style="display: none;">
     <div class="container mt-5">
