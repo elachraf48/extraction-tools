@@ -1,33 +1,164 @@
 let textCount = 0;
+//start fixage
+let textCount = 0;
+    let usedNames = new Set();
+    let activeTextAreas = new Set();
 
-// Function to add a new text input and textarea
-$('#add-text-btn').click(function () {
-    textCount++;
-    const inputGroup = `
-      <div class="mb-3" id="text-group-${textCount}">
-        <label for="text-name-${textCount}" class="form-label">Text Name:</label>
-        <input type="text" class="form-control text-name" id="text-name-${textCount}" value="text${textCount}" placeholder="Enter text name">
-        <label for="text-value-${textCount}" class="form-label mt-2">Replacement Text:</label>
-        <textarea class="form-control text-value" id="text-value-${textCount}" rows="2" placeholder="Enter replacement text"></textarea>
-      </div>`;
-    $('#dynamic-inputs').append(inputGroup);
-});
+    // Function to find the next available text name
+    function getNextTextName() {
+      let i = 1;
+      while (usedNames.has(`text${i}`)) {
+        i++;
+      }
+      return `text${i}`;
+    }
 
-// Function to generate output text
-$('#generate-btn').click(function () {
-    let mainText = $('#main-textarea').val();
-    
-    // Loop through all dynamic inputs and replace text
-    $('.text-name').each(function (index) {
-      const textName = $(this).val();
-      const replacementText = $(`#text-value-${index + 1}`).val();
-      const regex = new RegExp(`\\[${textName}\\]`, 'g'); // Regex to find [name]
-      mainText = mainText.replace(regex, replacementText);
+    // Function to add a new text input and textarea
+    $('#add-text-btn').click(async function () {
+      const defaultName = getNextTextName();
+      usedNames.add(defaultName);
+      activeTextAreas.add(defaultName);
+      textCount = Math.max(textCount, parseInt(defaultName.replace('text', '')) || 1);
+      
+      const inputGroup = `
+        <div class="text-group" id="text-group-${defaultName}">
+          <button class="btn btn-danger btn-sm remove-btn" data-name="${defaultName}">×</button>
+          <label for="text-name-${defaultName}" class="form-label">Text Name:</label>
+          <input type="text" class="form-control text-name mb-2" id="text-name-${defaultName}" value="${defaultName}" placeholder="Enter text name">
+          <label for="text-value-${defaultName}" class="form-label">Replacement Text:</label>
+          <textarea class="form-control text-value" id="text-value-${defaultName}" rows="3" placeholder="Enter replacement text"></textarea>
+          <div class="clean-checkbox form-check">
+            <input class="form-check-input clean-text-checkbox" type="checkbox" id="clean-text-${defaultName}">
+            <label class="form-check-label" for="clean-text-${defaultName}">Clean and paste from clipboard</label>
+          </div>
+        </div>`;
+      $('#dynamic-inputs').append(inputGroup);
+
+      // Focus on the new text name input
+      $(`#text-name-${defaultName}`).focus();
+
+      // Handle name changes to track duplicates
+      $(`#text-name-${defaultName}`).on('input', function() {
+        const newName = $(this).val();
+        const oldName = $(this).data('old-name') || defaultName;
+        
+        if (newName !== oldName) {
+          if (usedNames.has(newName) && newName !== '') {
+            $(this).addClass('is-invalid');
+          } else {
+            $(this).removeClass('is-invalid');
+            usedNames.delete(oldName);
+            activeTextAreas.delete(oldName);
+            usedNames.add(newName);
+            activeTextAreas.add(newName);
+            $(this).data('old-name', newName);
+            
+            // Update all references to the old name
+            $(`button[data-name="${oldName}"]`).attr('data-name', newName);
+            $(`#text-group-${oldName}`).attr('id', `text-group-${newName}`);
+            $(`#text-value-${oldName}`).attr('id', `text-value-${newName}`);
+            $(`#clean-text-${oldName}`).attr('id', `clean-text-${newName}`);
+            $(`label[for="text-name-${oldName}"]`).attr('for', `text-name-${newName}`);
+            $(`label[for="text-value-${oldName}"]`).attr('for', `text-value-${newName}`);
+            $(`label[for="clean-text-${oldName}"]`).attr('for', `clean-text-${newName}`);
+          }
+        }
+      });
+
+      // Handle checkbox change for this specific textarea
+      const handleCheckboxChange = async function() {
+        const textareaName = $(this).attr('id').split('-')[2];
+        if ($(this).is(':checked')) {
+          try {
+            const text = await navigator.clipboard.readText();
+            $(`#text-value-${textareaName}`).val(text).trigger('input');
+          } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+            alert('Could not read from clipboard. Please make sure you have granted clipboard permissions.');
+          }
+        } else {
+          $(`#text-value-${textareaName}`).val('');
+        }
+      };
+
+      $(`#clean-text-${defaultName}`).change(handleCheckboxChange);
     });
 
-    // Set the generated output in both output textareas
-    $('#left-output-textarea').val(mainText);
-});
+    // Function to remove a text group
+    $(document).on('click', '.remove-btn', function() {
+      const name = $(this).data('name');
+      usedNames.delete(name);
+      activeTextAreas.delete(name);
+      $(`#text-group-${name}`).remove();
+      
+      // Reset textCount if we've deleted all text areas
+      if (activeTextAreas.size === 0) {
+        textCount = 0;
+      }
+    });
+
+    // Function to generate output text
+    $('#generate-btn').click(async function () {
+      const generateBtn = $(this);
+      const originalText = generateBtn.text();
+      
+      let mainText = $('#main-textarea').val();
+      
+      // Loop through all dynamic inputs and replace text
+      $('.text-name').each(function () {
+        const textName = $(this).val();
+        const textareaName = $(this).attr('id').split('-')[2];
+        const replacementText = $(`#text-value-${textareaName}`).val();
+        if (textName) {
+          const regex = new RegExp(`\\[${textName}\\]`, 'g');
+          mainText = mainText.replace(regex, replacementText);
+        }
+      });
+
+      // Set the generated output in the output textarea
+      $('#left-output-textarea').val(mainText);
+
+      // Auto-copy to clipboard if checked
+      if ($('#auto-copy').is(':checked') && mainText) {
+        try {
+          await navigator.clipboard.writeText(mainText);
+          // Show temporary feedback
+          generateBtn.text('Copied!').removeClass('btn-primary').addClass('btn-success');
+          setTimeout(() => {
+            generateBtn.text(originalText).removeClass('btn-success').addClass('btn-primary');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+          generateBtn.text('Copy Failed!').removeClass('btn-primary').addClass('btn-danger');
+          setTimeout(() => {
+            generateBtn.text(originalText).removeClass('btn-danger').addClass('btn-primary');
+          }, 2000);
+        }
+      }
+    });
+
+    // Add visibility change listener for auto-paste
+    $(document).on('visibilitychange', async function() {
+      if (!document.hidden) {
+        $('.clean-text-checkbox:checked').each(async function() {
+          const textareaName = $(this).attr('id').split('-')[2];
+          try {
+            const text = await navigator.clipboard.readText();
+            $(`#text-value-${textareaName}`).val(text).trigger('input');
+          } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+          }
+        });
+      }
+    });
+
+    // Add one text area by default when page loads
+    $(document).ready(function() {
+      $('#add-text-btn').trigger('click');
+    });
+//end fixage
+// Function to add a new text input and textarea
+
 function showSection(sectionId) {
   var sections = ["fixage","home", "ip-extraction","texttool", "split", "checkdomain","prime"];
   sections.forEach(function (item) {
