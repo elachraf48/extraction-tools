@@ -1,6 +1,6 @@
 let textCount = 0;
 //start fixage
-   let textCountfixage = 0;
+let textCountfixagefixage = 0;
     let usedNames = new Set();
     let activeTextAreas = new Set();
 
@@ -13,7 +13,32 @@ let textCount = 0;
       return `text${i}`;
     }
 
-    // Function to add a new text input and textarea
+    // Function to highlight placeholders in main text
+    function highlightPlaceholders() {
+      const mainText = $('#main-textarea').val();
+      const placeholderRegex = /\[(.*?)\]/g;
+      let match;
+      let placeholders = new Set();
+      
+      // Find all placeholders in the text
+      while ((match = placeholderRegex.exec(mainText)) !== null) {
+        placeholders.add(match[1]);
+      }
+      
+      // Update the UI to show which placeholders are defined
+      $('.text-name').each(function() {
+        const textName = $(this).val();
+        const textGroup = $(this).closest('.text-group');
+        
+        if (placeholders.has(textName)) {
+          textGroup.find('.placeholder-badge').removeClass('bg-secondary').addClass('bg-success').html('<i class="fas fa-check me-1"></i>Found in text');
+        } else {
+          textGroup.find('.placeholder-badge').removeClass('bg-success').addClass('bg-secondary').html('<i class="fas fa-question me-1"></i>Not in text');
+        }
+      });
+    }
+
+    // Function to add a new text input and textarea with animation
     $('#add-text-btn').click(async function () {
       const defaultName = getNextTextName();
       usedNames.add(defaultName);
@@ -21,18 +46,40 @@ let textCount = 0;
       textCountfixage = Math.max(textCountfixage, parseInt(defaultName.replace('text', '')) || 1);
       
       const inputGroup = `
-        <div class="text-group" id="text-group-${defaultName}">
-          <button class="btn btn-danger btn-sm remove-btn" data-name="${defaultName}">×</button>
-          <label for="text-name-${defaultName}" class="form-label">Text Name:</label>
-          <input type="text" class="form-control text-name mb-2" id="text-name-${defaultName}" value="${defaultName}" placeholder="Enter text name">
-          <label for="text-value-${defaultName}" class="form-label">Replacement Text:</label>
-          <textarea class="form-control text-value" id="text-value-${defaultName}" rows="3" placeholder="Enter replacement text"></textarea>
-          <div class="clean-checkbox form-check">
+        <div class="text-group" id="text-group-${defaultName}" style="opacity: 0; transform: translateY(20px);">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge placeholder-badge bg-secondary"><i class="fas fa-question me-1"></i>Not in text</span>
+            <button class="btn btn-danger btn-sm remove-btn" data-name="${defaultName}">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="mb-3">
+            <label for="text-name-${defaultName}" class="form-label"><i class="fas fa-tag me-1"></i>Placeholder Name:</label>
+            <div class="input-group">
+              <span class="input-group-text">[</span>
+              <input type="text" class="form-control text-name" id="text-name-${defaultName}" value="${defaultName}" placeholder="Enter name without brackets">
+              <span class="input-group-text">]</span>
+            </div>
+            <small class="form-text text-muted">This will replace [${defaultName}] in your text</small>
+          </div>
+          <div class="mb-3">
+            <label for="text-value-${defaultName}" class="form-label"><i class="fas fa-edit me-1"></i>Replacement Text:</label>
+            <textarea class="form-control text-value" id="text-value-${defaultName}" rows="3" placeholder="Enter replacement text"></textarea>
+          </div>
+          <div class="clean-checkbox form-check form-switch">
             <input class="form-check-input clean-text-checkbox" type="checkbox" id="clean-text-${defaultName}">
-            <label class="form-check-label" for="clean-text-${defaultName}">Clean and paste from clipboard</label>
+            <label class="form-check-label" for="clean-text-${defaultName}"><i class="fas fa-clipboard me-1"></i>Auto-paste from clipboard</label>
           </div>
         </div>`;
+      
+      // Append and animate the new group
       $('#dynamic-inputs').append(inputGroup);
+      setTimeout(() => {
+        $(`#text-group-${defaultName}`).css({
+          'opacity': '1',
+          'transform': 'translateY(0)'
+        });
+      }, 10);
 
       // Focus on the new text name input
       $(`#text-name-${defaultName}`).focus();
@@ -45,8 +92,11 @@ let textCount = 0;
         if (newName !== oldName) {
           if (usedNames.has(newName) && newName !== '') {
             $(this).addClass('is-invalid');
+            $(this).siblings('.invalid-feedback').remove();
+            $(this).after('<div class="invalid-feedback">This name is already in use</div>');
           } else {
             $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').remove();
             usedNames.delete(oldName);
             activeTextAreas.delete(oldName);
             usedNames.add(newName);
@@ -61,7 +111,13 @@ let textCount = 0;
             $(`label[for="text-name-${oldName}"]`).attr('for', `text-name-${newName}`);
             $(`label[for="text-value-${oldName}"]`).attr('for', `text-value-${newName}`);
             $(`label[for="clean-text-${oldName}"]`).attr('for', `clean-text-${newName}`);
+            
+            // Update the small text helper
+            $(this).parent().siblings('small').text(`This will replace [${newName}] in your text`);
           }
+          
+          // Update placeholder highlighting
+          highlightPlaceholders();
         }
       });
 
@@ -74,7 +130,29 @@ let textCount = 0;
             $(`#text-value-${textareaName}`).val(text).trigger('input');
           } catch (err) {
             console.error('Failed to read clipboard contents: ', err);
-            alert('Could not read from clipboard. Please make sure you have granted clipboard permissions.');
+            // Show a more user-friendly toast notification instead of an alert
+            const toastHtml = `
+              <div class="toast align-items-center text-white bg-danger border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <div class="toast-body">
+                    <i class="fas fa-exclamation-circle me-2"></i>Could not read from clipboard. Please make sure you have granted clipboard permissions.
+                  </div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+              </div>`;
+            
+            const toast = $(toastHtml);
+            $('body').append(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+            
+            // Remove toast after it's hidden
+            toast.on('hidden.bs.toast', function() {
+              $(this).remove();
+            });
+            
+            // Uncheck the checkbox
+            $(this).prop('checked', false);
           }
         } else {
           $(`#text-value-${textareaName}`).val('');
@@ -82,27 +160,57 @@ let textCount = 0;
       };
 
       $(`#clean-text-${defaultName}`).change(handleCheckboxChange);
+      
+      // Update placeholder highlighting
+      highlightPlaceholders();
     });
 
-    // Function to remove a text group
+    // Function to remove a text group with animation
     $(document).on('click', '.remove-btn', function() {
       const name = $(this).data('name');
-      usedNames.delete(name);
-      activeTextAreas.delete(name);
-      $(`#text-group-${name}`).remove();
+      const textGroup = $(`#text-group-${name}`);
       
-      // Reset textCountfixage if we've deleted all text areas
-      if (activeTextAreas.size === 0) {
-        textCountfixage = 0;
-      }
+      // Animate removal
+      textGroup.css({
+        'opacity': '0',
+        'transform': 'translateY(20px)'
+      });
+      
+      setTimeout(() => {
+        usedNames.delete(name);
+        activeTextAreas.delete(name);
+        textGroup.remove();
+        
+        // Reset textCountfixage if we've deleted all text areas
+        if (activeTextAreas.size === 0) {
+          textCountfixage = 0;
+        }
+        
+        // Update placeholder highlighting
+        highlightPlaceholders();
+      }, 300);
     });
 
-    // Function to generate output text
+    // Monitor main textarea for changes to highlight placeholders
+    $('#main-textarea').on('input', function() {
+      highlightPlaceholders();
+    });
+
+    // Function to generate output text with animation
     $('#generate-btn').click(async function () {
       const generateBtn = $(this);
-      const originalText = generateBtn.text();
+      const originalHtml = generateBtn.html();
+      const outputTextarea = $('#left-output-textarea');
+      
+      // Add loading animation
+      generateBtn.html('<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Processing...');
+      generateBtn.prop('disabled', true);
+      
+      // Small delay to show the animation (can be removed in production)
+      await new Promise(resolve => setTimeout(resolve, 300));
       
       let mainText = $('#main-textarea').val();
+      let replacementsMade = 0;
       
       // Loop through all dynamic inputs and replace text
       $('.text-name').each(function () {
@@ -111,29 +219,59 @@ let textCount = 0;
         const replacementText = $(`#text-value-${textareaName}`).val();
         if (textName) {
           const regex = new RegExp(`\\[${textName}\\]`, 'g');
+          const matches = mainText.match(regex) || [];
+          replacementsMade += matches.length;
           mainText = mainText.replace(regex, replacementText);
         }
       });
 
-      // Set the generated output in the output textarea
-      $('#left-output-textarea').val(mainText);
+      // Set the generated output in the output textarea with a fade effect
+      outputTextarea.fadeOut(200, function() {
+        $(this).val(mainText);
+        $(this).fadeIn(200);
+      });
+
+      // Show a success toast with replacement count
+      const toastHtml = `
+        <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <i class="fas fa-check-circle me-2"></i>Successfully replaced ${replacementsMade} placeholder${replacementsMade !== 1 ? 's' : ''}!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>`;
+      
+      const toast = $(toastHtml);
+      $('body').append(toast);
+      const bsToast = new bootstrap.Toast(toast);
+      bsToast.show();
+      
+      // Remove toast after it's hidden
+      toast.on('hidden.bs.toast', function() {
+        $(this).remove();
+      });
 
       // Auto-copy to clipboard if checked
       if ($('#auto-copy').is(':checked') && mainText) {
         try {
           await navigator.clipboard.writeText(mainText);
           // Show temporary feedback
-          generateBtn.text('Copied!').removeClass('btn-primary').addClass('btn-success');
-          setTimeout(() => {
-            generateBtn.text(originalText).removeClass('btn-success').addClass('btn-primary');
-          }, 2000);
+          generateBtn.html('<i class="fas fa-check me-1"></i>Copied!').removeClass('btn-primary').addClass('btn-success');
         } catch (err) {
           console.error('Failed to copy: ', err);
-          generateBtn.text('Copy Failed!').removeClass('btn-primary').addClass('btn-danger');
-          setTimeout(() => {
-            generateBtn.text(originalText).removeClass('btn-danger').addClass('btn-primary');
-          }, 2000);
+          generateBtn.html('<i class="fas fa-times me-1"></i>Copy Failed!').removeClass('btn-primary').addClass('btn-danger');
         }
+        
+        // Reset button after delay
+        setTimeout(() => {
+          generateBtn.html(originalHtml).removeClass('btn-success btn-danger').addClass('btn-primary');
+          generateBtn.prop('disabled', false);
+        }, 2000);
+      } else {
+        // Reset button immediately if no copy was performed
+        generateBtn.html(originalHtml);
+        generateBtn.prop('disabled', false);
       }
     });
 
@@ -154,7 +292,52 @@ let textCount = 0;
 
     // Add one text area by default when page loads
     $(document).ready(function() {
+      // Add a welcome message to the main textarea if it's empty
+      if ($('#main-textarea').val() === '') {
+        $('#main-textarea').val('Hello [text1],\n\nThis is a sample text with [text1] and [text2] placeholders.\n\nThank you,\n[text2]');
+      }
+      
+      // Add the first text area
       $('#add-text-btn').trigger('click');
+      
+      // Initialize tooltips
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+
+
+    // Add visibility change listener for auto-paste
+    $(document).on('visibilitychange', async function() {
+      if (!document.hidden) {
+        $('.clean-text-checkbox:checked').each(async function() {
+          const textareaName = $(this).attr('id').split('-')[2];
+          try {
+            const text = await navigator.clipboard.readText();
+            $(`#text-value-${textareaName}`).val(text).trigger('input');
+          } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+          }
+        });
+      }
+    });
+
+    // Add one text area by default when page loads
+    $(document).ready(function() {
+      // Add a welcome message to the main textarea if it's empty
+      if ($('#main-textarea').val() === '') {
+        $('#main-textarea').val('Hello [text1],\n\nThis is a sample text with [text1] and [text2] placeholders.\n\nThank you,\n[text2]');
+      }
+      
+      // Add the first text area
+      $('#add-text-btn').trigger('click');
+      
+      // Initialize tooltips
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
     });
 //end fixage
 // Function to add a new text input and textarea
