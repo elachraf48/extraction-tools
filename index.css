@@ -188,7 +188,7 @@ body {
   }
 
 #fixage
-   :root {
+     .fixage:root {
       --primary-color: #4361ee;
       --secondary-color: #3f37c9;
       --accent-color: #f72585;
@@ -204,7 +204,16 @@ body {
       --transition: all 0.3s ease;
     }
 
- 
+    .fixage body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
 
     
     .app-subtitle {
@@ -213,7 +222,7 @@ body {
       font-size: 1rem;
     }
 
-    .container {
+    .fixage .container {
       max-width: 1400px;
       background-color: white;
       border-radius: var(--border-radius);
@@ -223,7 +232,7 @@ body {
       flex: 1;
     }
 
-    .card {
+    .fixage .card {
       border: none;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
@@ -237,7 +246,7 @@ body {
       box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .card-header {
+    .fixage .card-header {
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
@@ -246,7 +255,7 @@ body {
       padding: 1rem 1.25rem;
     }
 
-    .text-group {
+    .fixage .text-group {
       position: relative;
       border-left: 4px solid var(--primary-color);
       border-radius: var(--border-radius);
@@ -257,12 +266,12 @@ body {
       transition: var(--transition);
     }
 
-    .text-group:hover {
+    .fixage .text-group:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
 
-    .remove-btn {
+    .fixage .remove-btn {
       position: absolute;
       top: 0.75rem;
       right: 0.75rem;
@@ -277,7 +286,7 @@ body {
       transition: var(--transition);
     }
     
-    .remove-btn:hover {
+    .fixage .remove-btn:hover {
       transform: rotate(90deg);
     }
 
@@ -401,20 +410,21 @@ body {
     }
     
     /* Custom scrollbar */
-    ::-webkit-scrollbar {
+    .fixage ::-webkit-scrollbar {
       width: 8px;
+      height: 8px;
     }
     
-    ::-webkit-scrollbar-track {
+    .fixage ::-webkit-scrollbar-track {
       background: #f1f1f1;
       border-radius: 10px;
     }
     
-    ::-webkit-scrollbar-thumb {
+    .fixage ::-webkit-scrollbar-thumb {
       background: var(--primary-color);
       border-radius: 10px;
     }
     
-    ::-webkit-scrollbar-thumb:hover {
+    .fixage ::-webkit-scrollbar-thumb:hover {
       background: var(--secondary-color);
     }
