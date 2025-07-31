@@ -187,244 +187,241 @@ body {
     opacity: 1;
   }
 
-#fixage
-     .fixage:root {
-      --primary-color: #4361ee;
-      --secondary-color: #3f37c9;
-      --accent-color: #f72585;
-      --success-color: #4cc9f0;
-      --warning-color: #f8961e;
-      --danger-color: #e63946;
-      --text-color: #2b2d42;
-      --light-text: #f8f9fa;
-      --light-bg: #f8fafc;
-      --dark-bg: #2b2d42;
-      --border-radius: 10px;
-      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-    }
+.fixage:root {
+  --primary-color: #4361ee;
+  --secondary-color: #3f37c9;
+  --accent-color: #f72585;
+  --success-color: #4cc9f0;
+  --warning-color: #f8961e;
+  --danger-color: #e63946;
+  --text-color: #2b2d42;
+  --light-text: #f8f9fa;
+  --light-bg: #f8fafc;
+  --dark-bg: #2b2d42;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
 
-    .fixage body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text-color);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding-top: 20px;
-      padding-bottom: 20px;
-    }
+.fixage body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-    
-    .app-subtitle {
-      opacity: 0.8;
-      margin: 0.5rem 0 0;
-      font-size: 1rem;
-    }
+.app-subtitle {
+  opacity: 0.8;
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
 
-    .fixage .container {
-      max-width: 1400px;
-      background-color: white;
-      border-radius: var(--border-radius);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      flex: 1;
-    }
+.fixage .container {
+  max-width: 1400px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  flex: 1;
+}
 
-    .fixage .card {
-      border: none;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-      height: 100%;
-      overflow: hidden;
-    }
+.fixage .card {
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  height: 100%;
+  overflow: hidden;
+}
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    }
+.fixage .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
 
-    .fixage .card-header {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
-      font-weight: 600;
-      border: none;
-      padding: 1rem 1.25rem;
-    }
+.fixage .card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+  font-weight: 600;
+  border: none;
+  padding: 1rem 1.25rem;
+}
 
-    .fixage .text-group {
-      position: relative;
-      border-left: 4px solid var(--primary-color);
-      border-radius: var(--border-radius);
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-      background-color: white;
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-    }
+.fixage .text-group {
+  position: relative;
+  border-left: 4px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
 
-    .fixage .text-group:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
+.fixage .text-group:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
-    .fixage .remove-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      width: 2rem;
-      height: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      border-radius: 50%;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-    
-    .fixage .remove-btn:hover {
-      transform: rotate(90deg);
-    }
+.fixage .remove-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: var(--transition);
+}
 
-    .clean-checkbox {
-      margin-top: 0.75rem;
-    }
+.fixage .remove-btn:hover {
+  transform: rotate(90deg);
+}
 
-    h3 {
-      color: var(--primary-color);
-      margin-bottom: 1.25rem;
-      font-weight: 600;
-    }
+.clean-checkbox {
+  margin-top: 0.75rem;
+}
 
-    h4 {
-      color: white;
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
+.fixage h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
 
-    .btn-primary {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
+.fixage h4 {
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
 
-    .btn-primary:hover, .btn-primary:focus {
-      background-color: var(--secondary-color);
-      border-color: var(--secondary-color);
-    }
+.fixage .btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
 
-    .btn-success {
-      background-color: var(--success-color);
-      border-color: var(--success-color);
-      color: var(--dark-bg);
-    }
+.fixage .btn-primary:hover, .fixage .btn-primary:focus {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
 
-    .btn-danger {
-      background-color: var(--danger-color);
-      border-color: var(--danger-color);
-    }
+.fixage .btn-success {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: var(--dark-bg);
+}
 
-    .btn-outline-primary {
-      color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
+.fixage .btn-danger {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
 
-    .btn-outline-primary:hover {
-      background-color: var(--primary-color);
-      color: white;
-    }
+.fixage .btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
 
-    #generate-btn {
-      min-width: 120px;
-      font-weight: 500;
-    }
+.fixage .btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
 
-    #add-text-btn {
-      font-weight: 500;
-      background-color: var(--accent-color);
-      border-color: var(--accent-color);
-      transition: var(--transition);
-    }
-    
-    #add-text-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
+.fixage #generate-btn {
+  min-width: 120px;
+  font-weight: 500;
+}
 
-    textarea {
-      resize: vertical;
-      border-color: rgba(67, 97, 238, 0.2);
-      border-radius: var(--border-radius);
-      transition: var(--transition);
-    }
+.fixage #add-text-btn {
+  font-weight: 500;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  transition: var(--transition);
+}
 
-    textarea:focus {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
-    }
+.fixage #add-text-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-    .form-control:focus {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
-    }
+.fixage textarea {
+  resize: vertical;
+  border-color: rgba(67, 97, 238, 0.2);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
 
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.25rem;
-    }
+.fixage textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
 
-    .is-invalid {
-      border-color: var(--danger-color);
-    }
+.fixage .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
 
-    .form-label {
-      font-weight: 500;
-      color: var(--text-color);
-    }
-    
-    .placeholder-badge {
-      transition: var(--transition);
-      font-size: 0.8rem;
-    }
-    
-    .input-group-text {
-      background-color: var(--primary-color);
-      color: white;
-      border-color: var(--primary-color);
-    }
+.fixage .section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
 
-    
-    /* Animation classes */
-    .fade-in {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Custom scrollbar */
-    .fixage ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    
-    .fixage ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-    
-    .fixage ::-webkit-scrollbar-thumb {
-      background: var(--primary-color);
-      border-radius: 10px;
-    }
-    
-    .fixage ::-webkit-scrollbar-thumb:hover {
-      background: var(--secondary-color);
-    }
+.fixage .is-invalid {
+  border-color: var(--danger-color);
+}
+
+.fixage .form-label {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.fixage .placeholder-badge {
+  transition: var(--transition);
+  font-size: 0.8rem;
+}
+
+.fixage .input-group-text {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* Animation classes */
+.fixage .fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom scrollbar */
+.fixage ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.fixage ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.fixage ::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.fixage ::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
