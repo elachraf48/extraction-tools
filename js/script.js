@@ -1,5 +1,6 @@
 let textCount = 0;
 //start fixage
+   let textCountfixagefixage = 0;
     let usedNames = new Set();
     let activeTextAreas = new Set();
 
@@ -17,7 +18,7 @@ let textCount = 0;
       const defaultName = getNextTextName();
       usedNames.add(defaultName);
       activeTextAreas.add(defaultName);
-      textCount = Math.max(textCount, parseInt(defaultName.replace('text', '')) || 1);
+      textCountfixage = Math.max(textCountfixage, parseInt(defaultName.replace('text', '')) || 1);
       
       const inputGroup = `
         <div class="text-group" id="text-group-${defaultName}">
@@ -90,9 +91,9 @@ let textCount = 0;
       activeTextAreas.delete(name);
       $(`#text-group-${name}`).remove();
       
-      // Reset textCount if we've deleted all text areas
+      // Reset textCountfixage if we've deleted all text areas
       if (activeTextAreas.size === 0) {
-        textCount = 0;
+        textCountfixage = 0;
       }
     });
 
