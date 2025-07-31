@@ -618,37 +618,85 @@
   </div>
   </div>
   <section id="fixage" style="display: none;">
-    <div class="container">
-    <div class="row">
+    <div class="container mb-5">
+    <div class="row g-4">
       <!-- Left Section -->
       <div class="col-md-5">
-        <div class="section-title">
-          <h3>Main Text</h3>
+        <div class="card h-100">
+          <div class="card-header d-flex align-items-center">
+            <i class="fas fa-file-alt me-2"></i>
+            <h4>Main Text</h4>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="main-textarea" class="form-label">
+                <i class="fas fa-info-circle me-1"></i> Enter your text with placeholders like <code>[text1]</code>, <code>[name]</code>, etc.
+              </label>
+              <textarea class="form-control" id="main-textarea" rows="15" placeholder="Enter your text here with placeholders in [brackets]..."></textarea>
+              <small class="form-text text-muted mt-2">
+                <i class="fas fa-lightbulb me-1"></i> Tip: Placeholders should be wrapped in square brackets, like <code>[placeholder]</code>
+              </small>
+            </div>
+          </div>
         </div>
-        <textarea id="main-textarea" class="form-control" rows="10" placeholder="Enter your main text here..."></textarea>
       </div>
 
       <!-- Middle Section with Generate Button -->
       <div class="col-md-2">
-         <div class="btn-group w-100 mb-3" role="group" aria-label="Generate controls">
-          <input type="checkbox" class="btn-check" id="auto-copy" checked autocomplete="off">
-          <label class="btn btn-outline-primary" for="auto-copy">Auto copy</label>
-          <button id="generate-btn" class="btn btn-primary">Generate</button>
+        <div class="card mb-4">
+          <div class="card-header d-flex align-items-center">
+            <i class="fas fa-sliders-h me-2"></i>
+            <h4>Controls</h4>
+          </div>
+          <div class="card-body">
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" id="generate-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate text with replacements">
+                <i class="fas fa-magic me-2"></i>Generate
+              </button>
+              <div class="form-check form-switch mt-3">
+                <input class="form-check-input" type="checkbox" id="auto-copy" checked data-bs-toggle="tooltip" data-bs-placement="top" title="Automatically copy generated text to clipboard">
+                <label class="form-check-label" for="auto-copy">
+                  <i class="fas fa-copy me-1"></i> Auto copy to clipboard
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+          <div class="card-header d-flex align-items-center">
+            <i class="fas fa-file-export me-2"></i>
+            <h4>Output</h4>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="left-output-textarea" class="form-label">
+                <i class="fas fa-check-circle me-1"></i> Generated Text
+              </label>
+              <textarea class="form-control" id="left-output-textarea" rows="10" placeholder="Output will appear here..." readonly></textarea>
+            </div>
+          </div>
         </div>
-        <div class="mt-4">
-          <h4>Output Result</h4>
-          <textarea id="left-output-textarea" class="form-control" rows="10" readonly></textarea>
         </div>
+        
+        
       </div>
 
       <!-- Right Section -->
       <div class="col-md-5">
-        <div class="section-title">
-          <h3>Dynamic Text Inputs</h3>
-          <button id="add-text-btn" class="btn btn-success">+ Add Text</button>
-        </div>
-        <div id="dynamic-inputs">
-          <!-- Dynamic inputs will be appended here -->
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-list-alt me-2"></i>
+              <h4>Replacement Texts</h4>
+            </div>
+            <button class="btn btn-sm" id="add-text-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a new replacement text">
+              <i class="fas fa-plus me-1"></i> Add Text
+            </button>
+          </div>
+          <div class="card-body">
+            <div id="dynamic-inputs" class="overflow-auto pb-4" style="max-height: 500px;">
+              <!-- Dynamic inputs will be appended here -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
