@@ -1,6 +1,6 @@
 let textCount = 0;
 //start fixage
-let textCountfixage = 0;
+    let textCountfixage = 0;
     let usedNames = new Set();
     let activeTextAreas = new Set();
 
@@ -31,9 +31,9 @@ let textCountfixage = 0;
         const textGroup = $(this).closest('.text-group');
         
         if (placeholders.has(textName)) {
-          textGroup.find('.placeholder-badge').removeClass('bg-secondary').addClass('bg-success').html('<i class="fas fa-check me-1"></i>Found in text');
+          textGroup.find('.placeholder-badge').removeClass('bg-secondary').addClass('bg-success').addClass('fixage').html('<i class="fas fa-check me-1 fixage"></i>Found in text');
         } else {
-          textGroup.find('.placeholder-badge').removeClass('bg-success').addClass('bg-secondary').html('<i class="fas fa-question me-1"></i>Not in text');
+          textGroup.find('.placeholder-badge').removeClass('bg-success').addClass('bg-secondary').addClass('fixage').html('<i class="fas fa-question me-1 fixage"></i>Not in text');
         }
       });
     }
@@ -46,29 +46,29 @@ let textCountfixage = 0;
       textCountfixage = Math.max(textCountfixage, parseInt(defaultName.replace('text', '')) || 1);
       
       const inputGroup = `
-        <div class="text-group" id="text-group-${defaultName}" style="opacity: 0; transform: translateY(20px);">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <span class="badge placeholder-badge bg-secondary"><i class="fas fa-question me-1"></i>Not in text</span>
-            <button class="btn btn-danger btn-sm remove-btn" data-name="${defaultName}">
-              <i class="fas fa-times"></i>
+        <div class="text-group fixage" id="text-group-${defaultName}" style="opacity: 0; transform: translateY(20px);">
+          <div class="d-flex justify-content-between align-items-center mb-2 fixage">
+            <span class="badge placeholder-badge bg-secondary fixage"><i class="fas fa-question me-1 fixage"></i>Not in text</span>
+            <button class="btn btn-danger btn-sm remove-btn fixage" data-name="${defaultName}">
+              <i class="fas fa-times fixage"></i>
             </button>
           </div>
-          <div class="mb-3">
-            <label for="text-name-${defaultName}" class="form-label"><i class="fas fa-tag me-1"></i>Placeholder Name:</label>
-            <div class="input-group">
-              <span class="input-group-text">[</span>
-              <input type="text" class="form-control text-name" id="text-name-${defaultName}" value="${defaultName}" placeholder="Enter name without brackets">
-              <span class="input-group-text">]</span>
+          <div class="mb-3 fixage">
+            <label for="text-name-${defaultName}" class="form-label fixage"><i class="fas fa-tag me-1 fixage"></i>Placeholder Name:</label>
+            <div class="input-group fixage">
+              <span class="input-group-text fixage">[</span>
+              <input type="text" class="form-control text-name fixage" id="text-name-${defaultName}" value="${defaultName}" placeholder="Enter name without brackets">
+              <span class="input-group-text fixage">]</span>
             </div>
-            <small class="form-text text-muted">This will replace [${defaultName}] in your text</small>
+            <small class="form-text text-muted fixage">This will replace [${defaultName}] in your text</small>
           </div>
-          <div class="mb-3">
-            <label for="text-value-${defaultName}" class="form-label"><i class="fas fa-edit me-1"></i>Replacement Text:</label>
-            <textarea class="form-control text-value" id="text-value-${defaultName}" rows="3" placeholder="Enter replacement text"></textarea>
+          <div class="mb-3 fixage">
+            <label for="text-value-${defaultName}" class="form-label fixage"><i class="fas fa-edit me-1 fixage"></i>Replacement Text:</label>
+            <textarea class="form-control text-value fixage" id="text-value-${defaultName}" rows="3" placeholder="Enter replacement text"></textarea>
           </div>
-          <div class="clean-checkbox form-check form-switch">
-            <input class="form-check-input clean-text-checkbox" type="checkbox" id="clean-text-${defaultName}">
-            <label class="form-check-label" for="clean-text-${defaultName}"><i class="fas fa-clipboard me-1"></i>Auto-paste from clipboard</label>
+          <div class="clean-checkbox form-check form-switch fixage">
+            <input class="form-check-input clean-text-checkbox fixage" type="checkbox" id="clean-text-${defaultName}">
+            <label class="form-check-label fixage" for="clean-text-${defaultName}"><i class="fas fa-clipboard me-1 fixage"></i>Auto-paste from clipboard</label>
           </div>
         </div>`;
       
@@ -132,12 +132,12 @@ let textCountfixage = 0;
             console.error('Failed to read clipboard contents: ', err);
             // Show a more user-friendly toast notification instead of an alert
             const toastHtml = `
-              <div class="toast align-items-center text-white bg-danger border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                  <div class="toast-body">
-                    <i class="fas fa-exclamation-circle me-2"></i>Could not read from clipboard. Please make sure you have granted clipboard permissions.
+              <div class="toast align-items-center text-white bg-danger border-0 position-fixed bottom-0 end-0 m-3 fixage" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex fixage">
+                  <div class="toast-body fixage">
+                    <i class="fas fa-exclamation-circle me-2 fixage"></i>Could not read from clipboard. Please make sure you have granted clipboard permissions.
                   </div>
-                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto fixage" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
               </div>`;
             
@@ -233,12 +233,12 @@ let textCountfixage = 0;
 
       // Show a success toast with replacement count
       const toastHtml = `
-        <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-            <div class="toast-body">
-              <i class="fas fa-check-circle me-2"></i>Successfully replaced ${replacementsMade} placeholder${replacementsMade !== 1 ? 's' : ''}!
+        <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3 fixage" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex fixage">
+            <div class="toast-body fixage">
+              <i class="fas fa-check-circle me-2 fixage"></i>Successfully replaced ${replacementsMade} placeholder${replacementsMade !== 1 ? 's' : ''}!
             </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto fixage" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
         </div>`;
       
