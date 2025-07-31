@@ -622,23 +622,26 @@
   </div>
   </div>
   <section id="fixage" style="display: none;">
-    <div class="container mb-5">
-    <div class="row g-4">
+   <body class="fade-in fixage">
+
+  <!-- Main Content -->
+  <div class="container mb-5 fixage">
+    <div class="row g-4 fixage">
       <!-- Left Section -->
-      <div class="col-md-5">
-        <div class="card h-100">
-          <div class="card-header d-flex align-items-center">
+      <div class="col-md-5 fixage">
+        <div class="card h-100 fixage">
+          <div class="card-header d-flex align-items-center fixage">
             <i class="fas fa-file-alt me-2"></i>
-            <h4>Main Text</h4>
+            <h4 class="fixage">Main Text</h4>
           </div>
-          <div class="card-body">
-            <div class="mb-3">
-              <label for="main-textarea" class="form-label">
-                <i class="fas fa-info-circle me-1"></i> Enter your text with placeholders like <code>[text1]</code>, <code>[name]</code>, etc.
+          <div class="card-body fixage">
+            <div class="mb-3 fixage">
+              <label for="main-textarea" class="form-label fixage">
+                <i class="fas fa-info-circle me-1"></i> Enter your text with placeholders like <code class="fixage">[text1]</code>, <code class="fixage">[name]</code>, etc.
               </label>
-              <textarea class="form-control" id="main-textarea" rows="15" placeholder="Enter your text here with placeholders in [brackets]..."></textarea>
-              <small class="form-text text-muted mt-2">
-                <i class="fas fa-lightbulb me-1"></i> Tip: Placeholders should be wrapped in square brackets, like <code>[placeholder]</code>
+              <textarea class="form-control fixage" id="main-textarea" rows="15" placeholder="Enter your text here with placeholders in [brackets]..."></textarea>
+              <small class="form-text text-muted mt-2 fixage">
+                <i class="fas fa-lightbulb me-1"></i> Tip: Placeholders should be wrapped in square brackets, like <code class="fixage">[placeholder]</code>
               </small>
             </div>
           </div>
@@ -646,20 +649,20 @@
       </div>
 
       <!-- Middle Section with Generate Button -->
-      <div class="col-md-2">
-        <div class="card mb-4">
-          <div class="card-header d-flex align-items-center">
+      <div class="col-md-2 fixage">
+        <div class="card mb-4 fixage">
+          <div class="card-header d-flex align-items-center fixage">
             <i class="fas fa-sliders-h me-2"></i>
-            <h4>Controls</h4>
+            <h4 class="fixage">Controls</h4>
           </div>
-          <div class="card-body">
-            <div class="d-grid gap-2">
-              <button class="btn btn-primary" id="generate-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate text with replacements">
+          <div class="card-body fixage">
+            <div class="d-grid gap-2 fixage">
+              <button class="btn btn-primary fixage" id="generate-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate text with replacements">
                 <i class="fas fa-magic me-2"></i>Generate
               </button>
-              <div class="form-check form-switch mt-3">
-                <input class="form-check-input" type="checkbox" id="auto-copy" checked data-bs-toggle="tooltip" data-bs-placement="top" title="Automatically copy generated text to clipboard">
-                <label class="form-check-label" for="auto-copy">
+              <div class="form-check form-switch mt-3 fixage">
+                <input class="form-check-input fixage" type="checkbox" id="auto-copy" checked data-bs-toggle="tooltip" data-bs-placement="top" title="Automatically copy generated text to clipboard">
+                <label class="form-check-label fixage" for="auto-copy">
                   <i class="fas fa-copy me-1"></i> Auto copy to clipboard
                 </label>
               </div>
@@ -685,19 +688,19 @@
       </div>
 
       <!-- Right Section -->
-      <div class="col-md-5">
-        <div class="card h-100">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-list-alt me-2"></i>
-              <h4>Replacement Texts</h4>
+      <div class="col-md-5 fixage">
+        <div class="card h-100 fixage">
+          <div class="card-header d-flex justify-content-between align-items-center fixage">
+            <div class="d-flex align-items-center fixage">
+              <i class="fas fa-list-alt me-2 fixage"></i>
+              <h4 class="fixage">Replacement Texts</h4>
             </div>
-            <button class="btn btn-sm" id="add-text-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a new replacement text">
-              <i class="fas fa-plus me-1"></i> Add Text
+            <button class="btn btn-sm fixage" id="add-text-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a new replacement text">
+              <i class="fas fa-plus me-1 fixage"></i> Add Text
             </button>
           </div>
-          <div class="card-body">
-            <div id="dynamic-inputs" class="overflow-auto pb-4" style="max-height: 500px;">
+          <div class="card-body fixage">
+            <div id="dynamic-inputs" class="overflow-auto pb-4 fixage" style="max-height: 500px;">
               <!-- Dynamic inputs will be appended here -->
             </div>
           </div>
@@ -705,6 +708,8 @@
       </div>
     </div>
   </div>
+     </body>
+
   </section>
   <section id="checkdomain" style="display: none;">
     <div class="container mt-5">
