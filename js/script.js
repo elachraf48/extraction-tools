@@ -1,6 +1,6 @@
 let textCount = 0;
 //start fixage
-let textCountfixagefixage = 0;
+let textCountfixage = 0;
     let usedNames = new Set();
     let activeTextAreas = new Set();
 
