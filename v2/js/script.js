@@ -1,3 +1,40 @@
+function encodeToBase64() {
+  const textarea = document.getElementById('text');
+  const text = textarea.value.trim();
+  if (text) {
+    const encoded = btoa(unescape(encodeURIComponent(text)));
+    textarea.value = encoded;
+  } else {
+    alert('Please enter some text first');
+  }
+}
+
+function decodeFromBase64() {
+  const textarea = document.getElementById('text');
+  const text = textarea.value.trim();
+  if (text) {
+    try {
+      const decoded = decodeURIComponent(escape(atob(text)));
+      textarea.value = decoded;
+    } catch (e) {
+      alert('Invalid Base64 input');
+    }
+  } else {
+    alert('Please enter some Base64 text first');
+  }
+}
+
+function encodeForEmailSubject() {
+  const textarea = document.getElementById('text');
+  const text = textarea.value.trim();
+  if (text) {
+    const encoded = btoa(unescape(encodeURIComponent(text)));
+    textarea.value = `=?UTF-8?B?${encoded}?=`;
+  } else {
+    alert('Please enter some text first');
+  }
+}
+
 // Initialize variables if they don't already exist
 if (typeof textCount === 'undefined') {
   let textCount = 0;
