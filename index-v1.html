@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GM8HCQFNXP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-GM8HCQFNXP');
+  </script>
+  <title>Extraction Tools | Extract IP Addresses From Text, IP Address Extractor | achraf48 |Email Extractor </title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="index.css" />
+
+  <link rel="shortcut icon" type="image/ico" href="https://i.ibb.co/yy8S6Wn/code.png" />
+  <!-- Add a modern favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  <meta property="og:title" content="achraf48.co">
+  <meta name="twitter:title" content="achraf48.co">
+  <!-- IPVoid -->
+  <meta property="og:title" content="Extract IP Addresses, Extract IP Online | achraf48.co" />
+  <meta property="og:description"
+    content="Extract IP addresses online. This tool extracts all IPv4 addresses found on the submitted text and shows only unique and valid IPv4 and IPv6 addresses." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="achraf48" />
+  <meta property="og:image" content="https://www.achraf48.co/image/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description"
+    content="Extract IP addresses online. This tool extracts all IPv4 addresses found on the submitted text and shows only unique and valid IPv4 and IPv6 addresses." />
+  <meta name="twitter:title" content="Extract IP Addresses, Extract IP Online | achraf48" />
+  <!-- Toolsvoid -->
+  <meta property="og:title" content="Extract IP Addresses From Text, IP Address Extractor | achraf48.co" />
+  <meta name="description" content="Email extractor for web pages and text" />
+  <meta property="og:description"
+    content="Free online service used to extract ip addresses from a text, extract IPv4 addresses, extract ips online." />
+  <meta property="og:type" content="website" />
+  <meta name="description"
+    content="Email Extractor - A free online tool that help you find all the email addresses from the text content. " />
+  <meta name="keywords"
+    content="email extractor, email from text, get email from text, email extraction, online email extract tool, debounce">
+  <meta name="description"
+    content="A free tool to extract email from texts. Fast and accurate email extractor helps you to get emails from text body in seconds.">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="https://i.ibb.co/yy8S6Wn/code.png"
+            style="width: 10%; margin-right: 1%;">By Achraf <span class="badge bg-primary rounded-pill ms-2" style="font-size: 0.6rem; vertical-align: super;">v2</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link active" id="ip-extraction-nav-link" href="#tools-extraction"
+                onclick="showSection('ip-extraction')"><i class="fas fa-cogs"> </i> Extraction Tool</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="split-nav-link" href="#split-text" onclick="showSection('split')"><i
+                  class="fas fa-columns"> </i> Split Tool</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="texttool-nav-link" href="#tool-text" onclick="showSection('texttool')"><i
+                  class="fa-solid fa-font"></i> Text Tool</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="checkdomain-nav-link" href="#check_domain" onclick="showSection('checkdomain')"><i
+                  class="fa-solid fa-globe"> </i> About Domain</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="fixage-nav-link" href="#fixage" onclick="showSection('fixage')"><i class="fa-solid fa-wand-magic-sparkles"> </i> Fixage</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" id="fixage-nav-link"  href="extractjson.html"><i class="fas fa-file"> </i> Extract json</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link " data-bs-toggle="offcanvas" href="#offcanvasExample"
+                aria-controls="offcanvasExample"><i class="fa-solid fa-calculator"></i> Calcule prime</a>
+            </li>
+            <li class="nav-item">
+              <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                aria-controls="offcanvasWithBothOptions" class="nav-link">
+                <i class="fa-solid fa-note-sticky"></i>
+                Notpade
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="home-nav-link" href="#about" onclick="showSection('home')"><i
+                  class="fa-solid fa-circle-user"></i> About</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi"><i class="fa fa-envelope"></i>Contact Us</a> -->
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-envelope"></i>
+                Contact Us</a>
+            </li>
+
+          </ul>
+
+          <button class="btn btn-outline-primary rounded-circle" id="dark-mode-btn">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+    </nav>
+
+
+  </header>
+  <!-- contact  -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Contact Us</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <center>
+            <a href="https://t.me/Achraf_Abiwi" style="margin: 0 25px;" target="_blank" rel="noopener noreferrer"><img
+                style="width: 50px; " src="../image/telegram.png" alt="" srcset=""></a>
+            <a
+              href="mailto:a.elabouye@ump.ac.ma?body=Hi achraf%0aI have a probleme%0a<your message here>%0a%0aachraf48 Support"><img
+                style="width: 50px;" src="../image/email.png" alt="" srcset=""></a>
+            <!-- <a href="mailto:support@port25.com?body=<your message here>%0a%0aVersion: 4.0r8%0aBuilt: 2012-09-10 17:27:12%0aPlatform: Linux 3.10.0-1160.88.1.el7.x86_64 CentOS Linux release 7.9.2009 (Core) x86_64%0aSerial: Elysium3-5-316904">Port25 Support</a> -->
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---------------------  end contact  ------------------>
+  <!---------------------notpade---------------------------->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-body">
+      <div class="notepad-container">
+        <div class="notepad-header">
+          <h5 class="notepad-title">notepad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <center>
+          <button class="btn btn-danger mb-2" id="clear-button"><i class="fa fa-eraser"></i>Clear Notepad</button>
+          <button class="btn btn-success mb-2" id="copy-button-note"><i class="fa fa-clone"></i> Copy Text</button>
+
+
+
+          <div class="notepad-content">
+            <textarea id="notepad-textarea" rows="" style="height:73vh ; width:100% ;"></textarea>
+          </div>
+          <!-- <button class="btn btn-success mb-2" id="copy-button-note"><i class="fa fa-clone"></i> Copy Text</button> -->
+          <div class="form-group">
+            <label for="key">Enter Key:</label>
+            <input type="number" class="form-control" id="key" placeholder="Enter key">
+          </div>
+
+          <button class="btn btn-primary" onclick="encodeMessage()">Encode</button>
+          <button class="btn btn-secondary" onclick="decodeMessage()">Decode</button>
+
+          <!-- <button type="button" class="btn btn-primary" onclick="codeText()"><i class="fa fa-file" aria-hidden="true"></i> Encode Text</button>
+        <button type="button" class="btn btn-primary" onclick="decodeText()"><i class="fa fa-file-o" aria-hidden="true"></i> Decode Text</button> -->
+        </center>
+      </div>
+    </div>
+  </div>
+  <!----------------end-----notpade---------------------------->
+
+  <!-- <div class="modal fade" id="section-modal" tabindex="-1" aria-labelledby="section-modal-label">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="section-modal-label"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!---------------------text tool---------------------------->
+  <div class="container my-5 box-shadow " id="texttool" style="display: none; margin-bottom: 200%;">
+    <div class="mb-3" id="loadingGif" style="display: none;">
+      <img src="loading.gif" alt="Loading...">
+    </div>
+    <div class="row" style=" margin-bottom: 20%;">
+
+      <div class="col-md-4 mt-3">
+        <div id="megretandsplit" class="container box ">
+          <h3>Text File Merger and Splitter</h3>
+          <input style="display: none;" name="file" id="fileInputsw" type="file" multiple>
+          <button class="btn btn-primary m-2 px-4"
+            onclick="alert('aler','select your chois before select file','yes');document.getElementById('fileInputsw').click()">megret
+            text</button>
+
+          <div class="check boxcheck">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="sep">
+              <label class="form-check-label" for="sep">split by __SEP__ </label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="spescialcaractir">
+              <label class="form-check-label" for="spescialcaractir">Remove special caracter</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="notdolaar">
+              <label class="form-check-label" for="notdolaar">Remove dot and @ and $ </label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="domainsite">
+              <label class="form-check-label" for="domainsite">Remove domain </label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="emptyline">
+              <label class="form-check-label" for="emptyline">Remove empty line </label>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4 mt-3">
+        <div id="megretandsplit50" class="container box">
+          <h3>Text File Splitter</h3>
+          <input style="display: none;" name="file" id="fileInputsw50" type="file">
+          <div class="check">
+            <button class="btn btn-primary m-2 px-4" onclick="document.getElementById('fileInputsw50').click()">Split
+              text</button>
+            <br>
+            <label for="sep">Split By Line </label><br>
+
+          </div>
+          <center>
+            <input type="number" name="" class="form-control w-50" id="number50" value="50" required>
+
+            <div class="input-group m-1 w-50">
+              <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value=""
+                  aria-label="Checkbox for following text input" id="enableInput">
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="name file txt"
+                disabled id="nameInput">
+            </div>
+          </center>
+        </div>
+      </div>
+      <div class="col-md-4 mt-3" id="convertpdfpdfs">
+        <div id="megretandsplit50" class="container box">
+          <center>
+            <h3>PDF to Text</h3>
+            <div class="mb-3 w-50">
+              <label for="pdffile" class="form-label">Select PDF Files:</label>
+              <input type="file" class="form-control" id="pdffile" accept=".pdf" name="pdffile" multiple="">
+            </div>
+            <div class="mb-3 w-50">
+              <label for="lignsinfile" class="form-label">Count Lines in File:</label>
+              <input type="number" class="form-control" id="lignsinfile" value="50" placeholder="Count Lines in File">
+            </div>
+
+            <button class="btn btn-primary w-50 mt-2" onclick="convertpdf()">convert pdf to text</button>
+
+          </center>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="mb-3" id="resultTextContainer" style="display: none;">
+    <div class="alert alert-success fixed-top mt-3" role="alert" id="outputAlert">
+      Result:
+    </div>
+  </div>
+  <!---------------------end text tool---------------------------->
+
+  <main class="container my-5 box-shadow" id="home" style="display: none;">
+    <center class="site-heading">
+      <img src="https://i.ibb.co/yy8S6Wn/code.png" alt="Placeholder image" class="rounded-circle rounded-lg">
+      <h1 class="mb-4">IP and Email Extraction Tools</h1>
+    </center>
+    <div class="row tool-description" id="Row">
+      <p class="lead">Hi there! Welcome to the IP and Email Extraction Tools website. My name is Achraf, and I'm the
+        creator of this site. Here, you'll find two powerful tools designed to make your life easier when it comes to
+        extracting IP addresses and email addresses from text or URLs.</p>
+      <p class="tool-description">The IP Extraction Tool is a valuable resource for cybersecurity professionals,
+        webmasters, or anyone who needs to quickly identify IP addresses. Whether you want to analyze network traffic,
+        investigate potential security threats, or track website visitors, this tool provides a simple and efficient
+        solution.</p>
+      <p class="tool-description">With the Email Extraction Tool, marketing professionals, recruiters, and researchers
+        can save valuable time by automating the process of collecting email addresses. Whether you're building a
+        targeted email list, conducting market research, or performing competitive analysis, this tool will help you
+        gather email addresses from text or web pages effortlessly.</p>
+      <p>Both tools are designed with user-friendliness in mind. You can access them easily from the navigation bar
+        above. Simply choose the tool you need, follow the instructions on the respective page, and enjoy the benefits
+        of streamlined IP and email extraction.</p>
+      <p>Rest assured that our tools are completely free to use. We're passionate about providing accessible and
+        efficient solutions for professionals and enthusiasts alike. Your privacy and data security are also a top
+        priority for us. We handle your information with care and ensure that it remains confidential throughout the
+        extraction process.</p>
+      <p>Ready to get started? Explore the power of IP and email extraction today and take your analysis and research to
+        new heights!</p>
+    </div>
+  </main>
+
+  <div class="container" id="split" style="display: none;">
+    <h1>Split Text</h1>
+    <form>
+      <div class="form-group">
+        <div style="position: relative;">
+          <textarea class="form-control col-12 mt-2"
+            placeholder="Paste your text containing IP or Email addresses into the box below..." id="input-text"
+            rows="8"></textarea>
+          <button type="button" onclick="shuffleSplit()" class="btn btn-lg btn-outline-success" id="sufull" title="sufull"
+            style="position: absolute; top: 5px; right: 5px;">
+            <i class="fas fa-random"></i>
+          </button>
+          <button type="button" title="extract Gmail"
+            style="position: absolute;height: 50px; padding: 0; width: 54px; top: 55px; right: 5px; background-image: url(https://img.icons8.com/?size=512&id=P7UIlhbpWzZm&format=png); background-repeat: no-repeat; background-size: cover;"
+            class="btn btn-outline-danger btn-lg" onclick="extractGmail_split()">
+            <!-- <i class="fa fa-envelope"></i> -->
+          </button>
+          <div class="form-check form-switch" style="position: absolute; top: 106px; right: 5px; ">
+            <input class="form-check-input" type="checkbox" role="switch" title="Remove googlemail" id="removegooglemail">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label id="line-counts"></label>
+        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnradio" id="split-by-section" autocomplete="off" checked>
+          <label class="btn btn-outline-primary " for="split-by-section">Number of Sections</label>
+
+          <input type="radio" class="btn-check" name="btnradio" id="split-by-line" autocomplete="off">
+          <label class="btn btn-outline-primary" for="split-by-line">Number of Line</label>
+
+        </div>
+
+        <div class="input-group mt-1">
+          <button class="btn btn-primary" style="width:10% ;" type="button" id="decrements"><i
+              class="fa fa-minus"></i></button>
+          <input type="number" id="lengths" class="form-control text-center" value="1" min="1" max="100">
+          <button class="btn btn-primary" style="width:10% ;" type="button" id="increments"><i
+              class="fa fa-plus"></i></button>
+        </div>
+
+      </div>
+      <!-- <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="even-sections" checked>
+        <label class="form-check-label" for="even-sections">Even Sections</label>
+
+      </div> -->
+      <div class="checkbox-wrapper">
+        <input type="checkbox" class="form-check-input check" id="even-sections" checked>
+        <label for="even-sections" class="label">
+          <svg width="45" height="45" viewBox="0 0 95 95">
+            <rect x="30" y="20" width="50" height="50" stroke="black" fill="none"></rect>
+            <g transform="translate(0,-952.36222)">
+              <path d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4"
+                stroke="black" stroke-width="3" fill="none" class="path1"></path>
+            </g>
+          </svg>
+          <span>Even Sections</span>
+        </label>
+      </div>
+
+      <div class="d-flex d-grid gap-2  justify-content-center">
+        <button type="button" class="btn btn-outline-danger mr-6 col-3" onclick="splitText('area')">Split</button>
+        <button type="button" class="btn btn-outline-success col-3" onclick="splitText('txt')">Split in files
+          txt</button>
+      </div>
+    </form>
+    <hr>
+    <!--<h2>Output:</h2>-->
+    <div class="container text-center" style="margin-bottom: 100px;" id="output-container"></div>
+  </div>
+
+  <!--home-->
+
+  <div class="container" id="ip-extraction" style="margin-bottom: 100px; display: block;">
+    <!--<button alt="ffff" class="btn btn-outline-danger btn-lg" onclick="sendMail()">send</button>-->
+
+    <h1 class="mt-3">Extractor Tools</h1>
+    <div class="container mt-1" id="ip-extraction-lite">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div style="width: 100%;" class="btn-group" role="group" aria-label="Basic example">
+            <input style="width: 60%;" type="file" class="form-control btn-outline-success" id="inputGroupFile01"
+              accept=".txt">
+            <a title="extract json" class="btn btn-outline-danger btn-lg" href="extractjson.html"><i class="far fa-file-exclamation"></i> </a>
+            <button title="remove duplicate" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i
+                class="fa fa-eraser"></i></button>
+
+            <button title="shuffle Lines" class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i
+                class="fa fa-random"></i></button>
+
+            <button title="copy" class="btn  btn-lg btn-outline-success" onclick="copyText()">
+              <i class="fa fa-clone"></i>
+            </button>
+            <button title="download file" class="btn  btn-lg btn-outline-success" onclick="download()">
+              <i class="fa fa-download"></i>
+            </button>
+            
+          </div>
+          <textarea id="text" class="form-control"
+            placeholder="Paste your text containing IP or Email addresses into the box below..." rows="5"></textarea>
+
+          <center class="mt-2">
+
+            <div class="d-grid gap-2 d-md-block">
+              <button type="button" class="btn btn-primary btn-lg" id="btn">Get Randome Text</button>
+              <!-- <button class="btn btn-danger btn-lg" onclick="updateEmails()">Convert to gmail</button> -->
+
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-success btn-lg" onclick="extractEmails()"><i
+                    class="fa fa-envelope"></i> Extract Email</button>
+                <button class="btn btn-success dropdown-toggle  btn-lg dropdown-toggle-split" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#" onclick="extractEmails()">Email Only</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractGmail()">Gmail</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractYahoo()">Yahoo</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractHotmail()">Hotmail</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractEmailAndPassword()">Email:Password</a></li>
+                </ul>
+              </div>
+
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-info btn-lg" onclick="extractipv4()"><i
+                    class="fa fa-magic"></i>Extract Ip</button>
+                <button class="btn btn-info dropdown-toggle  btn-lg dropdown-toggle-split" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#" onclick="extractipv4()">Extract ipv4</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractipv6()">Extract ipv6</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractipv4_ipv6()">Extract ipv4 & ipv6</a></li>
+                </ul>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary btn-lg" onclick="extractsubDomain()"><i
+                    class="fa fa-magic"></i> Extract Domain</button>
+                <button class="btn btn-secondary dropdown-toggle  btn-lg dropdown-toggle-split" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#" onclick="extractDomain()">Extract Domain</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="extractsubDomain()">Extract sub Domain</a></li>
+                </ul>
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic example">
+
+                <button class="btn  btn-lg btn-dark" onclick="dotfunction()">add dot email </button>
+                <button class="btn  btn-lg btn-danger" onclick="removedots()"> <i class="fa fa-eraser"></i></button>
+              </div>
+            </div>
+
+            <div class="input-group m-2 w-75" role="group">
+              <button type="button" class="btn btn-primary " onclick="extractDomains()">Extract Domain</button>
+
+              <select id="extensionSelect" class="form-control" onchange="handleExtensionChange()">
+                <option value="net">net</option>
+                <option value="org">org</option>
+                <option value="edu">edu</option>
+                <option value="gov">gov</option>
+                <option value="info">info</option>
+                <option value="io">io</option>
+                <option value="com">com</option>
+                <option value="me" selected>me</option>
+                <option value="co">co</option>
+                <option value="uk">uk</option>
+                <option value="club">club</option>
+                <option value="online">online</option>
+                <option value="one">one</option>
+                <option value="other">Add new</option>
+                <!-- Add more options as needed -->
+              </select>
+              <span class="input-group-text bg-primary"></span>
+
+              <!-- <input type="text" class="form-control w-25" placeholder="s_emh_" value="s_emh_" id="keywordInput">
+              <button type="button" class="btn btn-primary" onclick="extractWords()">Extract Email pass</button> -->
+              <select id="Splitter" class="form-control">
+                <option value=";">;</option>
+                <option value=",">,</option>
+                <option value=":">:</option>
+                <!-- Add more options as needed -->
+              </select>
+            
+              <!-- Button to open file dialog -->
+              <button type="button" class="btn btn-danger" onclick="openFileDialog()"><i class="fas fa-file"> </i> Extract Email Pass</button>
+
+              <!-- Hidden file input element -->
+              <input type="file" id="csvFile" style="display: none;" accept=".csv">
+            </div>
+            
+            <span id="line-count"></span>
+      
+            <div class="container text-center" id="output-containerr"></div>
+            <!-- <div class="form-group row mt-4 w-50">
+              <div class="input-group col-12">
+                <input type="text" class="form-control text-center" id="url" placeholder="E.g., https://example.com">
+                <button class="btn btn-success" onclick="extractFooter()">Extract Footer</button>
+              </div>
+            </div> -->
+          </center>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Modal Dialog -->
+    <div class="modal fade" id="customExtensionModal" tabindex="-1" role="dialog"
+      aria-labelledby="customExtensionModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="customExtensionModalLabel">Add Custom Domain Extension</h5>
+            <button type="button" class="close" onclick="closeCustomExtensionModal()" data-dismiss="modal"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label for="customExtensionInputModal">Enter Custom Extension:</label>
+            <input type="text" id="customExtensionInputModal" class="form-control" placeholder="com or org .." />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              onclick="closeCustomExtensionModal()">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCustomExtension()">Add
+              Extension</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+
+      <div class="form-check form-switch">
+        <h2><label class="d-flex d-grid gap-2  justify-content-center form-check-label" for="random_">Random String
+            Generator</label></h2>
+        <input class="form-check-input" type="checkbox" role="switch" id="random" style="display: none;" checked>
+      </div>
+
+      <div id="generat_random">
+        <div class="container">
+          <div class="row justify-content-center" style="margin: 0 20%; ">
+            <div class="col-12">
+              <div class="form-group row ">
+                <div class="input-group col-4 " style="width:40% ;">
+                  <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group ">
+                    <input type="checkbox" class="btn-check" id="uppercase" autocomplete="off">
+                    <label class="btn btn-outline-danger " for="uppercase">AZ</label>
+
+                    <input type="checkbox" class="btn-check" id="lowercase" autocomplete="off" checked>
+                    <label class="btn btn-outline-danger" for="lowercase">az</label>
+
+                    <input type="checkbox" class="btn-check" id="numbers" autocomplete="off" checked>
+                    <label class="btn btn-outline-danger" for="numbers">NB</label>
+
+                    <input type="checkbox" class="btn-check" id="symbols" autocomplete="off">
+                    <label class="btn btn-outline-danger" for="symbols">SY</label>
+                  </div>
+                </div>
+
+                <div class="input-group col-4 " style="width:58% ; margin-left:1% ;">
+                  <button class="btn btn-outline-primary" style="width:30% ;" type="button" id="decrement"><i
+                      class="fa fa-minus"></i></button>
+                  <input type="number" id="length" class="form-control text-center" value="20" min="1" max="100">
+                  <button class="btn btn-outline-primary" style="width:30% ;" type="button" id="increment"><i
+                      class="fa fa-plus"></i></button>
+                </div>
+              </div>
+
+              <div class="form-group row mt-4">
+                <div class="input-group col-12">
+                  <input type="text" id="result-GN" class="form-control text-center" readonly>
+                  <button id="generate" class="btn btn-danger" style="width: 40%;">Generate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <section id="fixage" class="fade-in fixage" style="display: none;">
+
+  <!-- Main Content -->
+  <div class="container mb-5 fixage">
+    <div class="row g-4 fixage">
+      <!-- Left Section -->
+      <div class="col-md-5 fixage">
+        <div class="card h-100 fixage">
+          <div class="card-header d-flex align-items-center fixage">
+            <i class="fas fa-file-alt me-2"></i>
+            <h4 class="fixage">Main Text</h4>
+          </div>
+          <div class="card-body fixage">
+            <div class="mb-3 fixage">
+              <label for="main-textarea" class="form-label fixage">
+                <i class="fas fa-info-circle me-1"></i> Enter your text with placeholders like <code class="fixage">[text1]</code>, <code class="fixage">[name]</code>, etc.
+              </label>
+              <textarea class="form-control fixage" id="main-textarea" rows="15" placeholder="Enter your text here with placeholders in [brackets]..."></textarea>
+              <small class="form-text text-muted mt-2 fixage">
+                <i class="fas fa-lightbulb me-1"></i> Tip: Placeholders should be wrapped in square brackets, like <code class="fixage">[placeholder]</code>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Section with Generate Button -->
+      <div class="col-md-2 fixage">
+        <div class="card mb-4 fixage">
+          <div class="card-header d-flex align-items-center fixage">
+            <i class="fas fa-sliders-h me-2"></i>
+            <h4 class="fixage">Controls</h4>
+          </div>
+          <div class="card-body fixage">
+            <div class="d-grid gap-2 fixage">
+              <button class="btn btn-primary fixage" id="generate-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate text with replacements">
+                <i class="fas fa-magic me-2"></i>Generate
+              </button>
+              <div class="form-check form-switch mt-3 fixage">
+                <input class="form-check-input fixage" type="checkbox" id="auto-copy" checked data-bs-toggle="tooltip" data-bs-placement="top" title="Automatically copy generated text to clipboard">
+                <label class="form-check-label fixage" for="auto-copy">
+                  <i class="fas fa-copy me-1"></i> Auto copy to clipboard
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="card fixage">
+          <div class="card-header d-flex align-items-center fixage">
+            <i class="fas fa-file-export me-2 fixage"></i>
+            <h4 class="fixage">Output</h4>
+          </div>
+          <div class="card-body fixage">
+            <div class="mb-3 fixage">
+              <label for="left-output-textarea" class="form-label fixage">
+                <i class="fas fa-check-circle me-1 fixage"></i> Generated Text
+              </label>
+              <textarea class="form-control fixage" id="left-output-textarea" rows="10" placeholder="Output will appear here..." readonly></textarea>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+        
+      </div>
+
+      <!-- Right Section -->
+      <div class="col-md-5 fixage">
+        <div class="card h-100 fixage">
+          <div class="card-header d-flex justify-content-between align-items-center fixage">
+            <div class="d-flex align-items-center fixage">
+              <i class="fas fa-list-alt me-2 fixage"></i>
+              <h4 class="fixage">Replacement Texts</h4>
+            </div>
+            <button class="btn btn-primary btn-sm fixage" id="add-text-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a new replacement text">
+              <i class="fas fa-plus me-1 fixage"></i> Add Text
+            </button>
+          </div>
+          <div class="card-body fixage">
+            <div id="dynamic-inputs" class="overflow-auto pb-4 fixage" style="max-height: 500px;">
+              <!-- Dynamic inputs will be appended here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section id="checkdomain" style="display: none;">
+    <div class="container mt-5">
+      <h1>Domain List</h1>
+      <form>
+        <div class="form-group">
+          <textarea class="form-control" placeholder="Enter domains" id="domain-input" rows="3"></textarea>
+        </div>
+        <center class="mt-1">
+          <div class="d-grid gap-2 d-md-block justify-content-center">
+
+            <button type="button" class="btn btn-secondary " id="clear">clear</button>
+            <button type="button" class="btn btn-info   " id="bulkblacklist">bulk blacklist</button>
+            <button type="button" class="btn btn-primary   " id="talos-button">Check in Talos</button>
+            <button type="button" class="btn btn-success  " id="spamhaus-button">Check in Spamhaus</button>
+            <button type="button" class="btn btn-danger   " id="scamadviser-button">Check in ScamAdviser</button>
+            <button type="button" class="btn btn-warning  " id="mxtoolbar-button">Check in mxtoolbox</button>
+            <button type="button" class="btn btn-dark  " onclick="namesheap()">Check in namecheap</button>
+
+
+
+          </div>
+
+        </center>
+      </form>
+      <div class="container text-center" id="output-containerr"></div>
+      <ul style="margin-bottom: 100px;" id="domain-list">
+        <!--<iframe src="https://www.bulkblacklist.com/" style="width: 90%; height:80vh ;"></iframe>-->
+      </ul>
+    </div>
+  </section>
+  </center>
+  <footer class="bg-light fixed-bottom">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      <p class="text-center">
+        <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">
+          &copy;2021-<span id="currentYears"></span> Achraf . All rights reserved.
+        </a>
+      </p>
+
+    </div>
+  </footer>
+  <div id="cookie-banner">
+    <p>We use cookies to personalize content and ads, to provide social media features and to analyze our traffic. Some
+      of these cookies also help improve your user experience on our websites, assist with navigation and your ability
+      to provide feedback, and assist with our promotional and marketing efforts. Please read our <a
+        href="/cookie-policy">Cookie Policy</a> for a more detailed description and click on the settings button to
+      customize how the site uses cookies for you.</p>
+    <button id="cookie-settings">COOKIES SETTINGS</button>
+    <button id="cookie-accept">ACCEPT COOKIES</button>
+  </div>
+
+  <!--prima-->
+  <div class="offcanvas offcanvas-start p-2" tabindex="-1" id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title " id="offcanvasExampleLabel">Calcule Prime</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+    </div>
+    <form>
+      <label for="">Prime</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text bg-primary" style="width:25% ;">Prime </span>
+        <input type="text" class="form-control" id="prime" placeholder="0" value="0" required>
+        <span class="input-group-text">$</span>
+      </div>
+      <label class="m-6">Taux de change</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text">$</span>
+        <input type="text" name="change" id="change-input" placeholder="ex: 10.01" required />
+        <button class="btn btn-primary" onclick="fetchExchangeRate()" type="button" id="button-addon2">Get
+          Exchange</button>
+      </div>
+      <div class="btn-group d-flex justify-content-center mb-2" role="group"
+        aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradios" id="mailer" autocomplete="off" checked>
+        <label class="btn btn-outline-primary " for="mailer">Mailer </label>
+
+        <input type="radio" class="btn-check" name="btnradios" id="tl" autocomplete="off">
+        <label class="btn btn-outline-primary" for="tl">Team leader</label>
+
+      </div>
+      <div id="mailer_div">
+        <div class="input-group mb-3 befor">
+          <span class="input-group-text bg-danger" style="width:25% ;">Less than</span>
+          <input type="text" class="form-control" id="before" placeholder="20" value="20">
+          <span class="input-group-text">K</span>
+          <span class="input-group-text bg-danger"></span>
+          <span class="input-group-text"><i class="fa fa-arrow-right"></i> </span>
+          <input type="text" class="form-control" id="beforepr" placeholder="2" value="2">
+          <span class="input-group-text"><i class="fa fa-percent"></i> </span>
+        </div>
+
+        <div class="input-group mb-3 after">
+          <span class="input-group-text bg-success" style="width:25% ;">More than </span>
+          <input type="text" class="form-control" id="after" placeholder="20" value="20">
+          <span class="input-group-text">K</span>
+          <span class="input-group-text bg-success"></span>
+          <span class="input-group-text"><i class="fa fa-arrow-right"></i> </span>
+          <input type="text" class="form-control" id="afterpr" placeholder="2.5" value="2.5">
+          <span class="input-group-text"><i class="fa fa-percent"></i> </span>
+
+        </div>
+
+
+        <div class="btn-group d-flex justify-content-center mb-2" role="group"
+          aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnradio" id="model" autocomplete="off">
+          <label class="btn btn-outline-success " for="model">Employé model </label>
+
+          <input type="radio" class="btn-check" name="btnradio" id="nmodel" autocomplete="off" checked>
+          <label class="btn btn-outline-success" for="nmodel">Non employé model</label>
+
+        </div>
+      </div>
+      <div id="tl_div" style="display: none;">
+        <div class="input-group mb-3 befor">
+          <span class="input-group-text bg-primary" style="width:25% ;">It equals</span>
+          <input type="text" class="form-control" placeholder="0" value="0">
+          <span class="input-group-text">K</span>
+          <span class="input-group-text bg-primary"></span>
+          <span class="input-group-text"><i class="fa fa-arrow-right"></i> </span>
+          <input type="text" class="form-control" id="tl_pr" placeholder="1.5" value="1.5">
+          <span class="input-group-text"><i class="fa fa-percent"></i> </span>
+        </div>
+        <label for="">Your Prime </label>
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-primary" style="width:25% ;">Your Prime </span>
+          <input type="text" class="form-control" id="primetl" placeholder="0" value="0" required>
+          <span class="input-group-text">$</span>
+        </div>
+
+      </div>
+      <button class="btn btn-primary w-100" onclick="calcule()" type="button" id="button-calcule">Calcule</button>
+      <div id="resultatcal" class="text-center font-weight-bold p-3"></div>
+    </form>
+  </div>
+
+
+  <!--    header     
+   <div id="navbarContainer">
+    <div id="navbar">
+      <div id="bubbleWrapper">
+        <div id="bubble1" class="bubble"><span class="icon"><i class="fas fa-home"></i></span></div>
+        <div id="bubble2" class="bubble"><span class="icon"><i class="fab fa-twitter"></i></span></div>
+        <div id="bubble3" class="bubble"><span class="icon"><i class="fas fa-bell"></i></span></div>
+        <div id="bubble4" class="bubble"><span class="icon"><i class="fas fa-user"></i></span></div>
+      </div>
+      <div id="menuWrapper">
+        <div id="menu1" class="menuElement" onclick="move('1', '12.5vw', '#ffcc80')"><i class="fas fa-home"></i></div>
+        <div id="menu2" class="menuElement" onclick="move('2', '37.5vw', '#81d4fa')"><i class="fab fa-twitter"></i></div>
+        <div id="menu3" class="menuElement" onclick="move('3', '62.5vw', '#c5e1a5')"><i class="fas fa-bell"></i></div>
+        <div id="menu4" class="menuElement" onclick="move('4', '87.5vw', '#ce93d8')"><i class="fas fa-user"></i></div>
+      </div>
+    </div>
+-->
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  <!-- Add the JSZip library to your HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="https://use.fontawesome.com/releases/vVERSION/js/conflict-detection.js"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>
+  <!-- Font Awesome JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+  <script>
+    function updateEmails() {
+            // Get the value from the textarea
+            let inputText = document.getElementById('text').value;
+            
+            // Split the input text into lines
+            let lines = inputText.split('\n');
+
+            // Process each line
+            let processedLines = lines.map(line => {
+                // Remove everything before the last occurrence of '_smtp_'
+                line = line.replace(/.*?_smtp_/, '');
+                
+                // Replace '_smtp_gmail_com' with '@gmail.com'
+                line = line.replace('_smtp_gmail_com', '@gmail.com');
+                line = line.replace('_smtp_googlemail_com', '@googlemail.com');
+                line = line.replace(/_/g, '.');
+
+                return line;
+            });
+
+            // Join the processed lines back into a single string
+            let result = processedLines.join('\n');
+
+            // Set the value back to the textarea
+            document.getElementById('text').value = result;
+            
+        }
+
+    document.getElementById('enableInput').addEventListener('change', function () {
+      const textInput = document.getElementById('nameInput');
+      if (this.checked) {
+        textInput.disabled = false;
+      } else {
+        textInput.disabled = true;
+      }
+    });
+    let fileContents = [];
+    let mergedContent = '';
+
+    function handleFiles(e) {
+      fileContents = [];
+      const files = Array.from(e.target.files);
+      if (files.length > 0) {
+        document.getElementById('loadingGif').style.display = 'block';
+
+
+        const fileCount = files.length;
+        document.getElementById('outputAlert').innerText = `Files merged and downloaded successfully! ${fileCount}`;
+        readFiles(0, files); // Start reading the files
+      } else {
+        document.getElementById('resultTextContainer').style.display = 'none';
+        document.getElementById('outputAlert').innerText = 'No files selected.';
+      }
+    }
+
+    document.getElementById('fileInputsw').addEventListener('change', handleFiles);
+
+    function readFiles(index, files) { // Pass the index and files as parameters
+      const check = document.getElementById('sep').checked;
+
+      if (index >= files.length) {
+        if (check) {
+          mergedContent = fileContents.join("\n__SEP__\n");
+          mergeAndDownloadFiles();
+        }
+        else {
+          mergedContent = fileContents.join("\n");
+          mergeAndDownloadFiles();
+        }
+
+      } else {
+        const fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          const content = e.target.result;
+          fileContents.push(content);
+          readFiles(index + 1, files); // Call the function recursively with updated index
+        };
+        fileReader.onerror = function (e) {
+          alert('Error reading file: ', e);
+          readFiles(index + 1, files); // Call the function recursively with updated index
+        };
+        fileReader.readAsText(files[index]);
+      }
+    }
+
+    function mergeAndDownloadFiles() {
+      const check = document.getElementById('sep').checked;
+      const removeSpecialCharacter = document.getElementById('spescialcaractir').checked;
+      const removenotdolaar = document.getElementById('notdolaar').checked;
+      const removeDomain = document.getElementById('domainsite').checked;
+      const removeEmptyLines = document.getElementById('emptyline').checked;
+
+
+      let mergedContent = '';
+      if (check) {
+        // Merge the file contents with separator "__SEP__"
+        mergedContent = fileContents.join("\n__SEP__\n");
+      } else {
+        // Just join all lines of each file without any separators between them
+        mergedContent = fileContents.join("\n");
+      }
+
+      // Remove special characters if the checkbox is checked
+      if (removeSpecialCharacter) {
+        mergedContent = removeSpecialCharacters(mergedContent);
+      }
+      if (removenotdolaar) {
+        mergedContent = removedotanddollar(mergedContent);
+      }
+
+      // Remove domain if the checkbox is checked
+      if (removeDomain) {
+        mergedContent = removeDomains(mergedContent);
+      }
+
+      // Remove empty lines if the checkbox is checked
+      if (removeEmptyLines) {
+        mergedContent = removeEmptyLinesFromContent(mergedContent);
+      }
+      // Download the modified content as a text file
+      const downloadLink = document.createElement('a');
+      downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(mergedContent);
+      downloadLink.download = 'after_split.txt';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+
+      // Hide loading GIF and show success message with animation
+      // Hide loading GIF and show success message
+      document.getElementById('loadingGif').style.display = 'none';
+      mergedContent = ''; // Reset the merged content
+      document.getElementById('resultTextContainer').style.display = 'block';
+
+      const resultTextContainer = document.getElementById('resultTextContainer');
+
+      resultTextContainer.classList.add('show');
+      resultTextContainer.classList.remove('hide');
+
+      // Hide the result text after 3 seconds
+      setTimeout(() => {
+        resultTextContainer.classList.add('hide');
+      }, 3000);
+    }
+
+    // Helper function to remove special characters except '-'
+    function removeSpecialCharacters(text) {
+      // Define the regex pattern for special characters (except '-')
+      const specialCharsRegex = /[^a-zA-Z0-9\s_]/g;
+
+      // Replace special characters (except '-') with an empty string
+      return text.replace(specialCharsRegex, '');
+    }
+
+
+
+    // Helper function to remove special characters
+    function removedotanddollar(text) {
+      // Define the regex pattern for special characters
+      const specialCharsRegex = /[@.$]/g;
+
+      // Replace special characters with an empty string
+      return text.replace(specialCharsRegex, '');
+    }
+    // Helper function to remove domains
+    function removeDomains(text) {
+      // Define the regex pattern for domain names (assuming they are enclosed in < and >)
+      const domainNameRegex = /\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}\b/gi;
+
+      // Remove domain names from the text
+      return text.replace(domainNameRegex, '');
+    }
+
+    // Helper function to remove empty lines
+    function removeEmptyLinesFromContent(text) {
+      // Define the regex pattern for empty lines
+      const emptyLinesRegex = /^\s*$/gm;
+
+      // Remove empty lines from the text
+      return text.replace(emptyLinesRegex, '');
+    }
+    //==========================split of number line======================
+
+    function handleFiles50(e) {
+      const file = e.target.files[0];
+      if (file) {
+        splitFiles(file);
+      } else {
+        alert("No file selected.");
+      }
+    }
+
+    function splitFiles(file) {
+      const number = parseInt(document.getElementById("number50").value);
+      if (!isNaN(number) && number > 0) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const content = reader.result;
+          const lines = content.split("\n");
+          const splitContent = [];
+
+          document.getElementById('loadingGif').style.display = 'block';
+          document.getElementById('outputAlert').innerText = `Files Split and downloaded successfully! `;
+          for (let i = 0; i < lines.length; i += number) {
+            splitContent.push(lines.slice(i, i + number).join("\n"));
+          }
+          createZips(splitContent);
+        };
+        reader.readAsText(file);
+      } else {
+        alert("Invalid number of lines.");
+      }
+    }
+
+    function createZips(splitContent) {
+      let namefile = ' ';
+      enableInput = document.getElementById('enableInput').checked;
+      const nameInput = document.getElementById('nameInput');
+      // Remove domain if the checkbox is checked
+      if (enableInput) {
+        namefile = nameInput.value;
+      }
+      else {
+        namefile = 'part';
+      }
+
+      const zip = new JSZip();
+      for (let i = 0; i < splitContent.length; i++) {
+        zip.file(`${namefile}_${i + 1}.txt`, splitContent[i]);
+      }
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        downloadZips(content);
+      });
+    }
+
+    function downloadZips(zipBlob) {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(zipBlob);
+      downloadLink.download = "split_files.zip";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      // Hide loading GIF and show success message
+      document.getElementById('loadingGif').style.display = 'none';
+      document.getElementById('resultTextContainer').style.display = 'block';
+
+      const resultTextContainer = document.getElementById('resultTextContainer');
+
+      resultTextContainer.classList.add('show');
+      resultTextContainer.classList.remove('hide');
+
+      // Hide the result text after 3 seconds
+      setTimeout(() => {
+        resultTextContainer.classList.add('hide');
+      }, 3000);
+    }
+
+    document.getElementById("fileInputsw50").addEventListener("change", handleFiles50);
+
+    //==========================pdf to text======================
+    function convertpdf() {
+      // Hide the convertpdf button and show the loading GIF
+      document.getElementById('loadingGif').style.display = 'block';
+
+      var lignsinfile = parseInt(document.getElementById('lignsinfile').value);
+      var wordsinlign = Math.floor(Math.random() * (12 - 7 + 1)) + 7;
+
+      const files = document.getElementById('pdffile').files;
+      const pdf2text = new Pdf2TextClassp();
+      pdf2text.pdfToText(files, function (text) {
+
+        // Remove URLs/domains
+        text = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+
+        // Remove special characters
+        text = text.replace(/[^0-9a-zA-Z ]+/g, ' ');
+
+        const words = text.split(/\s+/);
+
+        let content = "";
+        let w = 0;
+        let l = 0;
+        let n = 1;
+        let zip = new JSZip();
+        let folder = zip.folder("text-files");
+
+        for (let i = 0; i < words.length; i++) {
+          content += words[i] + " ";
+          w++;
+
+          if (w == wordsinlign) {
+            content += "\n";
+            w = 0;
+            wordsinlign = Math.floor(Math.random() * (11 - 7 + 1)) + 7;
+
+            l++;
+
+            if (l == lignsinfile) {
+              folder.file(`text-${n}.txt`, content);
+              n++;
+              l = 0;
+              content = "";
+            }
+          }
+        }
+
+        if (content.length > 0) {
+          folder.file(`text-${n}.txt`, content);
+        }
+
+        zip.generateAsync({ type: "blob" }).then(function (content) {
+          // Hide the loading GIF and show the result text container
+          document.getElementById('loadingGif').style.display = 'none';
+          document.getElementById('resultTextContainer').style.display = 'block';
+          const resultTextContainer = document.getElementById('resultTextContainer');
+          resultTextContainer.classList.add('show');
+          resultTextContainer.classList.remove('hide');
+
+          // Display the result text
+          const outputAlert = document.getElementById('outputAlert');
+          outputAlert.innerText = 'Task donne \n';
+          saveAspdf(content, "textfiles.zip");
+          // Hide the result text after 3 seconds
+          setTimeout(() => {
+            resultTextContainer.classList.add('hide');
+          }, 3000);
+        }
+
+        );
+      });
+    }
+
+
+    function Pdf2TextClassp() {
+      this.pdfToText = function (files, callback) {
+        let total = files.length;
+        let complete = 0;
+        let layers = {};
+
+        for (let j = 0; j < files.length; j++) {
+          const file = files[j];
+          const reader = new FileReader();
+
+          reader.onload = function () {
+            const loadingTask = pdfjsLib.getDocument(reader.result);
+
+            loadingTask.promise.then(function (pdf) {
+              let numPages = pdf.numPages;
+              let pageNumber = 1;
+
+              pdf.getPage(pageNumber).then(function (page) {
+                page.getTextContent().then(function (textContent) {
+                  let pageText = "";
+
+                  for (let i = 0; i < textContent.items.length; i++) {
+                    const item = textContent.items[i];
+                    pageText += item.str;
+                  }
+
+                  layers[j] = pageText;
+
+                  complete++;
+                  if (complete == total) {
+                    let fullText = "";
+
+                    for (let k = 0; k < total; k++) {
+                      if (layers[k] !== undefined) {
+                        fullText += layers[k];
+                      }
+                    }
+
+                    callback(fullText);
+                  }
+                });
+              });
+            }).catch(function (error) {
+              console.log(`Error loading PDF: ${error.message}`);
+              complete++;
+              if (complete == total) {
+                let fullText = "";
+                for (let k = 0; k < total; k++) {
+                  if (layers[k] !== undefined) {
+                    fullText += layers[k];
+                  }
+                }
+                callback(fullText);
+              }
+            });
+          };
+
+          reader.readAsArrayBuffer(file);
+        }
+      };
+    }
+
+    function saveToFilepdf(text, filename) {
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+
+
+    function saveAspdf(blob, filename) {
+      if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
+        navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        const link = document.createElement('a');
+        if (typeof link.download !== 'undefined') {
+          const url = URL.createObjectURL(blob);
+          link.setAttribute('href', url);
+          link.setAttribute('download', filename);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+    }
+    var currentYear = new Date().getFullYear();
+    document.getElementById("currentYears").textContent = currentYear;
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  <!-- Add the JSZip library to your HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+
+</html>
