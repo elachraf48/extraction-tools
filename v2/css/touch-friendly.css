@@ -1,0 +1,26 @@
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets for better mobile usability */
+  .btn, 
+  .nav-link,
+  .form-control,
+  .form-select,
+  input[type="checkbox"],
+  input[type="radio"],
+  .dropdown-item {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+  }
+  
+  /* Add more space between clickable elements */
+  .btn {
+    margin: 0.25rem;
+  }
+  
+  /* Make scrollable areas have momentum scrolling */
+  .overflow-auto,
+  .overflow-scroll,
+  .modal-body,
+  .offcanvas-body {
+    -webkit-overflow-scrolling: touch;
+  }
+}

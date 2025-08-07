@@ -1,0 +1,38 @@
+/* Utility styles */
+
+/* Site heading */
+.site-heading {
+  margin-bottom: 40px;
+}
+
+.site-heading img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.lead {
+  font-size: 18px;
+}
+
+/* Row positioning */
+#Row {
+  position: relative;
+  margin-bottom: 18%;
+}
+
+/* Loading indicator */
+#loadingGif {
+  position: fixed;
+  left: 46%;
+  top: 20%;
+  z-index: 9999;
+}
+
+/* Box styles */
+.boxcheck {
+  text-align: left;
+  margin-left: 10%;
+}

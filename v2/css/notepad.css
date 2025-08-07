@@ -1,0 +1,25 @@
+/* Notepad styles */
+.notepad-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+  margin-bottom: 6px;
+}
+
+#resultTextContainer {
+  position: fixed;
+  z-index: 800;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 3s;
+  width: 400px;
+}
+
+#resultTextContainer.show {
+  opacity: 1;
+}
+
+#resultTextContainer.hide {
+  opacity: 0;
+}

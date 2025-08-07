@@ -1,0 +1,178 @@
+/* Enhanced Mobile and Tablet Responsiveness */
+/* Small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+  body {
+    font-size: 0.9rem;
+  }
+  
+  .container {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .card {
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .navbar-brand img {
+    width: 24px !important;
+    height: auto;
+    margin-right: 0.3rem !important;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.4rem 0.6rem;
+    margin: 0.2rem;
+  }
+  
+  h1, .h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+  
+  .display-6 {
+    font-size: 1.4rem;
+  }
+  
+  .lead {
+    font-size: 0.9rem;
+  }
+  
+  footer {
+    padding: 2rem 0;
+  }
+  
+  .offcanvas {
+    width: 85% !important;
+  }
+  
+  .row {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  
+  .col, [class*="col-"] {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .table {
+    font-size: 0.85rem;
+  }
+  
+  .badge {
+    font-size: 0.7rem;
+  }
+}
+
+/* Medium devices (tablets, 576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .container {
+    margin: 0.75rem;
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
+  
+  .card {
+    border-radius: 14px;
+  }
+  
+  .btn {
+    padding: 0.65rem 1.3rem;
+    font-size: 0.92rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+  
+  .navbar-brand img {
+    width: 30px !important;
+    height: auto;
+    margin-right: 0.5rem !important;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.45rem 0.7rem;
+    margin: 0.25rem;
+  }
+  
+  h1, .h1 {
+    font-size: 2rem;
+  }
+  
+  h2, .h2 {
+    font-size: 1.7rem;
+  }
+  
+  .display-6 {
+    font-size: 1.6rem;
+  }
+  
+  .lead {
+    font-size: 0.95rem;
+  }
+  
+  .offcanvas {
+    width: 75% !important;
+  }
+  
+  .row {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+  
+  .col, [class*="col-"] {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .table {
+    font-size: 0.9rem;
+  }
+  
+  footer .row > div {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Large devices (tablets in landscape, 768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .card {
+    border-radius: 16px;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+    margin: 0.25rem;
+  }
+  
+  .offcanvas {
+    width: 50% !important;
+  }
+}

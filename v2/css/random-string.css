@@ -1,0 +1,275 @@
+/* Random String Generator Styles */
+#generat_random {
+  transition: all 0.3s ease;
+}
+
+#generat_random .card {
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+#generat_random .card:hover {
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+#generat_random #generate {
+  transition: all 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#generat_random #generate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#generat_random #generate:active {
+  transform: scale(0.98);
+}
+
+#generat_random .form-range::-webkit-slider-thumb {
+  background: #0d6efd;
+}
+
+#generat_random .form-range::-moz-range-thumb {
+  background: #0d6efd;
+}
+
+#generat_random .badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+  transition: all 0.2s ease;
+}
+
+/* Button group styling */
+#generat_random .btn-group {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+#generat_random .btn-group label.btn {
+  transition: all 0.2s ease;
+  border-width: 1px;
+  font-weight: 500;
+}
+
+#generat_random .btn-group label.btn:hover {
+  transform: translateY(-1px);
+}
+
+#generat_random .btn-group label.btn.active {
+  transform: translateY(1px);
+}
+
+/* Result field styling */
+#generat_random #result-GN {
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+#generat_random #result-GN:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Highlight animation for result */
+#generat_random .highlight-result {
+  background-color: rgba(0, 123, 255, 0.1) !important;
+  border-color: #0d6efd !important;
+  animation: pulse 0.3s ease-in-out;
+}
+
+/* Random String Generator Responsive Styles */
+@media (max-width: 575.98px) {
+  #generat_random h2 label {
+    font-size: 1.5rem;
+  }
+  
+  #generat_random .card-body {
+    padding: 1rem !important;
+  }
+  
+  #generat_random .form-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  #generat_random .btn-group label.btn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  #generat_random .form-control {
+    font-size: 0.875rem;
+  }
+  
+  #generat_random #generate {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+  
+  /* Rounded buttons for increment/decrement */
+  #generat_random .btn-outline-primary.rounded-circle {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Result field and copy button */
+  #generat_random .input-group .input-group-text {
+    padding: 0.25rem 0.5rem;
+  }
+  
+  #generat_random #result-GN {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+  }
+  
+  #generat_random .result-container .btn {
+    padding: 0.375rem 0.5rem;
+  }
+}
+
+/* Extra small devices (phones, less than 400px) */
+@media (max-width: 399.98px) {
+  #generat_random h2 label {
+    font-size: 1.25rem;
+  }
+  
+  #generat_random .card-body {
+    padding: 0.75rem !important;
+  }
+  
+  #generat_random .btn-group {
+    flex-wrap: wrap;
+  }
+  
+  #generat_random .btn-group label.btn {
+    flex: 1 0 40%;
+    margin: 1px;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.4rem;
+  }
+  
+  #generat_random .form-label {
+    font-size: 0.85rem;
+  }
+  
+  #generat_random .badge {
+    font-size: 0.7rem;
+  }
+  
+  #generat_random .btn-outline-primary.rounded-circle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  #generat_random #generate {
+    font-size: 0.8rem;
+  }
+  
+  #generat_random .d-flex.justify-content-center {
+    margin: 0 -5px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #generat_random .row.justify-content-center {
+    margin: 0 !important;
+  }
+  
+  #generat_random .input-group[style*="width:40%"] {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+  
+  #generat_random .input-group[style*="width:58%"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  
+  #generat_random .btn-group {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  #generat_random .btn-group label.btn {
+    flex: 1 0 auto;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  #generat_random #generate {
+    width: 100% !important;
+    margin-top: 0.5rem;
+  }
+  
+  #generat_random .form-group.row .input-group {
+    margin-bottom: 0.5rem;
+  }
+  
+  #generat_random #result-GN {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  #generat_random .form-group.row {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #generat_random .input-group button {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Medium devices (tablets, 576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Random String Generator tablet styles */
+  #generat_random .card {
+    margin: 0 5% !important;
+  }
+  
+  #generat_random .card-body {
+    padding: 1.5rem !important;
+  }
+  
+  #generat_random .mb-4 {
+    margin-bottom: 1.25rem !important;
+  }
+  
+  #generat_random .form-label {
+    font-size: 1rem;
+  }
+  
+  #generat_random .btn-group label.btn {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.85rem;
+  }
+  
+  #generat_random .btn-outline-primary.rounded-circle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  #generat_random #result-GN {
+    font-size: 1rem;
+  }
+  
+  #generat_random #generate {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+}

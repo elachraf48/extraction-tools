@@ -1,0 +1,97 @@
+/* Responsive styles */
+
+/* Responsive styles for fixage section and general layout */
+@media (max-width: 767.98px) {
+  .fixage .container {
+    padding: 1rem;
+  }
+  
+  .fixage .card {
+    margin-bottom: 1rem;
+  }
+  
+  .fixage .btn-group {
+    flex-wrap: wrap;
+  }
+  
+  .fixage .btn-group .btn {
+    margin-bottom: 0.5rem;
+  }
+  
+  .fixage .display-6 {
+    font-size: 1.5rem;
+  }
+  
+  .fixage .lead {
+    font-size: 0.9rem;
+  }
+  
+  .fixage .d-flex.justify-content-center.gap-3 {
+    flex-wrap: wrap;
+  }
+  
+  .fixage .card-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .fixage .card-header .btn-group {
+    margin-top: 0.5rem;
+    align-self: flex-end;
+  }
+  
+  /* Footer responsive styles */
+  footer .row > div {
+    margin-bottom: 1.5rem;
+  }
+  
+  footer h6 {
+    margin-bottom: 0.8rem;
+  }
+  
+  footer .list-unstyled li {
+    margin-bottom: 0.5rem;
+  }
+  
+  footer .input-group {
+    flex-direction: column;
+  }
+  
+  footer .input-group .form-control {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem !important;
+  }
+  
+  footer .input-group .btn {
+    width: 100%;
+    border-radius: 0.25rem !important;
+  }
+  
+  footer .text-md-start,
+  footer .text-md-end {
+    text-align: center !important;
+  }
+}
+
+/* Custom scrollbar */
+.fixage ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.fixage ::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 0.5);
+  border-radius: 10px;
+}
+
+.fixage ::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.fixage ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+}

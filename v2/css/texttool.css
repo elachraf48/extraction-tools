@@ -1,0 +1,83 @@
+/* Text Tool Main Container */
+#texttool {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Merger and Splitter Box */
+#megretandsplit,
+#megretandsplit50,
+#convertpdfpdfs {
+  background: #e0e0e0;
+  border-radius: 50px;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  padding: 1%;
+  text-align: center;
+  height: 100%;
+}
+
+/* Result Container */
+#resultTextContainer {
+  position: fixed;
+  z-index: 800;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 3s;
+  width: 400px;
+}
+#resultTextContainer.show {
+  opacity: 1;
+}
+#resultTextContainer.hide {
+  opacity: 0;
+}
+
+/* Box Styles */
+.box {
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  height: 100%;
+  padding: 1%;
+  text-align: center;
+}
+.boxcheck {
+  text-align: left;
+  margin-left: 10%;
+}
+
+/* Checkbox Styles */
+.checkbox-wrapper {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.checkbox-wrapper * {
+  box-sizing: border-box;
+  user-select: none;
+}
+.checkbox-wrapper .label {
+  cursor: pointer;
+}
+.checkbox-wrapper .check {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+}
+.checkbox-wrapper .label svg {
+  vertical-align: middle;
+}
+.checkbox-wrapper .path1 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: .5s stroke-dashoffset;
+  opacity: 0;
+}
+.checkbox-wrapper .check:checked + label svg g path {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+/* ...add any other texttool-specific styles here... */

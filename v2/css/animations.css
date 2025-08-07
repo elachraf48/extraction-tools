@@ -1,0 +1,66 @@
+/* Animation styles */
+
+/* Animation classes */
+.fixage .fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fixage .scale-in {
+  animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fixage .slide-in-right {
+  animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Section fade-in animation */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Fix for section display */
+section {
+  display: none;
+}
+
+section.active {
+  display: block !important;
+}
+
+/* Ensure containers are properly hidden/shown */
+#ip-extraction, #split, #texttool, #checkdomain, #home, #privacy {
+  display: none;
+}
+
+#ip-extraction.active, #split.active, #texttool.active, #checkdomain.active, #home.active, #privacy.active {
+  display: block !important;
+}
+
+/* Fallback: Show ip-extraction by default if no JavaScript has run */
+body:not(.js-loaded) #ip-extraction {
+  display: block;
+}
+
+/* Fix for fixage section */
+#fixage {
+  display: none;
+}
+
+#fixage.active {
+  display: block !important;
+}

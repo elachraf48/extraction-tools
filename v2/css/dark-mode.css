@@ -1,0 +1,228 @@
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212 !important;
+  background-image: linear-gradient(135deg, #121212 0%, #1e1e30 100%) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Enhanced Dark Mode */
+.dark-mode {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+  background-attachment: fixed !important;
+}
+
+.dark-mode .navbar {
+  background-color: rgba(26, 26, 46, 0.9) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .navbar {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-mode .navbar-brand {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .navbar-nav .nav-link {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .navbar-nav .nav-link:hover {
+  color: #ffffff !important;
+}
+
+.dark-mode .navbar-nav .nav-link.active {
+  color: #4facfe !important;
+}
+
+.dark-mode .card {
+  background-color: rgba(30, 30, 48, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .card {
+  background: rgba(30, 30, 50, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Ensure text is visible in dark mode for all sections */
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode p, .dark-mode li, .dark-mode label, .dark-mode .text-muted {
+  color: #e2e8f0 !important;
+}
+
+/* Specific fixes for privacy and about sections */
+.dark-mode #privacy, .dark-mode #home {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode #privacy .card, .dark-mode #home .card {
+  background-color: rgba(30, 30, 48, 0.8) !important;
+}
+
+.dark-mode .form-control {
+  background-color: rgba(45, 45, 58, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .form-control:focus {
+  background-color: rgba(45, 45, 58, 0.8) !important;
+  border-color: #4facfe !important;
+  box-shadow: 0 0 0 0.25rem rgba(79, 172, 254, 0.25) !important;
+}
+
+.dark-mode .form-control,
+.dark-mode textarea {
+  background: rgba(30, 30, 50, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .form-control:focus,
+.dark-mode textarea:focus {
+  background: rgba(30, 30, 50, 0.95) !important;
+  border-color: #667eea !important;
+}
+
+.dark-mode .container {
+  background: rgba(30, 30, 50, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-mode .btn-outline-primary {
+  color: #4facfe !important;
+  border-color: #4facfe !important;
+}
+
+.dark-mode .btn-outline-primary:hover {
+  background-color: #4facfe !important;
+  color: #121212 !important;
+}
+
+/* Dark mode dropdown styles */
+.dark-mode .dropdown-menu {
+  background-color: #1e1e30 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.dark-mode .dropdown-item {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .dropdown-item:hover, 
+.dark-mode .dropdown-item:focus {
+  color: #ffffff !important;
+  background-color: rgba(79, 172, 254, 0.2) !important;
+}
+
+.dark-mode .dropdown-item.active, 
+.dark-mode .dropdown-item:active {
+  background-color: #4facfe !important;
+  color: #121212 !important;
+}
+
+/* Dark mode for fixage section */
+.dark-mode .fixage .card .card-body.text-center.py-4 {
+  background: linear-gradient(135deg, rgba(82, 28, 13, 0.8) 0%, rgba(213, 69, 27, 0.9) 100%) !important;
+}
+
+.dark-mode .fixage .display-6 {
+  color: #F4E7E1 !important;
+}
+
+.dark-mode .fixage .lead.text-muted {
+  color: #F4E7E1 !important;
+}
+
+.dark-mode #bulkAddModal .modal-content {
+  background-color: #521C0D !important;
+  color: #F4E7E1 !important;
+}
+
+.dark-mode #bulkAddModal .modal-header,
+.dark-mode #bulkAddModal .modal-footer {
+  border-color: rgba(244, 231, 225, 0.1) !important;
+}
+
+.dark-mode #previewModal .modal-content {
+  background-color: #521C0D !important;
+  color: #F4E7E1 !important;
+}
+
+.dark-mode #previewModal .modal-header,
+.dark-mode #previewModal .modal-footer {
+  border-color: rgba(244, 231, 225, 0.1) !important;
+}
+
+.dark-mode .placeholder-badge.bg-secondary {
+  background-color: #D5451B !important;
+}
+
+.dark-mode #no-replacements-message {
+  color: #F4E7E1 !important;
+}
+
+/* Dark mode for containers and other elements */
+.dark-mode .container {
+  color: #F4E7E1 !important;
+}
+
+.dark-mode .box {
+  background: #D5451B !important;
+  box-shadow: 20px 20px 60px #521C0D, -20px -20px 60px #FF9B45 !important;
+}
+
+.dark-mode .alert {
+  background-color: rgba(213, 69, 27, 0.8) !important;
+  border-color: rgba(244, 231, 225, 0.1) !important;
+  color: #F4E7E1 !important;
+}
+
+.dark-mode .modal-content {
+  background-color: #521C0D !important;
+  color: #F4E7E1 !important;
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  border-color: rgba(244, 231, 225, 0.1) !important;
+}
+
+.dark-mode .offcanvas {
+  background-color: #521C0D !important;
+  color: #F4E7E1 !important;
+}
+
+.dark-mode .offcanvas-header {
+  background-color: #D5451B !important;
+  color: #F4E7E1 !important;
+  border-bottom-color: rgba(244, 231, 225, 0.1) !important;
+}
+
+.dark-mode .nav-tabs {
+  border-bottom-color: rgba(244, 231, 225, 0.1) !important;
+}
+
+.dark-mode .nav-tabs .nav-link {
+  color: #F4E7E1 !important;
+}
+
+.dark-mode .nav-tabs .nav-link.active {
+  background-color: rgba(255, 155, 69, 0.2) !important;
+  border-color: rgba(244, 231, 225, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .nav-tabs .nav-link:hover {
+  border-color: rgba(244, 231, 225, 0.2) !important;
+}
