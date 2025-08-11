@@ -1,6 +1,7 @@
 /* Random String Generator Styles */
-#generat_random {
+#generat_random, #generat_random_m-5 {
   transition: all 0.3s ease;
+  display: block !important;
 }
 
 #generat_random .card {

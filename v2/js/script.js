@@ -1365,8 +1365,49 @@ function removeDuplicateLines() {
     lines = removeDuplicates(lines);
     textarea.value = lines.join("\n");
     document.getElementById("line-count").innerHTML = "Number of lines: " + lines.length;
+  }
+}
 
+function removeEmailsWithDuplicates() {
+  let fileInput = document.getElementById("inputGroupFile01");
+  let textarea = document.getElementById("text");
+  
+  if (fileInput.files.length > 0) {
+    let file = fileInput.files[0];
+    let reader = new FileReader();
     
+    reader.onload = function(event) {
+      let dialogueContent = event.target.result;
+      let lines = dialogueContent.split("\n").map(line => line.trim()).filter(line => line);
+      checkinputText(dialogueContent);
+      
+      // Count occurrences of each line
+      let counts = {};
+      lines.forEach(line => counts[line] = (counts[line] || 0) + 1);
+      
+      // Keep only lines that appear exactly once
+      let result = lines.filter(line => counts[line] === 1);
+      document.getElementById("line-count").innerHTML = "Number of lines: " + result.length;
+      
+      // Download the result
+      downloadResult(result.join("\n"));
+      fileInput.value = "";
+    };
+    
+    reader.readAsText(file);
+  } else {
+    let text = textarea.value.trim();
+    checkinputText(text);
+    let lines = text.split("\n").map(line => line.trim()).filter(line => line);
+    
+    // Count occurrences of each line
+    let counts = {};
+    lines.forEach(line => counts[line] = (counts[line] || 0) + 1);
+    
+    // Keep only lines that appear exactly once
+    let result = lines.filter(line => counts[line] === 1);
+    textarea.value = result.join("\n");
+    document.getElementById("line-count").innerHTML = "Number of lines: " + result.length;
   }
 }
 

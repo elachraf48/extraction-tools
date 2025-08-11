@@ -346,8 +346,8 @@
     </center>
     <div class="row tool-description" id="Row">
       <p class="lead">Hi there! Welcome to the IP and Email Extraction Tools website. My name is Achraf, and I'm the
-        creator of this site. Here, you'll find two powerful tools designed to make your life easier when it comes to
-        extracting IP addresses and email addresses from text or URLs.</p>
+        creator of this site. Here, you'll find powerful tools designed to make your life easier when it comes to
+        extracting IP addresses, email addresses, and manipulating text data.</p>
       <p class="tool-description">The IP Extraction Tool is a valuable resource for cybersecurity professionals,
         webmasters, or anyone who needs to quickly identify IP addresses. Whether you want to analyze network traffic,
         investigate potential security threats, or track website visitors, this tool provides a simple and efficient
@@ -356,17 +356,59 @@
         can save valuable time by automating the process of collecting email addresses. Whether you're building a
         targeted email list, conducting market research, or performing competitive analysis, this tool will help you
         gather email addresses from text or web pages effortlessly.</p>
-      <p>Both tools are designed with user-friendliness in mind. You can access them easily from the navigation bar
+      <p class="tool-description">Our Text Tools section offers various utilities for text manipulation, including splitting text, removing duplicates, and sorting. The Fixage tool allows you to easily replace placeholders in your text with custom values, perfect for template-based content creation.</p>
+      <p>All tools are designed with user-friendliness in mind. You can access them easily from the navigation bar
         above. Simply choose the tool you need, follow the instructions on the respective page, and enjoy the benefits
-        of streamlined IP and email extraction.</p>
+        of streamlined data extraction and text manipulation.</p>
       <p>Rest assured that our tools are completely free to use. We're passionate about providing accessible and
-        efficient solutions for professionals and enthusiasts alike. Your privacy and data security are also a top
-        priority for us. We handle your information with care and ensure that it remains confidential throughout the
-        extraction process.</p>
-      <p>Ready to get started? Explore the power of IP and email extraction today and take your analysis and research to
+        efficient solutions for professionals and enthusiasts alike.</p>
+      <p>Ready to get started? Explore the power of our extraction and text tools today and take your productivity to
         new heights!</p>
     </div>
   </main>
+  
+  <div class="container my-5 box-shadow" id="privacy" style="display: none;">
+    <center class="site-heading">
+      <i class="fa-solid fa-shield-alt fa-3x mb-3"></i>
+      <h1 class="mb-4">Privacy Policy</h1>
+    </center>
+    <div class="row tool-description">
+      <p class="lead">At Extraction Tools, we take your privacy and data security very seriously. This privacy policy explains how we handle your information when you use our website and tools.</p>
+      
+      <h4 class="mt-4">Data Collection</h4>
+      <p>Our tools process data that you input directly into our website. This may include text containing IP addresses, email addresses, or other content you choose to enter. We want to assure you that:</p>
+      <ul>
+        <li>All data processing happens locally in your browser</li>
+        <li>We do not store or retain any of the text data you input</li>
+        <li>We do not transmit your input data to our servers</li>
+        <li>No personal information is collected through your use of our extraction tools</li>
+      </ul>
+      
+      <h4 class="mt-4">Analytics</h4>
+      <p>We use Google Analytics to collect anonymous usage statistics that help us improve our website. This information includes:</p>
+      <ul>
+        <li>Pages visited and time spent on the site</li>
+        <li>Browser type and operating system</li>
+        <li>Approximate geographic location (country/city level)</li>
+        <li>Referral source</li>
+      </ul>
+      <p>Google Analytics uses cookies to collect this information. You can opt out of Google Analytics tracking by using browser extensions like Google Analytics Opt-out Browser Add-on.</p>
+      
+      <h4 class="mt-4">Cookies</h4>
+      <p>Our website uses cookies to enhance your browsing experience. These cookies may store preferences like dark mode settings or remember your usage patterns to provide a better experience. You can manage cookie preferences through your browser settings.</p>
+      
+      <h4 class="mt-4">Third-Party Services</h4>
+      <p>We may use third-party services for functionality like font loading (Google Fonts), icons (Font Awesome), or scripts (jQuery, Bootstrap). These services may collect some information as described in their respective privacy policies.</p>
+      
+      <h4 class="mt-4">Contact</h4>
+      <p>If you have any questions or concerns about our privacy practices, please contact us through the Contact Us link in the navigation menu.</p>
+      
+      <h4 class="mt-4">Updates to This Policy</h4>
+      <p>We may update this privacy policy from time to time. Any changes will be posted on this page.</p>
+      
+      <p class="mt-4"><em>Last updated: 2023</em></p>
+    </div>
+  </div>
 
   <div class="container" id="split">
     <h1>Split Text</h1>
@@ -456,8 +498,17 @@
             <input style="width: 60%;" type="file" class="form-control btn-outline-success" id="inputGroupFile01"
               accept=".txt">
             <a title="extract json" class="btn btn-outline-danger btn-lg" href="../extractjson.html"><i class="far fa-file-exclamation"></i> </a>
-            <button title="remove duplicate" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i
+            <div class="btn-group">
+              <button title="remove duplicate" class="btn btn-outline-danger btn-lg" onclick="removeDuplicateLines()"><i
                 class="fa fa-eraser"></i></button>
+              <button type="button" class="btn btn-outline-danger btn-lg dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" onclick="removeDuplicateLines()">Remove All Duplicates</a></li>
+                <li><a class="dropdown-item" onclick="removeEmailsWithDuplicates()">Remove Emails with Duplicates</a></li>
+              </ul>
+            </div>
 
             <button title="shuffle Lines" class="btn btn-outline-primary btn-lg" onclick="shuffleLines()"><i
                 class="fa fa-random"></i></button>
@@ -635,7 +686,7 @@
         <input class="form-check-input" type="checkbox" role="switch" id="random" style="display: none;" checked>
       </div>
 
-      <div id="generat_random m-5">
+      <div id="generat_random" class="m-5">
         <div class="container">
           <div class="card shadow-sm border-0 mb-4">
             <div class="card-body p-4">
@@ -907,13 +958,14 @@
     </div>
   </section>
   </center>
-  <footer class="bg-light mt-5 fixed-bottom">
-      <p class="text-center">
+  <footer class="mt-5">
+    <div class="container">
+      <p class="text-center mb-0">
         <a class="nav-link" target="_blank" href="https://t.me/Achraf_Abiwi">
           &copy;2021-<span id="currentYears"></span> Achraf . All rights reserved.
         </a>
       </p>
-
+    </div>
   </footer>
   <div id="cookie-banner">
     <p>We use cookies to personalize content and ads, to provide social media features and to analyze our traffic. Some

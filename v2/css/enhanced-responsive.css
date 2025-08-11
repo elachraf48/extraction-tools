@@ -1,178 +1,74 @@
-/* Enhanced Mobile and Tablet Responsiveness */
-/* Small devices (phones, less than 576px) */
-@media (max-width: 575.98px) {
-  body {
-    font-size: 0.9rem;
-  }
-  
+/* Enhanced responsive styles for all sections */
+
+/* Small devices (phones) */
+@media (max-width: 576px) {
+  /* General improvements */
   .container {
-    margin: 0.5rem;
-    padding: 1rem;
-    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   
-  .card {
-    border-radius: 12px;
-    margin-bottom: 1rem;
+  /* Button groups in mobile view */
+  .btn-group {
+    flex-wrap: wrap;
   }
   
-  .btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+  .btn-group .btn {
+    margin-bottom: 5px;
+    flex: 1 0 auto;
   }
   
-  .navbar-brand {
-    font-size: 1.2rem;
+  /* Improve form controls on small screens */
+  .form-control {
+    font-size: 16px; /* Prevents iOS zoom on focus */
   }
   
-  .navbar-brand img {
-    width: 24px !important;
-    height: auto;
-    margin-right: 0.3rem !important;
+  /* Random string generator section */
+  #generat_random .btn-group {
+    display: flex;
+    flex-wrap: wrap;
   }
   
-  .navbar-nav .nav-link {
-    padding: 0.4rem 0.6rem;
-    margin: 0.2rem;
+  #generat_random .btn-group .btn {
+    flex: 1 0 40%;
+    margin: 2px;
   }
   
-  h1, .h1 {
-    font-size: 1.8rem;
-  }
-  
-  h2, .h2 {
-    font-size: 1.5rem;
-  }
-  
-  .display-6 {
-    font-size: 1.4rem;
-  }
-  
-  .lead {
-    font-size: 0.9rem;
-  }
-  
+  /* Footer adjustments */
   footer {
-    padding: 2rem 0;
-  }
-  
-  .offcanvas {
-    width: 85% !important;
-  }
-  
-  .row {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
-  }
-  
-  .col, [class*="col-"] {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  
-  .table {
-    font-size: 0.85rem;
-  }
-  
-  .badge {
-    font-size: 0.7rem;
+    position: relative;
+    margin-top: 2rem;
+    padding: 1rem 0;
   }
 }
 
-/* Medium devices (tablets, 576px to 767.98px) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .container {
-    margin: 0.75rem;
-    padding: 1.25rem;
-    border-radius: 14px;
+/* Medium devices (tablets) */
+@media (min-width: 577px) and (max-width: 991px) {
+  /* Random string generator section */
+  #generat_random .btn-group {
+    flex-wrap: nowrap;
   }
   
-  .card {
-    border-radius: 14px;
-  }
-  
-  .btn {
-    padding: 0.65rem 1.3rem;
-    font-size: 0.92rem;
-  }
-  
-  .navbar-brand {
-    font-size: 1.3rem;
-  }
-  
-  .navbar-brand img {
-    width: 30px !important;
-    height: auto;
-    margin-right: 0.5rem !important;
-  }
-  
-  .navbar-nav .nav-link {
-    padding: 0.45rem 0.7rem;
-    margin: 0.25rem;
-  }
-  
-  h1, .h1 {
-    font-size: 2rem;
-  }
-  
-  h2, .h2 {
-    font-size: 1.7rem;
-  }
-  
-  .display-6 {
-    font-size: 1.6rem;
-  }
-  
-  .lead {
-    font-size: 0.95rem;
-  }
-  
-  .offcanvas {
-    width: 75% !important;
-  }
-  
-  .row {
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
-  }
-  
-  .col, [class*="col-"] {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  
-  .table {
-    font-size: 0.9rem;
-  }
-  
-  footer .row > div {
-    margin-bottom: 1.25rem;
+  /* Footer adjustments */
+  footer {
+    position: relative;
   }
 }
 
-/* Large devices (tablets in landscape, 768px to 991.98px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .container {
-    margin: 1rem;
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-  
-  .card {
-    border-radius: 16px;
-  }
-  
-  .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
-  }
-  
-  .navbar-nav .nav-link {
-    padding: 0.5rem 0.75rem;
-    margin: 0.25rem;
-  }
-  
-  .offcanvas {
-    width: 50% !important;
+/* Ensure content has enough bottom margin to prevent footer overlap */
+body {
+  margin-bottom: 60px;
+}
+
+/* Fix for the cookie banner on mobile */
+#cookie-banner {
+  max-width: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 576px) {
+  #cookie-banner button {
+    margin: 5px 0;
+    width: 100%;
   }
 }
