@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <!-- Redirect -->
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GM8HCQFNXP"></script>
   <script>
@@ -13,164 +10,572 @@
     gtag('config', 'G-GM8HCQFNXP');
   </script>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Multi-line Time Converter | mailer48</title>
 
   <!-- Bootstrap + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Google Fonts: Inter & Space Grotesk for modern touch -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      padding: 20px;
+      font-family: 'Inter', 'Space Grotesk', sans-serif;
+      background: radial-gradient(ellipse at 20% 30%, #0a0f1e, #030712);
+      color: #eef2ff;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
     }
 
-    .card {
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
       background: #1e293b;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      margin-bottom: 20px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 150px;
-      background: #020617;
-      color: #38bdf8;
-      border: 1px solid #334155;
       border-radius: 10px;
-      padding: 10px;
     }
 
-    input {
-      background: #020617;
-      color: white;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 8px;
-      width: 100px;
-    }
-
-    button {
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
       border-radius: 10px;
-      padding: 10px 15px;
     }
 
-    .btn-main {
-      background: #38bdf8;
-      border: none;
-      color: black;
-      font-weight: 600;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #60a5fa;
     }
 
-    .btn-copy {
-      background: #22c55e;
-      border: none;
-      color: black;
-      font-weight: 600;
+    .container-custom {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Glassmorphic card effect */
+    .glass-card {
+      background: rgba(18, 25, 45, 0.75);
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 2rem;
+      padding: 1.75rem 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(56, 189, 248, 0.1) inset;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 24px 40px -14px rgba(0, 0, 0, 0.5);
     }
 
     h2 {
       font-weight: 600;
-      margin-bottom: 10px;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f0f9ff, #bae6fd);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+
+    h2 i {
+      background: none;
+      color: #38bdf8;
+      font-size: 1.6rem;
+      background-clip: unset;
+      -webkit-background-clip: unset;
+      color: #38bdf8;
+    }
+
+    textarea, input {
+      background: #0b1120;
+      border: 1.5px solid #1e2a3e;
+      border-radius: 1.25rem;
+      padding: 0.9rem 1.2rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      color: #e2e8f0;
+      resize: vertical;
+      width: 100%;
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      background: #0f172f;
+    }
+
+    textarea {
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .input-group-custom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .label-icon {
+      background: #1e293b;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94a3b8;
+    }
+
+    .hours-input {
+      max-width: 130px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Button styles */
+    .btn-modern {
+      padding: 0.7rem 1.6rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      letter-spacing: -0.2px;
+    }
+
+    .btn-primary-glow {
+      background: linear-gradient(105deg, #0ea5e9, #3b82f6);
+      color: white;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-primary-glow:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(105deg, #38bdf8, #2563eb);
+      box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.5);
+    }
+
+    .btn-success-glow {
+      background: linear-gradient(105deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-success-glow:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(105deg, #34d399, #10b981);
+      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-outline-light {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid #334155;
+      color: #cbd5e1;
+    }
+
+    .btn-outline-light:hover {
+      background: #334155;
+      color: white;
+      border-color: #5b6e8c;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid #f59e0b;
+      color: #fbbf24;
+    }
+
+    .btn-outline-warning:hover {
+      background: #f59e0b20;
+      border-color: #fbbf24;
+      color: #ffd966;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Output styling */
+    .output-textarea {
+      background: #030712;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      border: 1px solid #2d3a5e;
+    }
+
+    /* Toast notification */
+    .toast-notify {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #1e293b;
+      backdrop-filter: blur(12px);
+      color: #e2e8f0;
+      padding: 0.75rem 1.5rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      z-index: 999;
+      box-shadow: 0 15px 30px -12px black;
+      border-left: 4px solid #22c55e;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateX(400px);
+      transition: transform 0.25s ease;
+      pointer-events: none;
+    }
+
+    .toast-notify.show {
+      transform: translateX(0);
+    }
+
+    /* placeholder styling */
+    ::placeholder {
+      color: #4b556b;
+      font-family: 'Inter', monospace;
+      font-size: 0.85rem;
+    }
+
+    .badge-example {
+      background: #0f172f;
+      border-radius: 2rem;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #7dd3fc;
+      border: 0.5px solid #1e3a5f;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+
+    .badge-example:hover {
+      background: #1e2a4a;
+      color: #bae6fd;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: #5b6e8c;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      .glass-card {
+        padding: 1.25rem;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      .btn-modern {
+        padding: 0.5rem 1.2rem;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <div class="container">
-
-    <div class="card">
-      <h2><i class="fa-solid fa-pen"></i> Input</h2>
-      <textarea id="input" placeholder="#liste1 5:09 pm 02/03/2026"></textarea>
+<div class="container-custom">
+  <!-- Header area with brand -->
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+    <div>
+      <h1 style="font-weight: 700; font-size: 1.8rem; background: linear-gradient(125deg, #ffffff, #7dd3fc); background-clip: text; -webkit-background-clip: text; color: transparent;">
+        <i class="fa-regular fa-clock me-2"></i> Multi‑Line Time Weaver
+      </h1>
+      <p class="text-secondary-emphasis mt-1" style="color: #94a3b8 !important;">
+        Bulk convert & offset timestamps • Smart date rollover
+      </p>
     </div>
-
-    <div class="card">
-      <label>+ Hours:</label>
-      <input type="number" id="hours" value="28">
-      <br><br>
-      <button class="btn-main" onclick="processLines()"><i class="fa-solid fa-gear"></i> Convert</button>
-      <button class="btn-copy" onclick="copyOutput()"><i class="fa-solid fa-copy"></i> Copy</button>
+    <div class="mt-2 mt-sm-0">
+      <span class="badge-example" id="fillExampleBtn"><i class="fa-regular fa-paste me-1"></i> Load example</span>
     </div>
-
-    <div class="card">
-      <h2><i class="fa-solid fa-terminal"></i> Output</h2>
-      <textarea id="output" readonly></textarea>
-    </div>
-
   </div>
 
+  <!-- INPUT CARD -->
+  <div class="glass-card mb-4">
+    <h2><i class="fa-solid fa-pen-fill"></i> Source timestamps</h2>
+    <textarea id="input" placeholder="#liste1 5:09 pm 02/03/2026
+#liste2 10:45 am 15/04/2026
+#liste3 11:30 pm 31/12/2026"></textarea>
+    <div class="mt-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="small text-muted">
+        <i class="fa-regular fa-circle-question"></i> Format: <code class="text-info">#listeX hh:mm am/pm dd/mm/yyyy</code>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn-modern btn-outline-light" id="clearInputBtn"><i class="fa-regular fa-trash-can"></i> Clear input</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIGURATION + ACTIONS CARD -->
+  <div class="glass-card mb-4">
+    <div class="row g-4 align-items-end">
+      <div class="col-md-5 col-lg-4">
+        <div class="label-icon"><i class="fa-solid fa-hourglass-half"></i> Hours offset</div>
+        <div class="d-flex align-items-center gap-3 mt-2">
+          <input type="number" id="hours" value="28" step="1" class="hours-input">
+          <span class="text-muted small">+ hours (supports negative)</span>
+        </div>
+        <div class="mt-2 small text-info-emphasis">
+          <i class="fa-regular fa-lightbulb"></i> Adding 28h shifts to next day
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <div class="button-group">
+          <button class="btn-modern btn-primary-glow" id="convertBtn"><i class="fa-solid fa-arrows-spin"></i> Convert & shift</button>
+          <button class="btn-modern btn-success-glow" id="copyOutputBtn"><i class="fa-regular fa-copy"></i> Copy results</button>
+          <button class="btn-modern btn-outline-warning" id="clearOutputBtn"><i class="fa-regular fa-rectangle-xmark"></i> Clear output</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTPUT CARD -->
+  <div class="glass-card">
+    <h2><i class="fa-solid fa-terminal"></i> Converted timeline</h2>
+    <textarea id="output" class="output-textarea" readonly placeholder="Click 'Convert' to generate shifted times..."></textarea>
+    <div class="mt-3 d-flex justify-content-end gap-2">
+      <span class="badge-example" id="copyHint" style="cursor:default"><i class="fa-regular fa-clipboard"></i> Ready to copy</span>
+    </div>
+  </div>
+  <footer>
+    <i class="fa-regular fa-gem"></i> mailer48 • precise date/time rollover • 24h output format
+  </footer>
+</div>
+
+<!-- Toast container -->
+<div id="toastMsg" class="toast-notify">
+  <i class="fa-regular fa-circle-check"></i> <span id="toastText">Copied!</span>
+</div>
+
 <script>
-function convertTo24h(timeStr) {
-  let time = timeStr.trim().toLowerCase();
-  let isPM = time.includes('pm');
-  let isAM = time.includes('am');
+  // ---------- UTILITIES ----------
+  function showToast(message, isError = false) {
+    const toastEl = document.getElementById('toastMsg');
+    const toastSpan = document.getElementById('toastText');
+    toastSpan.innerText = message;
+    const iconSpan = toastEl.querySelector('i');
+    if (isError) {
+      iconSpan.className = 'fa-regular fa-circle-exclamation';
+      toastEl.style.borderLeftColor = '#ef4444';
+    } else {
+      iconSpan.className = 'fa-regular fa-circle-check';
+      toastEl.style.borderLeftColor = '#22c55e';
+    }
+    toastEl.classList.add('show');
+    setTimeout(() => {
+      toastEl.classList.remove('show');
+    }, 2200);
+  }
 
-  time = time.replace(/am|pm/, '').trim();
-  let [hours, minutes] = time.split(':').map(Number);
+  // core conversion: 12h to 24h
+  function convertTo24h(timeStr) {
+    let t = timeStr.trim().toLowerCase();
+    let isPM = t.includes('pm');
+    let isAM = t.includes('am');
+    t = t.replace(/am|pm/, '').trim();
+    let [hours, minutes] = t.split(':').map(Number);
+    if (isNaN(hours) || isNaN(minutes)) return null;
+    if (isPM && hours < 12) hours += 12;
+    if (isAM && hours === 12) hours = 0;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  }
 
-  if (isPM && hours < 12) hours += 12;
-  if (isAM && hours === 12) hours = 0;
+  // main processing engine
+  function processLines() {
+    const inputArea = document.getElementById('input');
+    const rawLines = inputArea.value.split(/\r?\n/);
+    const addHours = parseInt(document.getElementById('hours').value, 10);
+    if (isNaN(addHours)) {
+      showToast("Invalid hours offset, using 0", true);
+    }
+    const offset = isNaN(addHours) ? 0 : addHours;
+    const outputLines = [];
+    outputLines.push("🚀 You can start sending in this liste at this time:");
 
-  return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}`;
-}
+    let hasErrors = false;
 
-function processLines() {
-  const input = document.getElementById('input').value.split('\n');
-  let output = [];
-  let addHours = parseInt(document.getElementById('hours').value) || 0;
+    for (let line of rawLines) {
+      line = line.trim();
+      if (line === "") continue;
 
-  output.push("🚀 You can start sending in this liste at this time:");
+      // regex: #liste + number, then time + optional am/pm, then date dd/mm/yyyy
+      const match = line.match(/(#liste\d+)\s+([\d: ]+(?:am|pm)?)\s+(\d{2}\/\d{2}\/\d{4})/i);
+      if (!match) {
+        outputLines.push('❌ Invalid format: ' + line);
+        hasErrors = true;
+        continue;
+      }
 
-  input.forEach((line) => {
-    if (!line.trim()) return;
+      const label = match[1];
+      let timeRaw = match[2];
+      const dateStr = match[3]; // dd/mm/yyyy
 
-    let match = line.match(/(#liste\d+)\s+([\d: ]+(?:am|pm)?)\s+(\d{2}\/\d{2}\/\d{4})/i);
+      // Ensure timeRaw has am/pm format support even if compact like "5:09pm"
+      // the regex already captures correctly but just in case minor spaces
+      const time24 = convertTo24h(timeRaw);
+      if (!time24) {
+        outputLines.push(`❌ Time parsing error: ${label} invalid time format`);
+        hasErrors = true;
+        continue;
+      }
 
-    if (!match) {
-      output.push('❌ Invalid format: ' + line);
-      return;
+      let [hours, minutes] = time24.split(':').map(Number);
+      // parse dd/mm/yyyy
+      const [day, month, year] = dateStr.split('/').map(Number);
+      if (!day || !month || !year || month < 1 || month > 12 || day < 1 || day > 31) {
+        outputLines.push(`❌ Invalid date: ${label} ${dateStr} (use dd/mm/yyyy)`);
+        hasErrors = true;
+        continue;
+      }
+
+      // Create date object (local timezone respects date addition)
+      let dateObj = new Date(year, month - 1, day, hours, minutes);
+      if (isNaN(dateObj.getTime())) {
+        outputLines.push(`❌ Date creation failed for ${label}`);
+        hasErrors = true;
+        continue;
+      }
+
+      // Apply hours offset
+      dateObj.setHours(dateObj.getHours() + offset);
+      
+      const finalHours = String(dateObj.getHours()).padStart(2, '0');
+      const finalMinutes = String(dateObj.getMinutes()).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      const mo = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const y = dateObj.getFullYear();
+
+      outputLines.push(`${label} ${finalHours}:${finalMinutes} ${d}/${mo}/${y}`);
     }
 
-    let label = match[1];
-    let timeRaw = match[2];
-    let date = match[3];
+    const outputArea = document.getElementById('output');
+    outputArea.value = outputLines.join('\n');
+    if (!hasErrors && rawLines.filter(l=>l.trim()).length > 0) {
+      showToast(`✓ Converted ${rawLines.filter(l=>l.trim()).length} entries`, false);
+    } else if (hasErrors) {
+      showToast(`⚠️ Some lines had errors, check output`, true);
+    } else {
+      showToast(`No input lines found`, false);
+    }
+  }
 
-    let time24 = convertTo24h(timeRaw);
+  // Copy to clipboard using modern API
+  async function copyOutput() {
+    const outputArea = document.getElementById('output');
+    const textToCopy = outputArea.value;
+    if (!textToCopy || textToCopy.trim() === "") {
+      showToast("Nothing to copy — output is empty", true);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      showToast("📋 Copied to clipboard!", false);
+      // Optional visual feedback on copy button
+      const copyBtn = document.getElementById('copyOutputBtn');
+      const originalHtml = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fa-regular fa-check-circle"></i> Copied!';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHtml;
+      }, 1500);
+    } catch (err) {
+      // Fallback for old browsers
+      outputArea.select();
+      document.execCommand('copy');
+      showToast("Copied (fallback)", false);
+    }
+  }
 
-    let [h, m] = time24.split(':').map(Number);
-    let dateObj = new Date(date.split('/').reverse().join('-'));
-    dateObj.setHours(h + addHours, m);
+  // Clear input area
+  function clearInput() {
+    document.getElementById('input').value = '';
+    showToast("Input cleared", false);
+  }
 
-    let finalHours = String(dateObj.getHours()).padStart(2,'0');
-    let finalMinutes = String(dateObj.getMinutes()).padStart(2,'0');
+  // Clear output area
+  function clearOutput() {
+    document.getElementById('output').value = '';
+    showToast("Output cleared", false);
+  }
 
-    let d = String(dateObj.getDate()).padStart(2,'0');
-    let mo = String(dateObj.getMonth() + 1).padStart(2,'0');
-    let y = dateObj.getFullYear();
+  // Load beautiful example lines
+  function loadExample() {
+    const exampleText = `#liste1 5:09 pm 02/03/2026
+#liste2 10:30 am 03/04/2026
+#liste3 11:45 pm 01/01/2026
+#liste4 8:00 am 31/12/2025
+#liste5 2:15 pm 15/08/2026`;
+    document.getElementById('input').value = exampleText;
+    showToast("✨ Example data loaded — hit Convert", false);
+    // optional auto-convert? user can click Convert, but better not to auto
+  }
 
-    output.push(`${label} ${finalHours}:${finalMinutes} ${d}/${mo}/${y}`);
+  // Event listeners (robust)
+  document.addEventListener('DOMContentLoaded', () => {
+    const convertBtn = document.getElementById('convertBtn');
+    const copyBtn = document.getElementById('copyOutputBtn');
+    const clearInp = document.getElementById('clearInputBtn');
+    const clearOut = document.getElementById('clearOutputBtn');
+    const fillExample = document.getElementById('fillExampleBtn');
+
+    if (convertBtn) convertBtn.addEventListener('click', processLines);
+    if (copyBtn) copyBtn.addEventListener('click', copyOutput);
+    if (clearInp) clearInp.addEventListener('click', clearInput);
+    if (clearOut) clearOut.addEventListener('click', clearOutput);
+    if (fillExample) fillExample.addEventListener('click', loadExample);
+
+    // Optional: set default placeholder example inside textarea hint (already set in HTML)
+    const inputArea = document.getElementById('input');
+    if (inputArea && inputArea.value === '') {
+      // keep placeholder but not overwrite example if empty
+    }
+    
+    // little easter egg: if user hits Ctrl+Enter in input, trigger convert
+    inputArea.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        processLines();
+      }
+    });
   });
 
-  document.getElementById('output').value = output.join('\n');
-}
-
-function copyOutput() {
-  const output = document.getElementById('output');
-  output.select();
-  document.execCommand('copy');
-  alert('Copied!');
-}
+  // preserve existing function hooks for global (just in case if inline calls)
+  window.processLines = processLines;
+  window.copyOutput = copyOutput;
+  window.clearInput = clearInput;
+  window.clearOutput = clearOutput;
+  window.loadExample = loadExample;
 </script>
-
 </body>
 </html>
