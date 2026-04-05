@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-line Time Converter</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    textarea { width: 100%; height: 150px; margin-bottom: 15px; }
+    button { padding: 10px 15px; margin-right: 10px; }
+    input { padding: 8px; width: 80px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<h2>Input</h2>
+<textarea id="input" placeholder="#liste1 5:09 pm 02/03/2026"></textarea>
+
+<label>+ Hours:</label>
+<input type="number" id="hours" value="28">
+<br><br>
+
+<button onclick="processLines()">Convert</button>
+<button onclick="copyOutput()">Copy Output</button>
+
+<h2>Output</h2>
+<textarea id="output" readonly></textarea>
+
+<script>
+function convertTo24h(timeStr) {
+  let time = timeStr.trim().toLowerCase();
+  let isPM = time.includes('pm');
+  let isAM = time.includes('am');
+
+  time = time.replace(/am|pm/, '').trim();
+  let [hours, minutes] = time.split(':').map(Number);
+
+  if (isPM && hours < 12) hours += 12;
+  if (isAM && hours === 12) hours = 0;
+
+  return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}`;
+}
+
+function processLines() {
+  const input = document.getElementById('input').value.split('\n');
+  let output = [];
+  let addHours = parseInt(document.getElementById('hours').value) || 0;
+
+  // Add first line message with emoji
+  output.push("🚀 You can start sending in this liste at this time:");
+
+  input.forEach((line) => {
+    if (!line.trim()) return;
+
+    // Accept #liste + number
+    let match = line.match(/(#liste\d+)\s+([\d: ]+(?:am|pm)?)\s+(\d{2}\/\d{2}\/\d{4})/i);
+
+    if (!match) {
+      output.push('❌ Invalid format: ' + line);
+      return;
+    }
+
+    let label = match[1];
+    let timeRaw = match[2];
+    let date = match[3];
+
+    let time24 = convertTo24h(timeRaw);
+
+    let [h, m] = time24.split(':').map(Number);
+    let dateObj = new Date(date.split('/').reverse().join('-'));
+    dateObj.setHours(h + addHours, m);
+
+    let finalHours = String(dateObj.getHours()).padStart(2,'0');
+    let finalMinutes = String(dateObj.getMinutes()).padStart(2,'0');
+
+    let d = String(dateObj.getDate()).padStart(2,'0');
+    let mo = String(dateObj.getMonth() + 1).padStart(2,'0');
+    let y = dateObj.getFullYear();
+
+    output.push(`${label} ${finalHours}:${finalMinutes} ${d}/${mo}/${y}`);
+  });
+
+  document.getElementById('output').value = output.join('\n');
+}
+
+function copyOutput() {
+  const output = document.getElementById('output');
+  output.select();
+  document.execCommand('copy');
+  alert('Copied!');
+}
+</script>
+
+</body>
+</html>
