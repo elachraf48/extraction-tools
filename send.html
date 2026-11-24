@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Email Sending Calculator</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-body p-4">
+
+            <h3 class="text-center mb-4">
+                Email Sending Calculator
+            </h3>
+
+            <!-- Inputs -->
+
+            <div class="mb-3">
+                <label class="form-label">Total Emails</label>
+                <input type="number" id="totalEmails"
+                       class="form-control" value="5200" min="1">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Number of Recipients</label>
+                <input type="number" id="recipients"
+                       class="form-control" value="19" min="1">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Desired Time (minutes)</label>
+                <input type="number" id="duration"
+                       class="form-control" value="30" min="1" step="any">
+            </div>
+
+            <button class="btn btn-primary w-100"
+                    onclick="calculate()">
+                Calculate
+            </button>
+
+            <!-- Results -->
+
+            <div id="results" class="mt-4 d-none">
+
+                <hr>
+
+                <h5 class="mb-3">Calculated Settings</h5>
+
+                <div class="alert alert-success">
+                    <label class="form-label">Emails per Batch</label>
+                    <h2 id="batchResult">-</h2>
+                </div>
+
+                <div class="alert alert-primary">
+                    <label class="form-label">Interval (milliseconds)</label>
+                    <h2 id="intervalResult">-</h2>
+                </div>
+
+                <p>
+                    <strong>Average emails per recipient:</strong>
+                    <span id="perRecipient"></span>
+                </p>
+
+                <p>
+                    <strong>Actual estimated duration:</strong>
+                    <span id="actualDuration"></span>
+                </p>
+
+                <p class="text-muted small mb-0" id="note"></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculate() {
+
+    const total = Number(
+        document.getElementById("totalEmails").value
+    );
+
+    const recipients = Number(
+        document.getElementById("recipients").value
+    );
+
+    const duration = Number(
+        document.getElementById("duration").value
+    );
+
+    if (
+        !Number.isInteger(total) || total <= 0 ||
+        !Number.isInteger(recipients) || recipients <= 0 ||
+        !Number.isFinite(duration) || duration <= 0
+    ) {
+        alert("Please enter valid positive values.");
+        return;
+    }
+
+    // Desired duration in milliseconds
+    const totalTimeMs = duration * 60 * 1000;
+
+    // Average emails per recipient
+    const emailsPerRecipient = total / recipients;
+
+    // Calculate a practical batch size
+    const batchSize = Math.ceil(total / totalTimeMs * 1000);
+
+    // Calculate interval to reach the desired duration
+    const batches = Math.ceil(total / batchSize);
+
+    const interval = totalTimeMs / batches;
+
+    // Actual estimated duration
+    const actualTime = batches * interval;
+
+    function formatTime(ms) {
+        const seconds = Math.round(ms / 1000);
+        const h = Math.floor(seconds / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
+        const s = seconds % 60;
+
+        return `${h ? h + "h " : ""}${m}m ${s}s`;
+    }
+
+    document.getElementById("batchResult").textContent =
+        batchSize + " emails";
+
+    document.getElementById("intervalResult").textContent =
+        Math.round(interval) + " ms";
+
+    document.getElementById("perRecipient").textContent =
+        emailsPerRecipient.toFixed(2);
+
+    document.getElementById("actualDuration").textContent =
+        formatTime(actualTime);
+
+    document.getElementById("note").textContent =
+        "The result is a mathematical estimate. Actual email delivery " +
+        "depends on mail server processing, queues and rate limits.";
+
+    document.getElementById("results").classList.remove("d-none");
+}
+
+calculate();
+</script>
+
+</body>
+</html>
