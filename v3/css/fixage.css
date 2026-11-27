@@ -1,0 +1,801 @@
+/* Fixage section styles */
+:root.fixage {
+  --primary-color: #6366f1;
+  --primary-color-dark: #4f46e5;
+  --secondary-color: #f59e0b;
+  --accent-color: #10b981;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --text-color: #1f2937;
+  --text-color-light: #6b7280;
+  --light-text: #f8fafc;
+  --light-bg: #f1f5f9;
+  --dark-bg: #0f172a;
+  --background-color: #f9fafb;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(229, 231, 235, 0.8);
+  --border-radius: 0.5rem;
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition: all 0.3s ease;
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --gradient-secondary: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glassmorphism-bg: rgba(255, 255, 255, 0.7);
+  --glassmorphism-border: 1px solid rgba(255, 255, 255, 0.3);
+  --glassmorphism-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glassmorphism-blur: blur(10px);
+}
+
+/* Fixage button styling */
+.fixage .btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.fixage .btn-primary:hover, .fixage .btn-primary:focus {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)) !important;
+  color: white !important;
+}
+
+.fixage .btn-success {
+  background-color: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+  color: white !important;
+}
+
+.fixage .btn-secondary {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: white !important;
+}
+
+.fixage .btn-info {
+  background-color: #0dcaf0 !important;
+  border-color: #0dcaf0 !important;
+  color: white !important;
+}
+
+.fixage .btn-danger {
+  background-color: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  color: white !important;
+}
+
+.fixage .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+.fixage .btn-outline-primary:hover, .fixage .btn-outline-primary:focus, .fixage .btn-outline-primary:active {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.fixage .btn-outline-secondary {
+  color: var(--text-color) !important;
+  border-color: #6c757d !important;
+  background-color: transparent !important;
+}
+
+.fixage .btn-outline-secondary:hover, .fixage .btn-outline-secondary:focus, .fixage .btn-outline-secondary:active {
+  background-color: #6c757d !important;
+  color: white !important;
+  border-color: #6c757d !important;
+}
+
+.fixage body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.fixage body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+  z-index: -1;
+}
+
+.fixage .app-subtitle {
+  opacity: 0.8;
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
+.fixage .container {
+  max-width: 1400px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.fixage .container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+.fixage .card {
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  height: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.fixage .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fixage .card:hover::before {
+  opacity: 1;
+}
+
+.fixage .card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-5px);
+}
+
+/* Button group styles for fixage */
+.btn-group.fixage {
+  display: inline-flex;
+  gap: 0;
+}
+
+.btn-group.fixage > .btn {
+  border-radius: 0.5rem;
+}
+
+.btn-group.fixage > .btn:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-group.fixage > .btn:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Loading animation */
+.fixage .loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.fixage .loading div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.fixage .loading div:nth-child(1) {
+  left: 8px;
+  animation: loading1 0.6s infinite;
+}
+
+.fixage .loading div:nth-child(2) {
+  left: 8px;
+  animation: loading2 0.6s infinite;
+}
+
+.fixage .loading div:nth-child(3) {
+  left: 32px;
+  animation: loading2 0.6s infinite;
+}
+
+.fixage .loading div:nth-child(4) {
+  left: 56px;
+  animation: loading3 0.6s infinite;
+}
+
+@keyframes loading1 {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes loading2 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(24px, 0); }
+}
+
+@keyframes loading3 {
+  0% { transform: scale(1); }
+  100% { transform: scale(0); }
+}
+
+/* Preview modal styles */
+.preview-content .badge {
+  font-size: 0.85rem;
+  padding: 0.35em 0.65em;
+  margin: 0 2px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Bulk add modal styles */
+#bulkAddModal .modal-content {
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767.98px) {
+  .modal-content {
+    border-radius: 0.75rem;
+  }
+  
+  .modal-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .modal-footer {
+    padding: 0.75rem 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.1rem;
+  }
+}
+
+#bulkAddModal .modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.25rem 1.5rem;
+}
+
+#bulkAddModal .modal-body {
+  padding: 1.5rem;
+}
+
+#bulkAddModal .modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.25rem 1.5rem;
+}
+
+/* Text group animation */
+.text-group {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Placeholder badge styles */
+.placeholder-badge {
+  font-size: 0.75rem;
+  padding: 0.35em 0.65em;
+  border-radius: 50rem;
+  transition: all 0.3s ease;
+}
+
+/* No replacements message */
+#no-replacements-message {
+  padding: 2rem 0;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+/* Header card in fixage section */
+.fixage .card .card-body.text-center.py-4 {
+  background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(240,240,250,0.9) 100%);
+  border-radius: 10px;
+}
+
+.fixage .display-6 {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.fixage .display-6 .badge {
+  font-size: 0.5em;
+  vertical-align: middle;
+  position: relative;
+  top: -0.1em;
+}
+
+.fixage .lead.text-muted {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.fixage .card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.fixage .card-header i {
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   Fixage — Converter Tabs (Table / List / HTML Tags)
+   ============================================================ */
+
+/* Tab navigation */
+.fixage-tabs {
+  border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+  padding: 0.5rem 1rem 0;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem 0.5rem 0 0;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.fixage-tabs .nav-link {
+  color: var(--primary-color, #6366f1);
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 0.4rem 0.4rem 0 0;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.fixage-tabs .nav-link:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.fixage-tabs .nav-link.active {
+  background: white;
+  border-color: rgba(99, 102, 241, 0.4) rgba(99, 102, 241, 0.4) white;
+  color: var(--primary-color, #6366f1);
+  box-shadow: 0 -2px 0 var(--primary-color, #6366f1) inset;
+}
+
+/* Live preview box */
+.converter-preview {
+  min-height: 120px;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  background: #fafbfc;
+  border: 1px dashed #d0d7de;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+/* Table preview — apply Bootstrap table look inside preview */
+.converter-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.converter-preview table.table-bordered td,
+.converter-preview table.table-bordered th {
+  border: 1px solid #dee2e6;
+}
+
+.converter-preview table.table-striped tbody tr:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.converter-preview table.table-hover tbody tr:hover {
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.converter-preview table th {
+  background: #f0f1ff;
+  font-weight: 600;
+  padding: 0.4rem 0.6rem;
+}
+
+.converter-preview table td {
+  padding: 0.35rem 0.6rem;
+}
+
+.converter-preview caption {
+  caption-side: top;
+  color: #6b7280;
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+/* HTML code output <pre> */
+.converter-code {
+  margin: 0;
+  padding: 1rem;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border-radius: 0 0 0.5rem 0.5rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* Tag button grid for HTML Tags tab */
+.tag-btn-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tag-btn {
+  padding: 0.25rem 0.55rem;
+  font-size: 0.75rem;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 0.3rem;
+  background: rgba(99, 102, 241, 0.05);
+  color: var(--primary-color, #6366f1);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+
+.tag-btn:hover {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: var(--primary-color, #6366f1);
+}
+
+.tag-btn.active {
+  background: var(--primary-color, #6366f1);
+  color: #fff;
+  border-color: var(--primary-color, #6366f1);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .fixage-tabs {
+    gap: 0;
+  }
+
+  .fixage-tabs .nav-link {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  .tag-btn {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .converter-code {
+    font-size: 0.72rem;
+    max-height: 200px;
+  }
+}
+
+/* ============================================================
+   Generator Section
+   ============================================================ */
+
+.generator-section {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.gen-container {
+  max-width: 1400px;
+}
+
+/* Cards */
+.gen-card {
+  border: none;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: #fff;
+  overflow: hidden;
+}
+
+.gen-card-header {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+/* Tab nav */
+.gen-tabs {
+  border-bottom: 2px solid rgba(59,130,246,0.25);
+  padding: 0.4rem 0.75rem 0;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 0.6rem 0.6rem 0 0;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.gen-tabs .nav-link {
+  color: #1e40af;
+  font-weight: 500;
+  font-size: 0.88rem;
+  border: 1px solid transparent;
+  border-radius: 0.4rem 0.4rem 0 0;
+  padding: 0.45rem 0.9rem;
+  transition: all 0.18s ease;
+}
+
+.gen-tabs .nav-link:hover {
+  background: rgba(59,130,246,0.1);
+}
+
+.gen-tabs .nav-link.active {
+  background: #fff;
+  color: #1e40af;
+  border-color: rgba(59,130,246,0.35) rgba(59,130,246,0.35) #fff;
+  box-shadow: 0 -2px 0 #3b82f6 inset;
+}
+
+.gen-tab-content {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(59,130,246,0.15);
+  border-top: none;
+  border-radius: 0 0 0.6rem 0.6rem;
+  padding: 0.5rem 0.5rem 1.5rem;
+}
+
+/* Labels */
+.gen-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #1e293b;
+  margin-bottom: 0.3rem;
+}
+
+.gen-label-sm {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+/* Inputs */
+.gen-textarea {
+  font-size: 0.85rem;
+  border-radius: 0.4rem;
+  border: 1px solid #cbd5e1;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+
+.gen-textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+.gen-input {
+  font-size: 0.82rem;
+  border-radius: 0.35rem;
+  border: 1px solid #cbd5e1;
+}
+
+.gen-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+/* Primary button */
+.gen-btn-primary {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: #fff;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.gen-btn-primary:hover {
+  opacity: 0.9;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Copy/download button */
+.gen-btn-copy {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 0.35rem;
+  font-size: 0.78rem;
+  transition: background 0.15s;
+}
+
+.gen-btn-copy:hover {
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+/* Variable chips */
+.gen-var-chip {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  border: 1px solid rgba(59,130,246,0.4);
+  border-radius: 0.3rem;
+  background: rgba(59,130,246,0.06);
+  color: #1e40af;
+  cursor: pointer;
+  transition: all 0.12s;
+  line-height: 1.5;
+}
+
+.gen-var-chip:hover {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.gen-var-chip code {
+  font-size: 0.72rem;
+  color: inherit;
+  background: none;
+  padding: 0;
+}
+
+/* Reference badges */
+.gen-ref-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  font-size: 0.75rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.gen-ref-badge code {
+  color: #1e40af;
+  font-size: 0.72rem;
+  background: none;
+  padding: 0;
+}
+
+/* Code output */
+.gen-code {
+  min-height: 180px;
+}
+
+/* Format buttons (multi-format export) */
+.gen-fmt-btn {
+  background: rgba(30,64,175,0.07);
+  color: #1e40af;
+  border: 1px solid rgba(30,64,175,0.3);
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.7rem;
+  transition: all 0.15s;
+}
+
+.gen-fmt-btn:hover {
+  background: #1e40af;
+  color: #fff;
+  border-color: #1e40af;
+}
+
+.gen-format-badge {
+  background: rgba(255,255,255,0.2) !important;
+  font-size: 0.7rem;
+  vertical-align: middle;
+}
+
+/* Custom Tag Builder — tag display pills */
+.ctb-tag-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.75rem;
+}
+
+.ctb-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.ctb-code-pill {
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.82rem;
+  color: #1e40af;
+  background: #eff6ff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
+  border: 1px solid #bfdbfe;
+  transition: background 0.3s, color 0.3s;
+  word-break: break-all;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .gen-tabs .nav-link {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .gen-fmt-btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.55rem;
+  }
+
+  .ctb-tag-display {
+    flex-wrap: wrap;
+  }
+}

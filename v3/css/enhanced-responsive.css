@@ -1,0 +1,74 @@
+/* Enhanced responsive styles for all sections */
+
+/* Small devices (phones) */
+@media (max-width: 576px) {
+  /* General improvements */
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  /* Button groups in mobile view */
+  .btn-group {
+    flex-wrap: wrap;
+  }
+  
+  .btn-group .btn {
+    margin-bottom: 5px;
+    flex: 1 0 auto;
+  }
+  
+  /* Improve form controls on small screens */
+  .form-control {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Random string generator section */
+  #generat_random .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #generat_random .btn-group .btn {
+    flex: 1 0 40%;
+    margin: 2px;
+  }
+  
+  /* Footer adjustments */
+  footer {
+    position: relative;
+    margin-top: 2rem;
+    padding: 1rem 0;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 577px) and (max-width: 991px) {
+  /* Random string generator section */
+  #generat_random .btn-group {
+    flex-wrap: nowrap;
+  }
+  
+  /* Footer adjustments */
+  footer {
+    position: relative;
+  }
+}
+
+/* Ensure content has enough bottom margin to prevent footer overlap */
+body {
+  margin-bottom: 60px;
+}
+
+/* Fix for the cookie banner on mobile */
+#cookie-banner {
+  max-width: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 576px) {
+  #cookie-banner button {
+    margin: 5px 0;
+    width: 100%;
+  }
+}

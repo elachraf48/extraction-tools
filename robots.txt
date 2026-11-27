@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block internal/dev files
+Disallow: /extraction-tools/
+Disallow: /__pycache__/
+Disallow: /.git/
+
+# Sitemap
+Sitemap: https://www.mailer48.com/sitemap.xml

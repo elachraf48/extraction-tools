@@ -1,0 +1,7 @@
+/* Split tool styles */
+/* ...split-specific styles from index.css... */
+
+#split, #output-container, #split-by-section, #split-by-line, #even-sections, .checkbox-wrapper, .checkbox-wrapper .label, .checkbox-wrapper .check, .checkbox-wrapper .label svg, .checkbox-wrapper .path1, .checkbox-wrapper .check:checked + label svg g path {
+  /* ...split-specific styles from index.css... */
+}
+/* ...all split-specific styles... */
